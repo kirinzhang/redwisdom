@@ -6,8 +6,19 @@
 }
 
 .card {
-    width: 300px;
-    height: 450px;
+    /* Adaptive Size: Scales with viewport height */
+    height: 55vh;
+    width: 36.6vh;
+    /* 2/3 Aspect Ratio of 55vh */
+
+    /* Maximum limits (Original Design Size) */
+    max-height: 450px;
+    max-width: 300px;
+
+    /* Minimum limits to be usable */
+    min-height: 300px;
+    min-width: 200px;
+
     cursor: pointer;
     background-color: transparent;
     perspective: 1000px;
@@ -76,7 +87,18 @@
     position: relative;
     z-index: 10;
     /* Vertically center content if short, but allow flow if long */
+    /* Handled by helper classes now */
+    overflow-y: hidden;
+    /* Prevent inner scrollbars, rely on scaling */
+}
+
+.layout-center {
     justify-content: center;
+}
+
+.layout-top {
+    justify-content: flex-start;
+    padding-top: 1rem;
 }
 
 
@@ -104,10 +126,12 @@
 
 .portrait-container {
     position: absolute;
-    bottom: -5px;
-    right: -10px;
-    width: 170px;
-    /* Reduced further to prevent overlap */
+    bottom: 0;
+    right: 0;
+    width: 140px;
+    /* Fixed functional size */
+    max-width: 45%;
+    /* Constraint for very small cards */
     height: auto;
     opacity: 1;
     mix-blend-mode: normal;
@@ -120,7 +144,8 @@
     -webkit-mask-composite: source-in;
     z-index: 1;
     filter: none;
-    /* Removed filter to preserve original colors as requested */
+    pointer-events: none;
+    /* Let clicks pass through to card flip */
 }
 
 .quote-blocks {
@@ -129,28 +154,45 @@
 }
 
 .quote-text {
-    /* Main quote text - Smaller Black Handwritten */
+    /* Main quote text - base styles */
     font-family: 'Xingkai', 'STXingkai', 'KaiTi', 'Ma Shan Zheng', cursive;
-    font-size: 1.5rem;
-    line-height: 1.5;
+    line-height: 1.4;
     text-align: left;
     color: #2B2B2B;
     font-weight: 500;
     letter-spacing: 0.05em;
     margin-bottom: 0;
-    /* Prevent overlap by restricting width (creates a cleaner column) */
-    max-width: 95%;
-    /* Use full width but rely on padding-bottom spacer if needed, OR safer column: */
-    width: 100%;
 
-    /* STRATEGY SWITCH: Use padding-right to protect the portrait area effectively */
-    /* Ensure no overlap: text strictly avoids the bottom-right zone via bottom padding */
-    padding-bottom: 160px;
-    /* Portrait height is approx 170px wide, maybe 200px high. */
-    padding-right: 10px;
+    /* Overlap Protection: Padding matches portrait height */
+    padding-bottom: 120px;
+    /* Reduced slightly from 150px to give more room */
+    padding-right: 15px;
+    max-width: 100%;
 
     text-shadow: none;
-    /* Ensure text doesn't collide with portrait visually if possible, but prioritization is display complete */
+}
+
+/* Adaptive Sizes */
+.quote-size-large {
+    font-size: 1.8rem;
+}
+
+.quote-size-medium {
+    font-size: 1.5rem;
+}
+
+.quote-size-small {
+    font-size: 1.25rem;
+    line-height: 1.3;
+    padding-bottom: 100px;
+    /* Can afford less padding as text is dense */
+}
+
+/* Extra small for very long quotes */
+.quote-size-xs {
+    font-size: 1.1rem;
+    line-height: 1.25;
+    padding-bottom: 90px;
 }
 
 /* Footer Section for Subtext */

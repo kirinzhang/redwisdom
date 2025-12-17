@@ -36,18 +36,20 @@
     </script>
 </head>
 
-<body class="bg-warm-rice min-h-screen flex flex-col items-center justify-center p-4 overflow-x-hidden">
+<body class="bg-warm-rice h-screen w-screen flex flex-col items-center justify-center p-4 overflow-hidden relative">
 
     <!-- Header -->
-    <header class="text-center mb-8 fade-in-up">
-        <!-- Changed tracking-widest to tracking-tighter for compact look -->
-        <h1 class="text-5xl md:text-6xl font-gotham text-china-red mb-2 tracking-tighter drop-shadow-sm uppercase">Don't
-            worry, be fighting</h1>
+    <header class="text-center mb-4 fade-in-up">
+        <!-- Changed font sizes to start smaller (3xl) to avoid truncation on mobile/small screens -->
+        <!-- Responsive sizing to ensure it fits mobile screens without truncation. Allows wrapping. -->
+        <h1
+            class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-gotham text-china-red mb-2 tracking-tighter drop-shadow-sm uppercase px-2 leading-tight">
+            Don't worry, be fighting</h1>
         <p class="text-ink-black text-lg md:text-xl font-serif mt-4 tracking-wider opacity-80">遇事不决读毛选，治愈你90%的焦虑</p>
     </header>
 
     <!-- Mental Projection Prompt -->
-    <div id="projection-prompt" class="mb-10 text-center fade-in-up delay-100">
+    <div id="projection-prompt" class="mb-4 text-center fade-in-up delay-100">
         <p class="text-dark-beige font-mao text-2xl animate-pulse">在心中默念你当下的困惑或焦虑……</p>
     </div>
 
@@ -60,7 +62,7 @@
     </div>
 
     <!-- Cards Container (Hidden Initially) -->
-    <div class="relative w-full max-w-5xl flex justify-center items-center perspective-1000 mb-12 min-h-[450px]"
+    <div class="relative w-full max-w-5xl flex justify-center items-center perspective-1000 mb-8 min-h-[450px]"
         id="cards-container">
         <!-- Card will be injected here -->
     </div>

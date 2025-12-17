@@ -84,9 +84,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const content = document.createElement('div');
         content.className = 'card-front-content';
 
+        // Auto-detect font size and layout based on length
+        let fontSizeClass = 'quote-size-medium';
+        let layoutClass = 'layout-center'; // Default to centered
+
+        const len = quote.content.length;
+
+        if (len < 20) {
+            fontSizeClass = 'quote-size-large';
+            layoutClass = 'layout-center';
+        } else if (len > 60) {
+            fontSizeClass = 'quote-size-small';
+            layoutClass = 'layout-top'; // Align top to prevent clipping
+        } else if (len > 90) {
+            fontSizeClass = 'quote-size-xs';
+            layoutClass = 'layout-top';
+        } else {
+            // Between 20 and 60
+            layoutClass = 'layout-center';
+        }
+
+        content.classList.add(layoutClass);
+
         // Quote Text (Main Red)
         const text = document.createElement('p');
-        text.className = 'quote-text';
+        text.className = `quote-text ${fontSizeClass}`;
         text.innerText = quote.content;
 
         content.appendChild(text);
