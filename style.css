@@ -1,0 +1,215 @@
+/* Custom Styles */
+
+/* 3D Flip Mechanics */
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.card {
+    width: 300px;
+    height: 450px;
+    cursor: pointer;
+    background-color: transparent;
+    perspective: 1000px;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Back of Card (Initial View) */
+.card-back {
+    background-image: url('assets/bg_back.png');
+    background-size: cover;
+    background-position: center;
+    color: #F7F4ED;
+    transform: rotateY(0deg);
+    /* Explicitly set */
+    border: 2px solid #a62015;
+}
+
+/* Front of Card (Revealed) */
+/* Front of Card (Revealed) */
+.card-front {
+    background-image: url('assets/bg_front.png');
+    background-size: cover;
+    background-position: center;
+    color: #2B2B2B;
+    /* Default, but main text will be Red */
+    transform: rotateY(180deg);
+    border: none;
+    /* Reference image has no border or minimal */
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.card-front-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    z-index: 10;
+    /* Vertically center content if short, but allow flow if long */
+    justify-content: center;
+}
+
+
+/* Decorations */
+.vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    letter-spacing: 0.5em;
+}
+
+.card-back-text {
+    font-size: 3rem;
+    /* Prioritize Maoken, Xingkai, KaiTi as requested */
+    font-family: 'Maoken', 'Xingkai', 'STXingkai', 'KaiTi', 'Ma Shan Zheng', cursive;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.card-back-sub {
+    position: absolute;
+    bottom: 20px;
+    font-size: 0.8rem;
+    opacity: 0.9;
+    letter-spacing: 2px;
+}
+
+.portrait-container {
+    position: absolute;
+    bottom: -5px;
+    right: -10px;
+    width: 170px;
+    /* Reduced further to prevent overlap */
+    height: auto;
+    opacity: 1;
+    mix-blend-mode: normal;
+    /* Adjusted mask: Only fade the very edges (top and left) so the face remains fully opaque */
+    mask-image: linear-gradient(to top, black 85%, transparent 100%),
+        linear-gradient(to left, black 85%, transparent 100%);
+    mask-composite: intersect;
+    -webkit-mask-image: linear-gradient(to top, black 85%, transparent 100%),
+        linear-gradient(to left, black 85%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    z-index: 1;
+    filter: none;
+    /* Removed filter to preserve original colors as requested */
+}
+
+.quote-blocks {
+    flex: 1;
+    z-index: 2;
+}
+
+.quote-text {
+    /* Main quote text - Smaller Black Handwritten */
+    font-family: 'Xingkai', 'STXingkai', 'KaiTi', 'Ma Shan Zheng', cursive;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    text-align: left;
+    color: #2B2B2B;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    margin-bottom: 0;
+    /* Prevent overlap by restricting width (creates a cleaner column) */
+    max-width: 95%;
+    /* Use full width but rely on padding-bottom spacer if needed, OR safer column: */
+    width: 100%;
+
+    /* STRATEGY SWITCH: Use padding-right to protect the portrait area effectively */
+    /* Ensure no overlap: text strictly avoids the bottom-right zone via bottom padding */
+    padding-bottom: 160px;
+    /* Portrait height is approx 170px wide, maybe 200px high. */
+    padding-right: 10px;
+
+    text-shadow: none;
+    /* Ensure text doesn't collide with portrait visually if possible, but prioritization is display complete */
+}
+
+/* Footer Section for Subtext */
+.card-front-footer {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    z-index: 10;
+    text-align: left;
+    max-width: 60%;
+}
+
+.footer-title {
+    font-family: 'Songti SC', 'Noto Serif SC', 'SimSun', serif;
+    font-weight: 700;
+    color: #B83228;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+.footer-sub {
+    font-family: 'Songti SC', 'Noto Serif SC', 'SimSun', serif;
+    font-size: 0.8rem;
+    color: #4B4B4B;
+    line-height: 1.4;
+}
+
+/* Font Class for the requested change */
+.font-cinzel {
+    font-family: 'Cinzel', serif;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 1s ease-out forwards;
+    opacity: 0;
+    /* Star hidden */
+}
+
+.delay-100 {
+    animation-delay: 0.1s;
+}
+
+.delay-200 {
+    animation-delay: 0.2s;
+}
+
+.delay-300 {
+    animation-delay: 0.3s;
+}
