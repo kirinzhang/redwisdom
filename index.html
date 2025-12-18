@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Wisdom Cards - Don't worry, be fighting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Added Cinzel to the fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;700&family=Montserrat:wght@700;900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <meta name="theme-color" content="#BC2D22">
+    <link rel="apple-touch-icon" href="./icon1.jpg">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'warm-rice': '#F7F4ED',
+                        'china-red': '#BC2D22',
+                        'ink-black': '#2B2B2B',
+                        'dark-beige': '#D6C6B0',
+                    },
+                    fontFamily: {
+                        'mao': ['"Ma Shan Zheng"', 'cursive'],
+                        'serif': ['"Noto Serif SC"', 'serif'],
+                        'cinzel': ['"Cinzel"', 'serif'],
+                        'gotham': ['"Gotham"', '"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+  <script type="module" crossorigin src="./assets/index-DXPdO_nP.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-iF-IIExW.css">
+<link rel="manifest" href="./manifest.webmanifest"></head>
+
+<body
+    class="bg-warm-rice min-h-[100dvh] w-screen flex flex-col items-center justify-center px-4 pb-24 pt-8 relative overflow-y-auto">
+
+    <!-- Install App Button (Hidden by default) -->
+    <div id="install-container" class="hidden fixed top-4 right-4 z-50">
+        <button id="install-btn"
+            class="bg-china-red text-warm-rice font-mao px-4 py-2 rounded-lg shadow-md hover:bg-red-800 transition-all">
+            安装应用
+        </button>
+    </div>
+
+    <!-- Header -->
+    <header class="text-center mb-4 fade-in-up">
+        <!-- Changed font sizes to start smaller (3xl) to avoid truncation on mobile/small screens -->
+        <!-- Responsive sizing to ensure it fits mobile screens without truncation. Allows wrapping. -->
+        <h1
+            class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-gotham text-china-red mb-2 tracking-tighter drop-shadow-sm uppercase px-2 leading-tight">
+            Don't worry, be fighting</h1>
+        <p class="text-ink-black text-lg md:text-xl font-serif mt-4 tracking-wider opacity-80">遇事不决读毛选，治愈你90%的焦虑</p>
+    </header>
+
+    <!-- Mental Projection Prompt -->
+    <div id="projection-prompt" class="mb-4 text-center fade-in-up delay-100">
+        <p class="text-dark-beige font-mao text-2xl animate-pulse">在心中默念你当下的困惑或焦虑……</p>
+    </div>
+
+    <!-- Start Action -->
+    <div id="start-area" class="fade-in-up delay-200 z-50">
+        <button id="start-btn"
+            class="px-10 py-4 bg-china-red text-warm-rice font-mao text-3xl rounded-lg hover:bg-red-800 transition-all duration-300 shadow-lg border-2 border-transparent hover:border-gold-muted transform hover:scale-105">
+            抽一张
+        </button>
+    </div>
+
+    <!-- Cards Container (Hidden Initially) -->
+    <div class="relative w-full max-w-5xl flex justify-center items-center perspective-1000 mb-8 min-h-[450px]"
+        id="cards-container">
+        <!-- Card will be injected here -->
+    </div>
+
+    <!-- Controls (Hidden Initially) -->
+    <div id="controls-area" class="flex gap-6 opacity-0 transition-opacity duration-500 pointer-events-none">
+        <button id="retry-btn"
+            class="px-8 py-3 bg-transparent border-2 border-china-red text-china-red font-mao text-xl rounded-full hover:bg-china-red hover:text-white transition-all duration-300 shadow-md">
+            再抽一次
+        </button>
+    </div>
+
+    <!-- Hidden Save Container -->
+    <div id="save-area" class="fixed top-[200vh] left-0 pointer-events-none"></div>
+
+</body>
+
+</html>
