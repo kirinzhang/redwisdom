@@ -93,14 +93,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (len < 20) {
             fontSizeClass = 'quote-size-large';
             layoutClass = 'layout-center';
-        } else if (len > 60) {
+        } else if (len > 40) {
             fontSizeClass = 'quote-size-small';
             layoutClass = 'layout-top'; // Align top to prevent clipping
-        } else if (len > 90) {
+        } else if (len > 80) {
             fontSizeClass = 'quote-size-xs';
             layoutClass = 'layout-top';
         } else {
-            // Between 20 and 60
+            // Between 20 and 40
             layoutClass = 'layout-center';
         }
 

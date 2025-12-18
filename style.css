@@ -88,7 +88,7 @@
     z-index: 10;
     /* Vertically center content if short, but allow flow if long */
     /* Handled by helper classes now */
-    overflow-y: hidden;
+    overflow-y: auto;
     /* Prevent inner scrollbars, rely on scaling */
 }
 
