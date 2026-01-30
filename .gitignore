@@ -1,2 +1,10 @@
+# 环境变量和敏感文件
 .env
+
+# 系统文件
 .DS_Store
+
+# 开发临时文件
+毛泽东语录.csv
+毛泽东语录.numbers
+convert_csv.py
