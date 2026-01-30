@@ -1,16 +1,18 @@
 // API 配置文件
-// 请复制此文件并重命名为 config.js，然后填入你的配置
-const CONFIG = {
-    // Cloudflare Worker 代理地址
-    // 部署 Worker 后填入，格式: https://redwisdom-api.你的账号.workers.dev
-    WORKER_URL: '',
+// 请复制此文件并重命名为 config.js
 
-    // 如果不使用 Worker，可以直接填入 OpenRouter API Key（不推荐，会暴露 Key）
+const CONFIG = {
+    // Pages Functions API 路由（部署到 Cloudflare Pages 后使用）
+    // 留空会自动使用相对路径 /api/chat
+    WORKER_URL: '/api/chat',
+
+    // 本地开发时使用的 OpenRouter API Key
+    // 部署到 Cloudflare Pages 后，API Key 从环境变量读取，此项可留空
     OPENROUTER_API_KEY: '',
 
     // 使用的模型
     MODEL: 'deepseek/deepseek-chat',
 
-    // OpenRouter API 地址（使用 Worker 时不需要）
+    // OpenRouter API 地址（本地开发时使用）
     API_URL: 'https://openrouter.ai/api/v1/chat/completions'
 };
