@@ -331,8 +331,11 @@
 
         // ===== API 调用 =====
         async function sendMessage(userMessage) {
+            const useWorker = !!WORKER_URL;
             const apiKey = getApiKey();
-            if (!apiKey) {
+
+            // 只有不使用 Worker 时才需要检查 API Key
+            if (!useWorker && !apiKey) {
                 showApiKeyModal();
                 return;
             }
