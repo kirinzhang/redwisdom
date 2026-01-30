@@ -1,0 +1,6 @@
+name = "redwisdom-api"
+main = "index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+# 不要在这里填写 API Key，使用 wrangler secret 命令设置

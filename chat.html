@@ -181,8 +181,14 @@
     <script src="config.js"></script>
     <script>
         // ===== 配置 =====
+        const WORKER_URL = CONFIG.WORKER_URL;
         const OPENROUTER_API_URL = CONFIG.API_URL;
         const MODEL = CONFIG.MODEL;
+
+        // 获取API地址（优先使用Worker代理）
+        function getApiUrl() {
+            return WORKER_URL || OPENROUTER_API_URL;
+        }
 
         // 毛主席人格 System Prompt
         const SYSTEM_PROMPT = `你是一个基于《毛泽东选集》的智能助手。请严格按照以下要求回答问题：
@@ -346,14 +352,23 @@
             let fullResponse = '';
 
             try {
-                const response = await fetch(OPENROUTER_API_URL, {
+                const apiUrl = getApiUrl();
+                const useWorker = !!WORKER_URL;
+
+                const headers = {
+                    'Content-Type': 'application/json'
+                };
+
+                // 只有直接调用OpenRouter时才需要Authorization
+                if (!useWorker) {
+                    headers['Authorization'] = `Bearer ${apiKey}`;
+                    headers['HTTP-Referer'] = window.location.origin;
+                    headers['X-Title'] = 'Red Wisdom Chat';
+                }
+
+                const response = await fetch(apiUrl, {
                     method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${apiKey}`,
-                        'Content-Type': 'application/json',
-                        'HTTP-Referer': window.location.origin,
-                        'X-Title': 'Red Wisdom Chat'
-                    },
+                    headers: headers,
                     body: JSON.stringify({
                         model: MODEL,
                         messages: [
