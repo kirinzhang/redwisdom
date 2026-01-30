@@ -1,6 +1,7 @@
 {
     "name": "redwisdom",
     "compatibility_date": "2024-01-01",
+    "main": "_worker.js",
     "assets": {
         "directory": "./"
     }
