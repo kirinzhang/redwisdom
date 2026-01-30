@@ -181,9 +181,8 @@
     <script src="config.js"></script>
     <script>
         // ===== 配置 =====
-        const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
+        const OPENROUTER_API_URL = CONFIG.API_URL;
         const MODEL = CONFIG.MODEL;
-        const DEFAULT_API_KEY = CONFIG.OPENROUTER_API_KEY;
 
         // 毛主席人格 System Prompt
         const SYSTEM_PROMPT = `你是一个基于《毛泽东选集》的智能助手。请严格按照以下要求回答问题：
@@ -233,7 +232,7 @@
 
         // ===== API Key 管理 =====
         function getApiKey() {
-            return localStorage.getItem('openrouter_api_key') || DEFAULT_API_KEY;
+            return localStorage.getItem('openrouter_api_key');
         }
 
         function setApiKey(key) {
@@ -454,7 +453,10 @@
             userInput.style.height = Math.min(userInput.scrollHeight, 120) + 'px';
         });
 
-        // 已预设 API Key，无需手动设置
+        // 首次使用时请求设置 API Key
+        if (!getApiKey()) {
+            setTimeout(showApiKeyModal, 500);
+        }
     </script>
 </body>
 
