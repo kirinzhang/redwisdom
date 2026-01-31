@@ -4,6 +4,19 @@
 export async function onRequestPost(context) {
     const { request, env } = context;
 
+    // 检查 API Key 是否存在
+    if (!env.OPENROUTER_API_KEY) {
+        return new Response(JSON.stringify({
+            error: '服务器未配置 API Key，请在 Cloudflare 环境变量中设置 OPENROUTER_API_KEY'
+        }), {
+            status: 500,
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            }
+        });
+    }
+
     try {
         // 获取请求体
         const body = await request.json();
@@ -44,12 +57,28 @@ export async function onRequestPost(context) {
     }
 }
 
+// 处理 GET 请求 - 用于测试 Function 是否正常工作
+export async function onRequestGet(context) {
+    const { env } = context;
+
+    return new Response(JSON.stringify({
+        status: 'ok',
+        message: 'Pages Function 正常工作',
+        hasApiKey: !!env.OPENROUTER_API_KEY
+    }), {
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+        }
+    });
+}
+
 // 处理 OPTIONS 预检请求
 export async function onRequestOptions() {
     return new Response(null, {
         headers: {
             'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'POST, OPTIONS',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type',
             'Access-Control-Max-Age': '86400',
         }
