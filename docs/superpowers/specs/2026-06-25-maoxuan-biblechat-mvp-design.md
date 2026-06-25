@@ -1,230 +1,230 @@
-# Maoxuan BibleChat MVP Design
+# 毛选 BibleChat MVP 设计
 
-## Summary
+## 概述
 
-Build Red Wisdom into a Mao Selected Works and Mao Zedong Thought version of BibleChat. The MVP keeps the current Red Wisdom visual language: china red, warm rice paper, Mao Selected Works atmosphere, card ritual, and serif/calligraphic typography. The product structure becomes BibleChat-like: ask about real life problems, receive grounded counsel with cited source passages, read the original works, and return daily through a lightweight companion hook.
+把 Red Wisdom 打造成一个“毛选与毛泽东思想版 BibleChat”。MVP 保留当前 Red Wisdom 的视觉语言：红色、暖米色宣纸质感、毛选氛围、抽卡仪式感，以及宋体/书法字体搭配。产品结构升级为类似 BibleChat 的体验：用户可以询问现实生活中的问题，获得带原文出处的咨询与安慰，也可以直接回到原著阅读，并通过每日陪伴钩子持续回来。
 
-The first version prioritizes citation trust over breadth. Answers should retrieve relevant local source passages from the existing Mao Selected Works Markdown corpus before calling the AI model. The AI response should be framed as method-based counsel, psychological comfort, and practical action, with visible citations and links back to the original text.
+第一版优先保证“引用可信”，而不是追求功能大而全。回答在调用 AI 模型前，应先从现有毛选 Markdown 语料中检索相关原文段落。AI 回答应以方法论咨询、心理安慰和可执行行动建议为主，并展示清晰出处与回到原文的链接。
 
-## Goals
+## 目标
 
-- Help users bring real anxieties, decisions, work, study, relationship, and self-discipline problems to a Mao Selected Works style advisor.
-- Ground answers in local Mao Selected Works source passages instead of relying only on model memory.
-- Preserve a clear path from answer to source: every answer shows cited excerpts and can open the relevant original article.
-- Keep the daily card/daily prompt as a fun retention hook that feeds into asking and reading.
-- Ship as a full MVP inside the existing static/Vercel-style codebase without adding accounts, payments, cloud sync, or a heavy framework.
+- 帮助用户把真实焦虑、决策、工作、学习、关系、自律等问题带到一个毛选风格的方法论顾问中。
+- 让回答基于本地毛选原文段落，而不是只依赖模型记忆。
+- 保留从回答回到原文的清晰路径：每次回答展示引用摘录，并能打开对应原文文章。
+- 把每日卡片/每日提问保留为有趣的留存钩子，引导用户继续提问和阅读。
+- 在现有静态站点 + Vercel 风格代码结构内交付完整 MVP，不引入账号、支付、云同步或重型框架。
 
-## Non-Goals
+## 非目标
 
-- No user login, personal cloud history, or multi-device sync in this MVP.
-- No fine-tuned model or external vector database.
-- No claim that the assistant is an authoritative political, medical, legal, or clinical mental health advisor.
-- No full learning-plan system beyond a simple daily prompt/card entry point.
-- No redesign into BibleChat's visual identity; BibleChat is a structural reference only.
+- MVP 不做用户登录、个人云端历史或多设备同步。
+- 不做模型微调，也不接外部向量数据库。
+- 不宣称助手是权威政治、医疗、法律或临床心理健康顾问。
+- 不做完整学习计划系统，只保留简单每日提示/卡片入口。
+- 不改成 BibleChat 的视觉身份；BibleChat 只作为产品结构参考。
 
-## Product Structure
+## 产品结构
 
-### 1. Ask: Reality Counsel
+### 1. 问道：现实问题咨询
 
-The primary screen becomes a more purposeful "问道毛选" experience. Users can describe a real problem in natural language. The answer format should be consistent:
+主页面升级为更有目的性的“问道毛选”体验。用户可以用自然语言描述一个真实问题。回答格式应保持一致：
 
-1. **先稳住**: a short comforting reframe that acknowledges the user's concern.
-2. **抓主要矛盾**: identify the central tension or decision point.
-3. **从原文看**: cite two or three retrieved Mao Selected Works passages with article titles.
-4. **怎么做**: give concrete next actions for the next day or week.
-5. **回到实践**: end with a small experiment or reflection question.
+1. **先稳住**：用一小段安慰性重述接住用户的问题。
+2. **抓主要矛盾**：指出当前最核心的张力或决策点。
+3. **从原文看**：引用 2-3 段检索到的毛选原文，并标注文章标题。
+4. **怎么做**：给出未来一天或一周内可以执行的具体行动。
+5. **回到实践**：用一个小实验或反思问题收尾。
 
-The assistant should avoid pretending certainty when retrieved context is weak. If the local search finds little relevant material, the answer should say it is using broad method references and invite the user to provide more detail.
+当检索上下文较弱时，助手应避免装作很确定。如果本地搜索没有找到强相关材料，回答需要说明当前主要使用广义方法论参考，并邀请用户补充更多细节。
 
-### 2. Read: Original Text And Source Tracing
+### 2. 读原著：原文阅读与出处追踪
 
-The existing reading page remains the source library. It should support links from AI citations:
+现有阅读页继续作为原文库。它需要支持从 AI 引用跳转过来：
 
-- `reading.html#<encoded filename>` opens the article.
-- Citation cards in chat show article title, short excerpt, and an "读原文" action.
-- The MVP links to the article level only. Exact paragraph highlighting is deferred to a later extension.
+- `reading.html#<encoded filename>` 打开对应文章。
+- 聊天里的引用卡片展示文章标题、短摘录和“读原文”操作。
+- MVP 只跳转到文章级别；精确段落高亮留到后续扩展。
 
-The reader should continue to support catalog navigation and previous/next article navigation.
+阅读器继续保留目录导航和上一篇/下一篇导航。
 
-### 3. Daily Companion
+### 3. 每日陪伴
 
-The current card ritual becomes the daily hook rather than the whole product:
+当前抽卡仪式从“整个产品”转为每日陪伴钩子：
 
-- Homepage shows a "今日一问" or "今日方法" card.
-- Users can draw a card, then choose "带着这个问题去问道" or "读相关原文".
-- Daily prompts should connect to common problems: anxiety, action paralysis, criticism, discipline, work pressure, learning, and relationships.
-- The hook should feel playful and ceremonial, but it should funnel into the grounded chat and source reading.
+- 首页展示“今日一问”或“今日方法”卡片。
+- 用户抽卡后，可以选择“带着这个问题去问道”或“读相关原文”。
+- 每日提示应关联常见问题：焦虑、行动迟滞、被批评、自律、工作压力、学习和关系。
+- 这个钩子可以有趣、有仪式感，但要把用户导向带出处的聊天和原文阅读。
 
-## Recommended MVP Approach
+## 推荐 MVP 方案
 
-Use a local lexical retrieval pipeline before the AI call:
+在 AI 调用前加入本地词法检索流程：
 
-1. Build a client-side or server-side source index from the existing `data/catalog.json` and `data/articles/*.md`.
-2. Split articles into paragraph-sized chunks with metadata:
-   - article title
-   - filename
-   - volume name
-   - chunk text
-   - rough paragraph index
-3. Search chunks using simple Chinese-friendly lexical scoring:
-   - tokenize by Chinese character bigrams and meaningful ASCII words
-   - boost exact query terms
-   - boost article titles and known method keywords such as `矛盾`, `实践`, `调查`, `群众`, `路线`, `主要`, `次要`, `困难`, `批评`, `学习`, `工作`
-4. Send the top 4-6 chunks to `/api/chat` with the user's question.
-5. The server calls OpenRouter with a system prompt that requires answering only from the provided context plus general method synthesis.
-6. Return the streamed answer plus citation metadata to the browser.
+1. 基于现有 `data/catalog.json` 和 `data/articles/*.md` 构建来源索引。
+2. 把文章切成段落级 chunk，并保留元数据：
+   - 文章标题
+   - 文件名
+   - 卷名
+   - chunk 文本
+   - 粗略段落序号
+3. 使用适合中文的简单词法评分搜索 chunk：
+   - 用中文双字组合和有意义的 ASCII 单词做 token
+   - 提升查询词精确匹配权重
+   - 提升文章标题和方法论关键词权重，例如 `矛盾`、`实践`、`调查`、`群众`、`路线`、`主要`、`次要`、`困难`、`批评`、`学习`、`工作`
+4. 将得分最高的 4-6 个 chunk 和用户问题一起发送到 `/api/chat`。
+5. 服务端调用 OpenRouter，并使用系统提示词要求模型只基于提供的上下文和通用方法论综合来回答。
+6. 浏览器接收流式回答，并展示引用元数据。
 
-For speed and reliability, pre-generate a compact JSON index during development if the browser fetching all Markdown files is too slow. A generated `data/search-index.json` is acceptable for the MVP because the source corpus is static.
+为了速度和稳定性，如果浏览器逐篇拉取 Markdown 太慢，开发阶段预生成一个紧凑 JSON 索引。MVP 可以生成 `data/search-index.json`，因为原文语料是静态的。
 
-## Architecture
+## 架构
 
-### Existing Files To Preserve
+### 需要保留的现有文件
 
-- `index.html`: homepage and card ritual.
-- `chat.html`: chat UI, to be upgraded into the main counsel interface.
-- `reading.html`: source reader, to remain the original text library.
-- `api/chat.js`: Vercel serverless proxy for OpenRouter.
-- `data/catalog.json`: article catalog.
-- `data/articles/*.md`: source corpus.
-- `data.js` and `data/quotes.json`: quote/card data.
-- `assets/*` and `style.css`: current visual system.
+- `index.html`：首页和抽卡仪式。
+- `chat.html`：聊天 UI，将升级为主要咨询界面。
+- `reading.html`：原文阅读器，继续作为原文库。
+- `api/chat.js`：Vercel serverless OpenRouter 代理。
+- `data/catalog.json`：文章目录。
+- `data/articles/*.md`：原文语料。
+- `data.js` 和 `data/quotes.json`：语录/卡片数据。
+- `assets/*` 和 `style.css`：当前视觉系统。
 
-### New Or Changed Modules
+### 新增或修改的模块
 
-- `data/search-index.json`: generated source chunks for retrieval.
-- `scripts/build-search-index.mjs`: builds `search-index.json` from catalog and Markdown files.
-- `retrieval.js`: browser-side retrieval utilities if retrieval runs in the client.
-- `chat.html`: upgraded layout, answer rendering, citation cards, daily prompt shortcuts.
-- `api/chat.js`: accepts `{ message, history, contextChunks }`, injects retrieved context into the OpenRouter prompt, and streams the response.
-- `index.html` and `script.js`: make the card flow feed into chat and fix the existing `saveIcon` runtime error.
+- `data/search-index.json`：生成后的原文 chunk 检索索引。
+- `scripts/build-search-index.mjs`：从目录和 Markdown 文件生成 `search-index.json`。
+- `retrieval.js`：如果在客户端检索，则放浏览器侧检索工具函数。
+- `chat.html`：升级布局、回答渲染、引用卡片和每日提示快捷入口。
+- `api/chat.js`：接受 `{ message, history, contextChunks }`，把检索上下文注入 OpenRouter prompt，并流式返回回答。
+- `index.html` 和 `script.js`：让抽卡流程导向聊天，并修复现有 `saveIcon` 运行时错误。
 
-The simplest MVP can run retrieval in the browser to avoid server filesystem assumptions on Vercel. The browser loads `data/search-index.json`, ranks chunks locally, sends only top chunks to `/api/chat`, and renders the same citation cards it sent. This keeps server code small and transparent.
+最简单的 MVP 可以把检索放在浏览器端运行，避免 Vercel 服务端文件系统假设。浏览器加载 `data/search-index.json`，本地排序 chunk，只把 top chunks 发送到 `/api/chat`，并渲染同一组引用卡片。这样服务端代码更小、更透明。
 
-## Data Flow
+## 数据流
 
-### Chat Query
+### 聊天查询
 
-1. User enters a problem on `chat.html`.
-2. Browser loads `data/search-index.json` once and caches it in memory.
-3. Browser ranks chunks for the user message.
-4. Browser displays a "正在查找原文" state and then shows selected source cards.
-5. Browser POSTs to `/api/chat` with:
-   - user message
-   - conversation history
-   - selected source chunks and metadata
-6. Server injects a strict context-first prompt and calls OpenRouter.
-7. Browser streams the answer and keeps citation cards attached to the response.
-8. User can click "读原文" on any citation card.
+1. 用户在 `chat.html` 输入现实问题。
+2. 浏览器加载一次 `data/search-index.json`，并缓存在内存里。
+3. 浏览器根据用户问题给 chunk 排名。
+4. 浏览器展示“正在查找原文”状态，然后显示选中的来源卡片。
+5. 浏览器向 `/api/chat` POST：
+   - 用户问题
+   - 对话历史
+   - 选中的来源 chunk 和元数据
+6. 服务端注入严格的 context-first prompt，并调用 OpenRouter。
+7. 浏览器流式展示回答，并把引用卡片附在回答下方。
+8. 用户可以点击任意引用卡片上的“读原文”。
 
-### Daily Card To Chat
+### 每日卡片到聊天
 
-1. User draws a card on `index.html`.
-2. The card reveals a quote or method prompt.
-3. User chooses a CTA:
-   - "带着这个问题去问道" opens `chat.html?prompt=<encoded prompt>`.
-   - "读相关原文" opens `reading.html#<filename>` when a source is known.
-4. Chat pre-fills the prompt and lets the user press send, so the transition feels intentional instead of surprising.
+1. 用户在 `index.html` 抽卡。
+2. 卡片展示语录或方法提示。
+3. 用户选择 CTA：
+   - “带着这个问题去问道”打开 `chat.html?prompt=<encoded prompt>`。
+   - “读相关原文”在已知来源时打开 `reading.html#<filename>`。
+4. 聊天页预填提示词，让用户自己点击发送，这样过渡更有意图感，不会显得突兀。
 
-## Prompting Requirements
+## Prompt 要求
 
-The AI system prompt should make the assistant:
+AI 系统提示词应要求助手：
 
-- speak in a warm, steady, method-oriented tone;
-- call the user "同志" sparingly, not mechanically in every paragraph;
-- use Mao Selected Works concepts such as contradiction analysis, practice, investigation, mass line, and seeking truth from facts;
-- ground claims in the supplied source excerpts;
-- separate source citation from interpretation;
-- avoid fabricating article titles, dates, or direct quotes;
-- recommend practical next actions;
-- include a safety line for severe distress: encourage contacting trusted people or professional help when the user indicates self-harm, danger, or crisis.
+- 语气温暖、稳定、偏方法论；
+- 可以少量称呼用户为“同志”，但不要每段机械重复；
+- 使用毛选中的方法论概念，例如矛盾分析、实践、调查研究、群众路线、实事求是；
+- 让观点基于提供的原文摘录；
+- 区分原文引用和自己的解释；
+- 避免编造文章标题、日期或直接引文；
+- 给出可执行的下一步行动；
+- 当用户表达自伤、危险或危机信号时，先用支持性语言鼓励立刻寻求现实中的可信任人员或专业帮助，再进行方法论分析。
 
-The response should not impersonate Mao as if he is personally speaking. It should be "using Mao Selected Works methods" rather than roleplaying Mao as a living advisor.
+回答不应假装是毛泽东本人在说话。定位应是“用毛选方法论进行分析”，而不是角色扮演一个仍在世的个人顾问。
 
-## UI Design
+## UI 设计
 
-### Visual Language
+### 视觉语言
 
-Keep the current palette and material:
+保留当前配色和材质：
 
-- china red for primary actions and emphasis;
-- warm rice paper background;
-- dark ink text;
-- subtle paper/card texture from existing assets;
-- Mao portrait art where already used;
-- restrained calligraphy for display labels, readable serif for body text.
+- 中国红用于主要操作和重点强调；
+- 暖米色宣纸背景；
+- 深墨色正文；
+- 使用现有素材中的轻微纸张/卡片纹理；
+- 在已有位置继续使用毛主席画像素材；
+- 展示标签用克制书法感字体，正文用可读性强的衬线字体。
 
-Avoid making the app feel like a generic SaaS dashboard. It should feel like a reading room plus counsel desk: calm, serious, warm, and ritualized.
+避免把应用做成通用 SaaS 仪表盘。它应该像一个“阅读室 + 咨询案头”：冷静、严肃、温暖，并带一点仪式感。
 
-### Chat Screen
+### 聊天页
 
-The chat screen should include:
+聊天页应包含：
 
-- top navigation back to home and reading;
-- a compact intro panel explaining that answers are based on retrieved original text;
-- prompt chips for common use cases, such as:
-  - "我最近很焦虑"
-  - "工作推进不下去"
-  - "被批评后很受挫"
-  - "如何开始行动"
-- streaming answer area;
-- citation cards under each assistant answer;
-- clear error states when API key is missing, retrieval fails, or model call fails.
+- 顶部导航，能回首页和阅读页；
+- 一个紧凑介绍区，说明回答基于检索到的原文；
+- 常用场景 prompt chips，例如：
+  - “我最近很焦虑”
+  - “工作推进不下去”
+  - “被批评后很受挫”
+  - “如何开始行动”
+- 流式回答区域；
+- 每条助手回答下方的引用卡片；
+- 当 API key 缺失、检索失败或模型调用失败时，有清楚的错误状态。
 
-### Homepage
+### 首页
 
-The homepage should still open with the card ritual, but after reveal it should offer:
+首页仍以抽卡仪式开场，但卡片揭晓后提供：
 
-- "问问这件事"
-- "读相关原文"
-- "再抽一次"
+- “问问这件事”
+- “读相关原文”
+- “再抽一次”
 
-The old save-card code should either be fully restored or removed. For MVP, remove broken save references unless explicitly restoring image saving.
+旧的保存卡片代码要么完整恢复，要么删除。MVP 中除非明确恢复图片保存，否则应移除已经损坏的保存引用。
 
-### Reader
+### 阅读页
 
-The reader should support existing catalog browsing and direct article links from citation cards. If there is time, show a small banner when opened from chat: "来自问道引用：<article title>".
+阅读页需要支持现有目录浏览和从引用卡片跳转到文章。如果时间允许，从聊天打开时可以展示一个小提示：“来自问道引用：<article title>”。
 
-## Error Handling
+## 错误处理
 
-- If `search-index.json` cannot load, show a non-blocking warning and allow direct AI chat only if configured.
-- If retrieval returns weak matches, label the citations as "相关参考" and ask for more detail.
-- If `/api/chat` returns missing API key, show an actionable setup message.
-- If OpenRouter fails mid-stream, preserve the user's message and selected citations so retry is possible.
-- If the user message suggests self-harm or immediate danger, answer with supportive language and encourage immediate real-world help before any ideological analysis.
+- 如果 `search-index.json` 加载失败，展示非阻塞警告；如果配置允许，则继续直接 AI 聊天。
+- 如果检索结果弱，把引用标记为“相关参考”，并请用户补充更多细节。
+- 如果 `/api/chat` 返回缺少 API key，展示可操作的配置提示。
+- 如果 OpenRouter 中途失败，保留用户消息和已选引用，方便重试。
+- 如果用户消息暗示自伤或即时危险，先用支持性语言鼓励立刻寻求现实帮助，再做任何方法论分析。
 
-## Testing And Verification
+## 测试与验证
 
-Manual verification for MVP:
+MVP 手动验证：
 
-- `python3 -m http.server 8080` serves static pages.
-- `index.html` card flow does not throw `saveIcon` errors.
-- `chat.html` loads `search-index.json`, retrieves source cards, and sends the top chunks to `/api/chat`.
-- Chat answers show streamed markdown and citation cards.
-- Citation "读原文" opens the expected article in `reading.html`.
-- `reading.html#016-实践论.md`, `reading.html#017-矛盾论.md`, and `reading.html#026-论持久战.md` load correctly.
-- Missing API key produces a clear error.
-- Mobile widths keep navigation, input, and cards usable without overlapping text.
+- `python3 -m http.server 8080` 能提供静态页面。
+- `index.html` 抽卡流程不会抛出 `saveIcon` 错误。
+- `chat.html` 能加载 `search-index.json`，检索来源卡片，并把 top chunks 发送到 `/api/chat`。
+- 聊天回答能流式展示 Markdown 和引用卡片。
+- 引用的“读原文”能打开 `reading.html` 中的预期文章。
+- `reading.html#016-实践论.md`、`reading.html#017-矛盾论.md`、`reading.html#026-论持久战.md` 能正确加载。
+- 缺少 API key 时展示清楚错误。
+- 移动端宽度下，导航、输入框和卡片可用，文字不重叠。
 
-Automated checks where practical:
+可行时加入自动检查：
 
-- Run the index builder and assert it creates chunks for all catalog articles.
-- Validate every generated citation filename exists in `data/articles`.
-- Run a simple retrieval smoke test for queries like `焦虑`, `行动`, `批评`, `调查研究`, `主要矛盾`.
+- 运行索引构建脚本，并断言它为所有目录文章生成 chunk。
+- 校验每条生成引用的文件名都存在于 `data/articles`。
+- 对 `焦虑`、`行动`、`批评`、`调查研究`、`主要矛盾` 等查询运行简单检索冒烟测试。
 
-## MVP Acceptance Criteria
+## MVP 验收标准
 
-- A user can ask a real problem and receive a grounded answer with at least two source cards when relevant passages are found.
-- Every source card has article title, excerpt, and a working "读原文" link.
-- The daily card experience leads naturally into chat or reading.
-- The app keeps the Red Wisdom visual identity.
-- The broken homepage flip flow is fixed.
-- README/deployment language is updated enough that local and Vercel usage are not misleading.
+- 用户可以提出一个现实问题，并在找到相关段落时收到带至少两个来源卡片的 grounded 回答。
+- 每张来源卡片都有文章标题、摘录和可用的“读原文”链接。
+- 每日卡片体验能自然导向聊天或阅读。
+- 应用保留 Red Wisdom 的视觉身份。
+- 首页翻牌流程中的已知错误被修复。
+- README/部署说明更新到足够清楚，不再误导本地运行和 Vercel 使用方式。
 
-## Later Extensions
+## 后续扩展
 
-- User accounts, saved history, favorites, and notes.
-- Highlight exact cited paragraphs in the reader.
-- Better retrieval with embeddings or a local vector index.
-- Topic courses: contradiction, practice, investigation, mass line, criticism, discipline.
-- Daily streaks and personalized practice plans.
-- A stricter source QA layer that rejects unsupported generated citations.
+- 用户账号、历史记录、收藏和笔记。
+- 阅读页精确高亮被引用段落。
+- 使用 embedding 或本地向量索引提升检索质量。
+- 主题课程：矛盾、实践、调查研究、群众路线、批评、自律。
+- 每日 streak 和个性化实践计划。
+- 更严格的来源 QA 层，拒绝没有原文支持的生成引用。
