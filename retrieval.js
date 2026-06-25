@@ -40,7 +40,8 @@
 
     function selectSkills(message, skills = [], limit = 3) {
         const queryTokens = tokenize(message);
-        if (!queryTokens.some(isMeaningfulToken)) return [];
+        const meaningfulQueryTokens = queryTokens.filter(isMeaningfulToken);
+        if (!meaningfulQueryTokens.length) return [];
         return asArray(skills)
             .map((skill) => {
                 const skillTokens = tokenize([
@@ -51,7 +52,7 @@
                     ...(skill.answerMoves || []),
                     skill.actionTemplate
                 ].join(' '));
-                let score = scoreByTokens(queryTokens, skillTokens, 4);
+                let score = scoreByTokens(meaningfulQueryTokens, skillTokens, 4);
                 for (const keyword of skill.keywords || []) {
                     if (String(message).includes(keyword)) score += 8;
                 }

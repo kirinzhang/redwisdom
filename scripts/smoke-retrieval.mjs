@@ -25,6 +25,9 @@ const emptySelected = rw.selectSkills('', skills, 3);
 if (!Array.isArray(emptySelected)) throw new Error('selectSkills should return an array for empty input');
 if (emptySelected.length !== 0) throw new Error('selectSkills should not return arbitrary skills for empty input');
 if (rw.selectSkills(undefined).length !== 0) throw new Error('selectSkills should tolerate missing skills');
+if (rw.selectSkills('天气晴朗散步吃饭', skills, 3).length !== 0) {
+  throw new Error('selectSkills should not return arbitrary skills for unrelated Chinese input');
+}
 
 const emptyChunks = rw.rankChunks('', [], index.chunks, 5);
 if (!Array.isArray(emptyChunks)) throw new Error('rankChunks should return an array for empty input');
