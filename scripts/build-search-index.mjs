@@ -60,11 +60,10 @@ for (const [volume, articles] of Object.entries(catalog.volumes)) {
 }
 
 const payload = {
-  generatedAt: new Date().toISOString(),
   articleCount,
   chunkCount: chunks.length,
   chunks
 };
 
-fs.writeFileSync(outFile, `${JSON.stringify(payload, null, 2)}\n`);
+fs.writeFileSync(outFile, `${JSON.stringify(payload)}\n`);
 console.log(`Wrote ${chunks.length} chunks from ${articleCount} articles to ${outFile}`);
