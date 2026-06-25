@@ -146,6 +146,12 @@
                     </p>
                 </div>
             </div>
+            <div id="promptChips" class="px-4 pb-2 flex flex-wrap gap-2">
+                <button data-prompt="我最近很焦虑，事情太多，不知道先做什么" class="prompt-chip px-3 py-2 rounded-full border border-china-red/30 text-china-red bg-white/70 font-serif text-sm">我最近很焦虑</button>
+                <button data-prompt="工作推进不下去，感觉大家都不配合" class="prompt-chip px-3 py-2 rounded-full border border-china-red/30 text-china-red bg-white/70 font-serif text-sm">工作推进不下去</button>
+                <button data-prompt="我被批评后很受挫，开始怀疑自己" class="prompt-chip px-3 py-2 rounded-full border border-china-red/30 text-china-red bg-white/70 font-serif text-sm">被批评后很受挫</button>
+                <button data-prompt="我想开始行动，但总是想太多" class="prompt-chip px-3 py-2 rounded-full border border-china-red/30 text-china-red bg-white/70 font-serif text-sm">如何开始行动</button>
+            </div>
         </div>
 
         <!-- Input Area -->
@@ -170,114 +176,40 @@
         </div>
     </main>
 
-    <!-- API Key Modal -->
-    <div id="apiKeyModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
-        <div class="bg-warm-rice rounded-2xl p-6 max-w-md mx-4 shadow-2xl">
-            <h2 class="font-mao text-2xl text-china-red mb-4">设置 API Key</h2>
-            <p class="text-ink-black/70 mb-4 font-serif text-sm">
-                请输入你的 OpenRouter API Key 以启用对话功能。你的 Key 仅保存在本地浏览器中。
-            </p>
-            <input type="password" id="apiKeyInput" placeholder="sk-or-v1-..."
-                class="w-full rounded-lg border-2 border-dark-beige/50 focus:border-china-red focus:ring-0 p-3 font-mono text-sm mb-4">
-            <div class="flex gap-3">
-                <button id="saveApiKey"
-                    class="flex-1 py-2 bg-china-red text-warm-rice font-mao text-lg rounded-lg hover:bg-red-800 transition-colors">
-                    保存
-                </button>
-                <button id="cancelApiKey"
-                    class="px-4 py-2 border-2 border-dark-beige text-ink-black/70 font-serif rounded-lg hover:bg-dark-beige/20 transition-colors">
-                    取消
-                </button>
-            </div>
-        </div>
-    </div>
-
     <script src="config.js"></script>
+    <script src="retrieval.js"></script>
     <script>
         // ===== 配置 =====
-        const WORKER_URL = CONFIG.WORKER_URL;
-        const OPENROUTER_API_URL = CONFIG.API_URL;
+        const CHAT_API_URL = CONFIG.WORKER_URL || '/api/chat';
         const MODEL = CONFIG.MODEL;
 
-        // 获取API地址（优先使用Worker代理）
         function getApiUrl() {
-            return WORKER_URL || OPENROUTER_API_URL;
+            return CHAT_API_URL;
         }
-
-        // 毛主席人格 System Prompt
-        const SYSTEM_PROMPT = `你是一个基于《毛泽东选集》的智能助手。请严格按照以下要求回答问题：
-
-## 思考方式（模仿毛主席的方法论）
-1. **辩证法思维** - 看问题要看两面，矛盾是普遍存在的，要抓主要矛盾
-2. **实践论** - 实践是检验真理的唯一标准，认识来源于实践
-3. **群众路线** - 从群众中来，到群众中去，相信群众依靠群众
-4. **调查研究** - 没有调查就没有发言权，一切从实际出发
-5. **实事求是** - 根据实际情况分析问题，不搞教条主义
-
-## 说话风格（模仿毛主席的语言特点）
-1. 善用通俗易懂的比喻（如"纸老虎"、"过河要有桥或船"、"星星之火可以燎原"）
-2. 语言简练有力，多用短句
-3. 善用反问句启发对方思考
-4. 喜欢用具体例子说明道理
-5. 语气亲切但坚定，称呼对方为"同志"
-6. 偶尔引用古语典故，但立足现实
-
-## 回答要求
-1. 每次回答都要引用毛选中的相关思想或原文，用引用格式标注
-2. 回答要结合用户的实际问题，给出具体可操作的建议
-3. 保持积极正向，给人力量和方向
-4. 如果用户的问题涉及政治敏感话题，委婉引导到学习方法论上
-5. 回答控制在300-500字左右，重点突出
-
-## 格式要求
-- 使用Markdown格式
-- 重点内容用**粗体**标注
-- 引用毛选原文用 > 引用格式
-- 在回答末尾标注思想来源，格式：📚 *参考：《文章名》*
-
-现在，请以这种风格和思维方式回答用户的问题。`;
 
         // ===== DOM 元素 =====
         const messagesContainer = document.getElementById('messages');
         const userInput = document.getElementById('userInput');
         const sendBtn = document.getElementById('sendBtn');
-        const apiKeyModal = document.getElementById('apiKeyModal');
-        const apiKeyInput = document.getElementById('apiKeyInput');
-        const saveApiKeyBtn = document.getElementById('saveApiKey');
-        const cancelApiKeyBtn = document.getElementById('cancelApiKey');
 
         // ===== 状态 =====
         let conversationHistory = [];
         let isGenerating = false;
+        let maoSkills = [];
+        let searchChunks = [];
 
-        // ===== API Key 管理 =====
-        function getApiKey() {
-            return localStorage.getItem('openrouter_api_key') || CONFIG.OPENROUTER_API_KEY;
-        }
-
-        function setApiKey(key) {
-            localStorage.setItem('openrouter_api_key', key);
-        }
-
-        function showApiKeyModal() {
-            apiKeyModal.classList.remove('hidden');
-            apiKeyInput.value = getApiKey() || '';
-            apiKeyInput.focus();
-        }
-
-        function hideApiKeyModal() {
-            apiKeyModal.classList.add('hidden');
-        }
-
-        saveApiKeyBtn.addEventListener('click', () => {
-            const key = apiKeyInput.value.trim();
-            if (key) {
-                setApiKey(key);
-                hideApiKeyModal();
+        async function loadKnowledgeBase() {
+            const [skillsResponse, indexResponse] = await Promise.all([
+                fetch('data/mao-skills.json'),
+                fetch('data/search-index.json')
+            ]);
+            if (!skillsResponse.ok) throw new Error('无法加载毛选方法 skills');
+            maoSkills = await skillsResponse.json();
+            if (indexResponse.ok) {
+                const index = await indexResponse.json();
+                searchChunks = index.chunks || [];
             }
-        });
-
-        cancelApiKeyBtn.addEventListener('click', hideApiKeyModal);
+        }
 
         // ===== 消息渲染 =====
         function addUserMessage(text) {
@@ -318,6 +250,33 @@
             element.classList.remove('typing-cursor');
         }
 
+        function renderSkillCards(skills) {
+            return `
+                <div class="mt-3 grid gap-2">
+                    ${skills.map(skill => `
+                        <div class="rounded-lg border border-china-red/20 bg-warm-rice/70 p-3">
+                            <div class="font-mao text-lg text-china-red">${escapeHtml(skill.name)}</div>
+                            <p class="font-serif text-sm text-ink-black/75">${escapeHtml(skill.summary)}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderCitationCards(chunks) {
+            return `
+                <div class="mt-3 space-y-2">
+                    ${chunks.map(chunk => `
+                        <a href="${RedWisdomRetrieval.articleUrl(chunk.filename, chunk.title)}" class="block rounded-lg border border-dark-beige/60 bg-warm-rice/80 p-3 hover:border-china-red transition">
+                            <div class="font-serif font-bold text-china-red">《${escapeHtml(chunk.title)}》</div>
+                            <p class="mt-1 font-serif text-sm text-ink-black/75 leading-relaxed">${escapeHtml(chunk.excerpt || chunk.text.slice(0, 160))}</p>
+                            <span class="mt-2 inline-block text-xs text-china-red">读原文</span>
+                        </a>
+                    `).join('')}
+                </div>
+            `;
+        }
+
         function addErrorMessage(text) {
             const messageDiv = document.createElement('div');
             messageDiv.className = 'flex gap-3 fade-in';
@@ -345,14 +304,10 @@
 
         // ===== API 调用 =====
         async function sendMessage(userMessage) {
-            const useWorker = !!WORKER_URL;
-            const apiKey = getApiKey();
-
-            // 只有不使用 Worker 时才需要检查 API Key
-            if (!useWorker && !apiKey) {
-                showApiKeyModal();
-                return;
-            }
+            const selectedSkills = RedWisdomRetrieval.selectSkills(userMessage, maoSkills, 3);
+            const contextChunks = searchChunks.length
+                ? RedWisdomRetrieval.rankChunks(userMessage, selectedSkills, searchChunks, 6)
+                : [];
 
             isGenerating = true;
             sendBtn.disabled = true;
@@ -360,45 +315,35 @@
 
             addUserMessage(userMessage);
 
-            conversationHistory.push({
-                role: 'user',
-                content: userMessage
-            });
-
             const contentElement = addAssistantMessage();
+            const cardsWrapper = document.createElement('div');
+            cardsWrapper.innerHTML = renderSkillCards(selectedSkills) + renderCitationCards(contextChunks);
+            contentElement.parentElement.appendChild(cardsWrapper);
             let fullResponse = '';
 
             try {
                 const apiUrl = getApiUrl();
-                const useWorker = !!WORKER_URL;
 
                 const headers = {
                     'Content-Type': 'application/json'
                 };
-
-                // 只有直接调用OpenRouter时才需要Authorization
-                if (!useWorker) {
-                    headers['Authorization'] = `Bearer ${apiKey}`;
-                    headers['HTTP-Referer'] = window.location.origin;
-                    headers['X-Title'] = 'Red Wisdom Chat';
-                }
 
                 const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: headers,
                     body: JSON.stringify({
                         model: MODEL,
-                        messages: [
-                            { role: 'system', content: SYSTEM_PROMPT },
-                            ...conversationHistory
-                        ],
+                        message: userMessage,
+                        history: conversationHistory,
+                        selectedSkills,
+                        contextChunks,
                         stream: true
                     })
                 });
 
                 if (!response.ok) {
-                    const error = await response.json();
-                    throw new Error(error.error?.message || `API 错误: ${response.status}`);
+                    const error = await response.json().catch(() => ({}));
+                    throw new Error(error.error?.message || error.error || `API 错误: ${response.status}`);
                 }
 
                 const reader = response.body.getReader();
@@ -431,6 +376,11 @@
                 }
 
                 conversationHistory.push({
+                    role: 'user',
+                    content: userMessage
+                });
+
+                conversationHistory.push({
                     role: 'assistant',
                     content: fullResponse
                 });
@@ -446,15 +396,7 @@
                     currentResponse.remove();
                 }
 
-                // 从历史中移除失败的消息
-                conversationHistory.pop();
-
-                if (error.message.includes('401') || error.message.includes('Invalid')) {
-                    addErrorMessage('API Key 无效，请重新设置。');
-                    showApiKeyModal();
-                } else {
-                    addErrorMessage(`出了点问题：${error.message}`);
-                }
+                addErrorMessage(`出了点问题：${error.message}`);
             } finally {
                 isGenerating = false;
                 sendBtn.disabled = false;
@@ -485,7 +427,23 @@
             userInput.style.height = Math.min(userInput.scrollHeight, 120) + 'px';
         });
 
-        // 使用 config.js 中的 API Key，无需手动设置
+        loadKnowledgeBase().catch((error) => {
+            addErrorMessage(error.message);
+        });
+
+        const params = new URLSearchParams(window.location.search);
+        const presetPrompt = params.get('prompt');
+        if (presetPrompt) {
+            userInput.value = presetPrompt;
+            userInput.focus();
+        }
+
+        document.querySelectorAll('.prompt-chip').forEach((button) => {
+            button.addEventListener('click', () => {
+                userInput.value = button.dataset.prompt;
+                userInput.focus();
+            });
+        });
     </script>
 </body>
 
