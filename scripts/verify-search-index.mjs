@@ -15,8 +15,20 @@ if (index.chunkCount !== index.chunks.length) {
 }
 
 const catalog = JSON.parse(fs.readFileSync('data/catalog.json', 'utf8'));
-const catalogFiles = Object.values(catalog.volumes).flat().map((article) => article.filename);
-const catalogFileSet = new Set(catalogFiles);
+const catalogEntries = Object.entries(catalog.volumes).flatMap(([volume, articles]) =>
+  articles.map((article) => ({
+    filename: article.filename,
+    title: article.title,
+    articleIndex: article.index,
+    volume
+  }))
+);
+const catalogFiles = catalogEntries.map((article) => article.filename);
+const catalogByFilename = new Map();
+for (const article of catalogEntries) {
+  if (catalogByFilename.has(article.filename)) throw new Error(`duplicate catalog filename ${article.filename}`);
+  catalogByFilename.set(article.filename, article);
+}
 if (index.articleCount !== catalogFiles.length) {
   throw new Error(`articleCount ${index.articleCount} does not match catalog length ${catalogFiles.length}`);
 }
@@ -35,10 +47,36 @@ for (const [chunkIndex, chunk] of index.chunks.entries()) {
     }
   }
 
+  for (const key of ['articleIndex', 'paragraphIndex']) {
+    if (!hasOwn(chunk, key)) throw new Error(`${chunk.id} missing ${key}`);
+    if (!Number.isInteger(chunk[key]) || chunk[key] < 0) {
+      throw new Error(`${chunk.id} has invalid ${key}`);
+    }
+  }
+
   if (!hasOwn(chunk, 'tokens')) throw new Error(`${chunk.id} missing tokens`);
   if (!Array.isArray(chunk.tokens) || chunk.tokens.length === 0) throw new Error(`${chunk.id} has no tokens`);
+  for (const [tokenIndex, token] of chunk.tokens.entries()) {
+    if (typeof token !== 'string' || token.length === 0) {
+      throw new Error(`${chunk.id} has invalid token ${tokenIndex}`);
+    }
+  }
   if (chunkIds.has(chunk.id)) throw new Error(`duplicate chunk id ${chunk.id}`);
-  if (!catalogFileSet.has(chunk.filename)) throw new Error(`indexed filename outside catalog: ${chunk.filename}`);
+  const catalogArticle = catalogByFilename.get(chunk.filename);
+  if (!catalogArticle) throw new Error(`indexed filename outside catalog: ${chunk.filename}`);
+  if (chunk.title !== catalogArticle.title) {
+    throw new Error(`${chunk.id} title ${chunk.title} does not match catalog title ${catalogArticle.title}`);
+  }
+  if (chunk.volume !== catalogArticle.volume) {
+    throw new Error(`${chunk.id} volume ${chunk.volume} does not match catalog volume ${catalogArticle.volume}`);
+  }
+  if (chunk.articleIndex !== catalogArticle.articleIndex) {
+    throw new Error(
+      `${chunk.id} articleIndex ${chunk.articleIndex} does not match catalog index ${catalogArticle.articleIndex}`
+    );
+  }
+  const expectedId = `${chunk.articleIndex}-${chunk.paragraphIndex}`;
+  if (chunk.id !== expectedId) throw new Error(`chunk id ${chunk.id} does not match expected id ${expectedId}`);
 
   chunkIds.add(chunk.id);
   indexedFiles.add(chunk.filename);
