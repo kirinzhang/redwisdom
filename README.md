@@ -48,6 +48,14 @@ python3 -m http.server 8080
 
 本地静态服务器可以验证首页、阅读页、skill 选择和原文检索。`/api/chat` 需要 Vercel Serverless 环境或自行配置兼容的本地 API 代理。
 
+如果要在本地完整测试 `/api/chat`，可以使用 Vercel CLI，并在 `.env.local` 中配置 `OPENROUTER_API_KEY`：
+
+```bash
+vercel dev
+```
+
+`config.js` 只保留客户端路由和模型名等非敏感配置，不应写入 API Key；OpenRouter 密钥只放在 Vercel 环境变量或本地 `.env.local`。
+
 ## 项目结构
 
 ```text
@@ -57,6 +65,7 @@ redwisdom/
 ├── reading.html                  # 阅读毛选：目录与文章阅读
 ├── script.js                     # 首页抽卡与行动入口逻辑
 ├── retrieval.js                  # skill 选择、原文检索排序、阅读链接生成
+├── config.js                     # 客户端非敏感配置：API 路由与默认模型名
 ├── api/
 │   └── chat.js                   # Vercel Serverless Function，代理 OpenRouter
 ├── data.js                       # 首页语录数据注入
@@ -67,6 +76,7 @@ redwisdom/
 │   ├── search-index.json         # 2119 个原文检索 chunks
 │   └── articles/                 # 毛选文章 Markdown
 ├── scripts/
+│   ├── build-search-index.mjs    # 从目录与 Markdown 原文生成检索索引
 │   ├── validate-mao-skills.mjs   # skill 数据校验
 │   ├── verify-search-index.mjs   # 检索索引校验
 │   ├── smoke-retrieval.mjs       # 检索逻辑 smoke test

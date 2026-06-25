@@ -7,13 +7,13 @@
     <title>毛泽东选集 - 全文在线阅读 | Red Wisdom</title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="毛泽东选集全5卷228篇在线阅读，包含《矛盾论》《实践论》《论持久战》等经典著作，原文无删减。">
+    <meta name="description" content="毛泽东选集全5卷229篇在线阅读，包含《矛盾论》《实践论》《论持久战》等经典著作，原文无删减。">
     <meta name="keywords" content="毛泽东选集,毛选,矛盾论,实践论,论持久战,在线阅读">
     <meta name="author" content="Red Wisdom">
 
     <!-- Open Graph / Social Media -->
     <meta property="og:title" content="毛泽东选集 - 全文在线阅读">
-    <meta property="og:description" content="毛泽东选集全5卷228篇在线阅读，经典著作原文无删减。">
+    <meta property="og:description" content="毛泽东选集全5卷229篇在线阅读，经典著作原文无删减。">
     <meta property="og:type" content="website">
 
     <!-- Favicon -->
@@ -227,7 +227,7 @@
                 <span class="font-mao text-lg">返回首页</span>
             </a>
             <h1 class="font-mao text-2xl text-china-red">毛泽东选集</h1>
-            <p class="text-gray-400 text-sm mt-1">共 5 卷 · 228 篇</p>
+            <p class="text-gray-400 text-sm mt-1">共 5 卷 · 229 篇</p>
         </div>
 
         <!-- Volume List -->
@@ -306,6 +306,7 @@
         let catalog = null;
         let allArticles = [];
         let currentArticleIndex = -1;
+        let ignoreNextHashChange = false;
 
         function safeDecodeHashPart(value) {
             if (!value) return '';
@@ -426,8 +427,12 @@
                 loadingEl.classList.add('hidden');
                 navEl.classList.remove('hidden');
 
-                // Update URL hash
-                window.location.hash = filename;
+                // Update URL hash without reloading the article through the hashchange handler.
+                const currentHash = parseArticleHash();
+                if (currentHash.filename !== filename || currentHash.source) {
+                    ignoreNextHashChange = true;
+                    window.location.hash = filename;
+                }
 
                 // Update active state in sidebar
                 document.querySelectorAll('.article-item').forEach(el => {
@@ -518,6 +523,20 @@
 
         // Initialize
         loadCatalog();
+
+        window.addEventListener('hashchange', () => {
+            if (ignoreNextHashChange) {
+                ignoreNextHashChange = false;
+                return;
+            }
+
+            const { filename, source } = parseArticleHash();
+            if (filename) {
+                loadArticle(filename, source);
+            } else {
+                showSourceBanner('');
+            }
+        });
     </script>
 </body>
 

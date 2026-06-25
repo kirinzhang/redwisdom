@@ -42,6 +42,14 @@ const selected = rw.selectSkills(anxietyPriorityQuery, skills, 3);
 if (selected.length !== 3) throw new Error(`expected 3 skills, got ${selected.length}`);
 if (!selected.some((skill) => skill.id === 'main-contradiction')) throw new Error('main-contradiction should be selected for anxiety and priority query');
 
+const shortAnxietySelected = rw.selectSkills('我最近很焦虑', skills, 3);
+if (shortAnxietySelected.length < 2) {
+  throw new Error(`short anxiety prompt should select at least 2 skills, got ${shortAnxietySelected.length}`);
+}
+if (!shortAnxietySelected.some((skill) => skill.id === 'main-contradiction')) {
+  throw new Error('main-contradiction should be selected for short anxiety prompt');
+}
+
 const chunks = rw.rankChunks(anxietyPriorityQuery, selected, index.chunks, 5);
 if (chunks.length !== 5) throw new Error(`expected 5 chunks, got ${chunks.length}`);
 for (const chunk of chunks) {
