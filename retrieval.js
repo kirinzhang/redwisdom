@@ -82,10 +82,12 @@
     }
 
     function rankChunks(message, selectedSkills = [], chunks = [], limit = 6) {
+        const selected = asArray(selectedSkills);
+        if (!selected.length) return [];
         const queryTokens = tokenize(message);
         const meaningfulQueryTokens = queryTokens.filter(isMeaningfulToken);
-        const hints = selectedSourceHints(selectedSkills);
-        const skillTokens = tokenize(asArray(selectedSkills).map((skill) => [
+        const hints = selectedSourceHints(selected);
+        const skillTokens = tokenize(selected.map((skill) => [
             skill.name,
             skill.summary,
             ...(skill.keywords || []),
