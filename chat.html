@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问道毛选 - AI智能对话 | Red Wisdom</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="基于毛泽东选集的AI智能助手，用毛主席的思想方法帮你分析问题，给出具有战略高度的建议。">
+    <meta name="keywords" content="毛选AI,毛泽东思想,智能对话,人生建议,战略思维">
+    <meta name="author" content="Red Wisdom">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="问道毛选 - AI智能对话">
+    <meta property="og:description" content="用毛主席的思想方法帮你分析问题，给出具有战略高度的建议。">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'warm-rice': '#F7F4ED',
+                        'china-red': '#BC2D22',
+                        'ink-black': '#2B2B2B',
+                        'dark-beige': '#D6C6B0',
+                    },
+                    fontFamily: {
+                        'mao': ['"Ma Shan Zheng"', 'cursive'],
+                        'serif': ['"Noto Serif SC"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .typing-cursor::after {
+            content: '▌';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .message-content blockquote {
+            border-left: 3px solid #BC2D22;
+            padding-left: 1rem;
+            margin: 0.5rem 0;
+            color: #5a5a5a;
+            font-style: italic;
+        }
+
+        .message-content strong {
+            color: #BC2D22;
+        }
+
+        .message-content ul,
+        .message-content ol {
+            padding-left: 1.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .message-content li {
+            margin: 0.25rem 0;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-warm-rice min-h-[100dvh] w-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-china-red text-warm-rice py-4 px-6 shadow-lg">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="text-warm-rice/80 hover:text-warm-rice transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
+                </a>
+                <h1 class="font-mao text-2xl md:text-3xl">问道毛选</h1>
+            </div>
+            <p class="text-sm opacity-80 hidden md:block">以毛主席的思想方法，解答你的困惑</p>
+        </div>
+    </header>
+
+    <!-- Chat Container -->
+    <main class="flex-1 overflow-hidden flex flex-col max-w-4xl mx-auto w-full">
+
+        <!-- Messages Area -->
+        <div id="messages" class="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth">
+            <!-- Welcome Message -->
+            <div class="flex gap-3 fade-in">
+                <div class="w-10 h-10 rounded-full bg-china-red flex items-center justify-center flex-shrink-0">
+                    <span class="text-warm-rice font-mao text-lg">毛</span>
+                </div>
+                <div class="flex-1 bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm max-w-[85%]">
+                    <p class="font-serif text-ink-black leading-relaxed">
+                        同志，你好！
+                    </p>
+                    <p class="font-serif text-ink-black leading-relaxed mt-2">
+                        我是根据《毛泽东选集》训练的智能助手。你有什么困惑、焦虑，或者工作生活中遇到的问题，都可以跟我说说。
+                    </p>
+                    <p class="font-serif text-ink-black leading-relaxed mt-2">
+                        我会用毛主席的思想方法来帮你分析问题，给你一些参考意见。记住：<strong>实践是检验真理的唯一标准</strong>！
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="border-t border-dark-beige/30 bg-warm-rice p-4">
+            <div class="flex gap-3 max-w-4xl mx-auto">
+                <textarea id="userInput" placeholder="说说你的困惑..."
+                    class="flex-1 resize-none rounded-xl border-2 border-dark-beige/50 focus:border-china-red focus:ring-0 p-3 font-serif text-ink-black placeholder:text-dark-beige/70 transition-colors"
+                    rows="2"></textarea>
+                <button id="sendBtn"
+                    class="px-6 py-3 bg-china-red text-warm-rice font-mao text-xl rounded-xl hover:bg-red-800 transition-all duration-300 shadow-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
+                    <span>发送</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                    </svg>
+                </button>
+            </div>
+            <p class="text-center text-xs text-dark-beige/70 mt-2">
+                回答仅供参考，基于毛选文章生成 ·
+                <a href="reading.html" class="text-china-red hover:underline">阅读原著</a>
+            </p>
+        </div>
+    </main>
+
+    <!-- API Key Modal -->
+    <div id="apiKeyModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+        <div class="bg-warm-rice rounded-2xl p-6 max-w-md mx-4 shadow-2xl">
+            <h2 class="font-mao text-2xl text-china-red mb-4">设置 API Key</h2>
+            <p class="text-ink-black/70 mb-4 font-serif text-sm">
+                请输入你的 OpenRouter API Key 以启用对话功能。你的 Key 仅保存在本地浏览器中。
+            </p>
+            <input type="password" id="apiKeyInput" placeholder="sk-or-v1-..."
+                class="w-full rounded-lg border-2 border-dark-beige/50 focus:border-china-red focus:ring-0 p-3 font-mono text-sm mb-4">
+            <div class="flex gap-3">
+                <button id="saveApiKey"
+                    class="flex-1 py-2 bg-china-red text-warm-rice font-mao text-lg rounded-lg hover:bg-red-800 transition-colors">
+                    保存
+                </button>
+                <button id="cancelApiKey"
+                    class="px-4 py-2 border-2 border-dark-beige text-ink-black/70 font-serif rounded-lg hover:bg-dark-beige/20 transition-colors">
+                    取消
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script>
+        // ===== 配置 =====
+        const WORKER_URL = CONFIG.WORKER_URL;
+        const OPENROUTER_API_URL = CONFIG.API_URL;
+        const MODEL = CONFIG.MODEL;
+
+        // 获取API地址（优先使用Worker代理）
+        function getApiUrl() {
+            return WORKER_URL || OPENROUTER_API_URL;
+        }
+
+        // 毛主席人格 System Prompt
+        const SYSTEM_PROMPT = `你是一个基于《毛泽东选集》的智能助手。请严格按照以下要求回答问题：
+
+## 思考方式（模仿毛主席的方法论）
+1. **辩证法思维** - 看问题要看两面，矛盾是普遍存在的，要抓主要矛盾
+2. **实践论** - 实践是检验真理的唯一标准，认识来源于实践
+3. **群众路线** - 从群众中来，到群众中去，相信群众依靠群众
+4. **调查研究** - 没有调查就没有发言权，一切从实际出发
+5. **实事求是** - 根据实际情况分析问题，不搞教条主义
+
+## 说话风格（模仿毛主席的语言特点）
+1. 善用通俗易懂的比喻（如"纸老虎"、"过河要有桥或船"、"星星之火可以燎原"）
+2. 语言简练有力，多用短句
+3. 善用反问句启发对方思考
+4. 喜欢用具体例子说明道理
+5. 语气亲切但坚定，称呼对方为"同志"
+6. 偶尔引用古语典故，但立足现实
+
+## 回答要求
+1. 每次回答都要引用毛选中的相关思想或原文，用引用格式标注
+2. 回答要结合用户的实际问题，给出具体可操作的建议
+3. 保持积极正向，给人力量和方向
+4. 如果用户的问题涉及政治敏感话题，委婉引导到学习方法论上
+5. 回答控制在300-500字左右，重点突出
+
+## 格式要求
+- 使用Markdown格式
+- 重点内容用**粗体**标注
+- 引用毛选原文用 > 引用格式
+- 在回答末尾标注思想来源，格式：📚 *参考：《文章名》*
+
+现在，请以这种风格和思维方式回答用户的问题。`;
+
+        // ===== DOM 元素 =====
+        const messagesContainer = document.getElementById('messages');
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const apiKeyModal = document.getElementById('apiKeyModal');
+        const apiKeyInput = document.getElementById('apiKeyInput');
+        const saveApiKeyBtn = document.getElementById('saveApiKey');
+        const cancelApiKeyBtn = document.getElementById('cancelApiKey');
+
+        // ===== 状态 =====
+        let conversationHistory = [];
+        let isGenerating = false;
+
+        // ===== API Key 管理 =====
+        function getApiKey() {
+            return localStorage.getItem('openrouter_api_key') || CONFIG.OPENROUTER_API_KEY;
+        }
+
+        function setApiKey(key) {
+            localStorage.setItem('openrouter_api_key', key);
+        }
+
+        function showApiKeyModal() {
+            apiKeyModal.classList.remove('hidden');
+            apiKeyInput.value = getApiKey() || '';
+            apiKeyInput.focus();
+        }
+
+        function hideApiKeyModal() {
+            apiKeyModal.classList.add('hidden');
+        }
+
+        saveApiKeyBtn.addEventListener('click', () => {
+            const key = apiKeyInput.value.trim();
+            if (key) {
+                setApiKey(key);
+                hideApiKeyModal();
+            }
+        });
+
+        cancelApiKeyBtn.addEventListener('click', hideApiKeyModal);
+
+        // ===== 消息渲染 =====
+        function addUserMessage(text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex gap-3 justify-end fade-in';
+            messageDiv.innerHTML = `
+                <div class="bg-china-red text-warm-rice rounded-2xl rounded-tr-sm p-4 shadow-sm max-w-[85%]">
+                    <p class="font-serif leading-relaxed">${escapeHtml(text)}</p>
+                </div>
+            `;
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        function addAssistantMessage() {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex gap-3 fade-in';
+            messageDiv.id = 'currentResponse';
+            messageDiv.innerHTML = `
+                <div class="w-10 h-10 rounded-full bg-china-red flex items-center justify-center flex-shrink-0">
+                    <span class="text-warm-rice font-mao text-lg">毛</span>
+                </div>
+                <div class="flex-1 bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm max-w-[85%]">
+                    <div class="message-content font-serif text-ink-black leading-relaxed typing-cursor"></div>
+                </div>
+            `;
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+            return messageDiv.querySelector('.message-content');
+        }
+
+        function updateAssistantMessage(content, element) {
+            element.innerHTML = marked.parse(content);
+            scrollToBottom();
+        }
+
+        function finalizeAssistantMessage(element) {
+            element.classList.remove('typing-cursor');
+        }
+
+        function addErrorMessage(text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex gap-3 fade-in';
+            messageDiv.innerHTML = `
+                <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
+                    <span class="text-china-red">⚠️</span>
+                </div>
+                <div class="flex-1 bg-red-50 rounded-2xl rounded-tl-sm p-4 shadow-sm max-w-[85%] border border-red-200">
+                    <p class="font-serif text-red-700 leading-relaxed">${escapeHtml(text)}</p>
+                </div>
+            `;
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function scrollToBottom() {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // ===== API 调用 =====
+        async function sendMessage(userMessage) {
+            const useWorker = !!WORKER_URL;
+            const apiKey = getApiKey();
+
+            // 只有不使用 Worker 时才需要检查 API Key
+            if (!useWorker && !apiKey) {
+                showApiKeyModal();
+                return;
+            }
+
+            isGenerating = true;
+            sendBtn.disabled = true;
+            userInput.disabled = true;
+
+            addUserMessage(userMessage);
+
+            conversationHistory.push({
+                role: 'user',
+                content: userMessage
+            });
+
+            const contentElement = addAssistantMessage();
+            let fullResponse = '';
+
+            try {
+                const apiUrl = getApiUrl();
+                const useWorker = !!WORKER_URL;
+
+                const headers = {
+                    'Content-Type': 'application/json'
+                };
+
+                // 只有直接调用OpenRouter时才需要Authorization
+                if (!useWorker) {
+                    headers['Authorization'] = `Bearer ${apiKey}`;
+                    headers['HTTP-Referer'] = window.location.origin;
+                    headers['X-Title'] = 'Red Wisdom Chat';
+                }
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify({
+                        model: MODEL,
+                        messages: [
+                            { role: 'system', content: SYSTEM_PROMPT },
+                            ...conversationHistory
+                        ],
+                        stream: true
+                    })
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.error?.message || `API 错误: ${response.status}`);
+                }
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    const chunk = decoder.decode(value);
+                    const lines = chunk.split('\n').filter(line => line.trim() !== '');
+
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const data = line.slice(6);
+                            if (data === '[DONE]') continue;
+
+                            try {
+                                const parsed = JSON.parse(data);
+                                const content = parsed.choices?.[0]?.delta?.content || '';
+                                if (content) {
+                                    fullResponse += content;
+                                    updateAssistantMessage(fullResponse, contentElement);
+                                }
+                            } catch (e) {
+                                // 忽略解析错误
+                            }
+                        }
+                    }
+                }
+
+                conversationHistory.push({
+                    role: 'assistant',
+                    content: fullResponse
+                });
+
+                finalizeAssistantMessage(contentElement);
+
+            } catch (error) {
+                console.error('发送消息失败:', error);
+
+                // 移除正在显示的回复
+                const currentResponse = document.getElementById('currentResponse');
+                if (currentResponse) {
+                    currentResponse.remove();
+                }
+
+                // 从历史中移除失败的消息
+                conversationHistory.pop();
+
+                if (error.message.includes('401') || error.message.includes('Invalid')) {
+                    addErrorMessage('API Key 无效，请重新设置。');
+                    showApiKeyModal();
+                } else {
+                    addErrorMessage(`出了点问题：${error.message}`);
+                }
+            } finally {
+                isGenerating = false;
+                sendBtn.disabled = false;
+                userInput.disabled = false;
+                userInput.focus();
+            }
+        }
+
+        // ===== 事件处理 =====
+        sendBtn.addEventListener('click', () => {
+            const message = userInput.value.trim();
+            if (message && !isGenerating) {
+                userInput.value = '';
+                sendMessage(message);
+            }
+        });
+
+        userInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendBtn.click();
+            }
+        });
+
+        // 自动调整输入框高度
+        userInput.addEventListener('input', () => {
+            userInput.style.height = 'auto';
+            userInput.style.height = Math.min(userInput.scrollHeight, 120) + 'px';
+        });
+
+        // 使用 config.js 中的 API Key，无需手动设置
+    </script>
+</body>
+
+</html>
