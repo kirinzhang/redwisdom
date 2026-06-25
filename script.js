@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const controlsArea = document.getElementById('controls-area');
     const retryBtn = document.getElementById('retry-btn');
     const promptArea = document.getElementById('projection-prompt');
+    const dailyActions = document.getElementById('daily-actions');
+    const askWithCard = document.getElementById('ask-with-card');
+    const readWithCard = document.getElementById('read-with-card');
 
     let allQuotes = [];
 
@@ -33,17 +36,28 @@ document.addEventListener('DOMContentLoaded', () => {
         // Reset UI
         controlsArea.style.opacity = '0';
         controlsArea.style.pointerEvents = 'none';
+        dailyActions.style.opacity = '0';
+        dailyActions.style.pointerEvents = 'none';
         container.innerHTML = '';
 
         // Deal new card
         dealCard();
     });
 
+    function buildPromptFromQuote(quote) {
+        return `我抽到这句话：“${quote.content}”。请用毛选方法论帮我理解它，并联系我当下的问题给出行动建议。`;
+    }
+
     function dealCard() {
         if (allQuotes.length === 0) return;
 
         // Pick 1 random
         const quote = getRandomQuotes(1)[0];
+
+        askWithCard.href = `chat.html?prompt=${encodeURIComponent(buildPromptFromQuote(quote))}`;
+        readWithCard.href = 'reading.html';
+        dailyActions.style.opacity = '0';
+        dailyActions.style.pointerEvents = 'none';
 
         // Create Card Element
         const card = createCardElement(quote);
@@ -93,12 +107,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (len < 20) {
             fontSizeClass = 'quote-size-large';
             layoutClass = 'layout-center';
-        } else if (len > 40) {
-            fontSizeClass = 'quote-size-small';
-            layoutClass = 'layout-top'; // Align top to prevent clipping
         } else if (len > 80) {
             fontSizeClass = 'quote-size-xs';
             layoutClass = 'layout-top';
+        } else if (len > 40) {
+            fontSizeClass = 'quote-size-small';
+            layoutClass = 'layout-top'; // Align top to prevent clipping
         } else {
             // Between 20 and 40
             layoutClass = 'layout-center';
@@ -137,7 +151,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     controlsArea.style.opacity = '1';
                     controlsArea.style.pointerEvents = 'auto';
-                    saveIcon.style.opacity = '1';
+                    dailyActions.style.opacity = '1';
+                    dailyActions.style.pointerEvents = 'auto';
                 }, 800);
             }
         });
