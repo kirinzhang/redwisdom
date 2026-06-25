@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dailyActions = document.getElementById('daily-actions');
     const askWithCard = document.getElementById('ask-with-card');
     const readWithCard = document.getElementById('read-with-card');
+    const dailyActionLinks = dailyActions ? Array.from(dailyActions.querySelectorAll('a')) : [];
 
     let allQuotes = [];
 
@@ -17,6 +18,55 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error('Error: quotesData not found');
     }
+
+    function setDailyActionsVisible(isVisible) {
+        if (!dailyActions) return;
+
+        dailyActions.setAttribute('aria-hidden', String(!isVisible));
+
+        if ('inert' in dailyActions) {
+            dailyActions.inert = !isVisible;
+        }
+
+        dailyActionLinks.forEach((link) => {
+            if (!link.dataset.originalTabIndexStored) {
+                const originalTabIndex = link.getAttribute('tabindex');
+                link.dataset.originalTabIndex = originalTabIndex === null ? '' : originalTabIndex;
+                link.dataset.originalTabIndexStored = 'true';
+            }
+
+            if (isVisible) {
+                if (link.dataset.originalTabIndex) {
+                    link.setAttribute('tabindex', link.dataset.originalTabIndex);
+                } else {
+                    link.removeAttribute('tabindex');
+                }
+            } else {
+                link.tabIndex = -1;
+            }
+        });
+
+        if (isVisible) {
+            dailyActions.classList.remove('hidden');
+            dailyActions.style.pointerEvents = 'auto';
+
+            const revealActions = () => {
+                dailyActions.style.opacity = '1';
+            };
+
+            if (typeof requestAnimationFrame === 'function') {
+                requestAnimationFrame(revealActions);
+            } else {
+                revealActions();
+            }
+        } else {
+            dailyActions.style.opacity = '0';
+            dailyActions.style.pointerEvents = 'none';
+            dailyActions.classList.add('hidden');
+        }
+    }
+
+    setDailyActionsVisible(false);
 
     // STATE 1: Start
     startBtn.addEventListener('click', () => {
@@ -36,8 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Reset UI
         controlsArea.style.opacity = '0';
         controlsArea.style.pointerEvents = 'none';
-        dailyActions.style.opacity = '0';
-        dailyActions.style.pointerEvents = 'none';
+        setDailyActionsVisible(false);
         container.innerHTML = '';
 
         // Deal new card
@@ -56,8 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         askWithCard.href = `chat.html?prompt=${encodeURIComponent(buildPromptFromQuote(quote))}`;
         readWithCard.href = 'reading.html';
-        dailyActions.style.opacity = '0';
-        dailyActions.style.pointerEvents = 'none';
+        setDailyActionsVisible(false);
 
         // Create Card Element
         const card = createCardElement(quote);
@@ -151,8 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     controlsArea.style.opacity = '1';
                     controlsArea.style.pointerEvents = 'auto';
-                    dailyActions.style.opacity = '1';
-                    dailyActions.style.pointerEvents = 'auto';
+                    setDailyActionsVisible(true);
                 }, 800);
             }
         });

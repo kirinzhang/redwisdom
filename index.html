@@ -52,7 +52,7 @@
 </head>
 
 <body
-    class="bg-warm-rice min-h-[100dvh] w-screen flex flex-col items-center justify-center px-4 pb-24 pt-8 relative overflow-y-auto">
+    class="bg-warm-rice min-h-[100dvh] w-screen flex flex-col items-center justify-center px-4 pb-44 sm:pb-24 pt-8 relative overflow-y-auto">
 
     <!-- Header -->
     <header class="text-center mb-4 fade-in-up">
@@ -92,7 +92,8 @@
     </div>
 
     <div id="daily-actions"
-        class="mt-2 flex flex-wrap justify-center gap-3 opacity-0 transition-opacity duration-500 pointer-events-none">
+        class="mt-2 mb-32 sm:mb-0 flex flex-wrap justify-center gap-3 opacity-0 transition-opacity duration-500 pointer-events-none hidden"
+        aria-hidden="true" inert>
         <a id="ask-with-card" href="chat.html"
             class="px-6 py-3 bg-china-red text-warm-rice font-mao text-xl rounded-full hover:bg-red-800 transition-all duration-300 shadow-md">问问这件事</a>
         <a id="read-with-card" href="reading.html"
