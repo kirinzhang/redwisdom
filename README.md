@@ -1,108 +1,101 @@
-# Red Wisdom Cards (红色智慧卡片)
+# Red Wisdom Cards（红色智慧卡片）
 
 **Don't worry, be fighting.**
-遇事不决读毛选，治愈你 90% 的焦虑。
 
-本项目是一个基于 Web 的互动应用，通过随机抽取毛泽东语录和 AI 智能对话，为用户提供精神力量和战略思维。
+遇事不决读毛选。这个项目现在是一个「毛选 / 毛泽东思想 BibleChat 风格」MVP：保留红色、宣纸、毛选阅读的视觉气质，同时把抽卡、原文阅读和现实问题咨询连成一个轻量 Web 应用。
 
-🌐 **在线访问**: [redwisdom.pages.dev](https://redwisdom.pages.dev)
+## 核心功能
 
-## ✨ 核心功能 (Features)
+### 1. 智慧卡片 - 随机抽取语录
+- **仪式感抽卡**: 首页支持抽卡、翻牌、重新抽取，卡面采用红色背面和宣纸正面。
+- **行动入口**: 抽到语录后，可以带着这句话进入「问道毛选」，也可以跳转到阅读页继续读原文。
+- **语录数据**: `data/quotes.json` 收录 181 条精选语录，并由 `data.js` 提供给首页使用。
 
-### 1. 🎴 智慧卡片 - 随机抽取语录
-- **仪式感交互**: 抽卡 → 翻牌 → 揭晓，沉浸式体验
-- **精美卡面**: 红底卡背配宣纸质感正面，配有毛主席素描画像
-- **一键保存**: 支持将抽到的语录保存为精美图片分享
+### 2. 问道毛选 - Skill-first 原文支撑咨询
+- **毛选方法论 Skills**: 先从 `data/mao-skills.json` 选择 2-3 个方法论 skill，例如抓主要矛盾、调查研究、实践检验、群众路线。
+- **原文出处支撑**: 再从 `data/search-index.json` 检索毛选原文段落，回答附带引用卡片和“读原文”入口。
+- **现实问题咨询**: 面向焦虑、工作推进、被批评、行动迟滞、学习计划等现实问题，输出安慰、分析和下一步行动。
+- **基于 DeepSeek / OpenRouter**: 通过 `/api/chat` 的 Vercel Serverless Function 代理调用模型。
 
-### 2. 💬 问道毛选 - AI 智能对话
-- **毛主席思维方式**: 辩证法、实践论、群众路线、调查研究
-- **毛主席说话风格**: 通俗比喻、短句有力、善用反问
-- **引经据典**: 每次回答都引用毛选原文并标注出处
-- **基于 DeepSeek 模型**: 通过 OpenRouter API 调用
+### 3. 阅读毛选 - 目录与原文阅读
+- **五卷目录**: `data/catalog.json` 按卷组织 229 条目录记录。
+- **全文阅读**: `data/articles/` 提供毛选文章 Markdown，阅读页支持目录导航、文章切换和来源提示。
+- **检索索引**: `data/search-index.json` 包含 2119 个原文检索 chunks，用于咨询页引用支撑。
 
-### 3. 📚 阅读毛选 - 全文在线阅读
-- 毛泽东选集全 5 卷 228 篇
-- 包含《矛盾论》《实践论》《论持久战》等经典著作
-- 左侧目录导航，支持按卷展开
-- 上下篇文章快速切换
-
-## 🛠 技术栈 (Tech Stack)
+## 技术栈
 
 | 类型 | 技术 |
-|------|------|
-| 前端框架 | HTML5 + Tailwind CSS + Vanilla JS |
-| AI 对话 | OpenRouter API (DeepSeek) |
-| 后端代理 | Cloudflare Pages Functions |
-| 部署平台 | Cloudflare Pages |
-| 数据格式 | JSON + Markdown |
+| --- | --- |
+| 前端 | HTML5 + Tailwind CSS + Vanilla JS |
+| 抽卡与阅读 | 静态页面 + JSON/Markdown 数据 |
+| 检索 | `retrieval.js` 客户端 skill 选择与原文片段排序 |
+| AI 代理 | Vercel Serverless Function：`api/chat.js` |
+| 模型服务 | OpenRouter / DeepSeek |
+| 部署 | Vercel |
 
-## 🚀 部署指南 (Deployment)
+## Vercel 部署
 
-### 方式一：Cloudflare Pages（推荐）
+1. Fork 本仓库到 GitHub。
+2. 在 Vercel 中导入仓库。
+3. 在 Environment Variables 中添加 `OPENROUTER_API_KEY`。
+4. 部署后访问站点，`/api/chat` 会使用服务端环境变量代理 OpenRouter。
 
-1. Fork 本仓库到你的 GitHub
-2. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com)
-3. 创建 Pages 项目，连接你的 GitHub 仓库
-4. 在 **Settings → Environment variables** 中添加：
-   - `OPENROUTER_API_KEY`: 你的 OpenRouter API Key
-5. 部署完成后即可访问
-
-### 方式二：本地运行
+## 本地运行
 
 ```bash
-# 克隆项目
-git clone https://github.com/kirinzhang/redwisdom.git
-cd redwisdom
-
-# 创建配置文件
-cp config.example.js config.js
-# 编辑 config.js，填入你的 API Key
-
-# 启动本地服务器
 python3 -m http.server 8080
-# 访问 http://localhost:8080
 ```
 
-## 📁 项目结构
+本地静态服务器可以验证首页、阅读页、skill 选择和原文检索。`/api/chat` 需要 Vercel Serverless 环境或自行配置兼容的本地 API 代理。
 
-```
+## 项目结构
+
+```text
 redwisdom/
-├── index.html          # 首页 - 智慧卡片
-├── chat.html           # AI 对话页面
-├── reading.html        # 毛选阅读页面
-├── config.js           # API 配置（不上传）
-├── script.js           # 卡片交互逻辑
-├── style.css           # 自定义样式
-├── data.js             # 语录数据
+├── index.html                    # 首页：智慧卡片抽取
+├── chat.html                     # 问道毛选：Skill-first 咨询页
+├── reading.html                  # 阅读毛选：目录与文章阅读
+├── script.js                     # 首页抽卡与行动入口逻辑
+├── retrieval.js                  # skill 选择、原文检索排序、阅读链接生成
+├── api/
+│   └── chat.js                   # Vercel Serverless Function，代理 OpenRouter
+├── data.js                       # 首页语录数据注入
 ├── data/
-│   ├── quotes.json     # 181条精选语录
-│   ├── catalog.json    # 文章目录
-│   └── articles/       # 231篇毛选文章 (Markdown)
-├── assets/             # 图片资源
-└── functions/
-    └── api/
-        └── chat.js     # Cloudflare Pages Function (API 代理)
+│   ├── quotes.json               # 181 条精选语录
+│   ├── mao-skills.json           # 毛选方法论 skills
+│   ├── catalog.json              # 5 卷 229 条目录记录
+│   ├── search-index.json         # 2119 个原文检索 chunks
+│   └── articles/                 # 毛选文章 Markdown
+├── scripts/
+│   ├── validate-mao-skills.mjs   # skill 数据校验
+│   ├── verify-search-index.mjs   # 检索索引校验
+│   ├── smoke-retrieval.mjs       # 检索逻辑 smoke test
+│   └── smoke-api-prompt.mjs      # API prompt 构造 smoke test
+├── assets/                       # 头像、卡面、favicon、OG 图等资源
+├── style.css                     # 全局视觉样式
+├── vercel.json                   # Vercel 配置
+└── CNAME                         # 自定义域名配置
 ```
 
-## 📝 更新日志 (Change Log)
+## 校验脚本
 
-### V2.0 - AI 对话功能
-- **[新增] 问道毛选**: 基于毛选的 AI 智能对话，模拟毛主席思维和说话风格
-- **[新增] Cloudflare 部署**: 支持 Pages Functions 作为 API 代理
-- **[新增] SEO 优化**: 添加完整的 meta 标签和 Open Graph 支持
-- **[优化] 项目结构**: 清理重复文件，规范目录组织
+```bash
+node scripts/validate-mao-skills.mjs
+node scripts/verify-search-index.mjs
+node scripts/smoke-retrieval.mjs
+node scripts/smoke-api-prompt.mjs
+```
 
-### V1.1 - 仪式感与细节优化
-- **[优化] 交互流程重构**: "抽一张 → 翻牌 → 再抽一次"的线性流程
-- **[优化] 字体调整**: 英文标题采用 Cinzel 字体提升庄重感
-- **[修复] 本地运行支持**: 通过内联数据方案解决 CORS 问题
+这些脚本用于确认方法论 skill 数据、原文索引、检索排序和 `/api/chat` 的 prompt 组装仍然符合当前 MVP。
 
-### V1.0 - 基础版本
-- 核心随机抽卡逻辑
-- CSS 3D 翻牌效果
-- 基础 UI 设计
-- html2canvas 卡片截图保存
+## 当前版本
+
+### MaoXuan BibleChat MVP
+- 首页保留红色智慧卡片的仪式感抽取。
+- 咨询页采用「先选方法论 skill，再检索原文，再调用模型」的回答链路。
+- 阅读页提供五卷目录、文章阅读和从引用卡片回到原文的入口。
+- 服务端 API 由 Vercel Serverless Function 读取 `OPENROUTER_API_KEY` 并代理 OpenRouter。
 
 ---
 
-*Powered by Cloudflare Pages & OpenRouter*
+*Powered by Vercel, OpenRouter & Mao Selected Works.*
