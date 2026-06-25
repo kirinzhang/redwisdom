@@ -160,9 +160,9 @@
                 <textarea id="userInput" placeholder="说说你的困惑..."
                     class="flex-1 resize-none rounded-xl border-2 border-dark-beige/50 focus:border-china-red focus:ring-0 p-3 font-serif text-ink-black placeholder:text-dark-beige/70 transition-colors"
                     rows="2"></textarea>
-                <button id="sendBtn"
+                <button id="sendBtn" disabled
                     class="px-6 py-3 bg-china-red text-warm-rice font-mao text-xl rounded-xl hover:bg-red-800 transition-all duration-300 shadow-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
-                    <span>发送</span>
+                    <span>加载中</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2">
                         <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
@@ -191,10 +191,13 @@
         const messagesContainer = document.getElementById('messages');
         const userInput = document.getElementById('userInput');
         const sendBtn = document.getElementById('sendBtn');
+        const sendBtnLabel = sendBtn.querySelector('span');
 
         // ===== 状态 =====
         let conversationHistory = [];
         let isGenerating = false;
+        let isKnowledgeBaseLoading = true;
+        let knowledgeBaseError = null;
         let maoSkills = [];
         let searchChunks = [];
 
@@ -204,11 +207,10 @@
                 fetch('data/search-index.json')
             ]);
             if (!skillsResponse.ok) throw new Error('无法加载毛选方法 skills');
+            if (!indexResponse.ok) throw new Error('无法加载毛选检索索引');
             maoSkills = await skillsResponse.json();
-            if (indexResponse.ok) {
-                const index = await indexResponse.json();
-                searchChunks = index.chunks || [];
-            }
+            const index = await indexResponse.json();
+            searchChunks = index.chunks || [];
         }
 
         // ===== 消息渲染 =====
@@ -227,7 +229,6 @@
         function addAssistantMessage() {
             const messageDiv = document.createElement('div');
             messageDiv.className = 'flex gap-3 fade-in';
-            messageDiv.id = 'currentResponse';
             messageDiv.innerHTML = `
                 <div class="w-10 h-10 rounded-full bg-china-red flex items-center justify-center flex-shrink-0">
                     <span class="text-warm-rice font-mao text-lg">毛</span>
@@ -238,11 +239,14 @@
             `;
             messagesContainer.appendChild(messageDiv);
             scrollToBottom();
-            return messageDiv.querySelector('.message-content');
+            return {
+                wrapper: messageDiv,
+                content: messageDiv.querySelector('.message-content')
+            };
         }
 
         function updateAssistantMessage(content, element) {
-            element.innerHTML = marked.parse(content);
+            element.innerHTML = sanitizeHtml(marked.parse(content));
             scrollToBottom();
         }
 
@@ -298,31 +302,100 @@
             return div.innerHTML;
         }
 
+        function sanitizeHtml(html) {
+            const template = document.createElement('template');
+            template.innerHTML = html;
+
+            template.content.querySelectorAll('script, iframe, object, embed, link, style, meta, base').forEach((node) => {
+                node.remove();
+            });
+
+            template.content.querySelectorAll('*').forEach((node) => {
+                [...node.attributes].forEach((attribute) => {
+                    const name = attribute.name.toLowerCase();
+                    const value = attribute.value.trim();
+
+                    if (name.startsWith('on') || name === 'srcdoc') {
+                        node.removeAttribute(attribute.name);
+                        return;
+                    }
+
+                    if ((name === 'href' || name === 'src' || name === 'xlink:href') && /^(javascript|data):/i.test(value)) {
+                        node.removeAttribute(attribute.name);
+                    }
+                });
+            });
+
+            return template.innerHTML;
+        }
+
         function scrollToBottom() {
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
 
+        function updateInputState() {
+            sendBtn.disabled = isGenerating || isKnowledgeBaseLoading || Boolean(knowledgeBaseError);
+            userInput.disabled = isGenerating;
+
+            if (isGenerating) {
+                sendBtnLabel.textContent = '生成中';
+            } else if (isKnowledgeBaseLoading) {
+                sendBtnLabel.textContent = '加载中';
+            } else if (knowledgeBaseError) {
+                sendBtnLabel.textContent = '不可用';
+            } else {
+                sendBtnLabel.textContent = '发送';
+            }
+        }
+
+        const knowledgeBasePromise = loadKnowledgeBase()
+            .then(() => {
+                isKnowledgeBaseLoading = false;
+                updateInputState();
+            })
+            .catch((error) => {
+                isKnowledgeBaseLoading = false;
+                knowledgeBaseError = error;
+                addErrorMessage(`知识库加载失败：${error.message}`);
+                updateInputState();
+            });
+
+        updateInputState();
+
         // ===== API 调用 =====
         async function sendMessage(userMessage) {
-            const selectedSkills = RedWisdomRetrieval.selectSkills(userMessage, maoSkills, 3);
-            const contextChunks = searchChunks.length
-                ? RedWisdomRetrieval.rankChunks(userMessage, selectedSkills, searchChunks, 6)
-                : [];
-
             isGenerating = true;
-            sendBtn.disabled = true;
-            userInput.disabled = true;
+            updateInputState();
 
-            addUserMessage(userMessage);
-
-            const contentElement = addAssistantMessage();
-            const cardsWrapper = document.createElement('div');
-            cardsWrapper.innerHTML = renderSkillCards(selectedSkills) + renderCitationCards(contextChunks);
-            contentElement.parentElement.appendChild(cardsWrapper);
+            let assistantMessage = null;
+            let contentElement = null;
             let fullResponse = '';
 
             try {
+                await knowledgeBasePromise;
+
+                if (knowledgeBaseError) {
+                    throw new Error(`知识库加载失败：${knowledgeBaseError.message}`);
+                }
+
+                const selectedSkills = RedWisdomRetrieval.selectSkills(userMessage, maoSkills, 3);
+                const contextChunks = searchChunks.length
+                    ? RedWisdomRetrieval.rankChunks(userMessage, selectedSkills, searchChunks, 6)
+                    : [];
+
+                addUserMessage(userMessage);
+
+                assistantMessage = addAssistantMessage();
+                contentElement = assistantMessage.content;
+                const cardsWrapper = document.createElement('div');
+                cardsWrapper.innerHTML = renderSkillCards(selectedSkills) + renderCitationCards(contextChunks);
+                contentElement.parentElement.appendChild(cardsWrapper);
                 const apiUrl = getApiUrl();
+                const requestContextChunks = contextChunks.map(({ title, filename, text }) => ({
+                    title,
+                    filename,
+                    text
+                }));
 
                 const headers = {
                     'Content-Type': 'application/json'
@@ -336,7 +409,7 @@
                         message: userMessage,
                         history: conversationHistory,
                         selectedSkills,
-                        contextChunks,
+                        contextChunks: requestContextChunks,
                         stream: true
                     })
                 });
@@ -346,33 +419,62 @@
                     throw new Error(error.error?.message || error.error || `API 错误: ${response.status}`);
                 }
 
+                if (!response.body) {
+                    throw new Error('服务器未返回可读取的流式响应，请检查网络环境后重试');
+                }
+
                 const reader = response.body.getReader();
                 const decoder = new TextDecoder();
+                let sseBuffer = '';
+
+                const processSseEvent = (eventText) => {
+                    const data = eventText
+                        .split('\n')
+                        .filter((line) => line.startsWith('data:'))
+                        .map((line) => {
+                            const value = line.slice(5);
+                            return value.startsWith(' ') ? value.slice(1) : value;
+                        })
+                        .join('\n');
+
+                    if (!data || data === '[DONE]') return;
+
+                    try {
+                        const parsed = JSON.parse(data);
+                        const content = parsed.choices?.[0]?.delta?.content || '';
+                        if (content) {
+                            fullResponse += content;
+                            updateAssistantMessage(fullResponse, contentElement);
+                        }
+                    } catch (e) {
+                        // Ignore malformed SSE payloads while preserving later complete events.
+                    }
+                };
+
+                const processCompleteSseEvents = () => {
+                    sseBuffer = sseBuffer.replace(/\r\n/g, '\n');
+                    const events = sseBuffer.split('\n\n');
+                    sseBuffer = events.pop() || '';
+                    events.forEach(processSseEvent);
+                };
 
                 while (true) {
                     const { done, value } = await reader.read();
                     if (done) break;
 
-                    const chunk = decoder.decode(value);
-                    const lines = chunk.split('\n').filter(line => line.trim() !== '');
+                    sseBuffer += decoder.decode(value, { stream: true });
+                    processCompleteSseEvents();
+                }
 
-                    for (const line of lines) {
-                        if (line.startsWith('data: ')) {
-                            const data = line.slice(6);
-                            if (data === '[DONE]') continue;
+                const finalChunk = decoder.decode();
+                if (finalChunk) {
+                    sseBuffer += finalChunk;
+                    processCompleteSseEvents();
+                }
 
-                            try {
-                                const parsed = JSON.parse(data);
-                                const content = parsed.choices?.[0]?.delta?.content || '';
-                                if (content) {
-                                    fullResponse += content;
-                                    updateAssistantMessage(fullResponse, contentElement);
-                                }
-                            } catch (e) {
-                                // 忽略解析错误
-                            }
-                        }
-                    }
+                if (sseBuffer.trim()) {
+                    processSseEvent(sseBuffer);
+                    sseBuffer = '';
                 }
 
                 conversationHistory.push({
@@ -390,17 +492,14 @@
             } catch (error) {
                 console.error('发送消息失败:', error);
 
-                // 移除正在显示的回复
-                const currentResponse = document.getElementById('currentResponse');
-                if (currentResponse) {
-                    currentResponse.remove();
+                if (assistantMessage?.wrapper?.isConnected) {
+                    assistantMessage.wrapper.remove();
                 }
 
                 addErrorMessage(`出了点问题：${error.message}`);
             } finally {
                 isGenerating = false;
-                sendBtn.disabled = false;
-                userInput.disabled = false;
+                updateInputState();
                 userInput.focus();
             }
         }
@@ -408,7 +507,7 @@
         // ===== 事件处理 =====
         sendBtn.addEventListener('click', () => {
             const message = userInput.value.trim();
-            if (message && !isGenerating) {
+            if (message && !sendBtn.disabled) {
                 userInput.value = '';
                 sendMessage(message);
             }
@@ -425,10 +524,6 @@
         userInput.addEventListener('input', () => {
             userInput.style.height = 'auto';
             userInput.style.height = Math.min(userInput.scrollHeight, 120) + 'px';
-        });
-
-        loadKnowledgeBase().catch((error) => {
-            addErrorMessage(error.message);
         });
 
         const params = new URLSearchParams(window.location.search);
