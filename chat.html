@@ -139,7 +139,7 @@
                         同志，你好！
                     </p>
                     <p class="font-serif text-ink-black leading-relaxed mt-2">
-                        我是根据《毛泽东选集》训练的智能助手。你有什么困惑、焦虑，或者工作生活中遇到的问题，都可以跟我说说。
+                        我是基于毛选原文检索和方法论提示的智能助手。你有什么困惑、焦虑，或者工作生活中遇到的问题，都可以跟我说说。
                     </p>
                     <p class="font-serif text-ink-black leading-relaxed mt-2">
                         我会用毛主席的思想方法来帮你分析问题，给你一些参考意见。记住：<strong>实践是检验真理的唯一标准</strong>！
@@ -181,8 +181,6 @@
     <script>
         // ===== 配置 =====
         const CHAT_API_URL = CONFIG.WORKER_URL || '/api/chat';
-        const MODEL = CONFIG.MODEL;
-
         function getApiUrl() {
             return CHAT_API_URL;
         }
@@ -391,11 +389,8 @@
                 cardsWrapper.innerHTML = renderSkillCards(selectedSkills) + renderCitationCards(contextChunks);
                 contentElement.parentElement.appendChild(cardsWrapper);
                 const apiUrl = getApiUrl();
-                const requestContextChunks = contextChunks.map(({ title, filename, text }) => ({
-                    title,
-                    filename,
-                    text
-                }));
+                const selectedSkillIds = selectedSkills.map(({ id }) => id).filter(Boolean);
+                const contextChunkIds = contextChunks.map(({ id }) => id).filter(Boolean);
 
                 const headers = {
                     'Content-Type': 'application/json'
@@ -405,11 +400,10 @@
                     method: 'POST',
                     headers: headers,
                     body: JSON.stringify({
-                        model: MODEL,
                         message: userMessage,
                         history: conversationHistory,
-                        selectedSkills,
-                        contextChunks: requestContextChunks,
+                        selectedSkillIds,
+                        contextChunkIds,
                         stream: true
                     })
                 });

@@ -38,7 +38,9 @@
 1. Fork 本仓库到 GitHub。
 2. 在 Vercel 中导入仓库。
 3. 在 Environment Variables 中添加 `OPENROUTER_API_KEY`。
-4. 部署后访问站点，`/api/chat` 会使用服务端环境变量代理 OpenRouter。
+4. 如需指定模型，可在服务端环境变量中设置 `OPENROUTER_MODEL` 和 `OPENROUTER_ALLOWED_MODELS`。
+5. 可选：用 `CHAT_RATE_LIMIT_MAX` 控制每分钟请求上限，用 `REDWISDOM_ALLOWED_ORIGINS` 控制允许跨域访问的来源。
+6. 部署后访问站点，`/api/chat` 会使用服务端环境变量代理 OpenRouter。
 
 ## 本地运行
 
@@ -54,7 +56,7 @@ python3 -m http.server 8080
 vercel dev
 ```
 
-`config.js` 只保留客户端路由和模型名等非敏感配置，不应写入 API Key；OpenRouter 密钥只放在 Vercel 环境变量或本地 `.env.local`。
+`config.js` 只保留客户端 API 路由等非敏感配置，不应写入 API Key；OpenRouter 密钥和可用模型只放在 Vercel 环境变量或本地 `.env.local`。
 
 ## 项目结构
 
@@ -65,7 +67,7 @@ redwisdom/
 ├── reading.html                  # 阅读毛选：目录与文章阅读
 ├── script.js                     # 首页抽卡与行动入口逻辑
 ├── retrieval.js                  # skill 选择、原文检索排序、阅读链接生成
-├── config.js                     # 客户端非敏感配置：API 路由与默认模型名
+├── config.js                     # 客户端非敏感配置：API 路由
 ├── api/
 │   └── chat.js                   # Vercel Serverless Function，代理 OpenRouter
 ├── data.js                       # 首页语录数据注入

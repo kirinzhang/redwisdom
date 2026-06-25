@@ -328,6 +328,12 @@
             };
         }
 
+        function formatArticleHash(filename, source = '') {
+            const encodedFilename = encodeURIComponent(filename);
+            if (!source) return encodedFilename;
+            return `${encodedFilename}?source=${encodeURIComponent(source)}`;
+        }
+
         function showSourceBanner(source) {
             const banner = document.getElementById('sourceBanner');
             const title = document.getElementById('sourceBannerTitle');
@@ -429,9 +435,9 @@
 
                 // Update URL hash without reloading the article through the hashchange handler.
                 const currentHash = parseArticleHash();
-                if (currentHash.filename !== filename || currentHash.source) {
+                if (currentHash.filename !== filename || currentHash.source !== source) {
                     ignoreNextHashChange = true;
-                    window.location.hash = filename;
+                    window.location.hash = formatArticleHash(filename, source);
                 }
 
                 // Update active state in sidebar
