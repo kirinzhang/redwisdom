@@ -307,14 +307,23 @@
         let allArticles = [];
         let currentArticleIndex = -1;
 
+        function safeDecodeHashPart(value) {
+            if (!value) return '';
+            try {
+                return decodeURIComponent(value);
+            } catch (error) {
+                return value;
+            }
+        }
+
         function parseArticleHash() {
             const raw = window.location.hash.slice(1);
             if (!raw) return { filename: '', source: '' };
             const [filenamePart, queryPart] = raw.split('?');
             const params = new URLSearchParams(queryPart || '');
             return {
-                filename: decodeURIComponent(filenamePart),
-                source: params.get('source') || ''
+                filename: safeDecodeHashPart(filenamePart),
+                source: safeDecodeHashPart(params.get('source') || '')
             };
         }
 
@@ -346,8 +355,7 @@
                 // Check URL hash for direct article link
                 if (window.location.hash) {
                     const { filename, source } = parseArticleHash();
-                    showSourceBanner(source);
-                    if (filename) loadArticle(filename);
+                    if (filename) loadArticle(filename, source);
                 }
             } catch (error) {
                 console.error('Failed to load catalog:', error);
@@ -393,13 +401,14 @@
         }
 
         // Load article content
-        async function loadArticle(filename) {
+        async function loadArticle(filename, source = '') {
             const welcomeEl = document.getElementById('welcomeMessage');
             const loadingEl = document.getElementById('loadingState');
             const bodyEl = document.getElementById('articleBody');
             const navEl = document.getElementById('navFooter');
 
             // Show loading
+            showSourceBanner(source);
             welcomeEl.classList.add('hidden');
             bodyEl.classList.add('hidden');
             navEl.classList.add('hidden');
