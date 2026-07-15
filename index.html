@@ -27,8 +27,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;700&family=Montserrat:wght@700;900&display=swap"
         rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=4">
     <script>
         tailwind.config = {
             theme: {
@@ -52,7 +51,7 @@
 </head>
 
 <body
-    class="bg-warm-rice min-h-[100dvh] w-screen flex flex-col items-center justify-center px-4 pb-24 pt-8 relative overflow-y-auto">
+    class="bg-warm-rice min-h-[100dvh] w-full flex flex-col items-center justify-center px-4 pb-24 pt-8 relative overflow-x-hidden overflow-y-auto">
 
     <!-- Header -->
     <header class="text-center mb-4 fade-in-up">
@@ -78,21 +77,29 @@
     </div>
 
     <!-- Cards Container (Hidden Initially) -->
-    <div class="relative w-full max-w-5xl flex justify-center items-center perspective-1000 mb-8 min-h-[450px]"
+    <div class="relative hidden w-full max-w-5xl justify-center items-center perspective-1000 mb-8 min-h-[450px]"
         id="cards-container">
         <!-- Card will be injected here -->
     </div>
 
     <!-- Controls (Hidden Initially) -->
-    <div id="controls-area" class="flex gap-6 opacity-0 transition-opacity duration-500 pointer-events-none">
+    <div id="controls-area" class="controls-pending grid w-full max-w-xl grid-cols-3 items-center justify-center gap-2 opacity-0 transition-opacity duration-500 pointer-events-none sm:flex sm:flex-wrap sm:gap-3">
+        <a id="result-source-link" href="reading.html"
+            class="px-2 py-3 text-center bg-china-red text-warm-rice font-mao text-lg sm:px-5 sm:text-xl rounded-lg hover:bg-red-800 transition-colors shadow-md">
+            <span class="sm:hidden">读出处</span><span class="hidden sm:inline">读完整出处</span>
+        </a>
+        <a id="result-ask-link" href="chat.html"
+            class="px-2 py-3 text-center bg-warm-rice border-2 border-china-red text-china-red font-mao text-lg sm:px-5 sm:text-xl rounded-lg hover:bg-red-50 transition-colors shadow-md">
+            <span class="sm:hidden">带去问道</span><span class="hidden sm:inline">带着这句话问道</span>
+        </a>
         <button id="retry-btn"
-            class="px-8 py-3 bg-transparent border-2 border-china-red text-china-red font-mao text-xl rounded-full hover:bg-china-red hover:text-white transition-all duration-300 shadow-md">
-            再抽一次
+            class="px-2 py-3 bg-transparent border border-dark-beige text-ink-black font-mao text-lg sm:px-5 sm:text-xl rounded-lg hover:bg-white transition-colors shadow-sm">
+            <span class="sm:hidden">再抽</span><span class="hidden sm:inline">再抽一次</span>
         </button>
     </div>
 
     <!-- Navigation Buttons -->
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+    <div class="hidden md:flex fixed bottom-6 right-6 z-50 flex-col gap-3">
         <a href="chat.html"
             class="flex items-center gap-2 px-5 py-3 bg-china-red text-warm-rice font-mao text-lg rounded-full hover:bg-red-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -110,13 +117,80 @@
             </svg>
             阅读毛选
         </a>
+        <a href="practice.html"
+            class="flex items-center gap-2 px-5 py-3 bg-warm-rice text-china-red border-2 border-china-red font-mao text-lg rounded-full hover:bg-china-red hover:text-warm-rice transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+            实践
+        </a>
+        <a href="me.html"
+            class="flex items-center gap-2 px-5 py-3 bg-warm-rice text-china-red border-2 border-china-red font-mao text-lg rounded-full hover:bg-china-red hover:text-warm-rice transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+            我的
+        </a>
+        <a href="login.html"
+            class="flex items-center gap-2 px-5 py-3 bg-warm-rice text-china-red border-2 border-china-red font-mao text-lg rounded-full hover:bg-china-red hover:text-warm-rice transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+            登录
+        </a>
     </div>
 
-    <!-- Hidden Save Container -->
-    <div id="save-area" class="fixed top-[200vh] left-0 pointer-events-none"></div>
+    <nav class="mobile-bottom-nav md:hidden fixed inset-x-0 bottom-0 z-40 border-t border-dark-beige/60 bg-warm-rice/95 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] backdrop-blur pb-[calc(0.35rem+env(safe-area-inset-bottom))]"
+        aria-label="移动端主导航">
+        <div class="mx-auto grid max-w-md grid-cols-5">
+            <a data-mobile-nav-item="home" href="index.html" aria-current="page"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-china-red font-bold">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                    <path d="M7 9h4"></path>
+                    <path d="M7 13h10"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.cards">抽卡</span>
+            </a>
+            <a data-mobile-nav-item="reading" href="reading.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.reading">阅读</span>
+            </a>
+            <a data-mobile-nav-item="chat" href="chat.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.chat">问道</span>
+            </a>
+            <a data-mobile-nav-item="practice" href="practice.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M9 11l3 3L22 4"></path>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.practice">实践</span>
+            </a>
+            <a data-mobile-nav-item="me" href="me.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M20 21a8 8 0 0 0-16 0"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.me">我的</span>
+            </a>
+        </div>
+    </nav>
 
     <script src="data.js"></script>
-    <script src="script.js"></script>
+    <script src="js/quote-utils.js"></script>
+    <script src="config.js?v=7"></script>
+    <script src="js/auth-utils.js"></script>
+    <script src="js/cloud-sync.js"></script>
+    <script src="js/auto-sync.js"></script>
+    <script src="js/auto-sync-bootstrap.js"></script>
+    <script src="js/register-pwa.js?v=4"></script>
+    <script src="script.js?v=4"></script>
 </body>
 
 </html>

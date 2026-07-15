@@ -4,16 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const startArea = document.getElementById('start-area');
     const controlsArea = document.getElementById('controls-area');
     const retryBtn = document.getElementById('retry-btn');
+    const sourceLink = document.getElementById('result-source-link');
+    const askLink = document.getElementById('result-ask-link');
     const promptArea = document.getElementById('projection-prompt');
 
     let allQuotes = [];
+    const quoteUtils = window.RedWisdomQuoteUtils;
 
-    // Load Data
-    if (window.quotesData) {
-        allQuotes = window.quotesData;
-    } else {
-        console.error('Error: quotesData not found');
-    }
+    startBtn.disabled = true;
+    startBtn.textContent = '载入毛选...';
+
+    loadQuoteData();
 
     // STATE 1: Start
     startBtn.addEventListener('click', () => {
@@ -33,17 +34,50 @@ document.addEventListener('DOMContentLoaded', () => {
         // Reset UI
         controlsArea.style.opacity = '0';
         controlsArea.style.pointerEvents = 'none';
+        controlsArea.classList.add('controls-pending');
         container.innerHTML = '';
 
         // Deal new card
         dealCard();
     });
 
+    async function loadQuoteData() {
+        try {
+            const [quotesResponse, catalogResponse] = await Promise.all([
+                fetch('data/quotes.json'),
+                fetch('data/catalog.json'),
+            ]);
+
+            const [quotesPayload, catalog] = await Promise.all([
+                quotesResponse.json(),
+                catalogResponse.json(),
+            ]);
+
+            allQuotes = quoteUtils.normalizeQuotes(quotesPayload, catalog);
+        } catch (error) {
+            console.warn('Falling back to inline quote data:', error);
+            allQuotes = quoteUtils.normalizeQuotes(window.quotesData || [], null);
+        }
+
+        startBtn.disabled = allQuotes.length === 0;
+        startBtn.textContent = allQuotes.length === 0 ? '语录载入失败' : '抽一张';
+    }
+
     function dealCard() {
         if (allQuotes.length === 0) return;
 
+        container.classList.remove('hidden');
+        container.classList.add('flex');
+
         // Pick 1 random
         const quote = getRandomQuotes(1)[0];
+
+        sourceLink.href = quote.articleHref || 'reading.html';
+        const askParams = new URLSearchParams({
+            quote: quote.content,
+            source: quote.source || '毛选',
+        });
+        askLink.href = `chat.html?${askParams.toString()}`;
 
         // Create Card Element
         const card = createCardElement(quote);
@@ -58,6 +92,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function createCardElement(quote) {
         const cardScene = document.createElement('div');
         cardScene.className = `card fade-in-up`;
+        cardScene.tabIndex = 0;
+        cardScene.setAttribute('role', 'button');
+        cardScene.setAttribute('aria-label', '翻开语录卡');
         // Card starts face down (default style)
 
         const cardInner = document.createElement('div');
@@ -79,30 +116,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const portrait = document.createElement('img');
         portrait.src = 'assets/portrait_color.png';
         portrait.className = 'portrait-container';
+        portrait.alt = '';
+        portrait.setAttribute('aria-hidden', 'true');
 
         // Main Content Container
         const content = document.createElement('div');
         content.className = 'card-front-content';
 
-        // Auto-detect font size and layout based on length
-        let fontSizeClass = 'quote-size-medium';
-        let layoutClass = 'layout-center'; // Default to centered
-
-        const len = quote.content.length;
-
-        if (len < 20) {
-            fontSizeClass = 'quote-size-large';
-            layoutClass = 'layout-center';
-        } else if (len > 40) {
-            fontSizeClass = 'quote-size-small';
-            layoutClass = 'layout-top'; // Align top to prevent clipping
-        } else if (len > 80) {
-            fontSizeClass = 'quote-size-xs';
-            layoutClass = 'layout-top';
-        } else {
-            // Between 20 and 40
-            layoutClass = 'layout-center';
-        }
+        const { fontSizeClass, layoutClass } = quoteUtils.getQuotePresentation(quote.content);
 
         content.classList.add(layoutClass);
 
@@ -113,13 +134,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
         content.appendChild(text);
 
-        // Footer Section REMOVED as requested
-        // Save Btn REMOVED as requested
+        const metadata = document.createElement('div');
+        metadata.className = 'quote-meta';
+
+        const source = document.createElement('p');
+        source.className = 'quote-source-line';
+        source.innerText = `《${quote.source}》`;
+        metadata.appendChild(source);
+
+        if (quote.date) {
+            const date = document.createElement('p');
+            date.className = 'quote-date-line';
+            date.innerText = quote.date;
+            metadata.appendChild(date);
+        }
+
+        content.appendChild(metadata);
 
         front.appendChild(portrait);
         front.appendChild(content); // Quote
-        // front.appendChild(footer);  
-        // front.appendChild(saveIcon);
 
         cardInner.appendChild(back);
         cardInner.appendChild(front);
@@ -127,50 +160,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // FLIP INTERACTION
         let isFlipped = false;
-        cardScene.addEventListener('click', () => {
+        function revealCard() {
             if (!isFlipped) {
                 // STATE 3: Flip & Reveal
                 cardScene.classList.add('flipped');
+                cardScene.setAttribute('aria-label', '语录卡已翻开');
                 isFlipped = true;
 
                 // Show Controls after delay
                 setTimeout(() => {
-                    controlsArea.style.opacity = '1';
-                    controlsArea.style.pointerEvents = 'auto';
-                    saveIcon.style.opacity = '1';
+                    controlsArea.classList.remove('controls-pending');
+                    window.requestAnimationFrame(() => {
+                        controlsArea.style.opacity = '1';
+                        controlsArea.style.pointerEvents = 'auto';
+                    });
                 }, 800);
+            }
+        }
+
+        cardScene.addEventListener('click', revealCard);
+        cardScene.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                revealCard();
             }
         });
 
         return cardScene;
     }
 
-    function saveCardAsImage(element) {
-        const clone = element.cloneNode(true);
-        clone.style.transform = 'none';
-        clone.style.position = 'fixed';
-        clone.style.top = '0';
-        clone.style.left = '0';
-        clone.style.zIndex = '-9999';
-        // Remove opacity class from save icon in clone if needed, but we don't need the icon in the image usually. 
-        // Let's remove the save icon from the generated image for cleanliness.
-        const icon = clone.querySelector('button');
-        if (icon) icon.remove();
-
-        document.body.appendChild(clone);
-
-        html2canvas(clone, {
-            useCORS: true,
-            backgroundColor: null
-        }).then(canvas => {
-            const link = document.createElement('a');
-            link.download = `red-wisdom-card-${Date.now()}.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-            document.body.removeChild(clone);
-        }).catch(err => {
-            console.error('Save failed', err);
-            document.body.removeChild(clone);
-        });
-    }
 });

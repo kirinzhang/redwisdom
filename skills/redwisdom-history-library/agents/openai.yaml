@@ -1,0 +1,4 @@
+interface:
+  display_name: "党史案例库编审"
+  short_description: "扩充、核验、检索并评测可追溯且禁止编造的党史方法案例库"
+  default_prompt: "Use $redwisdom-history-library to expand and validate the source-backed Red Wisdom party-history case library."

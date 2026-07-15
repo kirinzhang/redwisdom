@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的档案 - Red Wisdom</title>
+    <meta name="description" content="查看本机私密保存的毛选学习档案。">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'warm-rice': '#F7F4ED',
+                        'china-red': '#BC2D22',
+                        'ink-black': '#2B2B2B',
+                        'dark-beige': '#D6C6B0',
+                    },
+                    fontFamily: {
+                        'mao': ['"Ma Shan Zheng"', 'cursive'],
+                        'serif': ['"Noto Serif SC"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-warm-rice min-h-[100dvh] text-ink-black font-serif">
+    <header class="bg-china-red text-warm-rice px-5 py-4 shadow">
+        <div class="max-w-5xl mx-auto flex items-center justify-between gap-4">
+            <a href="index.html" class="font-mao text-2xl">Red Wisdom</a>
+            <nav class="hidden md:flex items-center gap-3 text-sm" aria-label="主导航">
+                <a class="hover:underline" href="reading.html">阅读</a>
+                <a class="hover:underline" href="chat.html">问道</a>
+                <a class="hover:underline" href="practice.html">实践</a>
+                <a class="hover:underline" href="login.html">登录</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-6 pb-24">
+        <section class="mb-6">
+            <p class="text-sm text-china-red font-bold mb-2">个人档案预览</p>
+            <h1 class="font-mao text-4xl text-china-red mb-2">我的毛选学习档案</h1>
+            <p class="text-gray-700 leading-relaxed">
+                当前数据保存在本机浏览器中。配置 Supabase 后，可同步问答、收藏回答、笔记、高亮、语录收藏、实践和复盘。
+            </p>
+        </section>
+
+        <section id="accountPanel" class="mb-6 bg-white/80 border border-dark-beige/50 rounded-lg p-4"></section>
+
+        <section id="summary" class="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-3 mb-6"></section>
+
+        <section id="archiveTrainingPanel" class="mb-6 bg-white/80 border border-dark-beige/50 rounded-lg p-4"
+            aria-label="下一步训练"></section>
+
+        <section class="mb-6 flex flex-col justify-between gap-3 border-y border-dark-beige/60 py-5 md:flex-row md:items-center">
+            <div>
+                <h2 class="font-mao text-2xl text-china-red">我的问题</h2>
+                <p class="text-sm leading-relaxed text-gray-700">把问答、阅读笔记和实践组织到同一个现实问题下，持续分析和复盘。</p>
+            </div>
+            <a href="problems.html" class="self-start rounded bg-china-red px-4 py-2 text-sm text-warm-rice hover:bg-red-800">进入问题工作台</a>
+        </section>
+
+        <section class="grid md:grid-cols-2 gap-4">
+            <div class="bg-white/80 border border-dark-beige/50 rounded-lg p-4">
+                <h2 class="font-mao text-2xl text-china-red mb-3">常用方法论</h2>
+                <div id="tagList" class="flex flex-wrap gap-2"></div>
+            </div>
+            <div class="bg-white/80 border border-dark-beige/50 rounded-lg p-4">
+                <h2 class="font-mao text-2xl text-china-red mb-3">账户与数据</h2>
+                <ul class="list-disc pl-5 leading-8 text-gray-700">
+                    <li>Google 登录</li>
+                    <li>完整学习档案云端同步</li>
+                    <li>本机数据导出</li>
+                    <li>本机问答历史、AI 回答收藏、阅读笔记、阅读进度、原文摘录和语录收藏</li>
+                    <li>后续支持删除账号和完整数据清理</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mt-6 grid md:grid-cols-3 gap-4">
+            <div>
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="font-mao text-2xl text-china-red">继续阅读</h2>
+                    <a href="reading.html" class="text-sm text-china-red hover:underline">去阅读</a>
+                </div>
+                <div id="progressList" class="grid gap-3"></div>
+            </div>
+            <div>
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="font-mao text-2xl text-china-red">收藏文章</h2>
+                    <a href="reading.html" class="text-sm text-china-red hover:underline">打开目录</a>
+                </div>
+                <div id="bookmarkList" class="grid gap-3"></div>
+            </div>
+            <div>
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="font-mao text-2xl text-china-red">原文摘录</h2>
+                    <a href="reading.html" class="text-sm text-china-red hover:underline">继续摘录</a>
+                </div>
+                <div id="highlightList" class="grid gap-3"></div>
+            </div>
+        </section>
+
+        <section class="mt-6">
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="font-mao text-2xl text-china-red">收藏语录</h2>
+                <a href="index.html" class="text-sm text-china-red hover:underline">继续抽卡</a>
+            </div>
+            <div id="savedQuoteList" class="grid md:grid-cols-2 gap-3"></div>
+        </section>
+
+        <section class="mt-6">
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="font-mao text-2xl text-china-red">收藏回答</h2>
+                <a href="chat.html" class="text-sm text-china-red hover:underline">继续问道</a>
+            </div>
+            <div id="savedAnswerList" class="grid md:grid-cols-2 gap-3"></div>
+        </section>
+
+        <section class="mt-6 grid md:grid-cols-2 gap-4">
+            <div>
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="font-mao text-2xl text-china-red">最近问答</h2>
+                    <a href="chat.html" class="text-sm text-china-red hover:underline">继续问道</a>
+                </div>
+                <div id="conversationList" class="grid gap-3"></div>
+            </div>
+            <div>
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="font-mao text-2xl text-china-red">最近笔记</h2>
+                    <a href="reading.html" class="text-sm text-china-red hover:underline">继续阅读</a>
+                </div>
+                <div id="noteList" class="grid gap-3"></div>
+            </div>
+        </section>
+
+        <section class="mt-6">
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="font-mao text-2xl text-china-red">最近实践</h2>
+                <a href="practice.html" class="text-sm text-china-red hover:underline">管理实践</a>
+            </div>
+            <div id="recentList" class="grid gap-3"></div>
+        </section>
+    </main>
+
+    <nav class="mobile-bottom-nav md:hidden fixed inset-x-0 bottom-0 z-40 border-t border-dark-beige/60 bg-warm-rice/95 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] backdrop-blur pb-[calc(0.35rem+env(safe-area-inset-bottom))]"
+        aria-label="移动端主导航">
+        <div class="mx-auto grid max-w-md grid-cols-5">
+            <a data-mobile-nav-item="home" href="index.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                    <path d="M7 9h4"></path>
+                    <path d="M7 13h10"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.cards">抽卡</span>
+            </a>
+            <a data-mobile-nav-item="reading" href="reading.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.reading">阅读</span>
+            </a>
+            <a data-mobile-nav-item="chat" href="chat.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.chat">问道</span>
+            </a>
+            <a data-mobile-nav-item="practice" href="practice.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M9 11l3 3L22 4"></path>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.practice">实践</span>
+            </a>
+            <a data-mobile-nav-item="me" href="me.html" aria-current="page"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-china-red font-bold">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M20 21a8 8 0 0 0-16 0"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.me">我的</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="config.js?v=7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/auth-utils.js"></script>
+    <script src="js/cloud-sync.js"></script>
+    <script src="js/auto-sync.js"></script>
+    <script src="js/auto-sync-bootstrap.js"></script>
+    <script src="js/register-pwa.js?v=4"></script>
+    <script src="js/practice-store.js"></script>
+    <script src="js/problem-case-store.js"></script>
+    <script src="js/conversation-store.js"></script>
+    <script src="js/reading-notes-store.js"></script>
+    <script src="js/reading-progress-store.js"></script>
+    <script src="js/saved-quotes-store.js"></script>
+    <script src="js/saved-answers-store.js"></script>
+    <script src="js/daily-training.js"></script>
+    <script>
+        const store = window.RedWisdomPractice.createPracticeStore(localStorage);
+        const conversationStore = window.RedWisdomConversations.createConversationStore(localStorage);
+        const problemCaseStore = window.RedWisdomProblemCases.createProblemCaseStore(localStorage);
+        const readingNotesStore = window.RedWisdomReadingNotes.createReadingNotesStore(localStorage);
+        const readingProgressStore = window.RedWisdomReadingProgress.createReadingProgressStore(localStorage);
+        const savedQuotesStore = window.RedWisdomSavedQuotes.createSavedQuotesStore(localStorage);
+        const savedAnswersStore = window.RedWisdomSavedAnswers.createSavedAnswersStore(localStorage);
+        const practices = store.listPractices();
+        const conversations = conversationStore.listConversations();
+        const conversationSummary = window.RedWisdomConversations.summarizeConversationArchive(conversations);
+        const readingNotes = readingNotesStore.listNotes();
+        const readingNotesSummary = window.RedWisdomReadingNotes.summarizeReadingNotesArchive(readingNotes);
+        const readingProgress = readingProgressStore.listProgress();
+        const highlights = readingProgressStore.listHighlights();
+        const readingProgressSummary = window.RedWisdomReadingProgress.summarizeReadingProgressArchive({
+            progress: readingProgress,
+            highlights,
+        });
+        const savedQuotes = savedQuotesStore.listSavedQuotes();
+        const savedQuotesSummary = window.RedWisdomSavedQuotes.summarizeSavedQuotesArchive(savedQuotes);
+        const savedAnswers = savedAnswersStore.listSavedAnswers();
+        const savedAnswersSummary = window.RedWisdomSavedAnswers.summarizeSavedAnswersArchive(savedAnswers);
+        const summary = window.RedWisdomPractice.summarizePracticeArchive(practices);
+        const archiveSummary = window.RedWisdomCloudSync.summarizeArchive(getLocalArchive());
+        const accountPanel = document.getElementById('accountPanel');
+        const authConfig = typeof CONFIG !== 'undefined' ? CONFIG : {};
+        let authStatus = { configured: false, missing: [] };
+        let authClient = null;
+        let currentProfile = null;
+
+        document.getElementById('summary').innerHTML = [
+            metricCard('总实践', summary.total),
+            metricCard('问答记录', conversationSummary.total),
+            metricCard('读过文章', readingProgressSummary.totalReadArticles),
+            metricCard('收藏语录', savedQuotesSummary.total),
+            metricCard('收藏回答', savedAnswersSummary.total),
+            metricCard('已复盘', summary.statusCounts.reviewed || 0),
+        ].join('');
+
+        document.getElementById('tagList').innerHTML = summary.topMethodologyTags.length
+            ? summary.topMethodologyTags.map(([tag, count]) => `<span class="px-3 py-1 rounded-full bg-red-50 text-china-red border border-red-100">${escapeHtml(tag)} · ${count}</span>`).join('')
+            : '<p class="text-gray-600">还没有方法论标签。先创建一条实践记录。</p>';
+
+        document.getElementById('recentList').innerHTML = practices.length
+            ? practices.slice(0, 5).map(practice => `
+                <article class="bg-white/80 border border-dark-beige/50 rounded-lg p-4">
+                    <h3 class="font-bold text-china-red">${escapeHtml(practice.title)}</h3>
+                    <p class="text-sm text-gray-500">${escapeHtml(practice.sourceTitle || '个人实践')} · ${statusLabel(practice.status)}</p>
+                    <p class="mt-2 text-gray-700">${escapeHtml(practice.actionPlan || practice.realProblem || '未填写行动')}</p>
+                </article>
+            `).join('')
+            : '<div class="bg-white/80 border border-dark-beige/50 rounded-lg p-6 text-center text-gray-600">还没有实践记录。</div>';
+
+        document.getElementById('conversationList').innerHTML = conversations.length
+            ? conversations.slice(0, 5).map(conversation => `
+                <article class="bg-white/80 border border-dark-beige/50 rounded-lg p-4">
+                    <h3 class="font-bold text-china-red">${escapeHtml(conversation.title)}</h3>
+                    <p class="text-sm text-gray-500">${(conversation.messages || []).length} 条消息 · ${formatDate(conversation.updatedAt)}</p>
+                    <p class="mt-2 text-gray-700">${escapeHtml(lastMessagePreview(conversation))}</p>
+                </article>
+            `).join('')
+            : '<div class="bg-white/80 border border-dark-beige/50 rounded-lg p-6 text-center text-gray-600">还没有问答记录。</div>';
+
+        document.getElementById('noteList').innerHTML = readingNotes.length
+            ? readingNotes.slice(0, 5).map(note => `
+                <article class="bg-white/80 border border-dark-beige/50 rounded-lg p-4">
+                    <h3 class="font-bold text-china-red">${escapeHtml(note.articleTitle)}</h3>
+                    <p class="text-sm text-gray-500">${formatDate(note.updatedAt)}</p>
+                    <p class="mt-2 text-gray-700">${escapeHtml(note.content.slice(0, 120))}</p>
+                    <a href="reading.html#${encodeURIComponent(note.articleId)}" class="mt-2 inline-block text-sm text-china-red hover:underline">打开文章</a>
+                </article>
+            `).join('')
+            : '<div class="bg-white/80 border border-dark-beige/50 rounded-lg p-6 text-center text-gray-600">还没有阅读笔记。</div>';
+
+        document.getElementById('progressList').innerHTML = readingProgress.length
+            ? readingProgress.slice(0, 5).map(entry => readingArticleCard(entry, `${entry.progressPercent || 0}%`)).join('')
+            : '<div class="bg-white/80 border border-dark-beige/50 rounded-lg p-6 text-center text-gray-600">还没有阅读进度。</div>';
+
+        const bookmarks = readingProgress.filter(entry => entry.bookmarked);
+        document.getElementById('bookmarkList').innerHTML = bookmarks.length
+            ? bookmarks.slice(0, 5).map(entry => readingArticleCard(entry, '已收藏')).join('')
+            : '<div class="bg-white/80 border border-dark-beige/50 rounded-lg p-6 text-center text-gray-600">还没有收藏文章。</div>';
+
+        document.getElementById('highlightList').innerHTML = highlights.length
+            ? highlights.slice(0, 5).map(highlight => `
+                <article class="bg-white/80 border border-dark-beige/50 rounded-lg p-4">
+                    <h3 class="font-bold text-china-red">${escapeHtml(highlight.articleTitle)}</h3>
+                    <p class="text-sm text-gray-500">${formatDate(highlight.updatedAt)}</p>
+                    <p class="mt-2 text-gray-700">${escapeHtml(highlight.selectedText.slice(0, 120))}</p>
+                    ${highlight.note ? `<p class="mt-2 text-sm text-gray-600">${escapeHtml(highlight.note.slice(0, 100))}</p>` : ''}
+                    <a href="reading.html#${encodeURIComponent(highlight.articleId)}" class="mt-2 inline-block text-sm text-china-red hover:underline">打开文章</a>
+                </article>
+            `).join('')
+            : '<div class="bg-white/80 border border-dark-beige/50 rounded-lg p-6 text-center text-gray-600">还没有原文摘录。</div>';
+
+        document.getElementById('savedQuoteList').innerHTML = savedQuotes.length
+            ? savedQuotes.slice(0, 6).map(savedQuote => `
+                <article class="bg-white/80 border border-dark-beige/50 rounded-lg p-4">
+                    <p class="text-gray-800 leading-relaxed">${escapeHtml(savedQuote.content)}</p>
+                    <p class="mt-2 text-sm text-gray-500">《${escapeHtml(savedQuote.source)}》${savedQuote.date ? ` · ${escapeHtml(savedQuote.date)}` : ''}</p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        ${(savedQuote.methodologyTags || []).map(tag => `<span class="px-2 py-1 rounded-full bg-red-50 text-xs text-china-red border border-red-100">${escapeHtml(tag)}</span>`).join('')}
+                    </div>
+                    <a href="${escapeAttribute(savedQuote.articleHref || 'reading.html')}" class="mt-3 inline-block text-sm text-china-red hover:underline">读原文</a>
+                </article>
+            `).join('')
+            : '<div class="bg-white/80 border border-dark-beige/50 rounded-lg p-6 text-center text-gray-600">还没有收藏语录。</div>';
+
+        document.getElementById('savedAnswerList').innerHTML = savedAnswers.length
+            ? savedAnswers.slice(0, 6).map(savedAnswer => `
+                <article class="bg-white/80 border border-dark-beige/50 rounded-lg p-4">
+                    <h3 class="font-bold text-china-red">${escapeHtml(savedAnswer.title || '收藏回答')}</h3>
+                    <p class="text-sm text-gray-500">${formatDate(savedAnswer.updatedAt)}</p>
+                    <p class="mt-2 text-gray-700">${escapeHtml((savedAnswer.assistantMessage || '').slice(0, 180))}</p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        ${(savedAnswer.methodologyTags || []).map(tag => `<span class="px-2 py-1 rounded-full bg-red-50 text-xs text-china-red border border-red-100">${escapeHtml(tag)}</span>`).join('')}
+                    </div>
+                    <a href="chat.html" class="mt-3 inline-block text-sm text-china-red hover:underline">继续问道</a>
+                </article>
+                `).join('')
+            : '<div class="bg-white/80 border border-dark-beige/50 rounded-lg p-6 text-center text-gray-600">还没有收藏回答。</div>';
+
+        renderArchiveTrainingPanel();
+
+        function renderArchiveTrainingPanel() {
+            const panel = document.getElementById('archiveTrainingPanel');
+            if (!panel || !window.RedWisdomDailyTraining) return;
+
+            const plan = window.RedWisdomDailyTraining.buildDailyTrainingPlan(getLocalArchive());
+            const topTags = plan.methodologyTags.length
+                ? plan.methodologyTags.map(([tag, count]) => `<span class="px-2 py-1 rounded-full bg-red-50 text-xs text-china-red border border-red-100">${escapeHtml(tag)} · ${count}</span>`).join('')
+                : '<span class="text-sm text-gray-500">完成一次实践后会形成方法论标签。</span>';
+            const secondaryItems = plan.secondary.length
+                ? plan.secondary.map(item => `
+                    <a data-archive-training-secondary href="${escapeAttribute(trainingHref(item))}"
+                        class="block rounded border border-dark-beige/50 bg-warm-rice/60 p-3 hover:border-china-red/50 hover:bg-red-50">
+                        <span class="block text-xs text-gray-500">${escapeHtml(item.meta)}</span>
+                        <span class="mt-1 block font-bold text-china-red">${escapeHtml(item.title)}</span>
+                        <span class="mt-1 block text-sm text-gray-700">${escapeHtml(item.description)}</span>
+                    </a>
+                `).join('')
+                : '<p class="text-sm text-gray-600">暂无备选训练。</p>';
+
+            panel.innerHTML = `
+                <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                    <div class="min-w-0 flex-1">
+                        <p class="text-sm font-bold text-china-red">下一步训练</p>
+                        <h2 class="mt-1 font-mao text-3xl text-china-red">${escapeHtml(plan.primary.title)}</h2>
+                        <p class="mt-2 text-gray-700 leading-relaxed">${escapeHtml(plan.primary.description)}</p>
+                        <div class="mt-3 flex flex-wrap gap-2">
+                            ${topTags}
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">
+                            待复盘 ${plan.stats.pendingReviews} · 今日实践 ${plan.stats.activePractices} · 阅读中 ${plan.stats.readingInProgress}
+                        </p>
+                    </div>
+                    <div class="w-full lg:w-72">
+                        <a data-archive-training-primary href="${escapeAttribute(trainingHref(plan.primary))}"
+                            class="block rounded bg-china-red px-4 py-3 text-center text-sm font-bold text-warm-rice hover:bg-red-800">
+                            进入训练
+                        </a>
+                        <div class="mt-3 grid gap-2">
+                            ${secondaryItems}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function metricCard(label, value) {
+            return `
+                <div class="bg-white/80 border border-dark-beige/50 rounded-lg p-4">
+                    <div class="text-sm text-gray-500">${label}</div>
+                    <div class="text-2xl font-bold text-china-red">${value}</div>
+                </div>
+            `;
+        }
+
+        function statusLabel(status) {
+            return {
+                draft: '草稿',
+                active: '今日待做',
+                done: '已完成',
+                reviewed: '已复盘',
+                archived: '已归档',
+            }[status] || '草稿';
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text || '';
+            return div.innerHTML;
+        }
+
+        function escapeAttribute(text) {
+            return escapeHtml(text).replace(/"/g, '&quot;');
+        }
+
+        function formatDate(value) {
+            return new Date(value).toLocaleDateString('zh-CN');
+        }
+
+        function lastMessagePreview(conversation) {
+            const messages = conversation.messages || [];
+            const latest = messages[messages.length - 1];
+            return latest?.content?.slice(0, 120) || '暂无内容';
+        }
+
+        function readingArticleCard(entry, meta) {
+            return `
+                <article class="bg-white/80 border border-dark-beige/50 rounded-lg p-4">
+                    <h3 class="font-bold text-china-red">${escapeHtml(entry.articleTitle)}</h3>
+                    <p class="text-sm text-gray-500">${escapeHtml(meta)} · ${formatDate(entry.updatedAt)}</p>
+                    <a href="reading.html#${encodeURIComponent(entry.articleId)}" class="mt-2 inline-block text-sm text-china-red hover:underline">继续阅读</a>
+                </article>
+                `;
+        }
+
+        function trainingHref(item) {
+            if (item.type === 'draw-card') {
+                return 'index.html#start-area';
+            }
+            return item.href || '#';
+        }
+
+        function getLocalArchive() {
+            return {
+                problemCases: problemCaseStore.listCases(),
+                practices: store.listPractices(),
+                conversations: conversationStore.listConversations(),
+                readingNotes: readingNotesStore.listNotes(),
+                readingProgress: readingProgressStore.listProgress(),
+                highlights: readingProgressStore.listHighlights(),
+                savedQuotes: savedQuotesStore.listSavedQuotes(),
+                savedAnswers: savedAnswersStore.listSavedAnswers(),
+            };
+        }
+
+        async function initAccountPanel() {
+            await Promise.resolve(window.REDWISDOM_CONFIG_READY).catch(() => authConfig);
+            authStatus = window.RedWisdomAuth.getAuthConfigStatus(authConfig);
+            if (!authStatus.configured) {
+                renderAccountPanel({
+                    title: '本机私密档案',
+                    detail: '当前学习档案只保存在本机浏览器。配置 Supabase 后可登录并同步到个人账户。',
+                    canSync: false,
+                });
+                return;
+            }
+
+            authClient = authClient || window.RedWisdomAuth.createSupabaseClient(authConfig, window.supabase);
+            if (!authClient) {
+                renderAccountPanel({
+                    title: '账户暂不可用',
+                    detail: 'Supabase SDK 未加载，仍可导出本机学习档案。',
+                    canSync: false,
+                });
+                return;
+            }
+
+            try {
+                const session = await window.RedWisdomAuth.getCurrentSession(authClient);
+                currentProfile = window.RedWisdomAuth.getSessionProfile(session);
+
+                if (!currentProfile) {
+                    renderAccountPanel({
+                        title: '未登录',
+                        detail: '登录后可把本机学习档案同步到个人账户。',
+                        canSync: false,
+                    });
+                    return;
+                }
+
+                renderAccountPanel({
+                    title: '已登录',
+                    detail: `${currentProfile.email} · 可同步本机学习档案。`,
+                    canSync: true,
+                });
+            } catch (error) {
+                renderAccountPanel({
+                    title: '账户状态读取失败',
+                    detail: error.message || '请稍后重试。',
+                    canSync: false,
+                });
+            }
+        }
+
+        function renderAccountPanel({ title, detail, canSync }) {
+            accountPanel.innerHTML = `
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                        <div>
+                            <h2 class="font-mao text-2xl text-china-red">${escapeHtml(title)}</h2>
+                            <p class="text-sm text-gray-700 leading-relaxed">${escapeHtml(detail)}</p>
+                            <p class="mt-2 text-sm text-gray-600">本机学习档案：${escapeHtml(archiveSummary.statusText)}</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <button id="exportDataBtn" class="px-3 py-2 border border-dark-beige rounded text-sm hover:bg-dark-beige/20" type="button">导出本机数据</button>
+                        ${canSync ? `
+                            <button id="syncArchiveBtn" class="px-3 py-2 bg-china-red text-warm-rice rounded text-sm hover:bg-red-800" type="button">同步到云端</button>
+                            <button id="restoreArchiveBtn" class="px-3 py-2 border border-china-red text-china-red rounded text-sm hover:bg-red-50" type="button">从云端恢复</button>
+                        ` : '<a href="login.html" class="px-3 py-2 bg-china-red text-warm-rice rounded text-sm hover:bg-red-800">登录同步</a>'}
+                    </div>
+                </div>
+                <p id="accountActionStatus" class="mt-3 text-sm text-gray-600"></p>
+            `;
+
+            document.getElementById('exportDataBtn').addEventListener('click', exportLocalData);
+            if (canSync) {
+                document.getElementById('syncArchiveBtn').addEventListener('click', syncArchiveToCloud);
+                document.getElementById('restoreArchiveBtn').addEventListener('click', restoreArchiveFromCloud);
+            }
+        }
+
+        function exportLocalData() {
+            const payload = window.RedWisdomCloudSync.buildExportPayload({
+                profile: currentProfile,
+                problemCases: problemCaseStore.listCases(),
+                practices: store.listPractices(),
+                conversations: conversationStore.listConversations(),
+                readingNotes: readingNotesStore.listNotes(),
+                readingProgress: readingProgressStore.listProgress(),
+                highlights: readingProgressStore.listHighlights(),
+                savedQuotes: savedQuotesStore.listSavedQuotes(),
+                savedAnswers: savedAnswersStore.listSavedAnswers(),
+            });
+            const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `redwisdom-export-${new Date().toISOString().slice(0, 10)}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+            document.getElementById('accountActionStatus').textContent = '已生成本机数据导出文件。';
+        }
+
+        async function syncArchiveToCloud(event) {
+            const button = event.currentTarget;
+            const statusEl = document.getElementById('accountActionStatus');
+            const archive = getLocalArchive();
+            const currentArchiveSummary = window.RedWisdomCloudSync.summarizeArchive(archive);
+
+            if (!currentArchiveSummary.hasRecords) {
+                statusEl.textContent = '暂无本机学习档案可同步。';
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = '同步中...';
+            statusEl.textContent = '';
+
+            try {
+                const counts = await window.RedWisdomCloudSync.pushArchiveToSupabase(authClient, currentProfile.id, archive);
+                statusEl.textContent = [
+                    `问题 ${counts.problemCases}`,
+                    `实践 ${counts.practices}`,
+                    `问答 ${counts.conversations}`,
+                    `消息 ${counts.messages}`,
+                    `笔记 ${counts.readingNotes}`,
+                    `阅读 ${counts.readingProgress}`,
+                    `摘录 ${counts.highlights}`,
+                    `语录 ${counts.savedQuotes}`,
+                    `回答 ${counts.savedAnswers}`,
+                ].join(' · ');
+            } catch (error) {
+                statusEl.textContent = error.message || '同步失败，请稍后重试。';
+            } finally {
+                button.disabled = false;
+                button.textContent = '同步到云端';
+            }
+        }
+
+        async function restoreArchiveFromCloud(event) {
+            const button = event.currentTarget;
+            const statusEl = document.getElementById('accountActionStatus');
+            const localArchive = getLocalArchive();
+
+            button.disabled = true;
+            button.textContent = '恢复中...';
+            statusEl.textContent = '正在读取云端学习档案。';
+
+            try {
+                const cloudArchive = await window.RedWisdomCloudSync.pullArchiveFromSupabase(authClient, currentProfile.id);
+                const mergedArchive = window.RedWisdomCloudSync.mergeArchives(localArchive, cloudArchive);
+                const counts = window.RedWisdomCloudSync.saveArchiveToLocalStorage(localStorage, mergedArchive);
+
+                statusEl.textContent = [
+                    '已合并云端档案',
+                    `问题 ${counts.problemCases}`,
+                    `实践 ${counts.practices}`,
+                    `问答 ${counts.conversations}`,
+                    `笔记 ${counts.readingNotes}`,
+                    `阅读 ${counts.readingProgress}`,
+                    `摘录 ${counts.highlights}`,
+                    `语录 ${counts.savedQuotes}`,
+                    `回答 ${counts.savedAnswers}`,
+                    '即将刷新页面',
+                ].join(' · ');
+                window.setTimeout(() => window.location.reload(), 900);
+            } catch (error) {
+                statusEl.textContent = error.message || '恢复失败，请稍后重试。';
+                button.disabled = false;
+                button.textContent = '从云端恢复';
+            }
+        }
+
+        initAccountPanel();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的问题 - Red Wisdom</title>
+    <meta name="description" content="持续用毛选方法分析、行动和复盘一个现实问题。">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'warm-rice': '#F7F4ED',
+                        'china-red': '#BC2D22',
+                        'ink-black': '#2B2B2B',
+                        'dark-beige': '#D6C6B0',
+                    },
+                    fontFamily: {
+                        'mao': ['"Ma Shan Zheng"', 'cursive'],
+                        'serif': ['"Noto Serif SC"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="min-h-[100dvh] bg-warm-rice font-serif text-ink-black">
+    <header class="bg-china-red px-5 py-4 text-warm-rice shadow">
+        <div class="mx-auto flex max-w-6xl items-center justify-between gap-4">
+            <a href="index.html" class="font-mao text-2xl">Red Wisdom</a>
+            <div class="flex items-center gap-3">
+            <nav class="hidden items-center gap-4 text-sm md:flex" aria-label="主导航">
+                <a class="hover:underline" href="reading.html">阅读</a>
+                <a class="hover:underline" href="chat.html">问道</a>
+                <a class="hover:underline" href="practice.html">实践</a>
+                <a class="font-bold underline" href="problems.html" aria-current="page" data-i18n="nav.problems">我的问题</a>
+                <a class="hover:underline" href="me.html">我的</a>
+            </nav>
+            <select id="problemLocaleSelect" class="rounded border border-warm-rice/40 bg-china-red px-2 py-1 text-xs text-warm-rice" aria-label="Language"><option value="zh-CN">中文</option><option value="en">EN</option></select>
+            </div>
+        </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 py-6 pb-24">
+        <section class="mb-6">
+            <p class="mb-2 text-sm font-bold text-china-red">持续训练</p>
+            <h1 class="mb-2 font-mao text-4xl text-china-red" data-i18n="problems.title">我的问题</h1>
+            <p class="max-w-3xl leading-relaxed text-gray-700" data-i18n="problems.subtitle">把一个现实困难作为长期案例，持续补充事实、分析主要矛盾、采取行动并复盘结果。</p>
+        </section>
+
+        <section class="grid gap-6 lg:grid-cols-[minmax(260px,0.8fr)_minmax(0,2fr)]">
+            <aside>
+                <button id="newProblemBtn" type="button" class="mb-3 w-full rounded bg-china-red px-4 py-3 text-warm-rice hover:bg-red-800" data-i18n="problems.new">新建问题</button>
+                <div id="problemList" class="grid gap-2" aria-label="问题列表"></div>
+            </aside>
+
+            <div>
+                <section id="emptyState" class="border-y border-dark-beige/70 py-12 text-center">
+                    <h2 class="font-mao text-3xl text-china-red">从一个具体问题开始</h2>
+                    <p class="mt-2 text-gray-600">问题越具体，调查、分析和行动越容易落地。</p>
+                </section>
+
+                <form id="problemForm" class="hidden grid gap-5" autocomplete="off">
+                    <input id="problemId" type="hidden">
+                    <section class="grid gap-3 border-b border-dark-beige/60 pb-5">
+                        <div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-start">
+                            <label class="grid flex-1 gap-1 text-sm text-gray-600">
+                                <span>问题标题</span>
+                                <input id="problemTitle" required maxlength="100" class="rounded border border-dark-beige/80 bg-white px-3 py-2 text-lg font-bold text-ink-black" placeholder="例如：是否应该换一份工作">
+                            </label>
+                            <label class="grid gap-1 text-sm text-gray-600">
+                                <span>状态</span>
+                                <select id="problemStatus" class="rounded border border-dark-beige/80 bg-white px-3 py-2">
+                                    <option value="active">进行中</option>
+                                    <option value="paused">暂停</option>
+                                    <option value="resolved">已解决</option>
+                                    <option value="archived">已归档</option>
+                                </select>
+                            </label>
+                        </div>
+                        <label class="grid gap-1 text-sm text-gray-600"><span>现实问题</span><textarea id="realProblem" rows="3" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="发生了什么？这个问题具体影响了什么？"></textarea></label>
+                        <label class="grid gap-1 text-sm text-gray-600"><span>希望达到的结果</span><textarea id="problemGoal" rows="2" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="什么变化可以说明问题得到改善？"></textarea></label>
+                    </section>
+
+                    <section>
+                        <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
+                            <h2 class="font-mao text-2xl text-china-red">当前分析</h2>
+                            <label class="flex items-center gap-2 text-sm text-gray-600">阶段
+                                <select id="problemStage" class="rounded border border-dark-beige/80 bg-white px-2 py-1">
+                                    <option value="define">明确问题</option>
+                                    <option value="investigate">调查事实</option>
+                                    <option value="analyze">分析矛盾</option>
+                                    <option value="act">采取行动</option>
+                                    <option value="review">复盘检验</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="grid gap-3 md:grid-cols-2">
+                            <label class="grid gap-1 text-sm text-gray-600"><span>已知事实</span><textarea id="problemFacts" rows="4" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="只写可观察、可核实的材料"></textarea></label>
+                            <label class="grid gap-1 text-sm text-gray-600"><span>判断与假设</span><textarea id="problemJudgments" rows="4" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="哪些结论还需要验证？"></textarea></label>
+                            <label class="grid gap-1 text-sm text-gray-600"><span>主要矛盾</span><textarea id="problemContradiction" rows="3" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="当前最决定局面的矛盾是什么？"></textarea></label>
+                            <label class="grid gap-1 text-sm text-gray-600"><span>待调查事项</span><textarea id="problemInvestigation" rows="3" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="每行一个需要补充的事实"></textarea></label>
+                            <label class="grid gap-1 text-sm text-gray-600"><span>可用力量</span><textarea id="problemForces" rows="3" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="时间、人员、经验、资源和支持"></textarea></label>
+                            <label class="grid gap-1 text-sm text-gray-600"><span>下一步行动</span><textarea id="problemNextAction" rows="3" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="今天或本周可以验证判断的一步"></textarea></label>
+                        </div>
+                    </section>
+
+                    <section class="border-t border-dark-beige/60 pt-5">
+                        <h2 class="font-mao text-2xl text-china-red">行动复盘</h2>
+                        <p class="mt-1 text-sm text-gray-600">用结果和证据检查原判断，不把“做过了”当成“有效了”。</p>
+                        <div class="mt-3 grid gap-3 md:grid-cols-2">
+                            <label class="grid gap-1 text-sm text-gray-600"><span>原先期待</span><textarea id="reviewExpected" rows="2" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="行动前预期发生什么？"></textarea></label>
+                            <label class="grid gap-1 text-sm text-gray-600"><span>实际结果</span><textarea id="reviewActual" rows="2" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="实际发生了什么？"></textarea></label>
+                            <label class="grid gap-1 text-sm text-gray-600"><span>证据</span><textarea id="reviewEvidence" rows="2" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="记录、反馈、数据或可观察变化"></textarea></label>
+                            <label class="grid gap-1 text-sm text-gray-600"><span>认识修正</span><textarea id="reviewReflection" rows="2" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="哪些判断被证实、推翻或仍不确定？"></textarea></label>
+                            <label class="grid gap-1 text-sm text-gray-600 md:col-span-2"><span>下一步</span><textarea id="reviewNextAction" rows="2" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="下一轮要调查或行动什么？"></textarea></label>
+                        </div>
+                        <div class="mt-3 flex flex-wrap items-center gap-3">
+                            <button id="saveReviewBtn" type="button" class="rounded bg-china-red px-4 py-2 text-warm-rice hover:bg-red-800">保存复盘</button>
+                            <label class="flex items-center gap-2 text-sm"><input id="reviewResolved" type="checkbox" class="h-4 w-4 accent-china-red">这个问题已达到目标</label>
+                            <span id="reviewStatus" class="text-sm text-gray-600" aria-live="polite"></span>
+                        </div>
+                    </section>
+
+                    <div class="flex flex-wrap gap-2 border-b border-dark-beige/60 pb-5">
+                        <button class="rounded bg-china-red px-4 py-2 text-warm-rice hover:bg-red-800" type="submit">保存问题</button>
+                        <a id="askWithProblem" class="rounded border border-china-red px-4 py-2 text-china-red hover:bg-red-50" href="chat.html">用 AI 分析</a>
+                        <a id="readWithProblem" class="rounded border border-dark-beige px-4 py-2 hover:bg-white" href="reading.html">带着问题阅读</a>
+                        <a id="practiceWithProblem" class="rounded border border-dark-beige px-4 py-2 hover:bg-white" href="practice.html">制定实践</a>
+                        <button id="deleteProblemBtn" class="ml-auto rounded border border-gray-300 px-4 py-2 text-gray-600 hover:bg-white" type="button">删除</button>
+                    </div>
+
+                    <section>
+                        <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
+                            <h2 class="font-mao text-2xl text-china-red">过程记录</h2>
+                            <label class="flex items-center gap-2 text-sm text-gray-600">筛选
+                                <select id="activityFilter" class="rounded border border-dark-beige/80 bg-white px-2 py-1">
+                                    <option value="all">全部</option>
+                                    <option value="conversation">问答</option>
+                                    <option value="note">阅读笔记</option>
+                                    <option value="practice">实践</option>
+                                    <option value="review">复盘</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div id="activityList" class="grid gap-3"></div>
+                    </section>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <nav class="fixed inset-x-0 bottom-0 z-40 border-t border-dark-beige/60 bg-warm-rice/95 pb-[calc(0.35rem+env(safe-area-inset-bottom))] shadow-[0_-8px_24px_rgba(0,0,0,0.08)] backdrop-blur md:hidden" aria-label="移动端主导航">
+        <div class="mx-auto grid max-w-md grid-cols-5">
+            <a href="index.html" class="flex min-h-[64px] items-center justify-center text-sm text-ink-black/70" data-i18n="nav.cards">抽卡</a>
+            <a href="reading.html" class="flex min-h-[64px] items-center justify-center text-sm text-ink-black/70" data-i18n="nav.reading">阅读</a>
+            <a href="chat.html" class="flex min-h-[64px] items-center justify-center text-sm text-ink-black/70" data-i18n="nav.chat">问道</a>
+            <a href="problems.html" aria-current="page" class="flex min-h-[64px] items-center justify-center text-sm font-bold text-china-red" data-i18n="nav.problems">问题</a>
+            <a href="me.html" class="flex min-h-[64px] items-center justify-center text-sm text-ink-black/70" data-i18n="nav.me">我的</a>
+        </div>
+    </nav>
+
+    <script src="config.js?v=7"></script>
+    <script src="js/auth-utils.js"></script>
+    <script src="js/cloud-sync.js"></script>
+    <script src="js/auto-sync.js"></script>
+    <script src="js/auto-sync-bootstrap.js"></script>
+    <script src="js/register-pwa.js?v=4"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/problem-case-store.js"></script>
+    <script>
+        const store = window.RedWisdomProblemCases.createProblemCaseStore(localStorage);
+        const localeSelect = document.getElementById('problemLocaleSelect');
+        let currentLocale = window.RedWisdomI18n.getStoredLocale(localStorage);
+        localeSelect.value = currentLocale;
+        window.RedWisdomI18n.applyTranslations(document, currentLocale);
+        localeSelect.addEventListener('change', () => {
+            currentLocale = window.RedWisdomI18n.setStoredLocale(localStorage, localeSelect.value);
+            window.RedWisdomI18n.applyTranslations(document, currentLocale);
+        });
+        const form = document.getElementById('problemForm');
+        const emptyState = document.getElementById('emptyState');
+        const fieldIds = {
+            title: 'problemTitle', realProblem: 'realProblem', goal: 'problemGoal', facts: 'problemFacts',
+            judgments: 'problemJudgments', mainContradiction: 'problemContradiction',
+            availableForces: 'problemForces', nextAction: 'problemNextAction', stage: 'problemStage', status: 'problemStatus'
+        };
+        const stageLabels = { define: '明确问题', investigate: '调查事实', analyze: '分析矛盾', act: '采取行动', review: '复盘检验' };
+        const statusLabels = { active: '进行中', paused: '暂停', resolved: '已解决', archived: '已归档' };
+
+        function getSelectedId() {
+            return new URLSearchParams(window.location.search).get('id') || store.getActiveCase()?.id || '';
+        }
+
+        function selectCase(id) {
+            store.setActiveCase(id);
+            const url = new URL(window.location.href);
+            url.searchParams.set('id', id);
+            window.history.replaceState({}, '', url);
+            render();
+        }
+
+        function render() {
+            const cases = store.listCases();
+            renderList(cases);
+            const selected = store.getCase(getSelectedId());
+            if (!selected) {
+                form.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            emptyState.classList.add('hidden');
+            form.classList.remove('hidden');
+            document.getElementById('problemId').value = selected.id;
+            Object.entries(fieldIds).forEach(([key, id]) => { document.getElementById(id).value = selected[key] || ''; });
+            document.getElementById('problemInvestigation').value = (selected.investigationTasks || []).join('\n');
+            document.getElementById('reviewNextAction').value = selected.nextAction || '';
+            const encodedId = encodeURIComponent(selected.id);
+            document.getElementById('askWithProblem').href = `chat.html?case=${encodedId}`;
+            document.getElementById('readWithProblem').href = `reading.html?case=${encodedId}`;
+            document.getElementById('practiceWithProblem').href = `practice.html?case=${encodedId}`;
+            renderActivities(selected.activities || []);
+        }
+
+        function renderList(cases) {
+            const list = document.getElementById('problemList');
+            if (!cases.length) {
+                list.innerHTML = '<p class="border-y border-dark-beige/60 py-5 text-sm text-gray-600">还没有问题记录。</p>';
+                return;
+            }
+            const selectedId = getSelectedId();
+            list.innerHTML = cases.map(item => `
+                <button type="button" data-case-id="${escapeHtml(item.id)}" class="rounded border px-3 py-3 text-left ${item.id === selectedId ? 'border-china-red bg-red-50' : 'border-dark-beige/60 bg-white/70 hover:border-china-red/60'}">
+                    <span class="block font-bold text-ink-black">${escapeHtml(item.title)}</span>
+                    <span class="mt-1 block text-xs text-gray-500">${escapeHtml(stageLabels[item.stage] || item.stage)} · ${escapeHtml(statusLabels[item.status] || item.status)}</span>
+                </button>
+            `).join('');
+            list.querySelectorAll('[data-case-id]').forEach(button => button.addEventListener('click', () => selectCase(button.dataset.caseId)));
+        }
+
+        function renderActivities(activities) {
+            const list = document.getElementById('activityList');
+            const filter = document.getElementById('activityFilter').value;
+            const visibleActivities = filter === 'all' ? activities : activities.filter(activity => activity.type === filter);
+            if (!visibleActivities.length) {
+                list.innerHTML = '<p class="text-sm text-gray-600">问答、阅读笔记和实践会自动记录在这里。</p>';
+                return;
+            }
+            list.innerHTML = visibleActivities.map(activity => `
+                <article class="border-l-2 border-china-red/50 pl-4">
+                    <div class="flex flex-wrap items-baseline justify-between gap-2">
+                        <h3 class="font-bold">${escapeHtml(activity.title || activity.type)}</h3>
+                        <time class="text-xs text-gray-500">${formatDate(activity.createdAt)}</time>
+                    </div>
+                    ${activity.detail ? `<p class="mt-1 whitespace-pre-wrap text-sm leading-relaxed text-gray-700">${escapeHtml(activity.detail)}</p>` : ''}
+                    ${renderActivityMetadata(activity.metadata)}
+                    ${activity.sourceHref ? `<a class="mt-1 inline-block text-sm text-china-red hover:underline" href="${escapeHtml(activity.sourceHref)}">查看记录</a>` : ''}
+                </article>
+            `).join('');
+        }
+
+        function renderActivityMetadata(metadata) {
+            if (!metadata || !Object.values(metadata).some(Boolean)) return '';
+            const rows = [
+                ['预期', metadata.expectedResult], ['结果', metadata.actualResult], ['证据', metadata.evidence],
+                ['认识修正', metadata.reflection], ['下一步', metadata.nextAction],
+            ].filter(([, value]) => value);
+            return `<dl class="mt-2 grid gap-1 text-sm">${rows.map(([label, value]) => `<div><dt class="inline text-gray-500">${label}：</dt><dd class="inline text-gray-700">${escapeHtml(value)}</dd></div>`).join('')}</dl>`;
+        }
+
+        document.getElementById('newProblemBtn').addEventListener('click', () => {
+            const created = store.createCase({ title: '新的现实问题' });
+            selectCase(created.id);
+            document.getElementById('problemTitle').select();
+        });
+
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            const id = document.getElementById('problemId').value;
+            saveProblemFields(id);
+            render();
+        });
+
+        function saveProblemFields(id) {
+            const patch = {};
+            Object.entries(fieldIds).forEach(([key, fieldId]) => { patch[key] = document.getElementById(fieldId).value; });
+            patch.investigationTasks = document.getElementById('problemInvestigation').value.split(/\r?\n/);
+            return store.updateCase(id, patch);
+        }
+
+        document.getElementById('saveReviewBtn').addEventListener('click', () => {
+            const id = document.getElementById('problemId').value;
+            const actualResult = document.getElementById('reviewActual').value.trim();
+            const evidence = document.getElementById('reviewEvidence').value.trim();
+            if (!actualResult && !evidence) {
+                document.getElementById('reviewStatus').textContent = '请至少记录实际结果或一条证据。';
+                return;
+            }
+            saveProblemFields(id);
+            store.addReview(id, {
+                expectedResult: document.getElementById('reviewExpected').value,
+                actualResult,
+                evidence,
+                reflection: document.getElementById('reviewReflection').value,
+                nextAction: document.getElementById('reviewNextAction').value,
+                resolved: document.getElementById('reviewResolved').checked,
+            });
+            ['reviewExpected', 'reviewActual', 'reviewEvidence', 'reviewReflection'].forEach(fieldId => { document.getElementById(fieldId).value = ''; });
+            document.getElementById('reviewResolved').checked = false;
+            render();
+            document.getElementById('reviewStatus').textContent = '复盘已加入问题时间线。';
+        });
+
+        document.getElementById('activityFilter').addEventListener('change', () => {
+            const selected = store.getCase(document.getElementById('problemId').value);
+            renderActivities(selected?.activities || []);
+        });
+
+        document.getElementById('deleteProblemBtn').addEventListener('click', () => {
+            const id = document.getElementById('problemId').value;
+            if (!id || !window.confirm('确认删除这个问题及其过程记录？')) return;
+            store.deleteCase(id);
+            const url = new URL(window.location.href);
+            url.searchParams.delete('id');
+            window.history.replaceState({}, '', url);
+            render();
+        });
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = String(text || '');
+            return div.innerHTML;
+        }
+
+        function formatDate(value) {
+            return value ? new Date(value).toLocaleString('zh-CN', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '';
+        }
+
+        render();
+    </script>
+</body>
+
+</html>

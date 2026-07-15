@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "evaluatedAt": "2026-07-14T16:06:00.653Z",
+  "metrics": {
+    "evaluationItems": 150,
+    "positiveItems": 132,
+    "negativeItems": 18,
+    "sourceCoverage": 1,
+    "top3CaseHitRate": 0.9318,
+    "problemTypeTop3Rate": 0.8939,
+    "citationAccuracy": 1,
+    "forcedAnalogyRate": 0
+  },
+  "thresholds": {
+    "sourceCoverage": 1,
+    "top3CaseHitRate": 0.85,
+    "problemTypeTop3Rate": 0.85,
+    "citationAccuracy": 0.95,
+    "forcedAnalogyRateMaximum": 0.05
+  },
+  "passed": true,
+  "failures": []
+}

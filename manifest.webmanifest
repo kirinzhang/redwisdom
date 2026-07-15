@@ -1,0 +1,24 @@
+{
+  "name": "Red Wisdom - 毛选学习与实践",
+  "short_name": "Red Wisdom",
+  "description": "阅读毛选原文，用毛选方法持续分析、行动和复盘现实问题。",
+  "lang": "zh-CN",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F7F4ED",
+  "theme_color": "#BC2D22",
+  "icons": [
+    {
+      "src": "assets/favicon.png",
+      "sizes": "1024x1024",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    { "name": "阅读毛选", "url": "./reading.html" },
+    { "name": "问道毛选", "url": "./chat.html" },
+    { "name": "我的问题", "url": "./problems.html" }
+  ]
+}

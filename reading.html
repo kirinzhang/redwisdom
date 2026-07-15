@@ -21,6 +21,7 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.4/dist/purify.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -78,6 +79,11 @@
         .volume-title {
             cursor: pointer;
             user-select: none;
+            width: 100%;
+            border: 0;
+            background: transparent;
+            text-align: left;
+            font-family: inherit;
         }
 
         .volume-title:hover {
@@ -96,6 +102,12 @@
 
         /* Article item */
         .article-item {
+            display: block;
+            width: 100%;
+            border: 0;
+            background: transparent;
+            text-align: left;
+            font-family: inherit;
             padding: 8px 16px 8px 24px;
             cursor: pointer;
             transition: all 0.2s;
@@ -115,7 +127,17 @@
             color: #fff;
         }
 
+        .volume-title:focus-visible,
+        .article-item:focus-visible {
+            outline: 2px solid #BC2D22;
+            outline-offset: -2px;
+        }
+
         /* Article content styling */
+        .article-content {
+            --reading-font-size: 18px;
+        }
+
         .article-content h1 {
             font-size: 2rem;
             font-weight: 700;
@@ -133,9 +155,15 @@
         }
 
         .article-content p {
+            font-size: var(--reading-font-size);
             line-height: 2;
             margin-bottom: 1.5rem;
             text-align: justify;
+        }
+
+        .article-content li {
+            font-size: var(--reading-font-size);
+            line-height: 1.8;
         }
 
         .article-content blockquote {
@@ -151,6 +179,228 @@
         .article-content hr {
             margin: 2rem 0;
             border-color: #D6C6B0;
+        }
+
+        .reading-anchor-target {
+            animation: anchorFlash 2.6s ease-out;
+        }
+
+        @keyframes anchorFlash {
+            from { background-color: rgba(188, 45, 34, 0.18); }
+            to { background-color: transparent; }
+        }
+
+        .reading-guide {
+            border: 1px solid rgba(188, 45, 34, 0.18);
+            background: rgba(255, 255, 255, 0.72);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .reading-guide h2 {
+            margin-top: 0;
+            color: #BC2D22;
+        }
+
+        .reading-guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .reading-guide-section {
+            border-top: 1px solid rgba(188, 45, 34, 0.12);
+            padding-top: 0.75rem;
+        }
+
+        .theme-track-card {
+            border: 1px solid rgba(188, 45, 34, 0.18);
+            border-radius: 8px;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.72);
+            text-align: left;
+        }
+
+        .theme-track-card-featured {
+            border-color: rgba(188, 45, 34, 0.48);
+            background: rgba(188, 45, 34, 0.07);
+        }
+
+        .theme-track-card h2 {
+            font-size: 1.1rem;
+            margin: 0 0 0.5rem;
+            color: #BC2D22;
+        }
+
+        .theme-track-card p {
+            margin: 0 0 0.75rem;
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .theme-track-card button {
+            display: inline-flex;
+            margin: 0.25rem 0.25rem 0 0;
+            padding: 0.35rem 0.65rem;
+            border-radius: 6px;
+            background: #BC2D22;
+            color: white;
+            font-size: 0.85rem;
+        }
+
+        .reading-toolbar-button {
+            display: inline-flex;
+            min-width: 2.25rem;
+            min-height: 2.25rem;
+            align-items: center;
+            justify-content: center;
+            gap: 0.35rem;
+            border: 1px solid rgba(214, 198, 176, 0.9);
+            border-radius: 6px;
+            padding: 0.35rem 0.55rem;
+            color: #8B1F19;
+            background: rgba(255, 255, 255, 0.56);
+        }
+
+        .reading-toolbar-button:hover,
+        .reading-toolbar-button[aria-pressed="true"] {
+            border-color: rgba(188, 45, 34, 0.55);
+            background: rgba(188, 45, 34, 0.08);
+        }
+
+        .reading-top-toolbar,
+        .menu-btn,
+        .mobile-bottom-nav {
+            transition: transform 0.22s ease, opacity 0.22s ease;
+        }
+
+        #readingFontMenuButton {
+            display: none;
+        }
+
+        .reading-font-popover {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .reader-tools-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 55;
+            display: none;
+            border: 0;
+            background: rgba(43, 43, 43, 0.28);
+        }
+
+        .reader-tools-overlay.is-open {
+            display: block;
+        }
+
+        .reader-tools {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 60;
+            display: flex;
+            width: min(380px, 92vw);
+            flex-direction: column;
+            border-left: 1px solid rgba(214, 198, 176, 0.75);
+            background: #FDFBF6;
+            box-shadow: -12px 0 32px rgba(43, 43, 43, 0.14);
+            transform: translateX(100%);
+            visibility: hidden;
+            transition: transform 0.24s ease, visibility 0.24s ease;
+        }
+
+        .reader-tools.is-open {
+            transform: translateX(0);
+            visibility: visible;
+        }
+
+        .reader-tools-header {
+            flex: none;
+            border-bottom: 1px solid rgba(214, 198, 176, 0.7);
+            background: rgba(247, 244, 237, 0.96);
+        }
+
+        .reader-tools-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .reader-tools-tab {
+            min-height: 2.75rem;
+            border-bottom: 2px solid transparent;
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .reader-tools-tab.is-active {
+            border-bottom-color: #BC2D22;
+            color: #BC2D22;
+        }
+
+        .reader-tools-body {
+            min-height: 0;
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem 1.1rem 2rem;
+        }
+
+        .reader-tool-textarea {
+            width: 100%;
+            resize: vertical;
+            border: 1px solid rgba(214, 198, 176, 0.9);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.78);
+            padding: 0.75rem;
+            font-family: "Noto Serif SC", serif;
+            line-height: 1.7;
+        }
+
+        .reader-tool-textarea:focus {
+            border-color: #BC2D22;
+            outline: 2px solid rgba(188, 45, 34, 0.12);
+        }
+
+        .selected-text-preview {
+            max-height: 7rem;
+            overflow-y: auto;
+            border-left: 3px solid #BC2D22;
+            background: rgba(188, 45, 34, 0.05);
+            padding: 0.7rem 0.8rem;
+            color: #4B4B4B;
+            font-family: "Noto Serif SC", serif;
+            font-size: 0.88rem;
+            line-height: 1.65;
+        }
+
+        .selection-excerpt-button {
+            position: fixed;
+            right: 1.25rem;
+            bottom: 1.25rem;
+            z-index: 35;
+            display: inline-flex;
+            min-height: 2.75rem;
+            align-items: center;
+            gap: 0.45rem;
+            border-radius: 6px;
+            background: #BC2D22;
+            padding: 0.65rem 0.9rem;
+            color: white;
+            box-shadow: 0 8px 22px rgba(43, 43, 43, 0.2);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .selection-excerpt-button.hidden {
+            display: none;
         }
 
         /* Mobile menu button */
@@ -181,6 +431,121 @@
             }
         }
 
+        @media (max-width: 640px) {
+            #readingNoteCount,
+            #readingExcerptCount {
+                display: none;
+            }
+
+            #readingFontMenuButton {
+                display: inline-flex;
+            }
+
+            .reading-font-popover {
+                position: absolute;
+                top: calc(100% + 0.5rem);
+                right: 0;
+                z-index: 30;
+                display: none;
+                min-width: max-content;
+                padding: 0.5rem;
+                border: 1px solid rgba(214, 198, 176, 0.9);
+                border-radius: 6px;
+                background: #FDFBF6;
+                box-shadow: 0 10px 28px rgba(43, 43, 43, 0.16);
+            }
+
+            .reading-font-popover.is-open {
+                display: flex;
+            }
+
+            body.reader-chrome-hidden .reading-top-toolbar {
+                transform: translateY(-100%);
+            }
+
+            body.reader-chrome-hidden .menu-btn {
+                transform: translateY(calc(-100% - 1rem));
+                opacity: 0;
+            }
+
+            body.reader-chrome-hidden .mobile-bottom-nav {
+                transform: translateY(calc(100% + env(safe-area-inset-bottom)));
+            }
+
+            .reader-tools {
+                top: auto;
+                left: 0;
+                width: 100%;
+                height: min(72vh, 640px);
+                bottom: calc(64px + env(safe-area-inset-bottom));
+                border-top: 1px solid rgba(214, 198, 176, 0.75);
+                border-left: 0;
+                border-radius: 8px 8px 0 0;
+                box-shadow: 0 -12px 32px rgba(43, 43, 43, 0.16);
+                transform: translateY(100%);
+            }
+
+            .reader-tools.is-open {
+                transform: translateY(0);
+            }
+
+            .selection-excerpt-button {
+                right: 0.9rem;
+                bottom: calc(76px + env(safe-area-inset-bottom));
+            }
+        }
+
+        @media (max-width: 360px) {
+            #readingFontReset {
+                display: none;
+            }
+
+            .reading-toolbar-button {
+                padding-inline: 0.4rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .sidebar.collapsed {
+                transform: translateX(0);
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .reader-tools {
+                position: relative;
+                top: auto;
+                right: auto;
+                bottom: auto;
+                z-index: auto;
+                display: none;
+                width: 360px;
+                height: 100vh;
+                flex: none;
+                transform: none;
+                visibility: visible;
+                box-shadow: none;
+                transition: none;
+            }
+
+            .reader-tools.is-available:not(.is-collapsed) {
+                display: flex;
+            }
+
+            .reader-tools-overlay,
+            .reader-tools-overlay.is-open {
+                display: none;
+            }
+
+            .selection-excerpt-button {
+                right: 380px;
+            }
+
+            .reader-tools.is-collapsed + .selection-excerpt-button {
+                right: 1.25rem;
+            }
+        }
+
         /* Loading spinner */
         .spinner {
             border: 3px solid #f3f3f3;
@@ -205,7 +570,7 @@
 
 <body class="bg-warm-rice h-screen flex overflow-hidden">
     <!-- Mobile Menu Button -->
-    <button class="menu-btn" id="menuBtn" onclick="toggleSidebar()">
+    <button class="menu-btn" id="menuBtn" onclick="toggleSidebar()" aria-label="打开阅读目录" aria-controls="sidebar" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2">
             <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -216,7 +581,7 @@
 
     <!-- Sidebar -->
     <aside id="sidebar"
-        class="sidebar w-80 bg-sidebar-bg text-white h-screen overflow-y-auto shrink-0 md:relative fixed">
+        class="sidebar collapsed w-80 bg-sidebar-bg text-white h-screen overflow-y-auto shrink-0 md:relative fixed">
         <!-- Header -->
         <div class="sticky top-0 bg-sidebar-bg z-10 p-4 border-b border-gray-700">
             <a href="index.html" class="flex items-center gap-2 text-china-red hover:opacity-80 transition mb-3">
@@ -224,27 +589,88 @@
                     stroke="currentColor" stroke-width="2">
                     <path d="M19 12H5M12 19l-7-7 7-7" />
                 </svg>
-                <span class="font-mao text-lg">返回首页</span>
+                <span class="font-mao text-lg" data-i18n="reading.backHome">返回首页</span>
             </a>
+            <div class="flex gap-3 text-sm mb-3">
+                <a href="chat.html" class="text-gray-300 hover:text-white" data-i18n="nav.chat">问道</a>
+                <a href="practice.html" class="text-gray-300 hover:text-white" data-i18n="nav.practice">实践</a>
+                <a href="problems.html" class="text-gray-300 hover:text-white" data-i18n="nav.problems">问题</a>
+                <a href="me.html" class="text-gray-300 hover:text-white" data-i18n="nav.me">我的</a>
+                <a href="login.html" class="text-gray-300 hover:text-white" data-i18n="nav.login">登录</a>
+            </div>
+            <select id="readingLocaleSelect"
+                class="mb-3 w-full rounded border border-gray-600 bg-sidebar-bg px-3 py-2 text-sm text-gray-100 focus:border-china-red focus:outline-none"
+                aria-label="Language">
+                <option value="zh-CN">中文</option>
+                <option value="en">English</option>
+            </select>
             <h1 class="font-mao text-2xl text-china-red">毛泽东选集</h1>
-            <p class="text-gray-400 text-sm mt-1">共 5 卷 · 228 篇</p>
+            <p id="catalogCount" class="text-gray-400 text-sm mt-1">正在读取目录...</p>
+            <label class="mt-4 block text-sm text-gray-300" for="readingSearchInput">搜索原文</label>
+            <input id="readingSearchInput" type="search" autocomplete="off"
+                class="mt-1 w-full rounded border border-gray-600 bg-sidebar-bg px-3 py-2 text-sm text-white placeholder:text-gray-500 focus:border-china-red focus:outline-none"
+                placeholder="输入概念、句子或问题">
+            <p id="readingSearchStatus" class="mt-2 text-xs text-gray-400" aria-live="polite"></p>
+            <details id="editionDetails" class="mt-3 text-xs leading-relaxed text-gray-400">
+                <summary class="cursor-pointer text-gray-300">版本说明</summary>
+                <div id="editionNotice" class="mt-2"></div>
+            </details>
         </div>
 
+        <section id="readingSearchResults" class="hidden border-b border-gray-700 px-3 py-3" aria-label="原文搜索结果"></section>
+
         <!-- Volume List -->
-        <nav id="volumeList" class="py-2">
+        <nav id="volumeList" class="py-2" aria-label="毛选文章目录">
             <!-- Will be populated by JavaScript -->
         </nav>
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 min-h-screen overflow-y-auto">
+    <main id="readingMain" class="min-w-0 flex-1 min-h-screen overflow-y-auto pb-24 md:pb-0">
+        <div class="reading-top-toolbar sticky top-0 z-20 border-b border-dark-beige/60 bg-warm-rice/95 px-16 py-3 backdrop-blur md:px-12">
+            <div class="mx-auto flex max-w-4xl items-center justify-between gap-2">
+                <div id="readingToolControls" class="hidden items-center gap-2">
+                    <button id="openReadingNotesBtn" type="button" class="reading-toolbar-button"
+                        aria-label="阅读笔记" aria-controls="readerTools" aria-pressed="false">
+                        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <path d="M14 2v6h6M8 13h8M8 17h6"></path>
+                        </svg>
+                        <span class="hidden sm:inline" data-i18n="reading.notesTitle">阅读笔记</span>
+                        <span id="readingNoteCount" class="text-xs text-gray-500">0</span>
+                    </button>
+                    <button id="openReadingExcerptsBtn" type="button" class="reading-toolbar-button"
+                        aria-label="原文摘录" aria-controls="readerTools" aria-pressed="false">
+                        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M6 17h3l2-4V7H5v6h3M15 17h3l2-4V7h-6v6h3"></path>
+                        </svg>
+                        <span class="hidden sm:inline" data-i18n="reading.excerptsTitle">原文摘录</span>
+                        <span id="readingExcerptCount" class="text-xs text-gray-500">0</span>
+                    </button>
+                </div>
+                <div id="readingFontControls" class="relative ml-auto flex items-center text-sm">
+                    <button id="readingFontMenuButton" type="button" class="reading-toolbar-button" aria-label="调整字号"
+                        aria-controls="readingFontPopover" aria-expanded="false">Aa</button>
+                    <div id="readingFontPopover" class="reading-font-popover">
+                        <span class="mr-1 hidden text-gray-600 sm:inline" data-i18n="reading.fontSize">字号</span>
+                        <button id="readingFontDecrease" type="button" class="reading-toolbar-button" aria-label="减小字号">A-</button>
+                        <button id="readingFontReset" type="button" class="reading-toolbar-button" aria-label="重置字号">A</button>
+                        <button id="readingFontIncrease" type="button" class="reading-toolbar-button" aria-label="增大字号">A+</button>
+                        <span id="readingFontSizeLabel" class="hidden min-w-10 text-right text-xs text-gray-500 md:inline">18px</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section id="problemContextBar" class="hidden mx-auto mt-4 w-[calc(100%-3rem)] max-w-4xl border-l-4 border-china-red bg-white/80 px-4 py-3 text-sm"></section>
         <!-- Article Content -->
         <article id="articleContent"
             class="article-content max-w-4xl mx-auto px-6 md:px-12 py-8 font-serif text-ink-black">
             <!-- Welcome Message -->
             <div id="welcomeMessage" class="text-center py-20">
                 <h1 class="font-mao text-4xl text-china-red mb-4">毛泽东选集</h1>
-                <p class="text-gray-600 text-lg mb-8">请从左侧目录选择一篇文章开始阅读</p>
+                <p class="text-gray-600 text-lg mb-8" data-i18n="reading.welcomeHint">请从左侧目录选择一篇文章开始阅读</p>
                 <div class="flex justify-center gap-4 flex-wrap">
                     <button onclick="loadArticle('016-实践论.md')"
                         class="px-4 py-2 bg-china-red text-white rounded-lg hover:bg-red-800 transition">
@@ -262,6 +688,11 @@
                         class="px-4 py-2 bg-china-red text-white rounded-lg hover:bg-red-800 transition">
                         为人民服务
                     </button>
+                </div>
+                <div class="mt-12 text-left">
+                    <h2 class="font-mao text-3xl text-china-red text-center mb-2" data-i18n="reading.themeHeading">按问题学习</h2>
+                    <p class="text-gray-600 text-center mb-6" data-i18n="reading.themeIntro">先选一个现实问题方向，再进入对应原文。</p>
+                    <div id="themeTracks" class="grid md:grid-cols-2 gap-4"></div>
                 </div>
             </div>
 
@@ -297,10 +728,141 @@
         </div>
     </main>
 
+    <button id="readerToolsOverlay" type="button" class="reader-tools-overlay" aria-label="关闭阅读工具"></button>
+    <aside id="readerTools" class="reader-tools" aria-hidden="true" aria-label="阅读工具" inert>
+        <div class="reader-tools-header">
+            <div class="flex items-start justify-between gap-3 px-4 pb-2 pt-4">
+                <div class="min-w-0">
+                    <p class="text-xs font-bold text-china-red" data-i18n="reading.toolsTitle">阅读工具</p>
+                    <p id="readerToolsArticleTitle" class="mt-1 truncate font-serif text-sm font-bold text-ink-black"></p>
+                </div>
+                <button id="closeReaderToolsBtn" type="button"
+                    class="flex h-9 w-9 flex-none items-center justify-center rounded border border-dark-beige text-gray-600 hover:bg-white"
+                    aria-label="关闭阅读工具">
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M18 6 6 18M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="reader-tools-tabs" role="tablist" aria-label="阅读工具">
+                <button type="button" class="reader-tools-tab is-active" data-reading-tool-tab="notes" role="tab"
+                    aria-selected="true" aria-controls="readingNotesPanel" data-i18n="reading.notesTitle">阅读笔记</button>
+                <button type="button" class="reader-tools-tab" data-reading-tool-tab="excerpts" role="tab"
+                    aria-selected="false" aria-controls="readingExcerptsPanel" data-i18n="reading.excerptsTitle">原文摘录</button>
+            </div>
+        </div>
+        <div id="readerToolsBody" class="reader-tools-body"></div>
+    </aside>
+
+    <button id="selectionExcerptButton" type="button" class="selection-excerpt-button hidden">
+        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M6 17h3l2-4V7H5v6h3M15 17h3l2-4V7h-6v6h3"></path>
+        </svg>
+        <span data-i18n="reading.selectionAction">摘录所选</span>
+    </button>
+
+    <nav class="mobile-bottom-nav md:hidden fixed inset-x-0 bottom-0 z-40 border-t border-dark-beige/60 bg-warm-rice/95 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] backdrop-blur pb-[calc(0.35rem+env(safe-area-inset-bottom))]"
+        aria-label="移动端主导航">
+        <div class="mx-auto grid max-w-md grid-cols-5">
+            <a data-mobile-nav-item="home" href="index.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                    <path d="M7 9h4"></path>
+                    <path d="M7 13h10"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.cards">抽卡</span>
+            </a>
+            <a data-mobile-nav-item="reading" href="reading.html" aria-current="page"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-china-red font-bold">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.reading">阅读</span>
+            </a>
+            <a data-mobile-nav-item="chat" href="chat.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.chat">问道</span>
+            </a>
+            <a data-mobile-nav-item="practice" href="practice.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M9 11l3 3L22 4"></path>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.practice">实践</span>
+            </a>
+            <a data-mobile-nav-item="me" href="me.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M20 21a8 8 0 0 0-16 0"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.me">我的</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="config.js?v=7"></script>
+    <script src="js/auth-utils.js"></script>
+    <script src="js/cloud-sync.js"></script>
+    <script src="js/auto-sync.js"></script>
+    <script src="js/auto-sync-bootstrap.js"></script>
+    <script src="js/register-pwa.js?v=4"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/reading-guides.js"></script>
+    <script src="js/practice-store.js"></script>
+    <script src="js/reading-notes-store.js"></script>
+    <script src="js/reading-progress-store.js"></script>
+    <script src="js/problem-case-store.js"></script>
+    <script src="js/text-anchors.js"></script>
+    <script src="js/full-text-search.js"></script>
     <script>
         let catalog = null;
         let allArticles = [];
         let currentArticleIndex = -1;
+        let currentArticleMeta = null;
+        let searchIndexPromise = null;
+        let lastSelectedArticleText = '';
+        let activeReadingToolTab = 'notes';
+        let readerToolsCollapsed = false;
+        let currentLocale = window.RedWisdomI18n?.getStoredLocale(localStorage) || 'zh-CN';
+        const READING_FONT_SIZE_KEY = 'redwisdom.readingFontSize.v1';
+        const DEFAULT_READING_FONT_SIZE = 18;
+        const MIN_READING_FONT_SIZE = 15;
+        const MAX_READING_FONT_SIZE = 24;
+        let readingFontSize = getStoredReadingFontSize();
+        const practiceStore = window.RedWisdomPractice.createPracticeStore(localStorage);
+        const readingNotesStore = window.RedWisdomReadingNotes.createReadingNotesStore(localStorage);
+        const problemCaseStore = window.RedWisdomProblemCases.createProblemCaseStore(localStorage);
+        const problemCaseId = new URLSearchParams(window.location.search).get('case') || '';
+        const activeProblemCase = problemCaseId ? problemCaseStore.getCase(problemCaseId) : null;
+        const readingProgressStore = window.RedWisdomReadingProgress.createReadingProgressStore(localStorage);
+
+        if (activeProblemCase) {
+            const contextBar = document.getElementById('problemContextBar');
+            contextBar.classList.remove('hidden');
+            contextBar.innerHTML = `
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <div><span class="text-gray-500">正在为这个问题阅读：</span><strong>${escapeHtml(activeProblemCase.title)}</strong></div>
+                    <a class="text-china-red hover:underline" href="problems.html?id=${encodeURIComponent(activeProblemCase.id)}">返回问题工作台</a>
+                </div>
+            `;
+        }
+
+        initializeSearch();
+        loadEditionNotice();
 
         // Load catalog data
         async function loadCatalog() {
@@ -313,10 +875,18 @@
                     allArticles = allArticles.concat(articles);
                 });
 
+                renderCatalogCount();
+
                 renderVolumeList();
+                renderThemeTracks();
 
                 // Check URL hash for direct article link
-                if (window.location.hash) {
+                const params = new URLSearchParams(window.location.search);
+                const linkedArticle = params.get('article');
+                const linkedAnchor = params.get('anchor');
+                if (linkedArticle) {
+                    loadArticle(linkedArticle, linkedAnchor);
+                } else if (window.location.hash) {
                     const filename = decodeURIComponent(window.location.hash.slice(1));
                     loadArticle(filename);
                 }
@@ -333,18 +903,18 @@
             Object.entries(catalog.volumes).forEach(([volumeName, articles], idx) => {
                 html += `
                     <div class="volume-section">
-                        <div class="volume-title flex items-center gap-2 px-4 py-3 text-gray-200 font-medium" onclick="toggleVolume(${idx})">
+                        <button type="button" class="volume-title flex items-center gap-2 px-4 py-3 text-gray-200 font-medium" data-volume-toggle="${idx}" aria-expanded="false" aria-controls="volume-${idx}">
                             <svg id="arrow-${idx}" class="transform transition-transform" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M9 18l6-6-6-6"/>
                             </svg>
                             <span>${volumeName}</span>
                             <span class="text-gray-500 text-xs ml-auto">${articles.length}篇</span>
-                        </div>
+                        </button>
                         <div id="volume-${idx}" class="volume-articles">
                             ${articles.map(article => `
-                                <div class="article-item" data-filename="${article.filename}" onclick="loadArticle('${article.filename}')">
-                                    ${article.title}
-                                </div>
+                                <button type="button" class="article-item" data-filename="${escapeAttribute(article.filename)}">
+                                    ${escapeHtml(article.title)}
+                                </button>
                             `).join('')}
                         </div>
                     </div>
@@ -352,6 +922,37 @@
             });
 
             container.innerHTML = html;
+            container.querySelectorAll('[data-volume-toggle]').forEach(button => {
+                button.addEventListener('click', () => toggleVolume(Number(button.dataset.volumeToggle)));
+            });
+            container.querySelectorAll('.article-item[data-filename]').forEach(button => {
+                button.addEventListener('click', () => loadArticle(button.dataset.filename));
+            });
+        }
+
+        function renderThemeTracks() {
+            const container = document.getElementById('themeTracks');
+            if (!container || !window.RedWisdomReadingGuides) return;
+
+            const titleToArticle = new Map(allArticles.map(article => [article.title, article]));
+
+            container.innerHTML = window.RedWisdomReadingGuides.getThemeTracks(currentLocale).map(track => `
+                <div class="theme-track-card${track.featured ? ' theme-track-card-featured' : ''}">
+                    <h2>${escapeHtml(track.title)}</h2>
+                    <p>${escapeHtml(track.description)}</p>
+                    <div>
+                        ${track.articles.map(title => {
+                const article = titleToArticle.get(title);
+                if (!article) return '';
+                return `<button type="button" data-filename="${escapeAttribute(article.filename)}">${escapeHtml(title)}</button>`;
+            }).join('')}
+                    </div>
+                </div>
+            `).join('');
+
+            container.querySelectorAll('button[data-filename]').forEach(button => {
+                button.addEventListener('click', () => loadArticle(button.dataset.filename));
+            });
         }
 
         // Toggle volume expansion
@@ -361,10 +962,11 @@
 
             volumeEl.classList.toggle('expanded');
             arrowEl.style.transform = volumeEl.classList.contains('expanded') ? 'rotate(90deg)' : '';
+            document.querySelector(`[data-volume-toggle="${idx}"]`)?.setAttribute('aria-expanded', String(volumeEl.classList.contains('expanded')));
         }
 
         // Load article content
-        async function loadArticle(filename) {
+        async function loadArticle(filename, targetAnchor = '') {
             const welcomeEl = document.getElementById('welcomeMessage');
             const loadingEl = document.getElementById('loadingState');
             const bodyEl = document.getElementById('articleBody');
@@ -381,15 +983,37 @@
                 if (!response.ok) throw new Error('Article not found');
 
                 const markdown = await response.text();
-                const html = marked.parse(markdown);
+                const html = DOMPurify.sanitize(marked.parse(markdown));
+                const articleMeta = allArticles.find(article => article.filename === filename);
+                const guide = window.RedWisdomReadingGuides?.getReadingGuide(articleMeta?.title, currentLocale);
+                currentArticleMeta = articleMeta || null;
+                recordReadingProgress(articleMeta, 5, 0);
 
-                bodyEl.innerHTML = html;
+                lastSelectedArticleText = '';
+                document.getElementById('selectionExcerptButton').classList.add('hidden');
+                bodyEl.innerHTML = `${renderReadingGuide(guide)}${html}`;
+                const articleRoot = bodyEl.querySelector(':scope > h1')?.parentElement || bodyEl;
+                window.RedWisdomTextAnchors.assignTextAnchors(articleRoot);
+                renderReadingTools(articleMeta);
+                attachGuidePracticeAction(articleMeta, guide);
+                attachReadingNoteAction(articleMeta);
+                attachReadingActivityAction(articleMeta);
                 bodyEl.classList.remove('hidden');
                 loadingEl.classList.add('hidden');
                 navEl.classList.remove('hidden');
 
-                // Update URL hash
-                window.location.hash = filename;
+                // Keep exact search links shareable; ordinary catalog navigation uses the shorter hash form.
+                const nextUrl = new URL(window.location.href);
+                if (targetAnchor) {
+                    nextUrl.searchParams.set('article', filename);
+                    nextUrl.searchParams.set('anchor', targetAnchor);
+                    nextUrl.hash = '';
+                } else {
+                    nextUrl.searchParams.delete('article');
+                    nextUrl.searchParams.delete('anchor');
+                    nextUrl.hash = filename;
+                }
+                window.history.replaceState({}, '', nextUrl);
 
                 // Update active state in sidebar
                 document.querySelectorAll('.article-item').forEach(el => {
@@ -405,17 +1029,106 @@
 
                 // Scroll to top
                 document.querySelector('main').scrollTo(0, 0);
+                showReadingChrome();
+                closeReadingFontMenu();
+                if (targetAnchor) {
+                    window.requestAnimationFrame(() => {
+                        const target = document.getElementById(targetAnchor);
+                        target?.classList.add('reading-anchor-target');
+                        target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    });
+                }
 
                 // Close sidebar on mobile
                 if (window.innerWidth < 768) {
                     document.getElementById('sidebar').classList.add('collapsed');
+                    document.getElementById('menuBtn').setAttribute('aria-expanded', 'false');
                 }
 
             } catch (error) {
                 console.error('Failed to load article:', error);
-                bodyEl.innerHTML = '<p class="text-center text-red-600 py-20">加载失败，请重试</p>';
+                bodyEl.innerHTML = `<p class="text-center text-red-600 py-20">${escapeHtml(t('reading.loadFailed'))}</p>`;
                 bodyEl.classList.remove('hidden');
                 loadingEl.classList.add('hidden');
+            }
+        }
+
+        function initializeSearch() {
+            const input = document.getElementById('readingSearchInput');
+            const status = document.getElementById('readingSearchStatus');
+            let timer = null;
+
+            input.addEventListener('input', () => {
+                window.clearTimeout(timer);
+                const query = input.value.trim();
+                if (query.length < 2) {
+                    status.textContent = query ? '请至少输入两个字。' : '';
+                    renderSearchResults([]);
+                    return;
+                }
+                status.textContent = '正在搜索原文...';
+                timer = window.setTimeout(async () => {
+                    try {
+                        const records = await loadSearchIndex();
+                        const results = window.RedWisdomFullTextSearch.searchIndex(records, query, 18);
+                        status.textContent = results.length ? `找到 ${results.length} 条相关段落` : '未找到相关段落';
+                        renderSearchResults(results);
+                    } catch (error) {
+                        status.textContent = '搜索索引加载失败，请稍后重试。';
+                    }
+                }, 180);
+            });
+        }
+
+        function loadSearchIndex() {
+            if (!searchIndexPromise) {
+                searchIndexPromise = fetch('data/search-index.json')
+                    .then(response => {
+                        if (!response.ok) throw new Error('Search index unavailable');
+                        return response.json();
+                    })
+                    .then(payload => payload.records || []);
+            }
+            return searchIndexPromise;
+        }
+
+        function renderSearchResults(results) {
+            const container = document.getElementById('readingSearchResults');
+            if (!results.length) {
+                container.classList.add('hidden');
+                container.innerHTML = '';
+                return;
+            }
+            container.classList.remove('hidden');
+            container.innerHTML = results.map(result => {
+                const params = new URLSearchParams({ article: result.articleId, anchor: result.anchor });
+                if (problemCaseId) params.set('case', problemCaseId);
+                return `
+                    <a href="reading.html?${params.toString()}" data-search-article="${escapeAttribute(result.articleId)}" data-search-anchor="${escapeAttribute(result.anchor)}" class="mb-2 block rounded border border-gray-700 bg-white/5 px-3 py-2 hover:border-china-red">
+                        <strong class="block text-sm text-white">${escapeHtml(result.title)}</strong>
+                        <span class="mt-1 block text-xs leading-relaxed text-gray-400">${escapeHtml(result.snippet)}</span>
+                    </a>
+                `;
+            }).join('');
+            container.querySelectorAll('[data-search-article]').forEach(link => {
+                link.addEventListener('click', event => {
+                    event.preventDefault();
+                    loadArticle(link.dataset.searchArticle, link.dataset.searchAnchor);
+                });
+            });
+        }
+
+        async function loadEditionNotice() {
+            try {
+                const response = await fetch('data/text-edition.json');
+                const edition = await response.json();
+                document.getElementById('editionNotice').innerHTML = `
+                    <strong class="text-gray-200">${escapeHtml(edition.displayName)}</strong>
+                    <p class="mt-1">${escapeHtml(edition.notice)}</p>
+                    <p class="mt-1 text-china-red">${escapeHtml(edition.verificationStatus)}</p>
+                `;
+            } catch (error) {
+                document.getElementById('editionNotice').textContent = '版本信息暂时无法读取。';
             }
         }
 
@@ -428,6 +1141,7 @@
                     const arrowEl = document.getElementById(`arrow-${volumeIdx}`);
                     volumeEl.classList.add('expanded');
                     arrowEl.style.transform = 'rotate(90deg)';
+                    document.querySelector(`[data-volume-toggle="${volumeIdx}"]`)?.setAttribute('aria-expanded', 'true');
                     break;
                 }
                 volumeIdx++;
@@ -448,7 +1162,7 @@
             } else {
                 prevBtn.disabled = true;
                 prevBtn.classList.add('opacity-30');
-                prevTitle.textContent = '已是第一篇';
+                prevTitle.textContent = t('reading.firstArticle');
             }
 
             if (currentArticleIndex < allArticles.length - 1) {
@@ -458,7 +1172,7 @@
             } else {
                 nextBtn.disabled = true;
                 nextBtn.classList.add('opacity-30');
-                nextTitle.textContent = '已是最后一篇';
+                nextTitle.textContent = t('reading.lastArticle');
             }
         }
 
@@ -475,11 +1189,520 @@
         }
 
         function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('collapsed');
+            const sidebar = document.getElementById('sidebar');
+            const collapsed = sidebar.classList.toggle('collapsed');
+            document.getElementById('menuBtn').setAttribute('aria-expanded', String(!collapsed));
+            if (!collapsed) showReadingChrome();
+        }
+
+        function renderReadingGuide(guide) {
+            if (!guide) return '';
+
+            return `
+                <section class="reading-guide">
+                    <h2>${escapeHtml(t('reading.guideTitle'))}</h2>
+                    <p><strong>${labelText('reading.problem')}</strong>${escapeHtml(guide.problem)}</p>
+                    <p><strong>${labelText('reading.background')}</strong>${escapeHtml(guide.background)}</p>
+                    <div class="reading-guide-grid">
+                        ${renderGuideList(t('reading.coreIdeas'), guide.coreIdeas)}
+                        ${renderGuideList(t('reading.scenarios'), guide.scenarios)}
+                        ${renderGuideList(t('reading.questions'), guide.questions)}
+                    </div>
+                    <p class="mt-4"><strong>${labelText('reading.practice')}</strong>${escapeHtml(guide.practice)}</p>
+                    <button type="button" data-action="guide-practice" class="mt-4 px-4 py-2 bg-china-red text-white rounded hover:bg-red-800">${escapeHtml(t('reading.savePractice'))}</button>
+                </section>
+            `;
+        }
+
+        function attachGuidePracticeAction(articleMeta, guide) {
+            const button = document.querySelector('[data-action="guide-practice"]');
+            if (!button || !articleMeta || !guide) return;
+
+            button.addEventListener('click', () => {
+                const draft = window.RedWisdomPractice.buildPracticeDraftFromGuide(articleMeta.title, guide);
+                draft.sourceHref = `reading.html#${encodeURIComponent(articleMeta.filename)}`;
+                draft.problemCaseId = problemCaseId;
+                const practice = practiceStore.createPractice(draft);
+                recordProblemActivity({
+                    type: 'practice',
+                    referenceId: practice.id,
+                    title: practice.title,
+                    detail: practice.actionPlan,
+                    sourceHref: `practice.html#${encodeURIComponent(practice.id)}`,
+                });
+                window.location.href = problemCaseId ? `practice.html?case=${encodeURIComponent(problemCaseId)}#${encodeURIComponent(practice.id)}` : 'practice.html';
+            });
+        }
+
+        function renderReadingTools(articleMeta) {
+            const tools = document.getElementById('readerTools');
+            const toolsBody = document.getElementById('readerToolsBody');
+            const toolControls = document.getElementById('readingToolControls');
+            if (!articleMeta || !tools || !toolsBody || !toolControls) return;
+
+            const note = readingNotesStore.getNoteForArticle(articleMeta.filename);
+            const progress = readingProgressStore.getProgressForArticle(articleMeta.filename);
+            const highlights = readingProgressStore.listHighlightsForArticle(articleMeta.filename);
+            const bookmarkText = progress?.bookmarked ? t('reading.bookmarked') : t('reading.bookmarkArticle');
+
+            document.getElementById('readerToolsArticleTitle').textContent = `《${articleMeta.title}》`;
+            toolsBody.innerHTML = `
+                <section id="readingNotesPanel" data-reading-tool-panel="notes" role="tabpanel">
+                    <div class="mb-4 flex flex-wrap items-center gap-2 text-sm text-gray-600">
+                        <span>${labelText('reading.progress')}${progress?.progressPercent || 0}%</span>
+                        <button type="button" id="bookmarkArticleBtn" class="px-3 py-1 border border-dark-beige rounded hover:bg-dark-beige/20">${bookmarkText}</button>
+                    </div>
+                    <p class="text-sm leading-relaxed text-gray-600">${escapeHtml(t('reading.noteHelp'))}</p>
+                    <textarea id="readingNoteInput" class="reader-tool-textarea mt-3 min-h-[220px]" placeholder="${escapeAttribute(t('reading.notePlaceholder'))}">${escapeHtml(note?.content || '')}</textarea>
+                    <div class="mt-3 flex flex-wrap gap-2">
+                        <button type="button" id="saveReadingNoteBtn" class="px-4 py-2 bg-china-red text-white rounded hover:bg-red-800">${escapeHtml(t('reading.saveNote'))}</button>
+                        <button type="button" id="deleteReadingNoteBtn" class="px-4 py-2 border border-dark-beige rounded hover:bg-dark-beige/20">${escapeHtml(t('reading.deleteNote'))}</button>
+                        <a href="me.html" class="px-4 py-2 border border-dark-beige rounded hover:bg-dark-beige/20">${escapeHtml(t('reading.viewArchive'))}</a>
+                    </div>
+                    <p id="readingNoteStatus" class="mt-2 min-h-5 text-sm text-gray-600" aria-live="polite"></p>
+                </section>
+                <section id="readingExcerptsPanel" class="hidden" data-reading-tool-panel="excerpts" role="tabpanel">
+                    <p class="text-sm leading-relaxed text-gray-600">${escapeHtml(t('reading.excerptsHelp'))}</p>
+                    <div class="mt-4">
+                        <p class="mb-2 text-xs font-bold text-gray-500">${escapeHtml(t('reading.currentSelection'))}</p>
+                        <blockquote id="selectedTextPreview" class="selected-text-preview">${escapeHtml(t('reading.noSelection'))}</blockquote>
+                    </div>
+                    <textarea id="highlightNoteInput" class="reader-tool-textarea mt-3 min-h-[90px]" placeholder="${escapeAttribute(t('reading.highlightPlaceholder'))}"></textarea>
+                    <div class="mt-3 flex flex-wrap gap-2">
+                        <button type="button" id="saveHighlightBtn" class="px-4 py-2 bg-china-red text-white rounded hover:bg-red-800">${escapeHtml(t('reading.saveHighlight'))}</button>
+                    </div>
+                    <p id="highlightStatus" class="mt-2 min-h-5 text-sm text-gray-600" aria-live="polite"></p>
+                    <div class="mt-5 border-t border-dark-beige/60 pt-3">
+                        <div id="highlightList">${renderHighlightList(highlights)}</div>
+                    </div>
+                </section>
+            `;
+
+            toolControls.classList.remove('hidden');
+            toolControls.classList.add('flex');
+            tools.classList.add('is-available');
+            updateReadingToolCounts(note, highlights);
+
+            if (window.matchMedia('(min-width: 1280px)').matches && !readerToolsCollapsed) {
+                tools.classList.remove('is-collapsed');
+                tools.setAttribute('aria-hidden', 'false');
+                tools.inert = false;
+            } else {
+                tools.classList.remove('is-open');
+                tools.setAttribute('aria-hidden', 'true');
+                tools.inert = true;
+                document.getElementById('readerToolsOverlay').classList.remove('is-open');
+            }
+            setReadingToolTab(activeReadingToolTab);
+        }
+
+        function setupReadingTools() {
+            document.getElementById('openReadingNotesBtn')?.addEventListener('click', () => openReadingTools('notes'));
+            document.getElementById('openReadingExcerptsBtn')?.addEventListener('click', () => openReadingTools('excerpts'));
+            document.getElementById('closeReaderToolsBtn')?.addEventListener('click', closeReadingTools);
+            document.getElementById('readerToolsOverlay')?.addEventListener('click', closeReadingTools);
+            document.getElementById('selectionExcerptButton')?.addEventListener('click', () => openReadingTools('excerpts'));
+
+            document.querySelectorAll('[data-reading-tool-tab]').forEach(button => {
+                button.addEventListener('click', () => setReadingToolTab(button.dataset.readingToolTab));
+            });
+
+            document.addEventListener('keydown', event => {
+                if (event.key === 'Escape' && document.getElementById('readerTools')?.classList.contains('is-open')) {
+                    closeReadingTools();
+                }
+            });
+            window.addEventListener('resize', syncReaderToolsForViewport);
+        }
+
+        function openReadingTools(tabName) {
+            const tools = document.getElementById('readerTools');
+            if (!currentArticleMeta || !tools?.classList.contains('is-available')) return;
+
+            showReadingChrome();
+            closeReadingFontMenu();
+            readerToolsCollapsed = false;
+            tools.classList.remove('is-collapsed');
+            tools.classList.add('is-open');
+            tools.setAttribute('aria-hidden', 'false');
+            tools.inert = false;
+            setReadingToolTab(tabName);
+
+            const isWideDesktop = window.matchMedia('(min-width: 1280px)').matches;
+            document.getElementById('readerToolsOverlay').classList.toggle('is-open', !isWideDesktop);
+        }
+
+        function closeReadingTools() {
+            const tools = document.getElementById('readerTools');
+            if (!tools) return;
+
+            const isWideDesktop = window.matchMedia('(min-width: 1280px)').matches;
+            tools.classList.remove('is-open');
+            if (isWideDesktop) {
+                readerToolsCollapsed = true;
+                tools.classList.add('is-collapsed');
+            }
+            tools.setAttribute('aria-hidden', 'true');
+            tools.inert = true;
+            document.getElementById('readerToolsOverlay').classList.remove('is-open');
+            document.getElementById('openReadingNotesBtn')?.setAttribute('aria-pressed', 'false');
+            document.getElementById('openReadingExcerptsBtn')?.setAttribute('aria-pressed', 'false');
+        }
+
+        function syncReaderToolsForViewport() {
+            const tools = document.getElementById('readerTools');
+            if (!tools?.classList.contains('is-available')) return;
+
+            if (window.matchMedia('(min-width: 1280px)').matches) {
+                tools.classList.remove('is-open');
+                document.getElementById('readerToolsOverlay').classList.remove('is-open');
+                tools.setAttribute('aria-hidden', String(readerToolsCollapsed));
+                tools.inert = readerToolsCollapsed;
+            } else {
+                tools.classList.remove('is-collapsed');
+                tools.setAttribute('aria-hidden', String(!tools.classList.contains('is-open')));
+                tools.inert = !tools.classList.contains('is-open');
+            }
+            setReadingToolTab(activeReadingToolTab);
+        }
+
+        function setReadingToolTab(tabName) {
+            activeReadingToolTab = tabName === 'excerpts' ? 'excerpts' : 'notes';
+            document.querySelectorAll('[data-reading-tool-tab]').forEach(button => {
+                const active = button.dataset.readingToolTab === activeReadingToolTab;
+                button.classList.toggle('is-active', active);
+                button.setAttribute('aria-selected', String(active));
+            });
+            document.querySelectorAll('[data-reading-tool-panel]').forEach(panel => {
+                panel.classList.toggle('hidden', panel.dataset.readingToolPanel !== activeReadingToolTab);
+            });
+
+            const toolsVisible = document.getElementById('readerTools')?.getAttribute('aria-hidden') === 'false';
+            document.getElementById('openReadingNotesBtn')?.setAttribute('aria-pressed', String(toolsVisible && activeReadingToolTab === 'notes'));
+            document.getElementById('openReadingExcerptsBtn')?.setAttribute('aria-pressed', String(toolsVisible && activeReadingToolTab === 'excerpts'));
+            if (activeReadingToolTab === 'excerpts') updateSelectedTextPreview();
+        }
+
+        function updateReadingToolCounts(note, highlights) {
+            const currentNote = note === undefined && currentArticleMeta
+                ? readingNotesStore.getNoteForArticle(currentArticleMeta.filename)
+                : note;
+            const currentHighlights = highlights === undefined && currentArticleMeta
+                ? readingProgressStore.listHighlightsForArticle(currentArticleMeta.filename)
+                : highlights;
+            document.getElementById('readingNoteCount').textContent = currentNote?.content?.trim() ? '1' : '0';
+            document.getElementById('readingExcerptCount').textContent = String(currentHighlights?.length || 0);
+        }
+
+        function updateSelectedTextPreview() {
+            const preview = document.getElementById('selectedTextPreview');
+            if (preview) preview.textContent = lastSelectedArticleText || t('reading.noSelection');
+        }
+
+        function attachReadingNoteAction(articleMeta) {
+            const input = document.getElementById('readingNoteInput');
+            const saveButton = document.getElementById('saveReadingNoteBtn');
+            const deleteButton = document.getElementById('deleteReadingNoteBtn');
+            const status = document.getElementById('readingNoteStatus');
+            if (!articleMeta || !input || !saveButton || !deleteButton || !status) return;
+
+            saveButton.addEventListener('click', () => {
+                readingNotesStore.upsertNote({
+                    articleId: articleMeta.filename,
+                    articleTitle: articleMeta.title,
+                    content: input.value,
+                    problemCaseId,
+                });
+                recordProblemActivity({
+                    type: 'note',
+                    referenceId: articleMeta.filename,
+                    title: `阅读笔记：《${articleMeta.title}》`,
+                    detail: input.value.slice(0, 500),
+                    sourceHref: `reading.html?case=${encodeURIComponent(problemCaseId)}#${encodeURIComponent(articleMeta.filename)}`,
+                });
+                status.textContent = t('reading.noteSaved');
+                updateReadingToolCounts();
+            });
+
+            deleteButton.addEventListener('click', () => {
+                readingNotesStore.deleteNoteForArticle(articleMeta.filename);
+                input.value = '';
+                status.textContent = t('reading.noteDeleted');
+                updateReadingToolCounts();
+            });
+        }
+
+        function recordProblemActivity(activity) {
+            if (!activeProblemCase) return;
+            problemCaseStore.addActivity(activeProblemCase.id, activity);
+        }
+
+        function attachReadingActivityAction(articleMeta) {
+            const bookmarkButton = document.getElementById('bookmarkArticleBtn');
+            const highlightButton = document.getElementById('saveHighlightBtn');
+            const highlightNoteInput = document.getElementById('highlightNoteInput');
+            const highlightStatus = document.getElementById('highlightStatus');
+            const highlightList = document.getElementById('highlightList');
+            const noteStatus = document.getElementById('readingNoteStatus');
+            if (!articleMeta || !bookmarkButton || !highlightButton || !highlightNoteInput || !highlightStatus || !highlightList || !noteStatus) return;
+
+            bookmarkButton.addEventListener('click', () => {
+                const updated = readingProgressStore.toggleBookmark({
+                    articleId: articleMeta.filename,
+                    articleTitle: articleMeta.title,
+                });
+                bookmarkButton.textContent = updated.bookmarked ? t('reading.bookmarked') : t('reading.bookmarkArticle');
+                noteStatus.textContent = updated.bookmarked ? t('reading.bookmarkSaved') : t('reading.bookmarkRemoved');
+            });
+
+            highlightButton.addEventListener('click', () => {
+                const selectedText = String(window.getSelection()?.toString() || '').trim() || lastSelectedArticleText;
+                if (!selectedText) {
+                    highlightStatus.textContent = t('reading.selectTextFirst');
+                    return;
+                }
+
+                readingProgressStore.addHighlight({
+                    articleId: articleMeta.filename,
+                    articleTitle: articleMeta.title,
+                    selectedText,
+                    note: highlightNoteInput.value,
+                });
+                highlightNoteInput.value = '';
+                lastSelectedArticleText = '';
+                window.getSelection()?.removeAllRanges();
+                highlightStatus.textContent = t('reading.highlightSaved');
+                highlightList.innerHTML = renderHighlightList(readingProgressStore.listHighlightsForArticle(articleMeta.filename));
+                document.getElementById('selectionExcerptButton').classList.add('hidden');
+                updateSelectedTextPreview();
+                updateReadingToolCounts();
+                attachHighlightDeleteActions(articleMeta);
+            });
+
+            attachHighlightDeleteActions(articleMeta);
+        }
+
+        function attachHighlightDeleteActions(articleMeta) {
+            document.querySelectorAll('[data-action="delete-highlight"]').forEach(button => {
+                button.addEventListener('click', () => {
+                    readingProgressStore.deleteHighlight(button.dataset.id);
+                    document.getElementById('highlightList').innerHTML = renderHighlightList(
+                        readingProgressStore.listHighlightsForArticle(articleMeta.filename)
+                    );
+                    updateReadingToolCounts();
+                    attachHighlightDeleteActions(articleMeta);
+                });
+            });
+        }
+
+        function renderHighlightList(highlights) {
+            if (!highlights.length) {
+                return `<p class="text-sm text-gray-600">${escapeHtml(t('reading.noHighlights'))}</p>`;
+            }
+
+            return highlights.map(highlight => `
+                <article class="border-t border-dark-beige/60 py-3 first:border-t-0">
+                    <p class="font-serif text-sm leading-relaxed">${escapeHtml(highlight.selectedText)}</p>
+                    ${highlight.note ? `<p class="mt-2 text-sm text-gray-600">${escapeHtml(highlight.note)}</p>` : ''}
+                    <button type="button" data-action="delete-highlight" data-id="${escapeAttribute(highlight.id)}" class="mt-2 text-sm text-china-red hover:underline">${escapeHtml(t('reading.deleteHighlight'))}</button>
+                </article>
+            `).join('');
+        }
+
+        function recordReadingProgress(articleMeta, percent, lastPosition) {
+            if (!articleMeta) return;
+            const existing = readingProgressStore.getProgressForArticle(articleMeta.filename);
+            readingProgressStore.upsertProgress({
+                articleId: articleMeta.filename,
+                articleTitle: articleMeta.title,
+                progressPercent: Math.max(existing?.progressPercent || 0, percent),
+                lastPosition,
+            });
+        }
+
+        function updateCurrentReadingProgress() {
+            if (!currentArticleMeta) return;
+            const mainEl = document.querySelector('main');
+            const maxScroll = mainEl.scrollHeight - mainEl.clientHeight;
+            if (maxScroll <= 0) return;
+            const percent = Math.min(100, Math.max(5, Math.round((mainEl.scrollTop / maxScroll) * 100)));
+            recordReadingProgress(currentArticleMeta, percent, mainEl.scrollTop);
+        }
+
+        function rememberArticleSelection() {
+            const selection = window.getSelection();
+            const selectedText = String(selection?.toString() || '').trim();
+            const articleBody = document.getElementById('articleBody');
+            if (!selectedText || !articleBody || !selection?.anchorNode || !articleBody.contains(selection.anchorNode)) {
+                return;
+            }
+
+            lastSelectedArticleText = selectedText;
+            updateSelectedTextPreview();
+            document.getElementById('selectionExcerptButton').classList.remove('hidden');
+        }
+
+        function renderGuideList(title, items) {
+            return `
+                <div class="reading-guide-section">
+                    <strong>${escapeHtml(title)}</strong>
+                    <ul>
+                        ${items.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        function t(key) {
+            return window.RedWisdomI18n?.translate(currentLocale, key) || key;
+        }
+
+        function labelText(key) {
+            const colon = currentLocale === 'en' ? ': ' : '：';
+            return `${escapeHtml(t(key))}${colon}`;
+        }
+
+        function setupLocaleControls() {
+            const localeSelect = document.getElementById('readingLocaleSelect');
+            if (!localeSelect || !window.RedWisdomI18n) return;
+
+            localeSelect.value = currentLocale;
+            window.RedWisdomI18n.applyTranslations(document, currentLocale);
+            localeSelect.addEventListener('change', () => {
+                currentLocale = window.RedWisdomI18n.setStoredLocale(localStorage, localeSelect.value);
+                localeSelect.value = currentLocale;
+                window.RedWisdomI18n.applyTranslations(document, currentLocale);
+                renderCatalogCount();
+                renderThemeTracks();
+
+                if (currentArticleMeta?.filename) {
+                    loadArticle(currentArticleMeta.filename);
+                }
+            });
+        }
+
+        function renderCatalogCount() {
+            if (!catalog) return;
+            const volumeCount = Object.keys(catalog.volumes).length;
+            document.getElementById('catalogCount').textContent = currentLocale === 'en'
+                ? `${volumeCount} volumes · ${allArticles.length} articles`
+                : `共 ${volumeCount} 卷 · ${allArticles.length} 篇`;
+        }
+
+        function setupReadingFontSizeControls() {
+            const decreaseButton = document.getElementById('readingFontDecrease');
+            const resetButton = document.getElementById('readingFontReset');
+            const increaseButton = document.getElementById('readingFontIncrease');
+            const menuButton = document.getElementById('readingFontMenuButton');
+            const controls = document.getElementById('readingFontControls');
+
+            applyReadingFontSize();
+
+            decreaseButton?.addEventListener('click', () => setReadingFontSize(readingFontSize - 1));
+            resetButton?.addEventListener('click', () => setReadingFontSize(DEFAULT_READING_FONT_SIZE));
+            increaseButton?.addEventListener('click', () => setReadingFontSize(readingFontSize + 1));
+            menuButton?.addEventListener('click', event => {
+                event.stopPropagation();
+                showReadingChrome();
+                const popover = document.getElementById('readingFontPopover');
+                const isOpen = popover?.classList.toggle('is-open') || false;
+                menuButton.setAttribute('aria-expanded', String(isOpen));
+            });
+            document.addEventListener('click', event => {
+                if (!controls?.contains(event.target)) closeReadingFontMenu();
+            });
+            document.addEventListener('keydown', event => {
+                if (event.key === 'Escape') closeReadingFontMenu();
+            });
+        }
+
+        function closeReadingFontMenu() {
+            document.getElementById('readingFontPopover')?.classList.remove('is-open');
+            document.getElementById('readingFontMenuButton')?.setAttribute('aria-expanded', 'false');
+        }
+
+        function showReadingChrome() {
+            document.body.classList.remove('reader-chrome-hidden');
+        }
+
+        function setupMobileReadingChrome() {
+            const mainEl = document.getElementById('readingMain');
+            if (!mainEl) return;
+
+            let lastScrollTop = mainEl.scrollTop;
+            mainEl.addEventListener('scroll', () => {
+                if (!window.matchMedia('(max-width: 640px)').matches || !currentArticleMeta) {
+                    showReadingChrome();
+                    lastScrollTop = mainEl.scrollTop;
+                    return;
+                }
+
+                const scrollTop = mainEl.scrollTop;
+                const delta = scrollTop - lastScrollTop;
+                const sidebarOpen = !document.getElementById('sidebar')?.classList.contains('collapsed');
+                const toolsOpen = document.getElementById('readerTools')?.classList.contains('is-open');
+                const fontMenuOpen = document.getElementById('readingFontPopover')?.classList.contains('is-open');
+
+                if (scrollTop <= 72 || delta < -4) {
+                    showReadingChrome();
+                } else if (scrollTop > 160 && delta > 4 && !sidebarOpen && !toolsOpen && !fontMenuOpen) {
+                    document.body.classList.add('reader-chrome-hidden');
+                }
+                lastScrollTop = scrollTop;
+            }, { passive: true });
+
+            window.addEventListener('resize', () => {
+                if (!window.matchMedia('(max-width: 640px)').matches) showReadingChrome();
+            });
+        }
+
+        function getStoredReadingFontSize() {
+            const value = localStorage.getItem(READING_FONT_SIZE_KEY);
+            if (value === null) return DEFAULT_READING_FONT_SIZE;
+            return clampReadingFontSize(value);
+        }
+
+        function setReadingFontSize(value) {
+            readingFontSize = clampReadingFontSize(value);
+            localStorage.setItem(READING_FONT_SIZE_KEY, String(readingFontSize));
+            applyReadingFontSize();
+        }
+
+        function applyReadingFontSize() {
+            const article = document.getElementById('articleContent');
+            const label = document.getElementById('readingFontSizeLabel');
+            if (article) {
+                article.style.setProperty('--reading-font-size', `${readingFontSize}px`);
+            }
+            if (label) {
+                label.textContent = `${readingFontSize}px`;
+            }
+        }
+
+        function clampReadingFontSize(value) {
+            const number = Number(value);
+            if (!Number.isFinite(number)) return DEFAULT_READING_FONT_SIZE;
+            return Math.min(MAX_READING_FONT_SIZE, Math.max(MIN_READING_FONT_SIZE, Math.round(number)));
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text || '';
+            return div.innerHTML;
+        }
+
+        function escapeAttribute(text) {
+            return escapeHtml(text).replace(/"/g, '&quot;');
         }
 
         // Initialize
+        setupLocaleControls();
+        setupReadingFontSizeControls();
+        setupReadingTools();
+        setupMobileReadingChrome();
         loadCatalog();
+        document.querySelector('main').addEventListener('scroll', updateCurrentReadingProgress, { passive: true });
+        document.addEventListener('selectionchange', rememberArticleSelection);
     </script>
 </body>
 

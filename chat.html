@@ -26,6 +26,7 @@
         href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;700&display=swap"
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.4/dist/purify.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -48,6 +49,39 @@
         .typing-cursor::after {
             content: '▌';
             animation: blink 1s infinite;
+        }
+
+        .thinking-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            color: #6B6258;
+        }
+
+        .thinking-dots {
+            display: inline-flex;
+            gap: 0.2rem;
+        }
+
+        .thinking-dots span {
+            width: 0.32rem;
+            height: 0.32rem;
+            border-radius: 999px;
+            background: #BC2D22;
+            animation: thinkingPulse 1.2s ease-in-out infinite;
+        }
+
+        .thinking-dots span:nth-child(2) {
+            animation-delay: 0.16s;
+        }
+
+        .thinking-dots span:nth-child(3) {
+            animation-delay: 0.32s;
+        }
+
+        @keyframes thinkingPulse {
+            0%, 70%, 100% { opacity: 0.28; transform: translateY(0); }
+            35% { opacity: 1; transform: translateY(-2px); }
         }
 
         @keyframes blink {
@@ -103,6 +137,73 @@
         .scroll-smooth {
             scroll-behavior: smooth;
         }
+
+        .history-mirror {
+            margin-top: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px solid #D6C6B0;
+        }
+
+        .history-mirror__label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            color: #BC2D22;
+            font-weight: 700;
+        }
+
+        .history-mirror__case {
+            padding: 0.9rem 0;
+        }
+
+        .history-mirror__case + .history-mirror__case {
+            border-top: 1px solid rgba(214, 198, 176, 0.65);
+        }
+
+        .history-mirror__title {
+            display: block;
+            color: #2B2B2B;
+            font-weight: 700;
+            line-height: 1.55;
+        }
+
+        .history-mirror__meta,
+        .history-mirror__boundary {
+            margin-top: 0.35rem;
+            color: #6B6258;
+            font-size: 0.8rem;
+            line-height: 1.65;
+        }
+
+        .history-mirror__method {
+            margin-top: 0.55rem;
+            color: #2B2B2B;
+            font-size: 0.9rem;
+            line-height: 1.75;
+        }
+
+        .history-mirror__links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+            margin-top: 0.65rem;
+            font-size: 0.82rem;
+        }
+
+        .history-mirror__links a {
+            color: #BC2D22;
+            text-decoration: underline;
+            text-underline-offset: 0.18rem;
+        }
+
+        @media (max-width: 640px) {
+            .history-mirror__label {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+        }
     </style>
 </head>
 
@@ -118,45 +219,140 @@
                         <path d="M19 12H5M12 19l-7-7 7-7" />
                     </svg>
                 </a>
-                <h1 class="font-mao text-2xl md:text-3xl">问道毛选</h1>
+                <h1 class="font-mao text-2xl md:text-3xl" data-i18n="chat.title">问道毛选</h1>
             </div>
-            <p class="text-sm opacity-80 hidden md:block">以毛主席的思想方法，解答你的困惑</p>
+            <div class="flex items-center gap-3">
+                <nav class="text-sm opacity-90 hidden md:flex items-center gap-4" aria-label="主导航">
+                <a href="reading.html" class="hover:underline" data-i18n="nav.reading">阅读</a>
+                <a href="practice.html" class="hover:underline" data-i18n="nav.practice">实践</a>
+                <a href="problems.html" class="hover:underline" data-i18n="nav.problems">我的问题</a>
+                <a href="me.html" class="hover:underline" data-i18n="nav.me">我的</a>
+                <a href="login.html" class="hover:underline" data-i18n="nav.login">登录</a>
+                </nav>
+                <select id="localeSelect"
+                    class="rounded border border-warm-rice/40 bg-china-red px-2 py-1 text-xs text-warm-rice" aria-label="Language">
+                    <option value="zh-CN">中文</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
         </div>
     </header>
 
     <!-- Chat Container -->
     <main class="flex-1 overflow-hidden flex flex-col max-w-4xl mx-auto w-full">
-
-        <!-- Messages Area -->
-        <div id="messages" class="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth">
-            <!-- Welcome Message -->
-            <div class="flex gap-3 fade-in">
-                <div class="w-10 h-10 rounded-full bg-china-red flex items-center justify-center flex-shrink-0">
-                    <span class="text-warm-rice font-mao text-lg">毛</span>
-                </div>
-                <div class="flex-1 bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm max-w-[85%]">
-                    <p class="font-serif text-ink-black leading-relaxed">
-                        同志，你好！
-                    </p>
-                    <p class="font-serif text-ink-black leading-relaxed mt-2">
-                        我是根据《毛泽东选集》训练的智能助手。你有什么困惑、焦虑，或者工作生活中遇到的问题，都可以跟我说说。
-                    </p>
-                    <p class="font-serif text-ink-black leading-relaxed mt-2">
-                        我会用毛主席的思想方法来帮你分析问题，给你一些参考意见。记住：<strong>实践是检验真理的唯一标准</strong>！
-                    </p>
+        <section id="problemContextBar" class="hidden px-4 pt-4"></section>
+        <section class="px-4 pt-4">
+            <div class="inline-flex rounded-lg border border-dark-beige/70 bg-white p-1" role="group" aria-label="问道方式">
+                <button id="directModeBtn" type="button" aria-pressed="true" class="rounded-md bg-china-red px-4 py-2 text-sm text-warm-rice" data-i18n="chat.mode.direct">直接解惑</button>
+                <button id="guidedModeBtn" type="button" aria-pressed="false" class="rounded-md px-4 py-2 text-sm text-ink-black hover:bg-red-50" data-i18n="chat.mode.guided">逐步分析</button>
+            </div>
+            <p id="chatModeStatus" class="mt-2 text-sm text-gray-600" data-i18n="chat.mode.directHelp">直接说明你的困惑，我会给出原文依据和可执行建议。</p>
+        </section>
+        <section id="analysisGuideSection" class="px-4 pt-4">
+            <div class="bg-white/85 border border-dark-beige/50 rounded-xl p-4 shadow-sm">
+                <button id="analysisGuideToggle" type="button"
+                    class="w-full flex items-center justify-between gap-3 text-left text-china-red">
+                    <span class="font-mao text-2xl" data-i18n="guide.title">毛选方法分析向导</span>
+                    <span id="analysisGuideToggleIcon" class="text-xl leading-none">+</span>
+                </button>
+                <div id="analysisGuidePanel" class="hidden mt-4 grid gap-3">
+                    <div class="grid md:grid-cols-2 gap-3">
+                        <label class="grid gap-1 text-sm text-gray-700">
+                            <span data-i18n="guide.problem">现实问题</span>
+                            <textarea data-guide-field="realProblem" rows="2"
+                                class="rounded-lg border border-dark-beige/60 px-3 py-2 focus:border-china-red focus:outline-none"
+                                data-i18n-placeholder="guide.problemPlaceholder"
+                                placeholder="我现在真正要解决的问题是什么？"></textarea>
+                        </label>
+                        <label class="grid gap-1 text-sm text-gray-700">
+                            <span data-i18n="guide.facts">事实材料</span>
+                            <textarea data-guide-field="facts" rows="2"
+                                class="rounded-lg border border-dark-beige/60 px-3 py-2 focus:border-china-red focus:outline-none"
+                                data-i18n-placeholder="guide.factsPlaceholder"
+                                placeholder="分开写：已确认的情况；我的推测或担心"></textarea>
+                        </label>
+                        <label class="grid gap-1 text-sm text-gray-700">
+                            <span data-i18n="guide.contradiction">主要矛盾</span>
+                            <textarea data-guide-field="mainContradiction" rows="2"
+                                class="rounded-lg border border-dark-beige/60 px-3 py-2 focus:border-china-red focus:outline-none"
+                                data-i18n-placeholder="guide.contradictionPlaceholder"
+                                placeholder="最影响全局的矛盾是什么？"></textarea>
+                        </label>
+                        <label class="grid gap-1 text-sm text-gray-700">
+                            <span data-i18n="guide.investigation">下一步要核实什么</span>
+                            <textarea data-guide-field="investigationTodo" rows="2"
+                                class="rounded-lg border border-dark-beige/60 px-3 py-2 focus:border-china-red focus:outline-none"
+                                data-i18n-placeholder="guide.investigationPlaceholder"
+                                placeholder="要确认什么？向谁问或查什么记录？何时能确认？"></textarea>
+                        </label>
+                        <label class="grid gap-1 text-sm text-gray-700">
+                            <span data-i18n="guide.forces">可用力量</span>
+                            <textarea data-guide-field="availableForces" rows="2"
+                                class="rounded-lg border border-dark-beige/60 px-3 py-2 focus:border-china-red focus:outline-none"
+                                data-i18n-placeholder="guide.forcesPlaceholder"
+                                placeholder="我手里有哪些人、时间、资源？"></textarea>
+                        </label>
+                        <label class="grid gap-1 text-sm text-gray-700">
+                            <span data-i18n="guide.action">今日行动</span>
+                            <textarea data-guide-field="actionPlan" rows="2"
+                                class="rounded-lg border border-dark-beige/60 px-3 py-2 focus:border-china-red focus:outline-none"
+                                data-i18n-placeholder="guide.actionPlaceholder"
+                                placeholder="今天能完成的最小实践是什么？"></textarea>
+                        </label>
+                    </div>
+                    <label class="grid gap-1 text-sm text-gray-700">
+                        <span data-i18n="guide.review">复盘问题</span>
+                        <input data-guide-field="reviewQuestion"
+                            class="rounded-lg border border-dark-beige/60 px-3 py-2 focus:border-china-red focus:outline-none"
+                            data-i18n-placeholder="guide.reviewPlaceholder"
+                            placeholder="明天用什么标准判断这一步是否有效？">
+                    </label>
+                    <div class="flex flex-wrap gap-2">
+                        <button id="useAnalysisGuideBtn" type="button"
+                            class="px-4 py-2 bg-china-red text-warm-rice rounded-lg text-sm hover:bg-red-800"
+                            data-i18n="guide.usePrompt">带入提问</button>
+                        <button id="saveAnalysisPracticeBtn" type="button"
+                            class="px-4 py-2 border border-china-red text-china-red rounded-lg text-sm hover:bg-red-50"
+                            data-i18n="guide.savePractice">保存实践</button>
+                    </div>
+                    <p id="analysisGuideStatus" class="text-sm text-gray-600"></p>
                 </div>
             </div>
+        </section>
+
+        <!-- Messages Area -->
+        <div id="messages" class="flex-1 overflow-y-auto p-4 scroll-smooth">
+            <section id="directMessages" data-chat-mode-panel="direct" class="space-y-4">
+                <!-- Welcome Message -->
+                <div class="flex gap-3 fade-in">
+                    <div class="w-10 h-10 rounded-full bg-china-red flex items-center justify-center flex-shrink-0">
+                        <span class="text-warm-rice font-mao text-lg">毛</span>
+                    </div>
+                    <div class="flex-1 bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm max-w-[85%]">
+                        <p class="font-serif text-ink-black leading-relaxed" data-i18n="chat.greeting">
+                            同志，你好！
+                        </p>
+                        <p class="font-serif text-ink-black leading-relaxed mt-2" data-i18n="chat.intro">
+                            我是经过毛选方法论蒸馏的实践教练。你可以把现实中的困惑、工作阻力、关系冲突或长期目标讲出来。
+                        </p>
+                        <p class="font-serif text-ink-black leading-relaxed mt-2" data-i18n="chat.method">
+                            我会引导你回到事实、调查、矛盾分析、行动和复盘。记住：实践是检验真理的唯一标准。
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <section id="guidedMessages" data-chat-mode-panel="guided" class="hidden space-y-4"></section>
         </div>
 
         <!-- Input Area -->
-        <div class="border-t border-dark-beige/30 bg-warm-rice p-4">
+        <div id="chatInputBar" class="border-t border-dark-beige/30 bg-warm-rice p-4 pb-24 md:pb-4">
             <div class="flex gap-3 max-w-4xl mx-auto">
-                <textarea id="userInput" placeholder="说说你的困惑..."
+                <textarea id="userInput" placeholder="说说你的困惑..." data-i18n-placeholder="chat.placeholder"
                     class="flex-1 resize-none rounded-xl border-2 border-dark-beige/50 focus:border-china-red focus:ring-0 p-3 font-serif text-ink-black placeholder:text-dark-beige/70 transition-colors"
                     rows="2"></textarea>
                 <button id="sendBtn"
                     class="px-6 py-3 bg-china-red text-warm-rice font-mao text-xl rounded-xl hover:bg-red-800 transition-all duration-300 shadow-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
-                    <span>发送</span>
+                    <span id="sendBtnLabel" data-i18n="chat.send">发送</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2">
                         <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
@@ -164,17 +360,68 @@
                 </button>
             </div>
             <p class="text-center text-xs text-dark-beige/70 mt-2">
-                回答仅供参考，基于毛选文章生成 ·
-                <a href="reading.html" class="text-china-red hover:underline">阅读原著</a>
+                <span data-i18n="chat.footer">回答仅供参考，基于毛选文章生成</span> ·
+                <a href="reading.html" class="text-china-red hover:underline" data-i18n="chat.readOriginal">阅读原著</a>
             </p>
         </div>
     </main>
 
+    <nav class="mobile-bottom-nav md:hidden fixed inset-x-0 bottom-0 z-40 border-t border-dark-beige/60 bg-warm-rice/95 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] backdrop-blur pb-[calc(0.35rem+env(safe-area-inset-bottom))]"
+        aria-label="移动端主导航">
+        <div class="mx-auto grid max-w-md grid-cols-5">
+            <a data-mobile-nav-item="home" href="index.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                    <path d="M7 9h4"></path>
+                    <path d="M7 13h10"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.cards">抽卡</span>
+            </a>
+            <a data-mobile-nav-item="reading" href="reading.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.reading">阅读</span>
+            </a>
+            <a data-mobile-nav-item="chat" href="chat.html" aria-current="page"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-china-red font-bold">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.chat">问道</span>
+            </a>
+            <a data-mobile-nav-item="practice" href="practice.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M9 11l3 3L22 4"></path>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.practice">实践</span>
+            </a>
+            <a data-mobile-nav-item="me" href="me.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M20 21a8 8 0 0 0-16 0"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.me">我的</span>
+            </a>
+        </div>
+    </nav>
+
     <!-- API Key Modal -->
     <div id="apiKeyModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
         <div class="bg-warm-rice rounded-2xl p-6 max-w-md mx-4 shadow-2xl">
-            <h2 class="font-mao text-2xl text-china-red mb-4">设置 API Key</h2>
-            <p class="text-ink-black/70 mb-4 font-serif text-sm">
+            <h2 class="font-mao text-2xl text-china-red mb-4" data-i18n="modal.apiTitle">设置 API Key</h2>
+            <p class="text-ink-black/70 mb-4 font-serif text-sm" data-i18n="modal.apiBody">
                 请输入你的 OpenRouter API Key 以启用对话功能。你的 Key 仅保存在本地浏览器中。
             </p>
             <input type="password" id="apiKeyInput" placeholder="sk-or-v1-..."
@@ -182,17 +429,33 @@
             <div class="flex gap-3">
                 <button id="saveApiKey"
                     class="flex-1 py-2 bg-china-red text-warm-rice font-mao text-lg rounded-lg hover:bg-red-800 transition-colors">
-                    保存
+                    <span data-i18n="modal.save">保存</span>
                 </button>
                 <button id="cancelApiKey"
                     class="px-4 py-2 border-2 border-dark-beige text-ink-black/70 font-serif rounded-lg hover:bg-dark-beige/20 transition-colors">
-                    取消
+                    <span data-i18n="modal.cancel">取消</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <script src="config.js"></script>
+    <script src="config.js?v=7"></script>
+    <script src="js/auth-utils.js"></script>
+    <script src="js/cloud-sync.js"></script>
+    <script src="js/auto-sync.js"></script>
+    <script src="js/auto-sync-bootstrap.js"></script>
+    <script src="js/register-pwa.js?v=4"></script>
+    <script src="js/ai-methodology.js"></script>
+    <script src="js/ai-context.js"></script>
+    <script src="js/history-case-retrieval.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/reading-guides.js"></script>
+    <script src="js/analysis-guide.js"></script>
+    <script src="js/practice-store.js"></script>
+    <script src="js/conversation-store.js"></script>
+    <script src="js/saved-answers-store.js"></script>
+    <script src="js/problem-case-store.js"></script>
+    <script src="js/guided-coach.js"></script>
     <script>
         // ===== 配置 =====
         const WORKER_URL = CONFIG.WORKER_URL;
@@ -204,51 +467,194 @@
             return WORKER_URL || OPENROUTER_API_URL;
         }
 
-        // 毛主席人格 System Prompt
-        const SYSTEM_PROMPT = `你是一个基于《毛泽东选集》的智能助手。请严格按照以下要求回答问题：
-
-## 思考方式（模仿毛主席的方法论）
-1. **辩证法思维** - 看问题要看两面，矛盾是普遍存在的，要抓主要矛盾
-2. **实践论** - 实践是检验真理的唯一标准，认识来源于实践
-3. **群众路线** - 从群众中来，到群众中去，相信群众依靠群众
-4. **调查研究** - 没有调查就没有发言权，一切从实际出发
-5. **实事求是** - 根据实际情况分析问题，不搞教条主义
-
-## 说话风格（模仿毛主席的语言特点）
-1. 善用通俗易懂的比喻（如"纸老虎"、"过河要有桥或船"、"星星之火可以燎原"）
-2. 语言简练有力，多用短句
-3. 善用反问句启发对方思考
-4. 喜欢用具体例子说明道理
-5. 语气亲切但坚定，称呼对方为"同志"
-6. 偶尔引用古语典故，但立足现实
-
-## 回答要求
-1. 每次回答都要引用毛选中的相关思想或原文，用引用格式标注
-2. 回答要结合用户的实际问题，给出具体可操作的建议
-3. 保持积极正向，给人力量和方向
-4. 如果用户的问题涉及政治敏感话题，委婉引导到学习方法论上
-5. 回答控制在300-500字左右，重点突出
-
-## 格式要求
-- 使用Markdown格式
-- 重点内容用**粗体**标注
-- 引用毛选原文用 > 引用格式
-- 在回答末尾标注思想来源，格式：📚 *参考：《文章名》*
-
-现在，请以这种风格和思维方式回答用户的问题。`;
-
         // ===== DOM 元素 =====
         const messagesContainer = document.getElementById('messages');
         const userInput = document.getElementById('userInput');
         const sendBtn = document.getElementById('sendBtn');
+        const sendBtnLabel = document.getElementById('sendBtnLabel');
         const apiKeyModal = document.getElementById('apiKeyModal');
         const apiKeyInput = document.getElementById('apiKeyInput');
         const saveApiKeyBtn = document.getElementById('saveApiKey');
         const cancelApiKeyBtn = document.getElementById('cancelApiKey');
+        const localeSelect = document.getElementById('localeSelect');
+        const analysisGuideToggle = document.getElementById('analysisGuideToggle');
+        const analysisGuidePanel = document.getElementById('analysisGuidePanel');
+        const analysisGuideToggleIcon = document.getElementById('analysisGuideToggleIcon');
+        const useAnalysisGuideBtn = document.getElementById('useAnalysisGuideBtn');
+        const saveAnalysisPracticeBtn = document.getElementById('saveAnalysisPracticeBtn');
+        const analysisGuideStatus = document.getElementById('analysisGuideStatus');
+        const directModeBtn = document.getElementById('directModeBtn');
+        const guidedModeBtn = document.getElementById('guidedModeBtn');
+        const chatModeStatus = document.getElementById('chatModeStatus');
+        const analysisGuideSection = document.getElementById('analysisGuideSection');
 
         // ===== 状态 =====
-        let conversationHistory = [];
         let isGenerating = false;
+        let maoContextSourcesPromise = null;
+        let currentLocale = window.RedWisdomI18n.getStoredLocale(localStorage);
+        let chatMode = 'direct';
+        const chatSessions = {
+            direct: {
+                conversationHistory: [],
+                activeConversationId: null,
+                draft: '',
+                initialized: true,
+            },
+            guided: {
+                conversationHistory: [],
+                activeConversationId: null,
+                draft: '',
+                initialized: false,
+                coach: null,
+                synthesisStarted: false,
+            },
+        };
+        const practiceStore = window.RedWisdomPractice.createPracticeStore(localStorage);
+        const conversationStore = window.RedWisdomConversations.createConversationStore(localStorage);
+        const savedAnswersStore = window.RedWisdomSavedAnswers.createSavedAnswersStore(localStorage);
+        const problemCaseStore = window.RedWisdomProblemCases.createProblemCaseStore(localStorage);
+        const problemCaseId = new URLSearchParams(window.location.search).get('case') || '';
+        const quoteContext = {
+            content: new URLSearchParams(window.location.search).get('quote') || '',
+            source: new URLSearchParams(window.location.search).get('source') || '',
+        };
+        const activeProblemCase = problemCaseId ? problemCaseStore.getCase(problemCaseId) : null;
+
+        if (activeProblemCase) {
+            const problemContextBar = document.getElementById('problemContextBar');
+            problemContextBar.classList.remove('hidden');
+            problemContextBar.innerHTML = `
+                <div class="flex flex-wrap items-center justify-between gap-2 border-l-4 border-china-red bg-white/80 px-4 py-3 text-sm">
+                    <div><span class="text-gray-500">正在分析：</span><strong>${escapeHtml(activeProblemCase.title)}</strong></div>
+                    <a class="text-china-red hover:underline" href="problems.html?id=${encodeURIComponent(activeProblemCase.id)}">返回问题工作台</a>
+                </div>
+            `;
+        }
+
+        if (quoteContext.content) {
+            const problemContextBar = document.getElementById('problemContextBar');
+            problemContextBar.classList.remove('hidden');
+            problemContextBar.insertAdjacentHTML('beforeend', `
+                <div class="mt-2 border-l-4 border-dark-beige bg-white/80 px-4 py-3 text-sm leading-relaxed">
+                    <span class="text-gray-500">来自语录卡：</span>“${escapeHtml(quoteContext.content)}”
+                    <span class="text-gray-500">《${escapeHtml(quoteContext.source || '毛选')}》</span>
+                </div>
+            `);
+            userInput.value = `这句话对我当前的问题有什么启发？请先解释原意，再告诉我怎样调查事实和采取一个具体行动：\n\n“${quoteContext.content}”`;
+            chatSessions.direct.draft = userInput.value;
+        }
+
+        directModeBtn.addEventListener('click', () => setChatMode('direct'));
+        guidedModeBtn.addEventListener('click', () => setChatMode('guided'));
+
+        function setChatMode(mode) {
+            const previousSession = getChatSession(chatMode);
+            previousSession.draft = userInput.value;
+            chatMode = mode === 'guided' ? 'guided' : 'direct';
+            const session = getChatSession(chatMode);
+            const guided = chatMode === 'guided';
+            directModeBtn.setAttribute('aria-pressed', String(!guided));
+            guidedModeBtn.setAttribute('aria-pressed', String(guided));
+            directModeBtn.className = guided
+                ? 'rounded-md px-4 py-2 text-sm text-ink-black hover:bg-red-50'
+                : 'rounded-md bg-china-red px-4 py-2 text-sm text-warm-rice';
+            guidedModeBtn.className = guided
+                ? 'rounded-md bg-china-red px-4 py-2 text-sm text-warm-rice'
+                : 'rounded-md px-4 py-2 text-sm text-ink-black hover:bg-red-50';
+            analysisGuideSection.classList.toggle('hidden', guided);
+            document.getElementById('directMessages').classList.toggle('hidden', guided);
+            document.getElementById('guidedMessages').classList.toggle('hidden', !guided);
+
+            if (guided) {
+                chatModeStatus.textContent = window.RedWisdomI18n.translate(currentLocale, 'chat.mode.guidedHelp');
+                if (!session.initialized) {
+                    session.coach = window.RedWisdomGuidedCoach.createGuidedCoach({
+                        realProblem: activeProblemCase?.realProblem,
+                        facts: activeProblemCase?.facts,
+                        goal: activeProblemCase?.goal,
+                        mainContradiction: activeProblemCase?.mainContradiction,
+                        investigation: (activeProblemCase?.investigationTasks || []).join('；'),
+                        availableForces: activeProblemCase?.availableForces,
+                    }, currentLocale);
+                    session.initialized = true;
+                    if (session.coach.isComplete()) {
+                        addCoachPrompt(window.RedWisdomI18n.translate(currentLocale, 'chat.mode.guidedReady'), null, 'guided');
+                    } else {
+                        addCoachPrompt(session.coach.getCurrentPrompt(), session.coach.getProgress(), 'guided');
+                    }
+                }
+                userInput.placeholder = window.RedWisdomI18n.translate(currentLocale, 'chat.mode.guidedPlaceholder');
+            } else {
+                chatModeStatus.textContent = window.RedWisdomI18n.translate(currentLocale, 'chat.mode.directHelp');
+                userInput.placeholder = window.RedWisdomI18n.translate(currentLocale, 'chat.placeholder');
+            }
+            userInput.value = session.draft;
+            userInput.style.height = 'auto';
+            userInput.style.height = Math.min(userInput.scrollHeight, 120) + 'px';
+            scrollToBottom(chatMode);
+            userInput.focus();
+        }
+
+        function getChatSession(mode = chatMode) {
+            return chatSessions[mode === 'guided' ? 'guided' : 'direct'];
+        }
+
+        function getModeMessages(mode = chatMode) {
+            return document.getElementById(mode === 'guided' ? 'guidedMessages' : 'directMessages');
+        }
+
+        localeSelect.value = currentLocale;
+        window.RedWisdomI18n.applyTranslations(document, currentLocale);
+        localeSelect.addEventListener('change', () => {
+            currentLocale = window.RedWisdomI18n.setStoredLocale(localStorage, localeSelect.value);
+            localeSelect.value = currentLocale;
+            window.RedWisdomI18n.applyTranslations(document, currentLocale);
+            chatModeStatus.textContent = window.RedWisdomI18n.translate(currentLocale, chatMode === 'guided' ? 'chat.mode.guidedHelp' : 'chat.mode.directHelp');
+            userInput.placeholder = window.RedWisdomI18n.translate(currentLocale, chatMode === 'guided' ? 'chat.mode.guidedPlaceholder' : 'chat.placeholder');
+        });
+
+        analysisGuideToggle.addEventListener('click', () => {
+            const isHidden = analysisGuidePanel.classList.toggle('hidden');
+            analysisGuideToggleIcon.textContent = isHidden ? '+' : '-';
+        });
+
+        useAnalysisGuideBtn.addEventListener('click', () => {
+            const input = getAnalysisGuideInput();
+            const normalized = window.RedWisdomAnalysisGuide.normalizeAnalysisInput(input);
+
+            if (!normalized.realProblem) {
+                setAnalysisGuideStatus('guide.needProblem');
+                return;
+            }
+
+            userInput.value = window.RedWisdomAnalysisGuide.buildGuidedAnalysisPrompt(input);
+            userInput.focus();
+            setAnalysisGuideStatus('guide.promptReady');
+        });
+
+        saveAnalysisPracticeBtn.addEventListener('click', () => {
+            const input = getAnalysisGuideInput();
+            const normalized = window.RedWisdomAnalysisGuide.normalizeAnalysisInput(input);
+
+            if (!normalized.realProblem) {
+                setAnalysisGuideStatus('guide.needProblem');
+                return;
+            }
+
+            const practice = practiceStore.createPractice({
+                ...window.RedWisdomAnalysisGuide.buildPracticeDraftFromAnalysis(input),
+                problemCaseId,
+            });
+            recordProblemActivity({
+                type: 'practice',
+                referenceId: practice.id,
+                title: practice.title,
+                detail: practice.actionPlan,
+                sourceHref: `practice.html#${encodeURIComponent(practice.id)}`,
+            });
+            setAnalysisGuideStatus('guide.practiceSaved');
+            window.location.href = 'practice.html';
+        });
 
         // ===== API Key 管理 =====
         function getApiKey() {
@@ -280,47 +686,90 @@
         cancelApiKeyBtn.addEventListener('click', hideApiKeyModal);
 
         // ===== 消息渲染 =====
-        function addUserMessage(text) {
+        function addUserMessage(text, mode = chatMode) {
             const messageDiv = document.createElement('div');
             messageDiv.className = 'flex gap-3 justify-end fade-in';
+            messageDiv.dataset.chatMessage = 'user';
             messageDiv.innerHTML = `
                 <div class="bg-china-red text-warm-rice rounded-2xl rounded-tr-sm p-4 shadow-sm max-w-[85%]">
                     <p class="font-serif leading-relaxed">${escapeHtml(text)}</p>
                 </div>
             `;
-            messagesContainer.appendChild(messageDiv);
-            scrollToBottom();
+            getModeMessages(mode).appendChild(messageDiv);
+            scrollToBottom(mode);
         }
 
-        function addAssistantMessage() {
+        function addAssistantMessage(mode = chatMode) {
             const messageDiv = document.createElement('div');
             messageDiv.className = 'flex gap-3 fade-in';
-            messageDiv.id = 'currentResponse';
+            messageDiv.dataset.chatMessage = 'assistant';
             messageDiv.innerHTML = `
                 <div class="w-10 h-10 rounded-full bg-china-red flex items-center justify-center flex-shrink-0">
                     <span class="text-warm-rice font-mao text-lg">毛</span>
                 </div>
                 <div class="flex-1 bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm max-w-[85%]">
-                    <div class="message-content font-serif text-ink-black leading-relaxed typing-cursor"></div>
+                    <div class="message-content font-serif text-ink-black leading-relaxed" role="status" aria-live="polite"></div>
                 </div>
             `;
-            messagesContainer.appendChild(messageDiv);
-            scrollToBottom();
-            return messageDiv.querySelector('.message-content');
+            getModeMessages(mode).appendChild(messageDiv);
+            scrollToBottom(mode);
+            const contentElement = messageDiv.querySelector('.message-content');
+            setAssistantStatus(contentElement, 'chat.waiting.start');
+            return contentElement;
         }
 
-        function updateAssistantMessage(content, element) {
-            element.innerHTML = marked.parse(content);
-            scrollToBottom();
+        function addCoachPrompt(text, progress = null, mode = 'guided') {
+            const messageDiv = document.createElement('div');
+            const progressText = progress ? `<span class="mb-1 block text-xs text-china-red">第 ${Math.min(progress.completed + 1, progress.total)} / ${progress.total} 步</span>` : '';
+            messageDiv.className = 'flex gap-3 fade-in';
+            messageDiv.dataset.chatMessage = 'coach';
+            messageDiv.innerHTML = `
+                <div class="w-10 h-10 rounded-full border border-china-red flex items-center justify-center flex-shrink-0"><span class="text-china-red font-mao text-lg">问</span></div>
+                <div class="flex-1 border-l-2 border-china-red bg-white p-4 max-w-[85%]">
+                    ${progressText}<p class="font-serif leading-relaxed text-ink-black">${escapeHtml(text)}</p>
+                </div>
+            `;
+            getModeMessages(mode).appendChild(messageDiv);
+            scrollToBottom(mode);
+        }
+
+        function updateAssistantMessage(content, element, mode = chatMode) {
+            element.dataset.hasContent = 'true';
+            element.removeAttribute('role');
+            element.removeAttribute('aria-live');
+            element.classList.remove('thinking-indicator');
+            element.classList.add('typing-cursor');
+            element.innerHTML = DOMPurify.sanitize(marked.parse(content));
+            scrollToBottom(mode);
+        }
+
+        function setAssistantStatus(element, key) {
+            if (!element || element.dataset.hasContent === 'true') return;
+            const status = window.RedWisdomI18n.translate(currentLocale, key);
+            element.classList.add('thinking-indicator');
+            element.innerHTML = `
+                <span>${escapeHtml(status)}</span>
+                <span class="thinking-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+            `;
+            scrollToBottom(element.closest('[data-chat-mode-panel]')?.dataset.chatModePanel || chatMode);
+        }
+
+        function setChatBusy(busy) {
+            isGenerating = busy;
+            sendBtn.disabled = busy;
+            userInput.disabled = busy;
+            sendBtn.setAttribute('aria-busy', String(busy));
+            sendBtnLabel.textContent = window.RedWisdomI18n.translate(currentLocale, busy ? 'chat.sending' : 'chat.send');
         }
 
         function finalizeAssistantMessage(element) {
             element.classList.remove('typing-cursor');
         }
 
-        function addErrorMessage(text) {
+        function addErrorMessage(text, mode = chatMode) {
             const messageDiv = document.createElement('div');
             messageDiv.className = 'flex gap-3 fade-in';
+            messageDiv.dataset.chatMessage = 'error';
             messageDiv.innerHTML = `
                 <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
                     <span class="text-china-red">⚠️</span>
@@ -329,8 +778,8 @@
                     <p class="font-serif text-red-700 leading-relaxed">${escapeHtml(text)}</p>
                 </div>
             `;
-            messagesContainer.appendChild(messageDiv);
-            scrollToBottom();
+            getModeMessages(mode).appendChild(messageDiv);
+            scrollToBottom(mode);
         }
 
         function escapeHtml(text) {
@@ -339,12 +788,91 @@
             return div.innerHTML;
         }
 
-        function scrollToBottom() {
+        function scrollToBottom(mode = chatMode) {
+            if (mode !== chatMode) return;
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
 
+        function getAnalysisGuideInput() {
+            const input = {};
+
+            document.querySelectorAll('[data-guide-field]').forEach((field) => {
+                input[field.dataset.guideField] = field.value;
+            });
+
+            return input;
+        }
+
+        function setAnalysisGuideStatus(key) {
+            analysisGuideStatus.textContent = window.RedWisdomI18n.translate(currentLocale, key);
+        }
+
+        function addPracticeSaveAction(contentElement, conversation) {
+            const wrapper = contentElement.closest('.flex-1');
+            if (!wrapper) return;
+
+            const action = document.createElement('button');
+            action.type = 'button';
+            action.className = 'mt-3 px-3 py-2 bg-china-red text-warm-rice rounded-lg text-sm hover:bg-red-800';
+            action.textContent = window.RedWisdomI18n.translate(currentLocale, 'chat.savePractice');
+            action.addEventListener('click', () => {
+                const practice = practiceStore.createPractice({
+                    ...window.RedWisdomPractice.buildPracticeDraftFromConversation(conversation),
+                    problemCaseId,
+                });
+                recordProblemActivity({
+                    type: 'practice',
+                    referenceId: practice.id,
+                    title: practice.title,
+                    detail: practice.actionPlan,
+                    sourceHref: `practice.html#${encodeURIComponent(practice.id)}`,
+                });
+                window.location.href = problemCaseId ? `practice.html?case=${encodeURIComponent(problemCaseId)}#${encodeURIComponent(practice.id)}` : 'practice.html';
+            });
+            wrapper.appendChild(action);
+        }
+
+        function addAnswerSaveAction(contentElement, answer) {
+            const wrapper = contentElement.closest('.flex-1');
+            if (!wrapper) return;
+
+            const action = document.createElement('button');
+            action.type = 'button';
+            action.className = 'mt-3 ml-2 px-3 py-2 border border-china-red text-china-red rounded-lg text-sm hover:bg-red-50';
+            action.textContent = window.RedWisdomI18n.translate(currentLocale, 'chat.saveAnswer');
+            action.addEventListener('click', () => {
+                savedAnswersStore.saveAnswer(answer);
+                action.textContent = window.RedWisdomI18n.translate(currentLocale, 'chat.answerSaved');
+                action.disabled = true;
+                action.classList.add('opacity-70', 'cursor-not-allowed');
+            });
+            wrapper.appendChild(action);
+        }
+
+        function addContinueAnswerAction(contentElement, mode) {
+            const wrapper = contentElement.closest('.flex-1');
+            if (!wrapper) return;
+
+            const action = document.createElement('button');
+            action.type = 'button';
+            action.className = 'mt-3 ml-2 px-3 py-2 border border-china-red text-china-red rounded-lg text-sm hover:bg-red-50';
+            action.textContent = window.RedWisdomI18n.translate(currentLocale, 'chat.continueAnswer');
+            action.addEventListener('click', () => {
+                action.disabled = true;
+                action.classList.add('opacity-60', 'cursor-not-allowed');
+                sendMessage(window.RedWisdomI18n.translate(currentLocale, 'chat.continuePrompt'), {
+                    displayUserMessage: false,
+                    conversationTitle: window.RedWisdomI18n.translate(currentLocale, 'chat.continueAnswer'),
+                    mode,
+                });
+            });
+            wrapper.appendChild(action);
+        }
+
         // ===== API 调用 =====
-        async function sendMessage(userMessage) {
+        async function sendMessage(userMessage, options = {}) {
+            const requestMode = options.mode === 'guided' ? 'guided' : options.mode === 'direct' ? 'direct' : chatMode;
+            const session = getChatSession(requestMode);
             const useWorker = !!WORKER_URL;
             const apiKey = getApiKey();
 
@@ -354,23 +882,50 @@
                 return;
             }
 
-            isGenerating = true;
-            sendBtn.disabled = true;
-            userInput.disabled = true;
+            setChatBusy(true);
 
-            addUserMessage(userMessage);
+            if (options.displayUserMessage !== false) addUserMessage(userMessage, requestMode);
 
-            conversationHistory.push({
+            session.conversationHistory.push({
                 role: 'user',
                 content: userMessage
             });
 
-            const contentElement = addAssistantMessage();
+            if (!session.activeConversationId) {
+                const conversation = conversationStore.createConversation({
+                    userMessage,
+                    title: options.conversationTitle || userMessage,
+                    source: requestMode === 'guided' ? 'guided-chat' : 'chat',
+                    problemCaseId,
+                });
+                session.activeConversationId = conversation.id;
+            } else {
+                conversationStore.appendMessage(session.activeConversationId, {
+                    role: 'user',
+                    content: userMessage,
+                });
+            }
+
+            const contentElement = addAssistantMessage(requestMode);
             let fullResponse = '';
+            let finishReason = '';
+            const abortController = new AbortController();
+            let inactivityTimeout = null;
+            const sourceStatusTimer = window.setTimeout(() => setAssistantStatus(contentElement, 'chat.waiting.sources'), 4000);
+            const longStatusTimer = window.setTimeout(() => setAssistantStatus(contentElement, 'chat.waiting.long'), 12000);
+
+            function armInactivityTimeout() {
+                window.clearTimeout(inactivityTimeout);
+                inactivityTimeout = window.setTimeout(() => abortController.abort(), 90000);
+            }
 
             try {
+                armInactivityTimeout();
                 const apiUrl = getApiUrl();
                 const useWorker = !!WORKER_URL;
+                const contextBundle = await buildContextMessageForUser(userMessage);
+                const contextMessage = contextBundle.message;
+                const localeMessage = window.RedWisdomI18n.createLocaleInstructionMessage(currentLocale);
 
                 const headers = {
                     'Content-Type': 'application/json'
@@ -386,81 +941,324 @@
                 const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: headers,
-                    body: JSON.stringify({
+                    body: JSON.stringify(window.RedWisdomAI.buildChatPayload({
                         model: MODEL,
-                        messages: [
-                            { role: 'system', content: SYSTEM_PROMPT },
-                            ...conversationHistory
-                        ],
-                        stream: true
-                    })
+                        contextMessage,
+                        localeMessage,
+                        conversationHistory: session.conversationHistory,
+                        mode: requestMode,
+                    })),
+                    signal: abortController.signal
                 });
 
                 if (!response.ok) {
-                    const error = await response.json();
-                    throw new Error(error.error?.message || `API 错误: ${response.status}`);
+                    throw new Error(await readApiErrorMessage(response));
                 }
 
-                const reader = response.body.getReader();
-                const decoder = new TextDecoder();
+                let streamBuffer = '';
 
-                while (true) {
-                    const { done, value } = await reader.read();
-                    if (done) break;
-
-                    const chunk = decoder.decode(value);
-                    const lines = chunk.split('\n').filter(line => line.trim() !== '');
-
-                    for (const line of lines) {
-                        if (line.startsWith('data: ')) {
-                            const data = line.slice(6);
-                            if (data === '[DONE]') continue;
-
-                            try {
-                                const parsed = JSON.parse(data);
-                                const content = parsed.choices?.[0]?.delta?.content || '';
-                                if (content) {
-                                    fullResponse += content;
-                                    updateAssistantMessage(fullResponse, contentElement);
-                                }
-                            } catch (e) {
-                                // 忽略解析错误
-                            }
+                function processStreamLine(line) {
+                    const normalized = line.trim();
+                    if (!normalized.startsWith('data:')) return;
+                    const data = normalized.slice(5).trim();
+                    if (!data || data === '[DONE]') return;
+                    try {
+                        const parsed = JSON.parse(data);
+                        finishReason = parsed.choices?.[0]?.finish_reason || finishReason;
+                        const content = parsed.choices?.[0]?.delta?.content || '';
+                        if (content) {
+                            fullResponse += content;
+                            updateAssistantMessage(fullResponse, contentElement, requestMode);
                         }
+                    } catch (error) {
+                        console.warn('忽略无法解析的流式片段');
                     }
                 }
 
-                conversationHistory.push({
+                if (response.body?.getReader) {
+                    const reader = response.body.getReader();
+                    const decoder = new TextDecoder();
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+
+                        armInactivityTimeout();
+                        streamBuffer += decoder.decode(value, { stream: true });
+                        const lines = streamBuffer.split(/\r?\n/);
+                        streamBuffer = lines.pop() || '';
+                        lines.forEach(processStreamLine);
+                    }
+                    streamBuffer += decoder.decode();
+                    if (streamBuffer.trim()) processStreamLine(streamBuffer);
+                } else {
+                    const responseText = await response.text();
+                    responseText.split(/\r?\n/).forEach(processStreamLine);
+                }
+
+                if (!fullResponse.trim()) {
+                    throw new Error(window.RedWisdomI18n.translate(currentLocale, 'chat.error.emptyResponse'));
+                }
+
+                session.conversationHistory.push({
                     role: 'assistant',
                     content: fullResponse
                 });
 
+                if (session.activeConversationId) {
+                    conversationStore.appendMessage(session.activeConversationId, {
+                        role: 'assistant',
+                        content: fullResponse,
+                        methodologyTags: inferMethodologyTags(fullResponse),
+                    });
+                    recordProblemActivity({
+                        type: 'conversation',
+                        referenceId: session.activeConversationId,
+                        title: userMessage.slice(0, 80),
+                        detail: fullResponse.slice(0, 500),
+                        sourceHref: `chat.html?case=${encodeURIComponent(problemCaseId)}`,
+                    });
+                }
+
                 finalizeAssistantMessage(contentElement);
+                addHistoryMirror(contentElement, contextBundle.historyCases, contextBundle.classification);
+                const answerTags = inferMethodologyTags(fullResponse);
+                const answerId = `${session.activeConversationId || requestMode}-assistant-${session.conversationHistory.length - 1}`;
+                addPracticeSaveAction(contentElement, {
+                    userMessage,
+                    assistantMessage: fullResponse,
+                });
+                addAnswerSaveAction(contentElement, {
+                    answerId,
+                    conversationId: session.activeConversationId,
+                    userMessage,
+                    assistantMessage: fullResponse,
+                    methodologyTags: answerTags,
+                });
+                if (finishReason === 'length' || finishReason === 'max_tokens') {
+                    addContinueAnswerAction(contentElement, requestMode);
+                }
 
             } catch (error) {
                 console.error('发送消息失败:', error);
 
-                // 移除正在显示的回复
-                const currentResponse = document.getElementById('currentResponse');
-                if (currentResponse) {
-                    currentResponse.remove();
-                }
+                contentElement.closest('[data-chat-message]')?.remove();
 
                 // 从历史中移除失败的消息
-                conversationHistory.pop();
+                session.conversationHistory.pop();
 
-                if (error.message.includes('401') || error.message.includes('Invalid')) {
-                    addErrorMessage('API Key 无效，请重新设置。');
+                if (!userInput.value) userInput.value = userMessage;
+
+                if (error.name === 'AbortError') {
+                    addErrorMessage(`${window.RedWisdomI18n.translate(currentLocale, 'chat.error.prefix')}${window.RedWisdomI18n.translate(currentLocale, 'chat.error.timeout')}`, requestMode);
+                } else if (error.message.includes('401') || error.message.includes('Invalid')) {
+                    addErrorMessage('API Key 无效，请重新设置。', requestMode);
                     showApiKeyModal();
                 } else {
-                    addErrorMessage(`出了点问题：${error.message}`);
+                    const isNetworkError = error instanceof TypeError && /fetch|network|load/i.test(error.message);
+                    const message = isNetworkError
+                        ? window.RedWisdomI18n.translate(currentLocale, 'chat.error.network')
+                        : error.message;
+                    addErrorMessage(`${window.RedWisdomI18n.translate(currentLocale, 'chat.error.prefix')}${message}`, requestMode);
                 }
             } finally {
-                isGenerating = false;
-                sendBtn.disabled = false;
-                userInput.disabled = false;
+                window.clearTimeout(inactivityTimeout);
+                window.clearTimeout(sourceStatusTimer);
+                window.clearTimeout(longStatusTimer);
+                setChatBusy(false);
                 userInput.focus();
             }
+        }
+
+        async function readApiErrorMessage(response) {
+            let payload = null;
+            try {
+                payload = await response.json();
+            } catch (error) {
+                // Non-JSON errors still receive a useful status message below.
+            }
+            if (typeof payload?.error === 'string') return payload.error;
+            if (payload?.error?.message) return payload.error.message;
+            if (payload?.message) return payload.message;
+            return `API 错误: ${response.status}`;
+        }
+
+        function recordProblemActivity(activity) {
+            if (!activeProblemCase) return;
+            problemCaseStore.addActivity(activeProblemCase.id, activity);
+        }
+
+        async function buildContextMessageForUser(userMessage) {
+            try {
+                const sources = await loadMaoContextSources();
+                const contexts = window.RedWisdomAIContext.findRelevantMaoContexts({
+                    userMessage,
+                    quotes: sources.quotes,
+                    guides: sources.guides,
+                    passages: sources.passages,
+                    limit: 4,
+                });
+                const historyCases = window.RedWisdomHistoryCases.findRelevantHistoryCases({
+                    userMessage,
+                    cases: sources.historyCases,
+                    problemTypes: sources.historyProblemTypes,
+                    noAnalogyCues: sources.noAnalogyCues,
+                    limit: 3,
+                });
+                const classification = window.RedWisdomHistoryCases.classifyProblem({
+                    userMessage,
+                    problemTypes: sources.historyProblemTypes,
+                    noAnalogyCues: sources.noAnalogyCues,
+                });
+                const originalContext = contexts.length ? window.RedWisdomAIContext.buildContextMessage(contexts) : null;
+                const historyContext = window.RedWisdomHistoryCases.buildHistoryContextMessage(historyCases);
+                const content = [originalContext?.content, historyContext?.content].filter(Boolean).join('\n\n');
+                return {
+                    message: content ? { role: 'system', content } : null,
+                    historyCases,
+                    classification,
+                };
+            } catch (error) {
+                console.warn('加载毛选上下文失败:', error);
+                return { message: null, historyCases: [], classification: null };
+            }
+        }
+
+        function loadMaoContextSources() {
+            if (!maoContextSourcesPromise) {
+                maoContextSourcesPromise = Promise.all([
+                    fetch('data/quotes.json').then(response => response.ok ? response.json() : { quotes: [] }),
+                    Promise.resolve(buildGuideContextSources()),
+                    fetch('data/search-index.json').then(response => response.ok ? response.json() : { records: [] }),
+                    fetch('data/history-cases.json').then(response => response.ok ? response.json() : { cases: [] }),
+                    fetch('data/history-problem-types.json').then(response => response.ok ? response.json() : { types: [], noAnalogyCues: [] }),
+                ]).then(([quoteData, guides, searchData, historyData, historyTypes]) => ({
+                    quotes: quoteData.quotes || [],
+                    guides,
+                    passages: searchData.records || [],
+                    historyCases: historyData.cases || [],
+                    historyProblemTypes: historyTypes.types || [],
+                    noAnalogyCues: historyTypes.noAnalogyCues || [],
+                })).catch(() => ({
+                    quotes: [],
+                    guides: [],
+                    passages: [],
+                    historyCases: [],
+                    historyProblemTypes: [],
+                    noAnalogyCues: [],
+                }));
+            }
+
+            return maoContextSourcesPromise;
+        }
+
+        function addHistoryMirror(contentElement, cases, classification) {
+            const models = window.RedWisdomHistoryCases.buildHistoryMirrorModel(cases).slice(0, 3);
+            if (!models.length) return;
+
+            const section = document.createElement('section');
+            section.className = 'history-mirror';
+            section.dataset.historyMirror = 'true';
+            section.setAttribute('aria-label', '党史镜鉴');
+
+            const typeLabel = classification?.types?.[0]?.label || '相关案例';
+            section.innerHTML = `
+                <div class="history-mirror__label">
+                    <span>党史镜鉴</span>
+                    <span class="text-xs font-normal text-gray-500">${escapeHtml(typeLabel)}</span>
+                </div>
+            `;
+
+            models.forEach((model) => {
+                const article = document.createElement('article');
+                article.className = 'history-mirror__case';
+                article.innerHTML = `
+                    <a class="history-mirror__title" href="${escapeHtml(model.readingHref)}">${escapeHtml(model.title)}</a>
+                    <p class="history-mirror__meta">${escapeHtml(model.period)} · 当时的困境：${escapeHtml(model.challenge)}</p>
+                    <p class="history-mirror__method"><strong>可迁移方法：</strong>${escapeHtml(model.transferMethod)}</p>
+                    <details class="history-mirror__boundary">
+                        <summary>查看类比边界</summary>
+                        <p class="mt-1">${escapeHtml(model.limits)}</p>
+                    </details>
+                    <div class="history-mirror__links">
+                        <a href="${escapeHtml(model.readingHref)}">阅读《${escapeHtml(model.articleTitle)}》原文</a>
+                        ${model.authorityUrl ? `<a href="${escapeHtml(model.authorityUrl)}" target="_blank" rel="noopener noreferrer">核对党史来源</a>` : ''}
+                    </div>
+                `;
+                section.appendChild(article);
+            });
+
+            contentElement.appendChild(section);
+        }
+
+        function buildGuideContextSources() {
+            if (!window.RedWisdomReadingGuides) return [];
+            const titles = new Set();
+            window.RedWisdomReadingGuides.getThemeTracks().forEach(track => {
+                track.articles.forEach(title => titles.add(title));
+            });
+
+            return [...titles].map(articleTitle => {
+                const guide = window.RedWisdomReadingGuides.getReadingGuide(articleTitle);
+                if (!guide) return null;
+                return {
+                    articleTitle,
+                    ...guide,
+                };
+            }).filter(Boolean);
+        }
+
+        function inferMethodologyTags(text) {
+            const tagKeywords = [
+                ['实践检验', ['实践', '检验']],
+                ['调查研究', ['调查', '事实']],
+                ['矛盾分析', ['矛盾']],
+                ['主要矛盾', ['主要矛盾']],
+                ['群众路线', ['群众']],
+                ['复盘', ['复盘']],
+            ];
+
+            return tagKeywords
+                .filter(([, keywords]) => keywords.some(keyword => String(text || '').includes(keyword)))
+                .map(([tag]) => tag);
+        }
+
+        function handleSubmittedMessage(message) {
+            const session = getChatSession(chatMode);
+            if (chatMode !== 'guided' || !session.coach || session.synthesisStarted) {
+                sendMessage(message, { mode: chatMode });
+                return;
+            }
+
+            if (session.coach.isComplete()) {
+                addUserMessage(message, 'guided');
+                const result = session.coach.answer(message);
+                const answers = session.coach.getAnswers();
+                const hesitationLabel = currentLocale === 'en' ? 'Current uncertainty' : '当前最犹豫的地方';
+                session.synthesisStarted = true;
+                addCoachPrompt(window.RedWisdomI18n.translate(currentLocale, 'chat.mode.guidedComplete'), null, 'guided');
+                sendMessage(`${result.finalPrompt}\n${hesitationLabel}：${message}`, {
+                    displayUserMessage: false,
+                    conversationTitle: answers.realProblem || (currentLocale === 'en' ? 'Guided analysis' : '逐步分析'),
+                    mode: 'guided',
+                });
+                return;
+            }
+
+            addUserMessage(message, 'guided');
+            const result = session.coach.answer(message);
+            if (!result.complete) {
+                addCoachPrompt(result.prompt, session.coach.getProgress(), 'guided');
+                return;
+            }
+
+            session.synthesisStarted = true;
+            addCoachPrompt(window.RedWisdomI18n.translate(currentLocale, 'chat.mode.guidedComplete'), null, 'guided');
+            const answers = session.coach.getAnswers();
+            sendMessage(result.finalPrompt, {
+                displayUserMessage: false,
+                conversationTitle: answers.realProblem || (currentLocale === 'en' ? 'Guided analysis' : '逐步分析'),
+                mode: 'guided',
+            });
         }
 
         // ===== 事件处理 =====
@@ -468,7 +1266,7 @@
             const message = userInput.value.trim();
             if (message && !isGenerating) {
                 userInput.value = '';
-                sendMessage(message);
+                handleSubmittedMessage(message);
             }
         });
 
@@ -485,7 +1283,13 @@
             userInput.style.height = Math.min(userInput.scrollHeight, 120) + 'px';
         });
 
-        // 使用 config.js 中的 API Key，无需手动设置
+        const initialPrompt = new URLSearchParams(window.location.search).get('prompt');
+        if (initialPrompt) {
+            userInput.value = initialPrompt;
+            chatSessions[chatMode].draft = initialPrompt;
+            userInput.style.height = 'auto';
+            userInput.style.height = Math.min(userInput.scrollHeight, 120) + 'px';
+        }
     </script>
 </body>
 

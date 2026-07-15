@@ -1,0 +1,6324 @@
+{
+  "version": 3,
+  "schema": "redwisdom.history-case.v3",
+  "updatedAt": "2026-07-14",
+  "sourcePolicy": "Every published case requires an exact local primary-text excerpt and at least one approved authoritative history source.",
+  "reviewPolicy": "source-reviewed means automated/editorial source audit only; editor-approved is reserved for a recorded human editorial review.",
+  "cases": [
+    {
+      "id": "hunan-investigation-1927",
+      "title": "三十二天湖南考察：用一手材料纠正主观判断",
+      "period": "1927年",
+      "challenge": "面对党内外对农民运动的责难，仅靠既有立场无法判断运动的真实状况和力量。",
+      "sourceBoundary": "史料证明的是一次特定政治运动中的实地考察及其报告，不能证明任意现代调研都能消除偏见，也未规定现代用户研究的样本量或访谈模板。",
+      "actions": [
+        "进入湖南多地进行三十二天实地考察",
+        "接触实际参与者并记录具体事实",
+        "以调查材料回应抽象责难并形成报告"
+      ],
+      "outcome": "形成《湖南农民运动考察报告》，把争论从印象和恐惧拉回到现场材料。",
+      "methodology": [
+        "调查研究",
+        "实事求是",
+        "群众路线"
+      ],
+      "applicableProblems": [
+        "用户研究不足",
+        "管理层与一线认知冲突",
+        "重大决策缺少事实",
+        "舆论与实际情况矛盾"
+      ],
+      "transferMethod": "先设计一份短周期调查：明确要核实的争议，选择直接了解情况的人，用事实表修正原假设。",
+      "limits": "个人或商业调查的规模、伦理和风险与革命运动完全不同；迁移的是获取一手材料的方法，不是历史目标或斗争方式。",
+      "keywords": [
+        "调查",
+        "用户",
+        "一线",
+        "事实",
+        "决策",
+        "偏见",
+        "访谈"
+      ],
+      "source": {
+        "articleTitle": "湖南农民运动考察报告",
+        "articleId": "001-湖南农民运动考察报告.md",
+        "anchor": "p-mh33pi"
+      },
+      "evidence": [
+        {
+          "id": "hunan-investigation-1927-primary-1",
+          "type": "primary",
+          "title": "湖南农民运动考察报告",
+          "articleId": "001-湖南农民运动考察报告.md",
+          "anchor": "p-mh33pi",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "毛泽东此文是为了答复当时党内党外对于农民革命斗争的责难而写的。为了这个目的，毛泽东到湖南做了三十二天的考察工作，并写了这一篇报告。当时党内以陈独秀为首的右倾机会主义者，不愿意接受毛泽东的意见，而坚持自己的错误见解。他们的错误，主要是被国民党的反动潮流所吓倒，不敢支持已经起来和正在起来的伟大的农民革命斗争。为了迁就国民党，他们宁愿抛弃农民这个最主要的同盟军，使工人阶级和共产党处于孤立无援的地位。一九二七年春夏国民党之所以敢于叛变，发动“清党运动”和反人民的战争，主要就是乘了共产党的这个弱点。",
+          "excerptHash": "023553cdccef584903b3f661c8a85dafcc16737f018e19f5bc28bbc0fc1f0821"
+        },
+        {
+          "id": "hunan-investigation-1927-history-2",
+          "type": "authoritative-history",
+          "title": "《美术经典中的党史》：中国画《好得很——农民运动考察报告》",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2022/01/25/VIDE1643124602092414.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "investigation",
+        "needs-communication"
+      ],
+      "retrieval": {
+        "aliases": [
+          "用户研究不足",
+          "管理层与一线认知冲突",
+          "重大决策缺少事实",
+          "舆论与实际情况矛盾",
+          "调查研究",
+          "实事求是",
+          "群众路线",
+          "调查",
+          "用户",
+          "一线",
+          "事实",
+          "决策",
+          "偏见",
+          "访谈"
+        ],
+        "negativeCues": []
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "investigation-meeting-1930",
+      "title": "调查会：把困难问题的来源和现状弄明白",
+      "period": "1930年",
+      "challenge": "干部面对陌生问题，容易只看表面就宣布意见，或在办公室里冥思苦想办法。",
+      "sourceBoundary": "原文讨论特定工作中的调查方法，不包含现代企业访谈、匿名调研或数据实验的具体规则，这些只能作为当代迁移建议。",
+      "actions": [
+        "围绕中心问题召开讨论式调查会",
+        "邀请真正了解现状和历史的人参加",
+        "先调查现状和历史，再在材料末尾形成结论"
+      ],
+      "outcome": "《反对本本主义》把调查步骤总结为一种可重复的工作方法。",
+      "methodology": [
+        "调查研究",
+        "反对本本主义",
+        "实事求是"
+      ],
+      "applicableProblems": [
+        "接手陌生业务",
+        "问题原因不清",
+        "方案反复失败",
+        "只听单一汇报"
+      ],
+      "transferMethod": "围绕一个中心问题组织小型调查会，让不同位置的人互相补证；会后分开记录事实、推断和待验证项。",
+      "limits": "调查会也可能受权力关系和群体偏见影响，需要匿名材料、数据或单独访谈交叉验证。",
+      "keywords": [
+        "困难",
+        "原因",
+        "现状",
+        "调查会",
+        "接手",
+        "陌生",
+        "汇报"
+      ],
+      "source": {
+        "articleTitle": "反对本本主义",
+        "articleId": "006-反对本本主义.md",
+        "anchor": "p-xpxgs3"
+      },
+      "evidence": [
+        {
+          "id": "investigation-meeting-1930-primary-1",
+          "type": "primary",
+          "title": "反对本本主义",
+          "articleId": "006-反对本本主义.md",
+          "anchor": "p-xpxgs3",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "（1）要开调查会作讨论式的调查 只有这样才能近于正确，才能抽出结论。那种不开调查会，不作讨论式的调查，只凭一个人讲他的经验的方法，是容易犯错误的。那种只随便问一下子，不提出中心问题在会议席上经过辩论的方法，是不能抽出近于正确的结论的。 （2）调查会到些什么人？ 要是能深切明了社会经济情况的人。以年龄说，老年人最好，因为他们有丰富的经验，不但懂得现状，而且明白因果。有斗争经验的青年人也要，因为他们有进步的思想，有锐利的观察。以职业说，工人也要，农民也要，商人也要，知识分子也要，有时兵士也要，流氓也要。自然，调查某个问",
+          "excerptHash": "715f357dfb9c96f65b4c001dddffaace57c77ab4546ab91ece01c984cd6eceba"
+        },
+        {
+          "id": "investigation-meeting-1930-history-2",
+          "type": "authoritative-history",
+          "title": "发扬调查研究好作风——重温毛泽东《反对本本主义》",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2018/08/15/ARTI1534290888138897.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "caseKind": "method-text",
+      "problemTypes": [
+        "investigation",
+        "risk-decision"
+      ],
+      "retrieval": {
+        "aliases": [
+          "接手陌生业务",
+          "问题原因不清",
+          "方案反复失败",
+          "只听单一汇报",
+          "调查研究",
+          "反对本本主义",
+          "实事求是",
+          "困难",
+          "原因",
+          "现状",
+          "调查会",
+          "接手",
+          "陌生",
+          "汇报"
+        ],
+        "negativeCues": []
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "spark-strategy-1930",
+      "title": "悲观时期的趋势判断：区分当前规模与发展条件",
+      "period": "1930年",
+      "challenge": "在力量弱小、前景不明时，组织内部对长期方向悲观，倾向于只做轻便、短期的行动。",
+      "sourceBoundary": "史料讨论的是当时革命形势与路线判断，不能表述为普遍的个人焦虑案例，也不能证明任何弱小项目最终都会成功。",
+      "actions": [
+        "重新分析具体社会条件和力量关系",
+        "区分眼前规模与可能的发展趋势",
+        "选择能够积累组织能力和群众基础的工作"
+      ],
+      "outcome": "《星星之火，可以燎原》系统回应了对前途的悲观估计，并论证长期积累的方向。",
+      "methodology": [
+        "趋势判断",
+        "力量分析",
+        "长期主义"
+      ],
+      "applicableProblems": [
+        "创业早期增长慢",
+        "长期项目看不到成果",
+        "团队士气低",
+        "是否继续投入"
+      ],
+      "transferMethod": "不要只问现在有多小；列出增长条件、积累机制、领先指标和停止条件，再决定是否继续。",
+      "limits": "历史革命形势不能证明任何创业项目必然成功；现代决策必须同时设置成本上限和退出条件。",
+      "keywords": [
+        "创业",
+        "前景",
+        "悲观",
+        "增长",
+        "长期",
+        "坚持",
+        "趋势",
+        "弱小"
+      ],
+      "source": {
+        "articleTitle": "星星之火，可以燎原",
+        "articleId": "005-星星之火，可以燎原.md",
+        "anchor": "p-17xpm52"
+      },
+      "evidence": [
+        {
+          "id": "spark-strategy-1930-primary-1",
+          "type": "primary",
+          "title": "星星之火，可以燎原",
+          "articleId": "005-星星之火，可以燎原.md",
+          "anchor": "p-17xpm52",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "在对于时局的估量和伴随而来的我们的行动问题上，我们党内有一部分同志还缺少正确的认识。他们虽然相信革命高潮不可避免地要到来，却不相信革命高潮有迅速到来的可能。因此他们不赞成争取江西的计划，而只赞成在福建、广东、江西之间的三个边界区域的流动游击，同时也没有在游击区域建立红色政权的深刻的观念，因此也就没有用这种红色政权的巩固和扩大去促进全国革命高潮的深刻的观念。他们似乎认为在距离革命高潮尚远的时期做这种建立政权的艰苦工作为徒劳，而希望用比较轻便的流动游击方式去扩大政治影响，等到全国各地争取群众的工作做好了，或做到某个地步",
+          "excerptHash": "e1a50961cc172ee248323260f5e84767160ea2353b8d1b14eb90cc6c818b8e92"
+        },
+        {
+          "id": "spark-strategy-1930-history-2",
+          "type": "authoritative-history",
+          "title": "党史百问｜如何理解“星星之火，可以燎原”？",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2022/04/06/ARTI1649243129608647.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "caseKind": "method-text",
+      "problemTypes": [
+        "long-term-pressure",
+        "risk-decision"
+      ],
+      "retrieval": {
+        "aliases": [
+          "创业早期增长慢",
+          "长期项目看不到成果",
+          "团队士气低",
+          "是否继续投入",
+          "趋势判断",
+          "力量分析",
+          "长期主义",
+          "创业",
+          "前景",
+          "悲观",
+          "增长",
+          "长期",
+          "坚持",
+          "趋势",
+          "弱小"
+        ],
+        "negativeCues": []
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "zunyi-correction-1935",
+      "title": "遵义会议纠正错误：重大损失后重新检验路线",
+      "period": "1935年",
+      "challenge": "第五次反“围剿”失败并失去根据地后，原有军事和组织路线已经造成严重损失，继续沿用会扩大危机。",
+      "sourceBoundary": "材料不能支持“仅靠一次会议立即扭转局势”或把失败完全归因于某一个人的说法；现代复盘流程属于迁移建议。",
+      "actions": [
+        "在危急处境中集中复盘军事和组织问题",
+        "根据实际后果检验原有判断和指挥方法",
+        "纠正错误路线并形成新的领导与行动方向"
+      ],
+      "outcome": "遵义会议集中讨论并纠正军事和组织上的错误，使党和红军在重大挫折后调整了方向。",
+      "methodology": [
+        "修正错误",
+        "实践检验",
+        "路线复盘"
+      ],
+      "applicableProblems": [
+        "重大失败后如何重来",
+        "方案连续失效",
+        "负责人需要承认错误",
+        "沉没成本阻碍转向"
+      ],
+      "transferMethod": "把失败拆成事实、原假设和决策过程，先停止继续放大损失的动作，再用结果证据决定保留什么、纠正什么，并设一个短周期验证点。",
+      "limits": "组织危机与个人生活或商业项目的权责结构不同；现代调整还要遵守合同、治理和专业责任，不能把一次失败简单归因于个人路线。",
+      "keywords": [
+        "失败",
+        "错误",
+        "纠正",
+        "重来",
+        "挫折",
+        "路线",
+        "损失",
+        "复盘",
+        "转向"
+      ],
+      "source": {
+        "articleTitle": "中国革命战争的战略问题",
+        "articleId": "012-中国革命战争的战略问题.md",
+        "anchor": "p-pcvcli"
+      },
+      "evidence": [
+        {
+          "id": "zunyi-correction-1935-primary-1",
+          "type": "primary",
+          "title": "中国革命战争的战略问题",
+          "articleId": "012-中国革命战争的战略问题.md",
+          "anchor": "p-pcvcli",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "毛泽东的这部著作，是为着总结第二次国内革命战争的经验而写的，当时曾在建立在陕北的红军大学作过讲演。据著者说，这部著作只完成五章，尚有战略进攻、政治工作及其他问题，因为西安事变发生，没有工夫再写，就搁笔了。这是第二次国内革命战争时期党内在军事问题上的一场大争论的结果，是表示一个路线反对另一个路线的意见。对于这个路线上的争论，一九三五年一月中共中央召开的遵义会议作出了结论，肯定了毛泽东的意见，而否定了错误路线的意见。在一九三五年十月中共中央移到陕北以后，毛泽东随即在十二月作了《论反对日本帝国主义的策略》的报告，系统地解",
+          "excerptHash": "84556cc1cf651025ae357396cc630aff76efe694e5ca1b01980f785796ac4604"
+        },
+        {
+          "id": "zunyi-correction-1935-history-2",
+          "type": "authoritative-history",
+          "title": "遵义会议：中国共产党历史的伟大转折",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/08/12/ARTI1628761880703772.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "failure-recovery",
+        "learning-growth"
+      ],
+      "retrieval": {
+        "aliases": [
+          "重大失败后如何重来",
+          "方案连续失效",
+          "负责人需要承认错误",
+          "沉没成本阻碍转向",
+          "修正错误",
+          "实践检验",
+          "路线复盘",
+          "失败",
+          "错误",
+          "纠正",
+          "重来",
+          "挫折",
+          "路线",
+          "损失",
+          "复盘",
+          "转向"
+        ],
+        "negativeCues": []
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "protracted-war-stages-1938",
+      "title": "持久战三阶段：在明显劣势下管理节奏",
+      "period": "1938年",
+      "challenge": "面对力量对比悬殊的长期战争，速胜论和亡国论都会导致错误行动。",
+      "sourceBoundary": "三阶段分析针对抗日战争，不能说个人成长、企业竞争或其他长期任务必然经历相同阶段，更不能把现实关系敌我化。",
+      "actions": [
+        "分析敌我双方的基本特点和长期变化",
+        "把长期过程划分为战略防御、相持和反攻三个阶段",
+        "承认具体进程不可预断，让阶段判断接受事实校正"
+      ],
+      "outcome": "《论持久战》提供了理解长期过程和安排阶段任务的战略框架。",
+      "methodology": [
+        "持久战",
+        "阶段论",
+        "敌我分析"
+      ],
+      "applicableProblems": [
+        "长期转型",
+        "考试或技能训练",
+        "慢性压力",
+        "与强大竞争者竞争"
+      ],
+      "transferMethod": "先判断自己处于保存力量、形成相持还是扩大优势阶段，为每个阶段只设对应任务和转段指标。",
+      "limits": "战争阶段不能机械映射到职场或关系；日常问题应避免敌我化，优先考虑合作、制度和专业支持。",
+      "keywords": [
+        "长期",
+        "阶段",
+        "劣势",
+        "竞争",
+        "转型",
+        "坚持",
+        "节奏",
+        "强大"
+      ],
+      "source": {
+        "articleTitle": "论持久战",
+        "articleId": "026-论持久战.md",
+        "anchor": "p-1nqfjpy"
+      },
+      "evidence": [
+        {
+          "id": "protracted-war-stages-1938-primary-1",
+          "type": "primary",
+          "title": "论持久战",
+          "articleId": "026-论持久战.md",
+          "anchor": "p-1nqfjpy",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "（三五）中日战争既然是持久战，最后胜利又将是属于中国的，那末，就可以合理地设想，这种持久战，将具体地表现于三个阶段之中。第一个阶段，是敌之战略进攻、我之战略防御的时期。第二个阶段，是敌之战略保守、我之准备反攻的时期。第三个阶段，是我之战略反攻、敌之战略退却的时期。三个阶段的具体情况不能预断，但依目前条件来看，战争趋势中的某些大端是可以指出的。客观现实的行程将是异常丰富和曲折变化的，谁也不能造出一本中日战争的“流年”来；然而给战争趋势描画一个轮廓，却为战略指导所必需。所以，尽管描画的东西不能尽合将来的事实，而将为事实",
+          "excerptHash": "7cea6125d4122b83816e45304015c2e98f0593a41bfed2dab5017684c0ce60f7"
+        },
+        {
+          "id": "protracted-war-stages-1938-history-2",
+          "type": "authoritative-history",
+          "title": "党史百问｜《论持久战》是怎么产生的？它的重大影响是什么？",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2022/04/21/ARTI1650539287890957.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "caseKind": "method-text",
+      "problemTypes": [
+        "long-term-pressure",
+        "risk-decision"
+      ],
+      "retrieval": {
+        "aliases": [
+          "长期转型",
+          "考试或技能训练",
+          "慢性压力",
+          "与强大竞争者竞争",
+          "持久战",
+          "阶段论",
+          "敌我分析",
+          "长期",
+          "阶段",
+          "劣势",
+          "竞争",
+          "转型",
+          "坚持",
+          "节奏",
+          "强大"
+        ],
+        "negativeCues": []
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "changgang-caixi-service-1934",
+      "title": "长冈乡与才溪乡：先解决真实需求再动员",
+      "period": "1934年",
+      "challenge": "有的基层组织只提出任务，不处理柴米、住房等实际困难，导致会议和动员都缺少响应。",
+      "sourceBoundary": "史料记载的是根据地群众工作案例，不能等同现代客户运营或员工管理，也不能证明解决一项需求必然换来支持或服从。",
+      "actions": [
+        "把群众生产和生活问题列入议事日程",
+        "对火灾、缺粮等具体困难及时组织互助",
+        "把提出任务与解决实现任务的方法结合起来"
+      ],
+      "outcome": "文中把长冈乡、才溪乡作为正面案例，与只提任务的官僚主义方法对照。",
+      "methodology": [
+        "群众路线",
+        "真实需求",
+        "工作方法"
+      ],
+      "applicableProblems": [
+        "团队不执行",
+        "用户不买单",
+        "组织动员困难",
+        "管理只压指标"
+      ],
+      "transferMethod": "先找出相关人的切身阻力，解决一个最影响参与的实际问题，再观察支持度是否变化。",
+      "limits": "组织成员和商业用户拥有独立权利与选择，不能把关心需求当成操控或交换服从的手段。",
+      "keywords": [
+        "团队",
+        "用户",
+        "需求",
+        "执行",
+        "动员",
+        "指标",
+        "支持",
+        "生活"
+      ],
+      "source": {
+        "articleTitle": "关心群众生活，注意工作方法",
+        "articleId": "010-关心群众生活，注意工作方法.md",
+        "anchor": "p-1ro09p7"
+      },
+      "evidence": [
+        {
+          "id": "changgang-caixi-service-1934-primary-1",
+          "type": "primary",
+          "title": "关心群众生活，注意工作方法",
+          "articleId": "010-关心群众生活，注意工作方法.md",
+          "anchor": "p-1ro09p7",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "有两个问题，同志们在讨论中没有着重注意，我觉得应该提出来说一说。 第一个问题是关于群众生活的问题。 我们现在的中心任务是动员广大群众参加革命战争，以革命战争打倒帝国主义和国民党，把革命发展到全国去，把帝国主义赶出中国去。谁要是看轻了这个中心任务，谁就不是一个很好的革命工作人员。我们的同志如果把这个中心任务真正看清楚了，懂得无论如何要把革命发展到全国去，那末，我们对于广大群众的切身利益问题，群众的生活问题，就一点也不能疏忽，一点也不能看轻。因为革命战争是群众的战争，只有动员群众才能进行战争，只有依靠群众才能进行战争。",
+          "excerptHash": "ac47b1c85f624188eca62086210c61cfdf1deda0c95dfbe4a2c126b0a78f0293"
+        },
+        {
+          "id": "changgang-caixi-service-1934-history-2",
+          "type": "authoritative-history",
+          "title": "共产党什么事情都替我们想到了——重温毛泽东《关心群众生活，注意工作方法》",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2020/08/26/ARTI1598398825767736.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "needs-communication",
+        "execution-experiment"
+      ],
+      "retrieval": {
+        "aliases": [
+          "团队不执行",
+          "用户不买单",
+          "组织动员困难",
+          "管理只压指标",
+          "群众路线",
+          "真实需求",
+          "工作方法",
+          "团队",
+          "用户",
+          "需求",
+          "执行",
+          "动员",
+          "指标",
+          "支持",
+          "生活"
+        ],
+        "negativeCues": []
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "border-economy-1942",
+      "title": "根据地经济困难：从节流转向发展生产",
+      "period": "1941至1942年",
+      "challenge": "外部进攻和封锁造成根据地财政经济困难，仅靠征收和削减无法持续。",
+      "sourceBoundary": "史料处理的是战争与封锁条件下的根据地经济，不能说它面对现代创业现金流问题，也不能据此断言发展生产在任何企业都优先于控制成本。",
+      "actions": [
+        "把发展农业和其他生产事业作为基础",
+        "推动机关、学校和部队尽可能生产自给",
+        "以生产结果改善财政和供给"
+      ],
+      "outcome": "《抗日时期的经济问题和财政问题》总结了在困难条件下发展经济、保障供给的工作框架。",
+      "methodology": [
+        "资源约束",
+        "自力更生",
+        "生产导向"
+      ],
+      "applicableProblems": [
+        "创业现金流紧张",
+        "预算不足",
+        "团队资源有限",
+        "只会削减成本"
+      ],
+      "transferMethod": "同时列出必须守住的消耗和可形成新增供给的能力，优先做能反复产生价值的小生产系统。",
+      "limits": "现代企业须遵守劳动、税务和财务制度，不能以历史上的生产动员替代合理薪酬或专业经营。",
+      "keywords": [
+        "现金流",
+        "预算",
+        "资源",
+        "成本",
+        "供给",
+        "困难",
+        "创业",
+        "生产"
+      ],
+      "source": {
+        "articleTitle": "抗日时期的经济问题和财政问题",
+        "articleId": "069-抗日时期的经济问题和财政问题.md",
+        "anchor": "p-68ggqc"
+      },
+      "evidence": [
+        {
+          "id": "border-economy-1942-primary-1",
+          "type": "primary",
+          "title": "抗日时期的经济问题和财政问题",
+          "articleId": "069-抗日时期的经济问题和财政问题.md",
+          "anchor": "p-68ggqc",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "这是毛泽东在陕甘宁边区高级干部会议上所作的报告《经济问题与财政问题》的第一章，原题为《关于过去工作的基本总结》。一九四一年和一九四二年是抗日战争期间根据地最困难的时期。由于日本侵略军的野蛮进攻和国民党的包围封锁，根据地的财政发生了极大的困难。毛泽东指出党必须努力领导人民发展农业生产和其他生产事业，并号召根据地的机关、学校、部队尽可能地实行生产自给，以便克服财政和经济的困难。毛泽东的《经济问题与财政问题》一书，以及《开展根据地的减租、生产和拥政爱民运动》、《组织起来》等文，就是当时中国共产党领导根据地生产运动的基本纲",
+          "excerptHash": "e392c99f1fbb2dde7baac47e8159240226ef522bb9440b7ec89dab28051ae7e3"
+        },
+        {
+          "id": "border-economy-1942-history-2",
+          "type": "authoritative-history",
+          "title": "党在延安时期对民营经济的保护和发展",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2025/03/09/ARTI1741481739972498.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "resource-constraint",
+        "priority"
+      ],
+      "retrieval": {
+        "aliases": [
+          "创业现金流紧张",
+          "预算不足",
+          "团队资源有限",
+          "只会削减成本",
+          "资源约束",
+          "自力更生",
+          "生产导向",
+          "现金流",
+          "预算",
+          "资源",
+          "成本",
+          "供给",
+          "困难",
+          "创业",
+          "生产"
+        ],
+        "negativeCues": []
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "leadership-pilot-1943",
+      "title": "一般号召与个别指导：先做试点再推广",
+      "period": "1943年",
+      "challenge": "只有普遍号召时，任务容易停留在口头；只有零散个案时，又难形成整体行动。",
+      "sourceBoundary": "原文提出一般号召与个别指导相结合，并未记载现代产品试点、A/B测试或敏捷开发；这些术语和流程只属于当代迁移。",
+      "actions": [
+        "提出共同方向",
+        "选择若干组织深入实施并突破一点",
+        "总结试点经验，再用来指导其他单位"
+      ],
+      "outcome": "《关于领导方法的若干问题》把一般和个别相结合总结为领导工作的基本方法。",
+      "methodology": [
+        "试点",
+        "从个别到一般",
+        "实践检验"
+      ],
+      "applicableProblems": [
+        "新制度推不动",
+        "产品功能推广",
+        "跨团队变革",
+        "方案未经验证"
+      ],
+      "transferMethod": "选一个有代表性且风险可控的样本，明确验证指标，跑通后记录适用条件再扩大。",
+      "limits": "试点成功可能来自特殊资源；推广前必须验证样本代表性和外部条件。",
+      "keywords": [
+        "试点",
+        "推广",
+        "制度",
+        "变革",
+        "产品",
+        "验证",
+        "样本"
+      ],
+      "source": {
+        "articleTitle": "关于领导方法的若干问题",
+        "articleId": "070-关于领导方法的若干问题.md",
+        "anchor": "p-yntdkq"
+      },
+      "evidence": [
+        {
+          "id": "leadership-pilot-1943-primary-1",
+          "type": "primary",
+          "title": "关于领导方法的若干问题",
+          "articleId": "070-关于领导方法的若干问题.md",
+          "anchor": "p-yntdkq",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "（一）我们共产党人无论进行何项工作，有两个方法是必须采用的，一是一般和个别相结合，二是领导和群众相结合。 （二）任何工作任务，如果没有一般的普遍的号召，就不能动员广大群众行动起来。但如果只限于一般号召，而领导人员没有具体地直接地从若干组织将所号召的工作深入实施，突破一点，取得经验，然后利用这种经验去指导其他单位，就无法考验自己提出的一般号召是否正确，也无法充实一般号召的内容，就有使一般号召归于落空的危险。例如一九四二年的各地整风，凡有成绩者，都是采用了一般号召和个别指导相结合的方法；凡无成绩者，都是没有采用此种方法",
+          "excerptHash": "3f8ee76ed1ba6b2a513462bbe8299950948e07f155498309628926fd67fe2a2f"
+        },
+        {
+          "id": "leadership-pilot-1943-history-2",
+          "type": "authoritative-history",
+          "title": "毛泽东的14个工作方法",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2023/12/25/ARTI1703494307830529.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "caseKind": "method-text",
+      "problemTypes": [
+        "execution-experiment",
+        "learning-growth"
+      ],
+      "retrieval": {
+        "aliases": [
+          "新制度推不动",
+          "产品功能推广",
+          "跨团队变革",
+          "方案未经验证",
+          "试点",
+          "从个别到一般",
+          "实践检验",
+          "推广",
+          "制度",
+          "变革",
+          "产品",
+          "验证",
+          "样本"
+        ],
+        "negativeCues": []
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "rectification-learning-1942",
+      "title": "延安整风：用批评和自我批评解决思想与实践脱节",
+      "period": "1942至1945年",
+      "challenge": "组织扩大后出现主观主义、宗派主义和理论脱离实践等问题，内部认识与工作方法需要系统校正。",
+      "sourceBoundary": "延安整风是特定党史事件，不能等同一般团队冲突，不能把其全部过程简化为一次复盘，也不能为现代组织中的强制检讨提供依据。",
+      "actions": [
+        "把理论同实际工作联系起来检验",
+        "开展认真而非敷衍的批评和自我批评",
+        "以“惩前毖后、治病救人”为原则纠正错误并保持团结"
+      ],
+      "outcome": "整风工作纠正了多种错误思想，增强了组织在共同任务上的思想统一和行动能力。",
+      "methodology": [
+        "批评与自我批评",
+        "理论联系实际",
+        "团结纠错"
+      ],
+      "applicableProblems": [
+        "团队内耗",
+        "意见不合",
+        "复盘变成追责",
+        "经验和事实脱节",
+        "组织文化问题"
+      ],
+      "transferMethod": "围绕共同目标开一次基于事实的复盘：每个人先陈述自己的判断和证据，再说明自身可改之处，最后只确定少量可验证的协作规则。",
+      "limits": "现代组织中的反馈必须尊重人格、隐私和劳动权利；不能借自我批评施压、羞辱或制造服从，也不能替代正式申诉和治理机制。",
+      "keywords": [
+        "团队",
+        "内耗",
+        "批评",
+        "自我批评",
+        "整风",
+        "团结",
+        "主观主义",
+        "宗派主义",
+        "复盘",
+        "协作"
+      ],
+      "source": {
+        "articleTitle": "论联合政府",
+        "articleId": "082-论联合政府.md",
+        "anchor": "p-g97dxc"
+      },
+      "evidence": [
+        {
+          "id": "rectification-learning-1942-primary-1",
+          "type": "primary",
+          "title": "论联合政府",
+          "articleId": "082-论联合政府.md",
+          "anchor": "p-g97dxc",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "同志们，我们已经了解了我们的任务和我们为完成这些任务所采取的政策，那末，我们应该用怎样的工作态度去执行这些政策和完成这些任务呢？ 目前国际国内的形势，在我们和中国人民面前显示了光明的前途，具备了前所未有的有利条件，这是显然的，毫无疑义的。但是同时，依然存在着严重的困难条件。谁要是只看见光明一面，不看见困难一面，谁就会不能很好地为实现党的任务而斗争。 我们的党和中国人民一道，不论在整个党的二十四年历史中，在八年抗日战争中，为中国人民创造了巨大的力量，我们的工作成绩是很显然的，毫无疑义的。但是同时，我们的工作中依然存在",
+          "excerptHash": "aa9ec71a5e827f37e0cef4599e2ce333ce9314b95dcd58dada51fb93c41fde9b"
+        },
+        {
+          "id": "rectification-learning-1942-history-2",
+          "type": "authoritative-history",
+          "title": "延安整风运动",
+          "publisher": "共产党员网",
+          "url": "https://news.12371.cn/2013/01/21/ARTI1358745995685187.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "team-conflict",
+        "learning-growth"
+      ],
+      "retrieval": {
+        "aliases": [
+          "团队内耗",
+          "意见不合",
+          "复盘变成追责",
+          "经验和事实脱节",
+          "组织文化问题",
+          "批评与自我批评",
+          "理论联系实际",
+          "团结纠错",
+          "团队",
+          "内耗",
+          "批评",
+          "自我批评",
+          "整风",
+          "团结",
+          "主观主义",
+          "宗派主义",
+          "复盘",
+          "协作"
+        ],
+        "negativeCues": []
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "focus-front-1950",
+      "title": "不要四面出击：复杂局面中减少对立面",
+      "period": "1950年",
+      "challenge": "新局面下任务和矛盾很多，如果同时在所有方向施压，会造成普遍紧张并分散力量。",
+      "sourceBoundary": "原文处理的是新中国成立初期的政治和社会关系，不能说现代个人或企业面对同一种局面，也不能推出所有冲突都应回避。",
+      "actions": [
+        "识别当前需要集中处理的对象",
+        "对其他方面有所缓和并争取中间力量",
+        "把有限力量集中到主要方向"
+      ],
+      "outcome": "《不要四面出击》提出避免树敌过多、集中力量处理主要方面的策略。",
+      "methodology": [
+        "主要矛盾",
+        "统一战线",
+        "力量集中"
+      ],
+      "applicableProblems": [
+        "任务过多",
+        "多方冲突",
+        "创业同时做太多市场",
+        "改革阻力大"
+      ],
+      "transferMethod": "列出所有战线，明确唯一主攻方向、需要稳定的关系和暂缓事项，每周重新核对。",
+      "limits": "日常关系不应敌我化；缓和不是隐瞒或操控，重大利益冲突仍需透明协商和法律边界。",
+      "keywords": [
+        "冲突",
+        "任务太多",
+        "优先级",
+        "阻力",
+        "集中",
+        "市场",
+        "改革",
+        "关系"
+      ],
+      "source": {
+        "articleTitle": "不要四面出击",
+        "articleId": "165-不要四面出击.md",
+        "anchor": "p-19rrbnv"
+      },
+      "evidence": [
+        {
+          "id": "focus-front-1950-primary-1",
+          "type": "primary",
+          "title": "不要四面出击",
+          "articleId": "165-不要四面出击.md",
+          "anchor": "p-19rrbnv",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "总之，我们不要四面出击。四面出击，全国紧张，很不好。我们绝不可树敌太多，必须在一个方面有所让步，有所缓和，集中力量向另一方面进攻。我们一定要做好工作，使工人、农民、小手工业者都拥护我们，使民族资产阶级和知识分子中的绝大多数人不反对我们。这样一来，国民党残余、特务、土匪就孤立了，地主阶级就孤立了，台湾、西藏的反动派就孤立了，帝国主义在我国人民中间就孤立了。我们的政策就是这样，我们的战略策略方针就是这样，三中全会的路线就是这样。",
+          "excerptHash": "17c71b2c81db468187f4f5fe7724359eab0a4d570ca40310368888af4a3742c6"
+        },
+        {
+          "id": "focus-front-1950-history-2",
+          "type": "authoritative-history",
+          "title": "中国共产党第七届中央委员会第三次全体会议",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2012/06/14/ARTI1339680590901954.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "caseKind": "method-text",
+      "problemTypes": [
+        "priority",
+        "risk-decision"
+      ],
+      "retrieval": {
+        "aliases": [
+          "任务过多",
+          "多方冲突",
+          "创业同时做太多市场",
+          "改革阻力大",
+          "主要矛盾",
+          "统一战线",
+          "力量集中",
+          "冲突",
+          "任务太多",
+          "优先级",
+          "阻力",
+          "集中",
+          "市场",
+          "改革",
+          "关系"
+        ],
+        "negativeCues": []
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "gutian-organization-correction-1929",
+      "title": "古田会议：队伍快速扩大后怎样统一方向和工作方法",
+      "period": "1929年",
+      "challenge": "红四军及其党组织在快速发展中成员来源复杂，又缺少持续教育，单纯军事观点、极端民主化、主观主义等错误思想妨碍了正确路线的执行。",
+      "sourceBoundary": "古田会议处于党和军队建设语境，不能表述为现代公司文化案例，史料也没有提供现代招聘、绩效或组织设计方案。",
+      "actions": [
+        "逐项列出错误思想的具体表现、来源和危害",
+        "以政治教育和调查研究纠正认识根源",
+        "用民主集中、组织批评和明确制度巩固新的工作方法"
+      ],
+      "outcome": "古田会议通过相关决议，确立思想建党、政治建军的重要原则，成为党和人民军队建设史上的重要里程碑。",
+      "methodology": [
+        "组织建设",
+        "思想教育",
+        "制度纠错",
+        "实事求是"
+      ],
+      "applicableProblems": [
+        "团队快速扩张后方向混乱",
+        "成员背景差异大",
+        "制度与文化脱节",
+        "只重业务结果忽视共同目标"
+      ],
+      "transferMethod": "先把组织问题拆成可观察行为、形成原因和制度缺口，再分别采用事实教育、流程调整和反馈机制，避免只给成员贴标签。",
+      "limits": "现代企业和社会组织不是党或军队；不得照搬政治组织方式，更不能用强制思想改造替代劳动权利、专业治理和正常异议机制。",
+      "keywords": [
+        "扩张",
+        "新人",
+        "组织",
+        "方向",
+        "制度",
+        "教育",
+        "文化",
+        "执行",
+        "团队建设"
+      ],
+      "source": {
+        "articleTitle": "关于纠正党内的错误思想",
+        "articleId": "004-关于纠正党内的错误思想.md",
+        "anchor": "p-1pslcyl"
+      },
+      "evidence": [
+        {
+          "id": "gutian-organization-correction-1929-primary-1",
+          "type": "primary",
+          "title": "关于纠正党内的错误思想",
+          "articleId": "004-关于纠正党内的错误思想.md",
+          "anchor": "p-1pslcyl",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "这是毛泽东为中国共产党红军第四军第九次代表大会写的决议的第一部分。中国人民军队的建设，是经过了艰难的道路的。中国红军（抗日时期是八路军、新四军，现在是人民解放军）从一九二七年八月一日南昌起义创始，到一九二九年十二月，经过了两年多的时间。在这个时期内，红军中的共产党和各种错误思想作斗争，学到了许多东西，积累了相当丰富的经验。毛泽东写的这个决议，就是这些经验的总结。这个决议使红军肃清旧式军队的影响，完全建立在马克思列宁主义的基础上。这个决议不但在红军第四军实行了，后来各部分红军都先后不等地照此做了，这样就使整个中国红军",
+          "excerptHash": "2f66017e3cb827a67ebb218da177be50edfef4b724c99fb1a7500e710ef64390"
+        },
+        {
+          "id": "gutian-organization-correction-1929-history-2",
+          "type": "authoritative-history",
+          "title": "古田会议中的批评和自我批评",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2024/01/08/ARTI1704700112442529.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "organization-governance",
+        "team-conflict"
+      ],
+      "retrieval": {
+        "aliases": [
+          "团队快速扩张后方向混乱",
+          "成员背景差异大",
+          "制度与文化脱节",
+          "只重业务结果忽视共同目标",
+          "组织建设",
+          "思想教育",
+          "制度纠错",
+          "实事求是",
+          "扩张",
+          "新人",
+          "组织",
+          "方向",
+          "制度",
+          "教育",
+          "文化",
+          "执行",
+          "团队建设"
+        ],
+        "negativeCues": []
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "anti-liberalism-accountability-1937",
+      "title": "反对自由主义：把回避分歧和背后议论转成有依据的组织讨论",
+      "period": "1937年",
+      "challenge": "全民族抗战开始、组织任务加重和成员构成复杂时，熟人情面、会外议论、明知不对却不提出等行为会削弱纪律和共同任务。",
+      "sourceBoundary": "“自由主义”在此有特定党史含义，不能泛指现代自由主义或任何异议；史料不能支持监控私下表达、强迫公开表态或取消正当申诉渠道。",
+      "actions": [
+        "列举自由主义在组织生活中的具体表现",
+        "主张开展积极而有原则的思想讨论",
+        "要求把批评放回组织程序并对共同任务负责"
+      ],
+      "outcome": "《反对自由主义》在党内教育中广泛传播，并在延安整风及后来的理论学习中发挥了思想引导作用。",
+      "methodology": [
+        "原则性沟通",
+        "组织纪律",
+        "公开讨论",
+        "责任意识"
+      ],
+      "applicableProblems": [
+        "会议不说会后抱怨",
+        "熟人关系妨碍反馈",
+        "团队回避冲突",
+        "执行决定时各行其是"
+      ],
+      "transferMethod": "为重要分歧设置正式讨论入口，要求意见包含事实、影响和建议；讨论行为和任务，不攻击个人，也不把沉默当作同意。",
+      "limits": "这里的“自由主义”有特定党史含义，不能等同现代政治自由主义；现实组织不得借此压制正当异议、举报权、言论权或心理安全。",
+      "keywords": [
+        "背后议论",
+        "会议",
+        "抱怨",
+        "熟人",
+        "反馈",
+        "回避冲突",
+        "纪律",
+        "各行其是"
+      ],
+      "source": {
+        "articleTitle": "反对自由主义",
+        "articleId": "020-反对自由主义.md",
+        "anchor": "p-93gwr2"
+      },
+      "evidence": [
+        {
+          "id": "anti-liberalism-accountability-1937-primary-1",
+          "type": "primary",
+          "title": "反对自由主义",
+          "articleId": "020-反对自由主义.md",
+          "anchor": "p-93gwr2",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "我们主张积极的思想斗争，因为它是达到党内和革命团体内的团结使之利于战斗的武器。每个共产党员和革命分子，应该拿起这个武器。 但是自由主义取消思想斗争，主张无原则的和平，结果是腐朽庸俗的作风发生，使党和革命团体的某些组织和某些个人在政治上腐化起来。 自由主义有各种表现。 因为是熟人、同乡、同学、知心朋友、亲爱者、老同事、老部下，明知不对，也不同他们作原则上的争论，任其下去，求得和平和亲热。或者轻描淡写地说一顿，不作彻底解决，保持一团和气。结果是有害于团体，也有害于个人。这是第一种。 不负责任的背后批评，不是积极地向组织",
+          "excerptHash": "d34a197ec02e433ff0674183020f0a20c90e2bc1374e39cd11b3cb5042e9270e"
+        },
+        {
+          "id": "anti-liberalism-accountability-1937-history-2",
+          "type": "authoritative-history",
+          "title": "学习毛泽东同志《反对自由主义》",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2019/06/17/ARTI1560728029703252.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "caseKind": "method-text",
+      "problemTypes": [
+        "team-conflict",
+        "organization-governance"
+      ],
+      "retrieval": {
+        "aliases": [
+          "会议不说会后抱怨",
+          "熟人关系妨碍反馈",
+          "团队回避冲突",
+          "执行决定时各行其是",
+          "原则性沟通",
+          "组织纪律",
+          "公开讨论",
+          "责任意识",
+          "背后议论",
+          "会议",
+          "抱怨",
+          "熟人",
+          "反馈",
+          "回避冲突",
+          "纪律",
+          "各行其是"
+        ],
+        "negativeCues": []
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "united-front-independence-1938",
+      "title": "统一战线中的独立自主：合作时既守共同目标也守必要边界",
+      "period": "1938年",
+      "challenge": "抗日民族统一战线需要长期合作，但党内出现迁就和无原则服从的倾向，可能把合作变成混同并削弱独立行动能力。",
+      "sourceBoundary": "史料讨论抗日民族统一战线，不是商业客户或私人关系案例；合同条款、决策权限和退出机制均属于现代迁移建议。",
+      "actions": [
+        "把长期合作和支持抗战作为共同原则",
+        "在合作中保持思想、政治和组织上的独立性",
+        "反对把一切行动无条件交由合作方决定"
+      ],
+      "outcome": "党的六届六中全会进一步阐明了既统一又独立的方针，批评了“一切经过统一战线”“一切服从统一战线”的错误主张。",
+      "methodology": [
+        "统一战线",
+        "独立自主",
+        "原则性与灵活性",
+        "合作边界"
+      ],
+      "applicableProblems": [
+        "战略合作边界不清",
+        "依赖单一大客户",
+        "联合项目决策权冲突",
+        "合作中失去自身能力"
+      ],
+      "transferMethod": "合作前写清共同目标、各自保留事项、决策权限和退出条件；合作中既履行共同承诺，也持续建设不依赖对方的核心能力。",
+      "limits": "抗日民族统一战线的政治和战争背景不能机械类比商业合作或私人关系；现代合作必须以合同、平等协商和法律责任为边界。",
+      "keywords": [
+        "合作",
+        "伙伴",
+        "大客户",
+        "依赖",
+        "边界",
+        "决策权",
+        "独立",
+        "联合项目",
+        "退出"
+      ],
+      "source": {
+        "articleTitle": "统一战线中的独立自主问题",
+        "articleId": "028-统一战线中的独立自主问题.md",
+        "anchor": "p-1cuknk2"
+      },
+      "evidence": [
+        {
+          "id": "united-front-independence-1938-primary-1",
+          "type": "primary",
+          "title": "统一战线中的独立自主问题",
+          "articleId": "028-统一战线中的独立自主问题.md",
+          "anchor": "p-1cuknk2",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "用长期合作支持长期战争，就是说使阶级斗争服从于今天抗日的民族斗争，这是统一战线的根本原则。在此原则下，保存党派和阶级的独立性，保存统一战线中的独立自主；不是因合作和统一而牺牲党派和阶级的必要权利，而是相反，坚持党派和阶级的一定限度的权利；这才有利于合作，也才有所谓合作。否则就是将合作变成了混一，必然牺牲统一战线。在民族斗争中，阶级斗争是以民族斗争的形式出现的，这种形式，表现了两者的一致性。一方面，阶级的政治经济要求在一定的历史时期内以不破裂合作为条件；又一方面，一切阶级斗争的要求都应以民族斗争的需要（为着抗日）为出",
+          "excerptHash": "70cec1e90deb09b28134b6ab88c4f5d8ae837c51d972fdabac2401c22b84bbbd"
+        },
+        {
+          "id": "united-front-independence-1938-history-2",
+          "type": "authoritative-history",
+          "title": "“六中全会是决定中国之命运的”",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/11/03/ARTI1635893454466253.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "caseKind": "method-text",
+      "problemTypes": [
+        "cooperation-boundaries",
+        "risk-decision"
+      ],
+      "retrieval": {
+        "aliases": [
+          "战略合作边界不清",
+          "依赖单一大客户",
+          "联合项目决策权冲突",
+          "合作中失去自身能力",
+          "统一战线",
+          "独立自主",
+          "原则性与灵活性",
+          "合作边界",
+          "合作",
+          "伙伴",
+          "大客户",
+          "依赖",
+          "边界",
+          "决策权",
+          "独立",
+          "联合项目",
+          "退出"
+        ],
+        "negativeCues": []
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "organize-mutual-aid-1943",
+      "title": "组织起来：资源分散时用自愿互助释放已有力量",
+      "period": "1943年",
+      "challenge": "抗日根据地物资困难，个体劳动者、机关、学校和部队的生产力量分散，仅靠号召难以形成持续供给。",
+      "sourceBoundary": "材料记载的是根据地生产与互助合作，不能说现代社区或团队面临同一问题，也不能据此支持强制劳动、无偿协作或预设收益。",
+      "actions": [
+        "把能够参加生产的力量组织起来",
+        "发展建立在自愿和互利基础上的劳动互助组织",
+        "总结劳动英雄和生产模范的经验并推广"
+      ],
+      "outcome": "1943年的边区生产运动取得明显进展；《组织起来》进一步总结了互助合作和群众生产的方法。",
+      "methodology": [
+        "组织起来",
+        "互助合作",
+        "资源整合",
+        "群众创造"
+      ],
+      "applicableProblems": [
+        "资源分散但互补",
+        "个人单干效率低",
+        "社区互助",
+        "小团队缺少完整能力"
+      ],
+      "transferMethod": "先列出每个人可提供和需要的资源，围绕一个具体任务建立小规模、可退出、收益透明的自愿互助机制，再用结果决定是否扩大。",
+      "limits": "历史生产动员不能成为强制劳动或无偿加班的理由；现代协作必须尊重自愿、报酬、公平分配、隐私和退出权。",
+      "keywords": [
+        "互助",
+        "资源共享",
+        "能力互补",
+        "社区",
+        "单干",
+        "协作",
+        "人手不足",
+        "组织起来"
+      ],
+      "source": {
+        "articleTitle": "组织起来",
+        "articleId": "074-组织起来.md",
+        "anchor": "p-1tyvl1b"
+      },
+      "evidence": [
+        {
+          "id": "organize-mutual-aid-1943-primary-1",
+          "type": "primary",
+          "title": "组织起来",
+          "articleId": "074-组织起来.md",
+          "anchor": "p-1tyvl1b",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "今天共产党中央招待陕甘宁边区从农民群众中、工厂中、部队中、机关学校中选举出来的男女劳动英雄，以及在生产中的模范工作者，我代表中央来讲几句话。我想讲的意思，拿几个字来概括，就是“组织起来”。边区的农民群众和部队、机关、学校、工厂中的群众，根据去年冬天中共中央西北局所召集的高级干部会议的决议，今年进行了一年的生产运动。这一年的生产，在各方面都有了很大的成绩和很大的进步，边区的面目为之一新。事实已经完全证明：高级干部会议的方针是正确的。高级干部会议方针的主要点，就是把群众组织起来，把一切老百姓的力量、一切部队机关学校的力",
+          "excerptHash": "33ac229b91f00e4de9cc4465a64fa8e19d0a29a21698c7e7c80814440d3a17d7"
+        },
+        {
+          "id": "organize-mutual-aid-1943-history-2",
+          "type": "authoritative-history",
+          "title": "毛主席视察南泥湾",
+          "publisher": "共产党员网",
+          "url": "https://news.12371.cn/2015/07/21/ARTI1437450189925282.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "resource-constraint",
+        "cooperation-boundaries"
+      ],
+      "retrieval": {
+        "aliases": [
+          "资源分散但互补",
+          "个人单干效率低",
+          "社区互助",
+          "小团队缺少完整能力",
+          "组织起来",
+          "互助合作",
+          "资源整合",
+          "群众创造",
+          "互助",
+          "资源共享",
+          "能力互补",
+          "社区",
+          "单干",
+          "协作",
+          "人手不足"
+        ],
+        "negativeCues": []
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "reporting-system-1948",
+      "title": "建立报告制度：组织扩张后用短报告减少信息失真",
+      "period": "1948年",
+      "challenge": "解放区逐渐连成一片、组织规模和正规化程度提高后，分散状态下形成的信息不及时和无纪律倾向妨碍统一判断。",
+      "sourceBoundary": "原文记载的是报告和请示不足、中央不了解或不充分了解重要活动及政策；没有记载“汇报太多”“汇报空洞”或现代意义的“信息孤岛”，不得把这些用户措辞写成当年史实。",
+      "actions": [
+        "明确主要负责人定期亲自提交综合报告",
+        "报告集中说明动态、问题、倾向和处理办法",
+        "限制篇幅并明确频率，使信息能够持续汇总"
+      ],
+      "outcome": "中央随后补充和完善请示报告制度，形成更加正规的制度安排，加强了集中统一领导。",
+      "methodology": [
+        "信息反馈",
+        "请示报告",
+        "组织纪律",
+        "问题导向"
+      ],
+      "applicableProblems": [
+        "组织扩张后信息孤岛",
+        "负责人不了解一线",
+        "汇报冗长没有重点",
+        "重大决策缺少反馈"
+      ],
+      "transferMethod": "设置固定周期的负责人短报告，只写关键变化、风险、争议、已采取行动和需要决策的事项，并保留紧急例外通道。",
+      "limits": "请示报告不能演变为事事审批、表格主义或监控员工；现代组织还要保护隐私、商业秘密和依法授权的专业判断。",
+      "keywords": [
+        "汇报",
+        "报告",
+        "信息孤岛",
+        "管理层",
+        "一线",
+        "组织扩张",
+        "反馈",
+        "重大决策",
+        "沟通"
+      ],
+      "source": {
+        "articleTitle": "关于建立报告制度",
+        "articleId": "113-关于建立报告制度.md",
+        "anchor": "p-1y33927"
+      },
+      "evidence": [
+        {
+          "id": "reporting-system-1948-primary-1",
+          "type": "primary",
+          "title": "关于建立报告制度",
+          "articleId": "113-关于建立报告制度.md",
+          "anchor": "p-o9c7l4",
+          "supports": [
+            "context",
+            "challenge"
+          ],
+          "excerpt": "这是毛泽东为中共中央起草的对党内的指示。这个指示中所规定的报告制度，是中共中央坚持民主集中制、反对无纪律无政府倾向的长期斗争在新条件下的一个发展。这个问题在这时之所以特别重要，是因为革命形势已经有了极大的进展，许多解放区已经连成一片，许多城市已经解放或者即将解放，人民解放军和人民解放战争的正规性程度大为提高，全国胜利已经在望。这种情况，要求党迅速克服存在于党内和军队内的任何无纪律无政府状态，把一切必须和可能集中的权力集中于中央。建立严格的报告制度，就是中共中央为此目的而采取的一个重要步骤。关于这个问题，参看本卷《一",
+          "excerptHash": "c7bedb5b298460b9175186ada8b999bfdbd6ffa1c759a4568bb682281f30955a"
+        },
+        {
+          "id": "reporting-system-1948-primary-2",
+          "type": "primary",
+          "title": "关于建立报告制度",
+          "articleId": "113-关于建立报告制度.md",
+          "anchor": "p-1y33927",
+          "supports": [
+            "actions"
+          ],
+          "excerpt": "为了及时反映情况，使中央有可能在事先或事后帮助各地不犯或少犯错误，争取革命战争更加伟大的胜利起见，从今年起，规定如下的报告制度。 （一）各中央局和分局，由书记负责（自己动手，不要秘书代劳），每两个月，向中央和中央主席作一次综合报告。报告内容包括该区军事、政治、土地改革、整党、经济、宣传和文化等各项活动的动态，活动中发生的问题和倾向，对于这些问题和倾向的解决方法。报告文字每次一千字左右为限，除特殊情况外，至多不要超过两千字。一次不能写完全部问题时，分两次写。或一次着重写几个问题，对其余问题则不着重写，只略带几笔；另一",
+          "excerptHash": "610b51a61b6ed1367b43c4aebdf1c50f04f917d9a528a1ad612d5a6682627fd4"
+        },
+        {
+          "id": "reporting-system-1948-history-3",
+          "type": "authoritative-history",
+          "title": "请示报告制度是怎样发展起来的",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2019/02/15/ARTI1550213777758229.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "caseKind": "method-text",
+      "problemTypes": [
+        "organization-governance",
+        "needs-communication"
+      ],
+      "retrieval": {
+        "aliases": [
+          "组织扩张后信息孤岛",
+          "负责人不了解一线",
+          "汇报冗长没有重点",
+          "重大决策缺少反馈",
+          "信息反馈",
+          "请示报告",
+          "组织纪律",
+          "问题导向",
+          "汇报",
+          "报告",
+          "信息孤岛",
+          "管理层",
+          "一线",
+          "组织扩张",
+          "反馈",
+          "重大决策",
+          "沟通"
+        ],
+        "negativeCues": []
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "differentiated-land-policy-1948",
+      "title": "不同地区不同策略：同一目标不能用同一成熟度假设推进",
+      "period": "1948年",
+      "challenge": "老解放区、半老区和新解放区的土地改革基础明显不同，如果不区分条件而采用同一办法，容易造成政策失误。",
+      "sourceBoundary": "史料针对不同地区的土地改革政策，不能表述为现代业务分层、产品推广或人员管理案例；成熟度模型和推广指标属于当代迁移。",
+      "actions": [
+        "按解放时间和既有工作基础把地区分为三类",
+        "老区以调整和组织整顿为主，半老区完整实施土地法",
+        "新区分阶段推进，并根据当地力量关系安排步骤"
+      ],
+      "outcome": "相关指示明确了三类地区的不同实施策略，为避免不顾条件的整齐划一提供了政策依据。",
+      "methodology": [
+        "分类指导",
+        "具体问题具体分析",
+        "阶段推进",
+        "政策适配"
+      ],
+      "applicableProblems": [
+        "多地区推广成熟度不同",
+        "同一制度落地效果差异大",
+        "总部政策一刀切",
+        "新老团队基础不同"
+      ],
+      "transferMethod": "先按成熟度、已有基础和风险把对象分层，为每层设置不同起点、动作和完成标准；不要用平均进度掩盖真实差异。",
+      "limits": "土地改革涉及特定历史制度和社会关系，不能类比现代财产处置或人事斗争；现代政策必须遵守法律、产权和程序正义。",
+      "keywords": [
+        "一刀切",
+        "分类",
+        "分层",
+        "成熟度",
+        "地区",
+        "推广",
+        "新老团队",
+        "因地制宜",
+        "政策落地"
+      ],
+      "source": {
+        "articleTitle": "在不同地区实施土地法的不同策略",
+        "articleId": "116-在不同地区实施土地法的不同策略.md",
+        "anchor": "p-1lxh2w6"
+      },
+      "evidence": [
+        {
+          "id": "differentiated-land-policy-1948-primary-1",
+          "type": "primary",
+          "title": "在不同地区实施土地法的不同策略",
+          "articleId": "116-在不同地区实施土地法的不同策略.md",
+          "anchor": "p-1lxh2w6",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "关于土地法⑴的实施，应当分三种地区，采取不同策略。 一、日本投降以前的老解放区。这种地区大体上早已分配土地，只须调整一部分土地。这种地区的工作中心，应当是按照平山经验⑵，用党内党外结合的方法整理党的队伍，解决党同群众间的矛盾。在这种老区，不是照土地法再来分配一次土地，也不是人为地、勉强地组织贫农团去领导农会，而是在农会中组织贫农小组。这种小组的积极分子，可以担负农会和农村政权中的领导工作，但是不应当排斥中农，规定一定由贫农做领导工作。这种地区的农会和农村政权的领导工作，应当由贫农和中农中思想正确、办事公道的积极分子",
+          "excerptHash": "70be88f4b9ce2d9696d9fe312d99d8fb23903aa5f1702cb3984a46d5a13389bd"
+        },
+        {
+          "id": "differentiated-land-policy-1948-history-2",
+          "type": "authoritative-history",
+          "title": "党史百年·天天读｜2月3日",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/02/02/ARTI1612232138439452.shtml",
+          "supports": [
+            "context",
+            "actions"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "execution-experiment",
+        "risk-decision"
+      ],
+      "retrieval": {
+        "aliases": [
+          "多地区推广成熟度不同",
+          "同一制度落地效果差异大",
+          "总部政策一刀切",
+          "新老团队基础不同",
+          "分类指导",
+          "具体问题具体分析",
+          "阶段推进",
+          "政策适配",
+          "一刀切",
+          "分类",
+          "分层",
+          "成熟度",
+          "地区",
+          "推广",
+          "新老团队",
+          "因地制宜",
+          "政策落地"
+        ],
+        "negativeCues": []
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "committee-working-method-1949",
+      "title": "党委会的工作方法：任务繁重时怎样形成有效的集体领导",
+      "period": "1949年",
+      "challenge": "全国胜利前夕，各级领导机构负责地区扩大、任务繁重，即使方针正确，信息不通、会议失效和工作方法不当仍会妨碍执行。",
+      "sourceBoundary": "原文总结党委会工作方法，并不能证明所有现代会议都低效或都应采用同一格式；责任人、期限和指标等设计属于当代迁移。",
+      "actions": [
+        "发挥集体成员作用并处理好负责人和成员关系",
+        "把问题摆到桌面上，互通情报并在重要问题上形成共同认识",
+        "抓紧重点、用数量判断情况，并提前通知会议议题"
+      ],
+      "outcome": "党的七届二中全会结论总结出十二条党委会工作方法，强调党内民主、集体领导和工作作风。",
+      "methodology": [
+        "集体领导",
+        "会议方法",
+        "信息共享",
+        "抓住重点"
+      ],
+      "applicableProblems": [
+        "管理会议低效",
+        "领导班子信息不通",
+        "团队无法形成决议",
+        "任务繁重缺少重点"
+      ],
+      "transferMethod": "为核心会议建立固定机制：会前明确议题和事实，会中公开分歧并形成责任人、期限和判断指标，会后跟踪少数重点决定。",
+      "limits": "党委工作方法不能替代现代企业董事会、管理层和专业岗位的法定权责；集体讨论也不能模糊个人责任或压制专业意见。",
+      "keywords": [
+        "开会",
+        "会议低效",
+        "领导班子",
+        "共识",
+        "议题",
+        "负责人",
+        "任务繁重",
+        "信息共享",
+        "集体决策"
+      ],
+      "source": {
+        "articleTitle": "党委会的工作方法",
+        "articleId": "147-党委会的工作方法.md",
+        "anchor": "p-on2zr6"
+      },
+      "evidence": [
+        {
+          "id": "committee-working-method-1949-primary-1",
+          "type": "primary",
+          "title": "党委会的工作方法",
+          "articleId": "147-党委会的工作方法.md",
+          "anchor": "p-on2zr6",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "一、党委书记要善于当“班长”。党的委员会有一二十个人，像军队的一个班，书记好比是“班长”。要把这个班带好，的确不容易。目前各中央局、分局都领导很大的地区，担负很繁重的任务。领导工作不仅要决定方针政策，还要制定正确的工作方法。有了正确的方针政策，如果在工作方法上疏忽了，还是要发生问题。党委要完成自己的领导任务，就必须依靠党委这“一班人”，充分发挥他们的作用。书记要当好“班长”，就应该很好地学习和研究。书记、副书记如果不注意向自己的“一班人”作宣传工作和组织工作，不善于处理自己和委员之间的关系，不去研究怎样把会议开好，",
+          "excerptHash": "0bb685069a0429b25c90683ab8d16f1e8272b1f380e948b50b32205434567844"
+        },
+        {
+          "id": "committee-working-method-1949-history-2",
+          "type": "authoritative-history",
+          "title": "西柏坡会议",
+          "publisher": "共产党员网",
+          "url": "https://news.12371.cn/2015/04/13/ARTI1428889774780878.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "caseKind": "method-text",
+      "problemTypes": [
+        "organization-governance",
+        "priority",
+        "team-conflict"
+      ],
+      "retrieval": {
+        "aliases": [
+          "管理会议低效",
+          "领导班子信息不通",
+          "团队无法形成决议",
+          "任务繁重缺少重点",
+          "集体领导",
+          "会议方法",
+          "信息共享",
+          "抓住重点",
+          "开会",
+          "会议低效",
+          "领导班子",
+          "共识",
+          "议题",
+          "负责人",
+          "任务繁重",
+          "集体决策"
+        ],
+        "negativeCues": []
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "internal-contradictions-method-1957",
+      "title": "人民内部矛盾：先判断问题性质，再选择讨论、批评和说服的方法",
+      "period": "1957年",
+      "challenge": "社会主义建设中仍存在领导与群众、集体与个人等内部矛盾，如果不区分矛盾性质而一律采用强制方式，会扩大冲突并妨碍问题解决。",
+      "sourceBoundary": "原文讨论社会主义政治生活中的人民内部矛盾，不能直接诊断所有人际冲突，也不能替代现代法律程序、专业调解、医疗或心理支持。",
+      "actions": [
+        "区分不同性质的矛盾，不把内部意见分歧简单敌我化",
+        "对思想和是非问题采用讨论、批评和说服教育",
+        "从团结愿望出发，经过批评达到新的团结，并检查官僚主义等现实原因"
+      ],
+      "outcome": "《关于正确处理人民内部矛盾的问题》系统提出相关分析框架，把正确处理人民内部矛盾概括为国家政治生活的重要主题。",
+      "methodology": [
+        "矛盾分类",
+        "团结批评团结",
+        "民主讨论",
+        "反对简单化"
+      ],
+      "applicableProblems": [
+        "把普通分歧当成立场敌对",
+        "管理者用命令解决认知问题",
+        "团队冲突升级",
+        "投诉背后存在制度原因"
+      ],
+      "transferMethod": "先判断是利益分配、事实认知、价值分歧、程序问题还是违法伤害；对可协商分歧用事实讨论和制度改进，对违法或安全问题另走专业程序。",
+      "limits": "历史政治概念不能直接给现代个人贴“人民”或“敌人”标签；涉及暴力、歧视、违法、医疗或心理危机时，应优先使用法律和专业支持。",
+      "keywords": [
+        "敌我化",
+        "内部矛盾",
+        "意见分歧",
+        "命令",
+        "说服",
+        "投诉",
+        "官僚主义",
+        "冲突升级",
+        "沟通"
+      ],
+      "source": {
+        "articleTitle": "关于正确处理人民内部矛盾的问题",
+        "articleId": "216-关于正确处理人民内部矛盾的问题.md",
+        "anchor": "p-18993xi"
+      },
+      "evidence": [
+        {
+          "id": "internal-contradictions-method-1957-primary-1",
+          "type": "primary",
+          "title": "关于正确处理人民内部矛盾的问题",
+          "articleId": "216-关于正确处理人民内部矛盾的问题.md",
+          "anchor": "p-br1opl",
+          "supports": [
+            "context",
+            "challenge"
+          ],
+          "excerpt": "我们的国家现在是空前统一的。资产阶级民主革命和社会主义革命的胜利，以及社会主义建设的成就，迅速地改变了旧中国的面貌。祖国的更加美好的将来，正摆在我们的面前。人民所厌恶的国家分裂和混乱的局面，已经一去不复返了。我国的六亿人民正在工人阶级和共产党的领导下，团结一致地进行着伟大的社会主义建设。国家的统一，人民的团结，国内各民族的团结，这是我们的事业必定要胜利的基本保证。但是，这并不是说在我们的社会里已经没有任何的矛盾了。没有矛盾的想法是不符合客观实际的天真的想法。在我们的面前有两类社会矛盾，这就是敌我之间的矛盾和人民内部",
+          "excerptHash": "bfc747ae4a46e54eca534c7148c5126faf298ba923c585c53685e3a52cea9aba"
+        },
+        {
+          "id": "internal-contradictions-method-1957-primary-2",
+          "type": "primary",
+          "title": "关于正确处理人民内部矛盾的问题",
+          "articleId": "216-关于正确处理人民内部矛盾的问题.md",
+          "anchor": "p-18993xi",
+          "supports": [
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "在一九四二年，我们曾经把解决人民内部矛盾的这种民主的方法，具体化为一个公式，叫做“团结——批评——团结”。讲详细一点，就是从团结的愿望出发，经过批评或者斗争使矛盾得到解决，从而在新的基础上达到新的团结。按照我们的经验，这是解决人民内部矛盾的一个正确的方法。一九四二年，我们采用了这个方法解决共产党内部的矛盾，就是教条主义者和广大党员群众之间的矛盾，教条主义思想和马克思主义思想之间的矛盾。“左”倾教条主义者从前采用的党内斗争方法叫做“残酷斗争，无情打击”。这是一个错误的方法。我们在批评“左”倾教条主义的时候，就没有采取",
+          "excerptHash": "c56f415444e91a86f7b268c0e74f5d2118306fc49d2a74dd05a184836217a805"
+        },
+        {
+          "id": "internal-contradictions-method-1957-history-3",
+          "type": "authoritative-history",
+          "title": "百炼成钢｜重温经典：《关于正确处理人民内部矛盾的问题》",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/05/08/VIDE1620458649750412.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "caseKind": "method-text",
+      "problemTypes": [
+        "team-conflict",
+        "risk-decision"
+      ],
+      "retrieval": {
+        "aliases": [
+          "把普通分歧当成立场敌对",
+          "管理者用命令解决认知问题",
+          "团队冲突升级",
+          "投诉背后存在制度原因",
+          "矛盾分类",
+          "团结批评团结",
+          "民主讨论",
+          "反对简单化",
+          "敌我化",
+          "内部矛盾",
+          "意见分歧",
+          "命令",
+          "说服",
+          "投诉",
+          "官僚主义",
+          "冲突升级",
+          "沟通"
+        ],
+        "negativeCues": []
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "stakeholder-map-1925",
+      "title": "先辨明利益关系：从社会位置判断可依靠、可争取和有冲突的力量",
+      "period": "1925年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "investigation",
+        "cooperation-boundaries",
+        "risk-decision"
+      ],
+      "challenge": "大革命初期，各阶级对革命的态度并不相同，如果只凭口号或人数判断敌友，就无法形成可靠的联合与行动策略。",
+      "sourceBoundary": "原文分析的是1920年代中国社会阶级及其革命态度，不能把现代同事、客户或家人贴成政治敌友；现代迁移只能分析利益、约束和合作意愿。",
+      "actions": [
+        "从各阶级的经济地位和现实利益入手",
+        "区分稳定支持者、可能争取者和根本利益冲突者",
+        "据此决定联合对象和行动重点"
+      ],
+      "outcome": "《中国社会各阶级的分析》提出从具体社会经济关系辨明敌友，为革命力量分析提供了明确框架。",
+      "methodology": [
+        "利益相关者分析",
+        "调查研究",
+        "统一战线"
+      ],
+      "applicableProblems": [
+        "合作方态度反复",
+        "利益相关者很多",
+        "不知道争取谁",
+        "关键人物立场不明"
+      ],
+      "transferMethod": "列出相关人的实际利益、可承受成本、决策权和既往行动，区分核心支持、可协商、中立和存在根本冲突四类，再设计不同沟通方式。",
+      "limits": "现代关系必须尊重法律、人格和平等协商，不能使用阶级标签替代个体事实，也不能把意见不同者敌我化。",
+      "keywords": [
+        "利益相关者",
+        "敌友",
+        "合作对象",
+        "立场",
+        "争取",
+        "联盟",
+        "关键人物"
+      ],
+      "source": {
+        "articleTitle": "中国社会各阶级的分析",
+        "articleId": "000-中国社会各阶级的分析.md",
+        "anchor": "p-h6xbo2"
+      },
+      "evidence": [
+        {
+          "id": "stakeholder-map-1925-primary-1",
+          "type": "primary",
+          "title": "中国社会各阶级的分析",
+          "articleId": "000-中国社会各阶级的分析.md",
+          "anchor": "p-h6xbo2",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "错了路而革命不失败的。我们的革命要有不领错路和一定成功的把握，不可不注意团结我们的真正的朋友，以攻击我们的真正的敌人。我们要分辨真正的敌友，不可不将中国社会各阶级的经济地位及其对于革命的态度，作一个大概的分析。 中国社会各阶级的情况是怎样的呢？ 地主阶级和买办阶级。在经济落后的半殖民地的中国，地主阶级和买办阶级完全是国际资产阶级的附庸，其生存和发展，是附属于帝国主义的。这些阶级代表中国最落后的和最反动的生产关系，阻碍中国生产力的发展。他们和中国革命的目的完全不相容。特别是大地主阶级和大",
+          "excerptHash": "5ac56dd09674f0858f7de9464d2f118b012568ce39c94ddefb5fb781bb22ec5a"
+        },
+        {
+          "id": "stakeholder-map-1925-history-2",
+          "type": "authoritative-history",
+          "title": "党史百年·天天读｜12月1日",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/11/29/ARTI1638189319567558.shtml",
+          "supports": [
+            "context",
+            "actions",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "合作方态度反复",
+          "利益相关者很多",
+          "不知道争取谁",
+          "关键人物立场不明",
+          "利益相关者分析",
+          "调查研究",
+          "统一战线",
+          "利益相关者",
+          "敌友",
+          "合作对象",
+          "立场",
+          "争取",
+          "联盟",
+          "关键人物"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "investigation-outline-participants-1930",
+      "title": "调查会怎么开：围绕中心问题让真正知情者互相补证",
+      "period": "1930年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "investigation",
+        "team-conflict",
+        "learning-growth"
+      ],
+      "challenge": "调查容易退化成随便问几句、只听一个人讲经历或收集互不关联的材料，因而仍然得不出可靠结论。",
+      "sourceBoundary": "原文讨论社会经济调查会，不等于现代焦点小组或统计抽样；参与者数量、隐私保护和数据方法必须按现代专业标准另行设计。",
+      "actions": [
+        "事先提出中心问题和调查纲目",
+        "邀请真正了解情况且位置不同的人参加",
+        "采用讨论式调查，让不同说法在会上相互校正"
+      ],
+      "outcome": "《反对本本主义》系统列出了调查会的对象、人数、纲目、深度和记录等方法。",
+      "methodology": [
+        "调查会",
+        "交叉验证",
+        "问题导向"
+      ],
+      "applicableProblems": [
+        "访谈信息互相矛盾",
+        "只听单一负责人",
+        "会议没有结论",
+        "问题原因复杂"
+      ],
+      "transferMethod": "围绕一个可回答的中心问题，邀请3至7名来自不同环节的知情者；会前发出事实清单，会中标注一致事实、争议判断和待补证项目。",
+      "limits": "现代调查需避免权力压迫和从众效应；涉及敏感议题时应增加匿名渠道、单独访谈或独立数据。",
+      "keywords": [
+        "调查会",
+        "中心问题",
+        "知情者",
+        "交叉验证",
+        "访谈",
+        "不同说法"
+      ],
+      "source": {
+        "articleTitle": "反对本本主义",
+        "articleId": "006-反对本本主义.md",
+        "anchor": "p-xpxgs3"
+      },
+      "evidence": [
+        {
+          "id": "investigation-outline-participants-1930-primary-1",
+          "type": "primary",
+          "title": "反对本本主义",
+          "articleId": "006-反对本本主义.md",
+          "anchor": "p-xpxgs3",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "（1）要开调查会作讨论式的调查 只有这样才能近于正确，才能抽出结论。那种不开调查会，不作讨论式的调查，只凭一个人讲他的经验的方法，是容易犯错误的。那种只随便问一下子，不提出中心问题在会议席上经过辩论的方法，是不能抽出近于正确的结论的。 （2）调查会到些什么人？ 要是能深切明了社会经济情况的人。以年龄说，老年人最好，因为他们有丰富",
+          "excerptHash": "ba00f38780485a846b3c09a8b3e82e43d4232f33da663e5de721a6f42dabac76"
+        },
+        {
+          "id": "investigation-outline-participants-1930-history-2",
+          "type": "authoritative-history",
+          "title": "发扬调查研究好作风——重温毛泽东《反对本本主义》",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2018/08/15/ARTI1534290888138897.shtml",
+          "supports": [
+            "context",
+            "actions"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "访谈信息互相矛盾",
+          "只听单一负责人",
+          "会议没有结论",
+          "问题原因复杂",
+          "调查会",
+          "交叉验证",
+          "问题导向",
+          "中心问题",
+          "知情者",
+          "访谈",
+          "不同说法"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "rural-investigation-leadership-1941",
+      "title": "不了解下情不能指导：把调查变成领导工作的前置条件",
+      "period": "1941年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "investigation",
+        "organization-governance",
+        "learning-growth"
+      ],
+      "challenge": "一些干部保留粗枝大叶、不求甚解的作风，在没有真正了解基层情况时仍承担指导工作。",
+      "sourceBoundary": "原文针对党的农村工作与社会阶级调查，不能据此声称管理者必须亲自调查所有事项；现代组织仍需合理授权和专业分工。",
+      "actions": [
+        "把了解真实情况作为指导工作的前提",
+        "向社会各阶层调查其生动情况",
+        "既亲自调查，也利用可靠材料研究具体问题"
+      ],
+      "outcome": "《农村调查》的序言和跋重新整理调查材料，用以帮助干部掌握研究问题的方法。",
+      "methodology": [
+        "下情调查",
+        "领导方法",
+        "实事求是"
+      ],
+      "applicableProblems": [
+        "管理层脱离一线",
+        "决策依赖汇报",
+        "基层情况不透明",
+        "负责人凭经验指挥"
+      ],
+      "transferMethod": "重大决定前写明必须了解的三项下情，至少取得一份一手材料和一份独立数据，并记录哪些仍是未知。",
+      "limits": "调查不等于越级管理；应尊重职责边界、个人隐私和专业判断，避免管理者用零散见闻推翻系统证据。",
+      "keywords": [
+        "下情",
+        "指导工作",
+        "基层",
+        "一手材料",
+        "粗枝大叶",
+        "管理层"
+      ],
+      "source": {
+        "articleTitle": "《农村调查》的序言和跋",
+        "articleId": "058-《农村调查》的序言和跋.md",
+        "anchor": "p-ntasu4"
+      },
+      "evidence": [
+        {
+          "id": "rural-investigation-leadership-1941-primary-1",
+          "type": "primary",
+          "title": "《农村调查》的序言和跋",
+          "articleId": "058-《农村调查》的序言和跋.md",
+          "anchor": "p-ntasu4",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "粗枝大叶、不求甚解的作风，甚至全然不了解下情，却在那里担负指导工作，这是异常危险的现象。对于中国各个社会阶级的实际情况，没有真正具体的了解，真正好的领导是不会有的。 要了解情况，唯一的方法是向社会作调查，调查社会各阶级的生动情况。对于担负指导工作的人来说，有计划地抓住几个城市、几个乡村，用马克思主义的基本观点，即阶级分析的方法，作几次周密的调查，乃是了解情况的最基本的方法。只有这样，才能使我们具有对中国社会问题的最基础的知识。要做这件事，第一是眼睛向下，不要",
+          "excerptHash": "073cdd6ae47193de25513d5761027845d8c7cdeb006330cc36483c11a3a4595a"
+        },
+        {
+          "id": "rural-investigation-leadership-1941-history-2",
+          "type": "authoritative-history",
+          "title": "毛泽东的14个工作方法",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2023/12/25/ARTI1703494307830529.shtml",
+          "supports": [
+            "context",
+            "actions"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "管理层脱离一线",
+          "决策依赖汇报",
+          "基层情况不透明",
+          "负责人凭经验指挥",
+          "下情调查",
+          "领导方法",
+          "实事求是",
+          "下情",
+          "指导工作",
+          "基层",
+          "一手材料",
+          "粗枝大叶",
+          "管理层"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "practice-facts-before-theory-1937",
+      "title": "知识从实践中来：先用事实检验认识，再讨论理论是否适用",
+      "period": "1937年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "investigation",
+        "learning-growth",
+        "risk-decision"
+      ],
+      "challenge": "党内教条主义者拒绝革命经验，经验主义者又拘守片段经验，两者都不能正确理解全局和行动。",
+      "sourceBoundary": "《实践论》是对中国革命经验的哲学总结，不是现代科学实验手册；医疗、法律和工程问题必须使用各自专业证据标准。",
+      "actions": [
+        "承认识识依赖社会实践",
+        "把感性材料经过分析上升为理性认识",
+        "再回到实践中检验认识是否符合客观规律"
+      ],
+      "outcome": "《实践论》系统阐述了认识与实践的关系，为克服教条主义和经验主义提供了认识论框架。",
+      "methodology": [
+        "实践检验",
+        "事实判断",
+        "反对教条主义"
+      ],
+      "applicableProblems": [
+        "理论和现实不符",
+        "只凭一次经验",
+        "争论没有证据",
+        "方案需要验证"
+      ],
+      "transferMethod": "把当前结论写成可证伪假设，列出支持与反对事实，设计一个低风险行动取得新证据，再更新判断。",
+      "limits": "不能用“实践”否定成熟科学共识或跳过安全审查；个人体验也不能自动代表普遍规律。",
+      "keywords": [
+        "实践",
+        "事实",
+        "理论",
+        "经验主义",
+        "教条主义",
+        "验证",
+        "假设"
+      ],
+      "source": {
+        "articleTitle": "实践论",
+        "articleId": "016-实践论.md",
+        "anchor": "p-niogqj"
+      },
+      "evidence": [
+        {
+          "id": "practice-facts-before-theory-1937-primary-1",
+          "type": "primary",
+          "title": "实践论",
+          "articleId": "016-实践论.md",
+          "anchor": "p-niogqj",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "合于外界的规律性，人们就能变失败为胜利，所谓“失败者成功之母”，“吃一堑长一智”，就是这个道理。辩证唯物论的认识论把实践提到第一的地位，认为人的认识一点也不能离开实践，排斥一切否认实践重要性、使认识离开实践的错误理论。列宁这样说过：“实践高于（理论的）认识，因为它不但有普遍性的品格，而且还有直接现实性的品格。”⑴马克思主义的哲学辩证唯物论有两个最显著的特点：一个是它的阶级性，公然申明辩证唯物论是为无产阶级服务的；再一个是它的实践性，强调理论对于实践的依赖关系，理",
+          "excerptHash": "6a5bde302615dbfe4a9a96f781943d15aad9856d6f45077192e4a7cefcdd396e"
+        },
+        {
+          "id": "practice-facts-before-theory-1937-history-2",
+          "type": "authoritative-history",
+          "title": "读懂用好《实践论》《矛盾论》的哲学智慧",
+          "publisher": "共产党员网",
+          "url": "https://news.12371.cn/2017/09/01/ARTI1504217870275177.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "理论和现实不符",
+          "只凭一次经验",
+          "争论没有证据",
+          "方案需要验证",
+          "实践检验",
+          "事实判断",
+          "反对教条主义",
+          "实践",
+          "事实",
+          "理论",
+          "经验主义",
+          "教条主义",
+          "验证",
+          "假设"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "red-power-conditions-1928",
+      "title": "弱小力量能否立足：逐项分析存在和发展的具体条件",
+      "period": "1928年",
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "long-term-pressure",
+        "risk-decision",
+        "priority"
+      ],
+      "challenge": "井冈山斗争处于四周白色政权包围之中，党内有人因困难和危急而怀疑红色政权能否长期存在。",
+      "sourceBoundary": "这是特定历史条件下的革命根据地分析，不能证明任何弱小组织或创业项目都会发展，也不能把军事政治条件套到商业竞争。",
+      "actions": [
+        "分析中国社会结构和各派力量冲突形成的外部条件",
+        "检查群众、党组织、武装、地势和经济给养等内部条件",
+        "根据条件稳定程度选择逐步推进而非盲目冒进"
+      ],
+      "outcome": "相关决议分析了红色政权发生、存在和发展的原因及条件，回答了当时“红旗到底打得多久”的疑问。",
+      "methodology": [
+        "条件分析",
+        "力量分析",
+        "长期判断"
+      ],
+      "applicableProblems": [
+        "小团队能否活下来",
+        "项目基础薄弱",
+        "长期前景不明",
+        "是否应该继续投入"
+      ],
+      "transferMethod": "把“能不能成”改写为条件清单：外部窗口、核心支持、组织能力、必要资源和现金安全线；逐项给出证据与停止条件。",
+      "limits": "历史成功不能作为现代项目成功概率；商业和个人决策必须同时评估合规、资金、机会成本和退出方案。",
+      "keywords": [
+        "弱小",
+        "生存条件",
+        "红旗多久",
+        "立足",
+        "继续投入",
+        "外部窗口",
+        "基础"
+      ],
+      "source": {
+        "articleTitle": "中国的红色政权为什么能够存在？",
+        "articleId": "002-中国的红色政权为什么能够存在？.md",
+        "anchor": "p-omul76"
+      },
+      "evidence": [
+        {
+          "id": "red-power-conditions-1928-primary-1",
+          "type": "primary",
+          "title": "中国的红色政权为什么能够存在？",
+          "articleId": "002-中国的红色政权为什么能够存在？.md",
+          "anchor": "p-omul76",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "一国之内，在四围白色政权的包围中，有一小块或若干小块红色政权的区域长期地存在，这是世界各国从来没有的事。这种奇事的发生，有其独特的原因。而其存在和发展，亦必有相当的条件。第一，它的发生不能在任何帝国主义的国家，也不能在任何帝国主义直接统治的殖民地⑺，必然是在帝国主义间接统治的经济落后的半殖民地的中国。因为这种奇怪现象必定伴着另外一件奇怪现象，那就是白色政权之间的战争。帝国主义和国内买办豪绅阶级支持着的各派新旧军阀，从民国元年以来，相互间进行着继续不断的战争，这是半",
+          "excerptHash": "9837d619169af61459cb6ad2afb4f96e43363590c0b00847a690060db000fa36"
+        },
+        {
+          "id": "red-power-conditions-1928-history-2",
+          "type": "authoritative-history",
+          "title": "党史百年·天天读｜10月5日",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/09/27/ARTI1632747807069979.shtml",
+          "supports": [
+            "context",
+            "actions",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "小团队能否活下来",
+          "项目基础薄弱",
+          "长期前景不明",
+          "是否应该继续投入",
+          "条件分析",
+          "力量分析",
+          "长期判断",
+          "弱小",
+          "生存条件",
+          "红旗多久",
+          "立足",
+          "继续投入",
+          "外部窗口",
+          "基础"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "principal-contradiction-focus-1937",
+      "title": "复杂问题先找主要矛盾：识别最能影响其他问题的关键关系",
+      "period": "1937年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "priority",
+        "risk-decision",
+        "learning-growth"
+      ],
+      "challenge": "复杂事物同时存在许多矛盾，如果把所有问题等量处理，就难以决定行动重点和战略次序。",
+      "sourceBoundary": "主要矛盾是分析概念，不是凭直觉宣布的唯一原因；现代复杂系统可能需要多目标权衡、专业模型和持续修正。",
+      "actions": [
+        "列出同一过程中的多组矛盾",
+        "判断哪一组矛盾的存在和发展规定或影响其他矛盾",
+        "随着过程阶段变化重新检查主要矛盾"
+      ],
+      "outcome": "《矛盾论》系统阐述主要矛盾和主要矛盾方面，形成分析复杂过程重点的方法。",
+      "methodology": [
+        "主要矛盾",
+        "重点判断",
+        "动态分析"
+      ],
+      "applicableProblems": [
+        "问题太多无法下手",
+        "优先级争论",
+        "根因不清",
+        "资源分散"
+      ],
+      "transferMethod": "画出问题之间的因果和依赖关系，优先处理能解除最多阻塞、且证据最充分的一项；为主要矛盾判断设复查日期。",
+      "limits": "不能把人简单定义为“矛盾”；涉及安全、违法或基本权利的问题，即使不是业务重点也不能忽略。",
+      "keywords": [
+        "主要矛盾",
+        "优先级",
+        "根因",
+        "复杂问题",
+        "重点",
+        "依赖关系"
+      ],
+      "source": {
+        "articleTitle": "矛盾论",
+        "articleId": "017-矛盾论.md",
+        "anchor": "p-15j7hhl"
+      },
+      "evidence": [
+        {
+          "id": "principal-contradiction-focus-1937-primary-1",
+          "type": "primary",
+          "title": "矛盾论",
+          "articleId": "017-矛盾论.md",
+          "anchor": "p-15j7hhl",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "在矛盾特殊性的问题中，还有两种情形必须特别地提出来加以分析，这就是主要的矛盾和主要的矛盾方面。 在复杂的事物的发展过程中，有许多的矛盾存在，其中必有一种是主要的矛盾，由于它的存在和发展规定或影响着其他矛盾的存在和发展。 例如在资本主义社会中，无产阶级和资产阶级这两个矛盾着的力量是主要的矛盾；其他的矛盾力量，例如，残存的封建阶级和资产阶级的矛盾，农民小资产者和资产阶级的矛盾，无产阶级和农民小资产者的矛盾，自由资产阶级和垄断资产阶级的矛盾，资产阶级的民主主义和资产",
+          "excerptHash": "773968addc4b9051aa5b961e071df076ac5b3f544e7e3548b57e6fbfd994a50e"
+        },
+        {
+          "id": "principal-contradiction-focus-1937-history-2",
+          "type": "authoritative-history",
+          "title": "读懂用好《实践论》《矛盾论》的哲学智慧",
+          "publisher": "共产党员网",
+          "url": "https://news.12371.cn/2017/09/01/ARTI1504217870275177.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "问题太多无法下手",
+          "优先级争论",
+          "根因不清",
+          "资源分散",
+          "主要矛盾",
+          "重点判断",
+          "动态分析",
+          "优先级",
+          "根因",
+          "复杂问题",
+          "重点",
+          "依赖关系"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "contradiction-particularity-1937",
+      "title": "相似问题不能照搬答案：先研究对象和阶段的特殊性",
+      "period": "1937年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "risk-decision",
+        "execution-experiment",
+        "learning-growth"
+      ],
+      "challenge": "教条主义容易把一般原理直接套用到性质、阶段和条件不同的问题上，忽略矛盾的特殊性。",
+      "sourceBoundary": "原文论述哲学上的矛盾特殊性，不能代替具体行业知识；“具体分析”也不能成为拒绝通用法律、安全规范或科学规律的借口。",
+      "actions": [
+        "区分不同事物矛盾的质的差别",
+        "分析同一过程不同阶段的特点",
+        "把一般原理同对象的具体条件结合"
+      ],
+      "outcome": "《矛盾论》把对矛盾特殊性的研究作为正确认识事物和决定方法的重要基础。",
+      "methodology": [
+        "具体问题具体分析",
+        "矛盾特殊性",
+        "阶段判断"
+      ],
+      "applicableProblems": [
+        "照搬别人方案失败",
+        "不同团队效果相反",
+        "同一办法过期",
+        "行业条件不同"
+      ],
+      "transferMethod": "采用案例前先列出目标、资源、权责、成熟度和风险五项差异；只有关键条件相近时才迁移，并先小范围验证。",
+      "limits": "特殊性分析不是任意化；需要公开判断依据，并接受数据、专业标准和结果检验。",
+      "keywords": [
+        "照搬",
+        "特殊性",
+        "情况不同",
+        "阶段不同",
+        "因地制宜",
+        "条件"
+      ],
+      "source": {
+        "articleTitle": "矛盾论",
+        "articleId": "017-矛盾论.md",
+        "anchor": "p-1eojadd"
+      },
+      "evidence": [
+        {
+          "id": "contradiction-particularity-1937-primary-1",
+          "type": "primary",
+          "title": "矛盾论",
+          "articleId": "017-矛盾论.md",
+          "anchor": "p-1eojadd",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "依存破裂后，又各用何种具体的方法和对方作斗争。研究这些问题，是十分重要的事情。列宁说：马克思主义的最本质的东西，马克思主义的活的灵魂，就在于具体地分析具体的情况⑾。就是说的这个意思。我们的教条主义者违背列宁的指示，从来不用脑筋具体地分析任何事物，做起文章或演说来，总是空洞无物的八股调，在我们党内造成了一种极坏的作风。 研究问题，忌带主观性、片面性和表面性。所谓主观性，就是不知道客观地看问题，也就是不知道用唯物的观点去看问题。这一点，我在《实践论》一文中已经",
+          "excerptHash": "b98a8a4acf6780b690d15fdf251d35fce534e547bcdfad808e949ba737ccf22a"
+        },
+        {
+          "id": "contradiction-particularity-1937-history-2",
+          "type": "authoritative-history",
+          "title": "读懂用好《实践论》《矛盾论》的哲学智慧",
+          "publisher": "共产党员网",
+          "url": "https://news.12371.cn/2017/09/01/ARTI1504217870275177.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "照搬别人方案失败",
+          "不同团队效果相反",
+          "同一办法过期",
+          "行业条件不同",
+          "具体问题具体分析",
+          "矛盾特殊性",
+          "阶段判断",
+          "照搬",
+          "特殊性",
+          "情况不同",
+          "阶段不同",
+          "因地制宜",
+          "条件"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "piano-priorities-1949",
+      "title": "学会弹钢琴：突出中心工作，同时保持必要配合",
+      "period": "1949年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "priority",
+        "organization-governance",
+        "execution-experiment"
+      ],
+      "challenge": "领导工作方面很多，只抓一项会丢掉必要配合，所有事项同时用力又无法形成节奏和重点。",
+      "sourceBoundary": "“弹钢琴”是党委工作方法的比喻，不证明所有现代任务都应并行；并行数量仍受人员、技术依赖和风险约束。",
+      "actions": [
+        "明确中心工作",
+        "围绕中心安排其他必要工作",
+        "让各项工作的动作具有节奏并互相配合"
+      ],
+      "outcome": "《党委会的工作方法》把“弹钢琴”列为处理中心与全面关系的工作方法之一。",
+      "methodology": [
+        "统筹兼顾",
+        "中心工作",
+        "协同节奏"
+      ],
+      "applicableProblems": [
+        "项目并行过多",
+        "只顾重点造成短板",
+        "多部门节奏混乱",
+        "资源排期冲突"
+      ],
+      "transferMethod": "确定一个周期内唯一中心目标，列出必须同步维持的底线工作，为每项规定容量、依赖和停止条件。",
+      "limits": "紧急安全、法律和伦理问题不能因不是中心工作而延后；现代项目还需使用容量规划和依赖管理。",
+      "keywords": [
+        "弹钢琴",
+        "中心工作",
+        "并行",
+        "统筹",
+        "节奏",
+        "多项目",
+        "配合"
+      ],
+      "source": {
+        "articleTitle": "党委会的工作方法",
+        "articleId": "147-党委会的工作方法.md",
+        "anchor": "p-on2zr6"
+      },
+      "evidence": [
+        {
+          "id": "piano-priorities-1949-primary-1",
+          "type": "primary",
+          "title": "党委会的工作方法",
+          "articleId": "147-党委会的工作方法.md",
+          "anchor": "p-on2zr6",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "弹钢琴要十个指头都动作，不能有的动，有的不动。但是，十个指头同时都按下去，那也不成调子。要产生好的音乐，十个指头的动作要有节奏，要互相配合。党委要抓紧中心工作，又要围绕中心工作而同时开展其他方面的工作。我们现在管的方面很多，各地、各军、各部门的工作，都要照顾到，不能只注意一部分问题而把别的丢掉。凡是有问题的地方都要点一下，这个方法我们一定要学会。钢琴有人弹得好，有人弹得不好，这两种人弹出来的调子差别很大。党委的同志必须学好“弹钢琴”。 六、要“抓紧”。就是说，党委对主要工",
+          "excerptHash": "b8f091ea4f0e960796cc695cac3e9581a9efc86cdade1a787b52b8e7f1060605"
+        },
+        {
+          "id": "piano-priorities-1949-history-2",
+          "type": "authoritative-history",
+          "title": "党委会工作的“十二条方法”",
+          "publisher": "共产党员网",
+          "url": "https://news.12371.cn/2016/02/26/ARTI1456421688871699.shtml",
+          "supports": [
+            "context",
+            "actions"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "项目并行过多",
+          "只顾重点造成短板",
+          "多部门节奏混乱",
+          "资源排期冲突",
+          "统筹兼顾",
+          "中心工作",
+          "协同节奏",
+          "弹钢琴",
+          "并行",
+          "统筹",
+          "节奏",
+          "多项目",
+          "配合"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "strategic-tactical-balance-1948",
+      "title": "整体保持信心，局部保持谨慎：分开战略判断和具体行动",
+      "period": "1948年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "risk-decision",
+        "long-term-pressure",
+        "priority"
+      ],
+      "challenge": "面对强大对手，既可能因整体恐惧而不敢行动，也可能因总体乐观而在具体问题上轻率冒进。",
+      "sourceBoundary": "原文讨论革命斗争中的敌我判断，现代问题不得敌我化；迁移的只是把长期信心和局部风险评估分开。",
+      "actions": [
+        "在整体和长期层面分析趋势与力量基础",
+        "在每个局部问题上重视风险并集中力量",
+        "反对把总体判断机械复制到具体行动"
+      ],
+      "outcome": "相关决定明确区分战略上的总体判断和局部具体问题上的谨慎态度。",
+      "methodology": [
+        "战略与战术",
+        "风险控制",
+        "力量分析"
+      ],
+      "applicableProblems": [
+        "长期看好但短期风险高",
+        "害怕竞争不敢行动",
+        "过度自信",
+        "重大项目下注"
+      ],
+      "transferMethod": "分别写两张表：长期成立条件与本次行动风险；长期方向可以继续，但每次投入仍需限额、验证点和退出条件。",
+      "limits": "不能用战略乐观掩盖财务、安全或合规风险，也不能把市场竞争者或关系对象称作敌人。",
+      "keywords": [
+        "战略",
+        "战术",
+        "整体",
+        "局部",
+        "信心",
+        "谨慎",
+        "风险"
+      ],
+      "source": {
+        "articleTitle": "关于目前党的政策中的几个重要问题",
+        "articleId": "114-关于目前党的政策中的几个重要问题.md",
+        "anchor": "p-10q81kd"
+      },
+      "evidence": [
+        {
+          "id": "strategic-tactical-balance-1948-primary-1",
+          "type": "primary",
+          "title": "关于目前党的政策中的几个重要问题",
+          "articleId": "114-关于目前党的政策中的几个重要问题.md",
+          "anchor": "p-10q81kd",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "正确的。全世界帝国主义和中国蒋介石反动集团的统治，已经腐烂，没有前途。我们有理由轻视它们，我们有把握、有信心战胜中国人民的一切内外敌人。但是在每一个局部上，在每一个具体斗争问题上（不论是军事的、政治的、经济的或思想的斗争），却又决不可轻视敌人，相反，应当重视敌人，集中全力作战，方能取得胜利。当着我们正确地指出在全体上，在战略上，应当轻视敌人的时候，却决不可在每一个局部上，在每一个具体问题上，也轻视敌人。如果我们在全体上过高估计敌人力量，因而不敢推翻他们，不敢胜利，我们就要犯",
+          "excerptHash": "cf6af8e8c7bbfbc26f0cd1a164e46723b4148f53a0ccc8728bed9deee6eabece"
+        },
+        {
+          "id": "strategic-tactical-balance-1948-history-2",
+          "type": "authoritative-history",
+          "title": "毛泽东的14个工作方法",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2023/12/25/ARTI1703494307830529.shtml",
+          "supports": [
+            "context",
+            "actions"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "长期看好但短期风险高",
+          "害怕竞争不敢行动",
+          "过度自信",
+          "重大项目下注",
+          "战略与战术",
+          "风险控制",
+          "力量分析",
+          "战略",
+          "战术",
+          "整体",
+          "局部",
+          "信心",
+          "谨慎",
+          "风险"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "practice-recognition-cycle-1937",
+      "title": "实践—认识—再实践：让方案在循环中逐步接近真实",
+      "period": "1937年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "learning-growth",
+        "execution-experiment",
+        "failure-recovery"
+      ],
+      "challenge": "一次实践得到的认识可能只反映局部和阶段，如果把第一版判断当成终局，就无法随着新事实修正。",
+      "sourceBoundary": "哲学上的认识循环不能替代受控实验、统计显著性或专业审查；高风险领域不应采用无保护的试错。",
+      "actions": [
+        "从实践获得材料并形成认识",
+        "用形成的认识指导新的实践",
+        "根据新的结果修正、补充并深化认识"
+      ],
+      "outcome": "《实践论》把实践和认识的反复循环概括为认识发展的基本过程。",
+      "methodology": [
+        "实践认识循环",
+        "迭代",
+        "复盘"
+      ],
+      "applicableProblems": [
+        "第一版方案不完善",
+        "需要持续迭代",
+        "行动后不知道怎么复盘",
+        "经验没有沉淀"
+      ],
+      "transferMethod": "为行动建立四栏日志：原判断、最小行动、实际结果、下一版判断；每轮只修正有新证据支持的部分。",
+      "limits": "不能把反复试错强加给无知情同意的人；医疗、安全、法律等问题必须优先遵循专业程序。",
+      "keywords": [
+        "实践认识",
+        "再实践",
+        "迭代",
+        "复盘",
+        "循环",
+        "修正判断"
+      ],
+      "source": {
+        "articleTitle": "实践论",
+        "articleId": "016-实践论.md",
+        "anchor": "p-niogqj"
+      },
+      "evidence": [
+        {
+          "id": "practice-recognition-cycle-1937-primary-1",
+          "type": "primary",
+          "title": "实践论",
+          "articleId": "016-实践论.md",
+          "anchor": "p-niogqj",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "实践而发现真理，又通过实践而证实真理和发展真理。从感性认识而能动地发展到理性认识，又从理性认识而能动地指导革命实践，改造主观世界和客观世界。实践、认识、再实践、再认识，这种形式，循环往复以至无穷，而实践和认识之每一循环的内容，都比较地进到了高一级的程度。这就是辩证唯物论的全部认识论，这就是辩证唯物论的知行统一观。",
+          "excerptHash": "0e6bdc00db319b5ab0a0c3544bbbb10761f2ca84026b583d882e3398668a34f8"
+        },
+        {
+          "id": "practice-recognition-cycle-1937-history-2",
+          "type": "authoritative-history",
+          "title": "《实践论》《矛盾论》的时代价值",
+          "publisher": "共产党员网",
+          "url": "https://news.12371.cn/2017/09/27/ARTI1506464208558140.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "第一版方案不完善",
+          "需要持续迭代",
+          "行动后不知道怎么复盘",
+          "经验没有沉淀",
+          "实践认识循环",
+          "迭代",
+          "复盘",
+          "实践认识",
+          "再实践",
+          "循环",
+          "修正判断"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "three-month-review-1946",
+      "title": "三个月总结：用阶段结果校正胜负判断和下一步部署",
+      "period": "1946年",
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "failure-recovery",
+        "learning-growth",
+        "risk-decision"
+      ],
+      "challenge": "全面内战开始后，必须根据最初三个月的实际作战结果，检验此前判断并提炼继续行动的原则。",
+      "sourceBoundary": "这是解放战争初期的军事总结，不能把伤亡、歼灭或敌我语言迁移到企业与个人关系；只能借鉴阶段复盘结构。",
+      "actions": [
+        "用阶段事实检验此前判断",
+        "分析基本矛盾和直接原因",
+        "总结有效方法、暴露问题并形成下一阶段要求"
+      ],
+      "outcome": "《三个月总结》对1946年7至9月作战作出系统总结，并据实际结果提出继续作战的判断和方法。",
+      "methodology": [
+        "阶段复盘",
+        "结果检验",
+        "经验总结"
+      ],
+      "applicableProblems": [
+        "季度复盘",
+        "项目阶段总结",
+        "计划是否继续",
+        "结果与预期不同"
+      ],
+      "transferMethod": "以固定周期复盘：原判断、实际结果、直接原因、仍成立条件、下一阶段动作和停止条件，禁止只报成绩不报偏差。",
+      "limits": "现代绩效复盘不能采用战争指标或归罪逻辑；应避免幸存者偏差并保护合理试错。",
+      "keywords": [
+        "三个月",
+        "阶段总结",
+        "季度复盘",
+        "实际结果",
+        "校正",
+        "下一阶段"
+      ],
+      "source": {
+        "articleTitle": "三个月总结",
+        "articleId": "104-三个月总结.md",
+        "anchor": "p-ezjejh"
+      },
+      "evidence": [
+        {
+          "id": "three-month-review-1946-primary-1",
+          "type": "primary",
+          "title": "三个月总结",
+          "articleId": "104-三个月总结.md",
+          "anchor": "p-ezjejh",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "（一）七月二十日中央对时局的指示⑴上说：“我们是能够战胜蒋介石的。全党对此应当有充分的信心。”七、八、九三个月的作战，业已证明此项断语是正确的。 （二）除了政治上经济上的基本矛盾，蒋介石无法克服，为我必胜蒋必败的基本原因之外，在军事上，蒋军战线太广与其兵力不足之间，业已发生了尖锐的矛盾。此种矛盾，必然要成为我胜蒋败的直接原因。 （三）向解放区进攻的全部正规蒋军，除伪军、保安队、交通警察部队等不计外，共计一百九十几",
+          "excerptHash": "0a43223284db9690e484f7bab7d1de5a792c4a15074107457b00d5248db2efa6"
+        },
+        {
+          "id": "three-month-review-1946-history-2",
+          "type": "authoritative-history",
+          "title": "毛泽东的14个工作方法",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2023/12/25/ARTI1703494307830529.shtml",
+          "supports": [
+            "context",
+            "actions"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "季度复盘",
+          "项目阶段总结",
+          "计划是否继续",
+          "结果与预期不同",
+          "阶段复盘",
+          "结果检验",
+          "经验总结",
+          "三个月",
+          "阶段总结",
+          "实际结果",
+          "校正",
+          "下一阶段"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "learning-history-unity-1944",
+      "title": "总结历史但不纠缠个人：弄清错误根源并保持共同工作",
+      "period": "1944至1945年",
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "failure-recovery",
+        "team-conflict",
+        "learning-growth"
+      ],
+      "challenge": "全党高级干部需要弄清历史路线问题、避免重犯错误，同时又要防止把历史总结变成对个别同志的无限追责。",
+      "sourceBoundary": "这是党内历史问题总结，不能替代现代组织的法定调查、问责和申诉程序；严重违法或伤害不能只用团结原则处理。",
+      "actions": [
+        "分析当时环境及错误的社会、历史和思想根源",
+        "对历史问题作出明确结论",
+        "以惩前毖后、治病救人为方针团结共同工作"
+      ],
+      "outcome": "相关学习与讨论推动形成《关于若干历史问题的决议》，在弄清历史问题的同时促进思想统一。",
+      "methodology": [
+        "历史复盘",
+        "根源分析",
+        "团结纠错"
+      ],
+      "applicableProblems": [
+        "团队反复翻旧账",
+        "失败后互相追责",
+        "组织需要统一认识",
+        "历史问题影响合作"
+      ],
+      "transferMethod": "复盘时分别写环境条件、错误判断、制度原因和个人责任；先修复制度，再按事实处理责任，并明确哪些问题结论后不再反复争论。",
+      "limits": "不能以团结为由掩盖违法、歧视、骚扰或重大职业失责；此类问题必须进入独立专业程序。",
+      "keywords": [
+        "历史问题",
+        "翻旧账",
+        "责任",
+        "团结",
+        "错误根源",
+        "惩前毖后"
+      ],
+      "source": {
+        "articleTitle": "学习和时局",
+        "articleId": "075-学习和时局.md",
+        "anchor": "p-1i9v139"
+      },
+      "evidence": [
+        {
+          "id": "learning-history-unity-1944-primary-1",
+          "type": "primary",
+          "title": "学习和时局",
+          "articleId": "075-学习和时局.md",
+          "anchor": "p-1i9v139",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "法，以致后来又可能重犯同类性质的错误；另一方面，太着重了个人的责任，未能团结更多的人共同工作。这两个缺点，我们应引为鉴戒。这次处理历史问题，不应着重于一些个别同志的责任方面，而应着重于当时环境的分析，当时错误的内容，当时错误的社会根源、历史根源和思想根源，实行惩前毖后、治病救人的方针，借以达到既要弄清思想又要团结同志这样两个目的。对于人的处理问题取慎重态度，既不含糊敷衍，又不损害同志，这是我们的党兴旺发达的标志之一。 （二）对于任何问题应取分析态度，不要否定一切。例如",
+          "excerptHash": "26db389957d7321bd948ffe793133573309bad95b4b7fe4956abc8aec1c4db8c"
+        },
+        {
+          "id": "learning-history-unity-1944-history-2",
+          "type": "authoritative-history",
+          "title": "“两个决议”的历史使命和时代价值",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/11/09/ARTI1636457107184165.shtml",
+          "supports": [
+            "context",
+            "actions",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "团队反复翻旧账",
+          "失败后互相追责",
+          "组织需要统一认识",
+          "历史问题影响合作",
+          "历史复盘",
+          "根源分析",
+          "团结纠错",
+          "历史问题",
+          "翻旧账",
+          "责任",
+          "团结",
+          "错误根源",
+          "惩前毖后"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "seventh-congress-self-criticism-1945",
+      "title": "七大以自我批评达到团结：分歧处理服务于共同路线",
+      "period": "1945年",
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "team-conflict",
+        "failure-recovery",
+        "organization-governance"
+      ],
+      "challenge": "党的七大需要在总结历史经验后形成共同路线、选举领导机关，并让经历过分歧的同志继续共同工作。",
+      "sourceBoundary": "史料记载七大代表自我批评与团结，不能把现代团队会议称为同类政治过程，也不能据此强迫个人公开认错。",
+      "actions": [
+        "围绕大会报告和路线公开发表意见",
+        "从团结目标出发开展自我批评",
+        "形成共同路线并转入执行"
+      ],
+      "outcome": "毛泽东在七大闭幕词中把大会概括为团结、自我批评和党内民主的模范。",
+      "methodology": [
+        "自我批评",
+        "共同目标",
+        "团结"
+      ],
+      "applicableProblems": [
+        "重大分歧后重建合作",
+        "团队需要统一行动",
+        "复盘后仍互不信任",
+        "领导层换届"
+      ],
+      "transferMethod": "先确认共同目标和已形成的决定；每个人只陈述自己判断中可修正之处及证据，最后明确共同执行项和保留异议记录。",
+      "limits": "现代组织反馈必须自愿、尊重人格并允许申诉；不能借集体团结压制举报、专业异议或少数意见。",
+      "keywords": [
+        "七大",
+        "自我批评",
+        "团结",
+        "共同路线",
+        "重大分歧",
+        "重建信任"
+      ],
+      "source": {
+        "articleTitle": "愚公移山",
+        "articleId": "083-愚公移山.md",
+        "anchor": "p-r1qq86"
+      },
+      "evidence": [
+        {
+          "id": "seventh-congress-self-criticism-1945-primary-1",
+          "type": "primary",
+          "title": "愚公移山",
+          "articleId": "083-愚公移山.md",
+          "anchor": "p-r1qq86",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "员会。今后的任务就是领导全党实现党的路线。我们开了一个胜利的大会，一个团结的大会。代表们对三个报告⑴发表了很好的意见。许多同志作了自我批评，从团结的目标出发，经过自我批评，达到了团结。这次大会是团结的模范，是自我批评的模范，又是党内民主的模范。 大会闭幕以后，很多同志将要回到自己的工作岗位上去，将要分赴各个战场。同志们到各地去，要宣传大会的路线，并经过全党同志向人民作广泛的解释。 我们宣传大会的路线，就是要使全党和全国人民建立起一个信心，即革命一定要胜利。首先要使先锋队觉悟，下",
+          "excerptHash": "e2629e3e21386e08c51c7c990da9283ef649f5cb9861f908a59bb4a8819d8b7e"
+        },
+        {
+          "id": "seventh-congress-self-criticism-1945-history-2",
+          "type": "authoritative-history",
+          "title": "毛泽东致七大闭幕词——《愚公移山》",
+          "publisher": "共产党员网",
+          "url": "https://news.12371.cn/2017/09/22/ARTI1506040499406905.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "重大分歧后重建合作",
+          "团队需要统一行动",
+          "复盘后仍互不信任",
+          "领导层换届",
+          "自我批评",
+          "共同目标",
+          "团结",
+          "七大",
+          "共同路线",
+          "重大分歧",
+          "重建信任"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "northeast-base-1945",
+      "title": "建立东北根据地：不抢最显眼位置，先在可持续区域积蓄力量",
+      "period": "1945至1946年",
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "long-term-pressure",
+        "risk-decision",
+        "resource-constraint"
+      ],
+      "challenge": "抗战胜利后东北局势复杂，靠近大城市和交通干线的地区难以立即建立巩固根据地，工作又必须尽快形成可靠立足点。",
+      "sourceBoundary": "这是解放战争前后的军事政治部署，不能直接类比市场占领、城市选择或商业扩张；现代选址必须服从法律和商业证据。",
+      "actions": [
+        "预估建立巩固根据地需要长期艰苦工作",
+        "选择距离对方占领中心较远、具备群众条件的区域",
+        "把群众工作、生产、组织和地方建设结合起来"
+      ],
+      "outcome": "相关电报确定在东满、北满、西满建立巩固根据地的方针，并部署初步创建工作。",
+      "methodology": [
+        "立足点选择",
+        "长期积累",
+        "条件匹配"
+      ],
+      "applicableProblems": [
+        "创业切入点选择",
+        "强竞争市场如何进入",
+        "先做边缘市场",
+        "长期基础建设"
+      ],
+      "transferMethod": "不要只追逐最大市场；比较竞争强度、真实需求、服务成本和可形成复利的能力，先选能建立稳定反馈与供给的切入点。",
+      "limits": "不能把区域或竞争者敌我化，也不能用历史战争逻辑指导商业排他行为；现代决策还需市场、财务和合规评估。",
+      "keywords": [
+        "根据地",
+        "切入点",
+        "立足",
+        "大城市",
+        "边缘市场",
+        "积蓄力量",
+        "长期建设"
+      ],
+      "source": {
+        "articleTitle": "建立巩固的东北根据地",
+        "articleId": "098-建立巩固的东北根据地.md",
+        "anchor": "p-1fahywv"
+      },
+      "evidence": [
+        {
+          "id": "northeast-base-1945-primary-1",
+          "type": "primary",
+          "title": "建立巩固的东北根据地",
+          "articleId": "098-建立巩固的东北根据地.md",
+          "anchor": "p-1fahywv",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "（一）我党现时在东北的任务，是建立根据地，是在东满、北满、西满建立巩固的军事政治的根据地⑴。建立这种根据地，不是轻而易举的事，必须经过艰苦奋斗。建立这种根据地的时间，需要三四年。但是在一九四六年一年内，必须完成初步的可靠的创建工作。否则，我们就有可能站不住脚。 （二）建立这种根据地的地区，现在应当确定不是在国民党已占或将占的大城市和交通干线，这是在现时条件下所作不到的。也不是在国民党占领的大城市和交通干线的附近地区内。这",
+          "excerptHash": "ae2a40995a01001a841c84d8bd27850d9245ed2acd055c3ef2d9f2b4437969c1"
+        },
+        {
+          "id": "northeast-base-1945-history-2",
+          "type": "authoritative-history",
+          "title": "党史百年·天天读｜12月28日",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/12/23/ARTI1640247136521162.shtml",
+          "supports": [
+            "context",
+            "actions",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "创业切入点选择",
+          "强竞争市场如何进入",
+          "先做边缘市场",
+          "长期基础建设",
+          "立足点选择",
+          "长期积累",
+          "条件匹配",
+          "根据地",
+          "切入点",
+          "立足",
+          "大城市",
+          "边缘市场",
+          "积蓄力量",
+          "长期建设"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "yugong-persistence-1945",
+      "title": "愚公移山：把长期困难转化为持续行动",
+      "period": "1945年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "long-term-pressure",
+        "learning-growth",
+        "priority"
+      ],
+      "challenge": "抗日战争胜利前夕，仍需说明困难尚未结束，并把共同目标转化为继续行动的决心。",
+      "sourceBoundary": "这是党的七大闭幕词中的政治动员与寓言表达，不能证明坚持任何目标都必然成功；现代行动仍需验证方向、成本和退出条件。",
+      "actions": [
+        "承认前进道路仍有困难",
+        "把大目标分解为持续努力",
+        "强调依靠广泛参与形成行动力量"
+      ],
+      "outcome": "闭幕词以愚公移山寓言概括了克服困难、争取胜利的行动意志。",
+      "methodology": [
+        "长期主义",
+        "目标分解",
+        "持续行动"
+      ],
+      "applicableProblems": [
+        "长期项目没有反馈",
+        "困难太大想放弃",
+        "学习目标难坚持",
+        "团队士气下降"
+      ],
+      "transferMethod": "先重新核验目标是否值得做，再把未来两周能验证方向的最小行动列出来；每轮根据结果决定继续、调整或停止。",
+      "limits": "不能把坚持当成拒绝止损；健康、财务和安全风险应优先交给专业判断。",
+      "keywords": [
+        "坚持",
+        "长期",
+        "困难",
+        "行动",
+        "信心",
+        "目标分解"
+      ],
+      "source": {
+        "articleTitle": "愚公移山",
+        "articleId": "083-愚公移山.md",
+        "anchor": "p-r1qq86"
+      },
+      "evidence": [
+        {
+          "id": "yugong-persistence-1945-primary-1",
+          "type": "primary",
+          "title": "愚公移山",
+          "articleId": "083-愚公移山.md",
+          "anchor": "p-r1qq86",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "的路线，并经过全党同志向人民作广泛的解释。 我们宣传大会的路线，就是要使全党和全国人民建立起一个信心，即革命一定要胜利。首先要使先锋队觉悟，下定决心，不怕牺牲，排除万难，去争取胜利。但这还不够，还必须使全国广大人民群众觉悟，甘心情愿和我们一起奋斗，去争取胜利。要使全国人民有这样的信心：中国是中国人民的，不是反动派的。中国古代有个寓言，叫做“愚公移山”。说的是古代有一位老人，住在华北，名叫北山愚公。他的家门南面有两座大山挡住他家的出路，一座叫做太行山，一座叫做王屋山",
+          "excerptHash": "28187cd9a3d4f115804b080ca0bc81954627e05fc6561612b43f88d62bd94c42"
+        },
+        {
+          "id": "yugong-persistence-1945-history-2",
+          "type": "authoritative-history",
+          "title": "毛泽东致七大闭幕词——《愚公移山》",
+          "publisher": "共产党员网",
+          "url": "https://news.12371.cn/2017/09/22/ARTI1506040499406905.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "长期项目没有反馈",
+          "困难太大想放弃",
+          "学习目标难坚持",
+          "团队士气下降",
+          "长期主义",
+          "目标分解",
+          "持续行动",
+          "坚持",
+          "长期",
+          "困难",
+          "行动",
+          "信心"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "strategic-retreat-yanan-1947",
+      "title": "主动放弃延安：不以一城一地替代全局目标",
+      "period": "1947年",
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "failure-recovery",
+        "risk-decision",
+        "long-term-pressure"
+      ],
+      "challenge": "国民党军重点进攻陕北，守卫延安面临明显兵力压力，需要在局部得失与保存力量、争取全局主动之间作出选择。",
+      "sourceBoundary": "这是解放战争中的军事决策，不能直接类比裁员、投资或商业竞争，也不能用战争成败替代现代组织的法律、伦理和财务评估。",
+      "actions": [
+        "区分象征性地点与全局目标",
+        "在压力下主动调整部署",
+        "保存力量并寻找更有利的行动条件"
+      ],
+      "outcome": "中央主动撤离延安，随后继续指挥西北战场作战；史料将这一部署记为以空间换取主动的战略选择。",
+      "methodology": [
+        "战略退却",
+        "全局判断",
+        "保存力量"
+      ],
+      "applicableProblems": [
+        "项目该不该止损",
+        "局部失败后如何调整",
+        "资源不足守不住所有阵地",
+        "执着于沉没成本"
+      ],
+      "transferMethod": "把不可放弃的目标、可暂时放弃的形式和必须保存的核心能力分别列出；用下一阶段可验证的指标决定退出或转向。",
+      "limits": "不得把员工、客户或竞争者敌我化；涉及合同、劳动权益、健康和投资时必须采用相应专业规则。",
+      "keywords": [
+        "延安",
+        "撤退",
+        "止损",
+        "沉没成本",
+        "保存实力",
+        "全局"
+      ],
+      "source": {
+        "articleTitle": "中共中央关于暂时放弃延安和保卫陕甘宁边区的两个文件",
+        "articleId": "106-中共中央关于暂时放弃延安和保卫陕甘宁边区的两个文件.md",
+        "anchor": "p-numzge"
+      },
+      "evidence": [
+        {
+          "id": "strategic-retreat-yanan-1947-primary-1",
+          "type": "primary",
+          "title": "中共中央关于暂时放弃延安和保卫陕甘宁边区的两个文件",
+          "articleId": "106-中共中央关于暂时放弃延安和保卫陕甘宁边区的两个文件.md",
+          "anchor": "p-numzge",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "全失败。进攻陕甘宁边区的国民党军兵力达到二十五万人，西北战场的人民解放军在陕甘宁边区的部队只有两万多人，因而国民党军曾经先后占领过人民解放军主动放弃的延安和陕甘宁边区的所有县城。但是国民党军不但没有达到消灭中共中央首脑机关和陕甘宁边区的人民解放军或者把它们赶到黄河以东的目的，而且受到人民解放军多次的沉重打击，损失兵力约达十万人，最后不得不逃出边区，而人民解放军胜利地转入解放大西北的进攻。同时，西北战场人民解放军以很少兵力吸引和歼灭了敌军的大量主力部队",
+          "excerptHash": "20d7acc8c5564be582b8b3d95f5ec538248e7ee62e1c1a671d49e89279bf8d83"
+        },
+        {
+          "id": "strategic-retreat-yanan-1947-history-2",
+          "type": "authoritative-history",
+          "title": "党史百年·天天读｜3月18日",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/04/06/ARTI1617716078958513.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "项目该不该止损",
+          "局部失败后如何调整",
+          "资源不足守不住所有阵地",
+          "执着于沉没成本",
+          "战略退却",
+          "全局判断",
+          "保存力量",
+          "延安",
+          "撤退",
+          "止损",
+          "沉没成本",
+          "保存实力",
+          "全局"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "paper-tiger-confidence-1946",
+      "title": "战略上藐视、战术上重视：信心与具体分析并存",
+      "period": "1946年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "long-term-pressure",
+        "risk-decision",
+        "priority"
+      ],
+      "challenge": "全面内战爆发后，面对强大对手，需要既避免被表面力量吓倒，也避免在具体行动中轻敌。",
+      "sourceBoundary": "这是特定战争环境中的战略论述，不能把现实中的个人、机构或疾病称为敌人；迁移的只是长期趋势与具体风险分开判断。",
+      "actions": [
+        "从全局和长期趋势建立信心",
+        "对每个具体问题保持谨慎",
+        "把战略判断与行动层面的证据评估分开"
+      ],
+      "outcome": "谈话系统表达了从整体上建立信心、在具体问题上严肃对待风险的判断方式。",
+      "methodology": [
+        "战略信心",
+        "战术审慎",
+        "风险分层"
+      ],
+      "applicableProblems": [
+        "被强大竞争者吓住",
+        "焦虑导致不敢行动",
+        "过度自信忽略细节",
+        "长期趋势与短期困难冲突"
+      ],
+      "transferMethod": "分别写下长期成立的有利条件和眼前可能失败的具体环节；长期判断决定是否继续，具体风险决定下一步如何试验和防护。",
+      "limits": "信心不能代替概率、数据和专业诊断；高风险决策必须设置止损与复核。",
+      "keywords": [
+        "纸老虎",
+        "战略",
+        "战术",
+        "信心",
+        "轻敌",
+        "风险"
+      ],
+      "source": {
+        "articleTitle": "和美国记者安娜·路易斯·斯特朗的谈话",
+        "articleId": "101-和美国记者安娜·路易斯·斯特朗的谈话.md",
+        "anchor": "p-1bw0wzf"
+      },
+      "evidence": [
+        {
+          "id": "paper-tiger-confidence-1946-primary-1",
+          "type": "primary",
+          "title": "和美国记者安娜·路易斯·斯特朗的谈话",
+          "articleId": "101-和美国记者安娜·路易斯·斯特朗的谈话.md",
+          "anchor": "p-1bw0wzf",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "和一切反动派看做纸老虎，都是从它们的本质说的。这是革命人民的一个根本战略思想。从第二次国内革命战争时期以来，毛泽东曾经多次地指出，革命者必须在战略上，在全体上，藐视敌人，敢于同他们斗争，敢于夺取胜利；同时，又要在战术上，在策略上，在每一个局部上，在每一个具体斗争问题上，重视敌人，采取谨慎态度，讲究斗争艺术，根据不同的时间、地点和条件，采取适当的斗争形式，以便一步一步地孤立敌人和消灭敌人。毛泽东一九五八年十二月一日在中共八届六中全会期间写的《关于帝国主义和一切反动派",
+          "excerptHash": "e9f2e83c9ef12189dc2b915348a69a0ab1c194acf9499d738fb7548d32b04cd4"
+        },
+        {
+          "id": "paper-tiger-confidence-1946-history-2",
+          "type": "authoritative-history",
+          "title": "党史百年·天天读｜8月6日",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/04/23/ARTI1619147155449237.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "被强大竞争者吓住",
+          "焦虑导致不敢行动",
+          "过度自信忽略细节",
+          "长期趋势与短期困难冲突",
+          "战略信心",
+          "战术审慎",
+          "风险分层",
+          "纸老虎",
+          "战略",
+          "战术",
+          "信心",
+          "轻敌",
+          "风险"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "hardship-style-1949",
+      "title": "进城前的提醒：条件改善时仍保持艰苦奋斗",
+      "period": "1949年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "organization-governance",
+        "risk-decision",
+        "learning-growth"
+      ],
+      "challenge": "全国胜利在望，工作环境和组织地位即将发生变化，需要防止因成绩和条件改善而产生骄傲、停滞与脱离实际。",
+      "sourceBoundary": "这是革命胜利前夕的组织作风要求，不能据此美化贫困、拒绝合理待遇或要求个人无偿牺牲。",
+      "actions": [
+        "在成功节点提前识别作风风险",
+        "提醒保持谦虚谨慎",
+        "把艰苦奋斗作为持续检查组织状态的要求"
+      ],
+      "outcome": "七届二中全会报告提出在胜利后继续保持谦虚谨慎和艰苦奋斗的作风。",
+      "methodology": [
+        "成功复盘",
+        "作风风险",
+        "自我约束"
+      ],
+      "applicableProblems": [
+        "团队取得成绩后松懈",
+        "公司扩张后浪费",
+        "管理者脱离一线",
+        "成功后过度自信"
+      ],
+      "transferMethod": "在里程碑复盘中增加一项：哪些事实可能被成绩遮蔽；保留一线反馈、成本纪律和反方意见渠道。",
+      "limits": "艰苦奋斗不等于压低员工报酬、忽视健康或拒绝必要投入；现代组织必须保障合法权益。",
+      "keywords": [
+        "艰苦奋斗",
+        "成功",
+        "骄傲",
+        "谦虚谨慎",
+        "浪费",
+        "脱离一线"
+      ],
+      "source": {
+        "articleTitle": "永远保持艰苦奋斗的作风",
+        "articleId": "162-永远保持艰苦奋斗的作风.md",
+        "anchor": "p-cm8715"
+      },
+      "evidence": [
+        {
+          "id": "hardship-style-1949-primary-1",
+          "type": "primary",
+          "title": "永远保持艰苦奋斗的作风",
+          "articleId": "162-永远保持艰苦奋斗的作风.md",
+          "anchor": "p-cm8715",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "国人民是有伟大贡献的。我庆祝延安和陕甘宁边区的人民继续团结一致，迅速恢复战争的创伤，发展经济建设和文化建设。我并且希望，全国一切革命工作人员永远保持过去十余年间在延安和陕甘宁边区的工作人员中所具有的艰苦奋斗的作风。",
+          "excerptHash": "ab6656e4fd94b2e08062a4c92d50ccd8f3c0202fe969a3adc9636b60a04adc87"
+        },
+        {
+          "id": "hardship-style-1949-history-2",
+          "type": "authoritative-history",
+          "title": "党史百年·天天读｜3月5日",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/04/20/ARTI1618873661345767.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "团队取得成绩后松懈",
+          "公司扩张后浪费",
+          "管理者脱离一线",
+          "成功后过度自信",
+          "成功复盘",
+          "作风风险",
+          "自我约束",
+          "艰苦奋斗",
+          "成功",
+          "骄傲",
+          "谦虚谨慎",
+          "浪费",
+          "脱离一线"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "put-problems-on-table-1949",
+      "title": "把问题摆到桌面上：让分歧进入正式讨论",
+      "period": "1949年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "team-conflict",
+        "organization-governance",
+        "needs-communication"
+      ],
+      "challenge": "党委内部存在问题时，如果只在背后议论而不进入会议，分歧无法形成可处理的共同事实。",
+      "sourceBoundary": "这是党委工作方法，不能替代现代组织的人事申诉、反骚扰调查和保密程序；并非所有敏感问题都适合公开讨论。",
+      "actions": [
+        "有问题时及时召集会议",
+        "把信息和分歧放到正式议程",
+        "在事实基础上讨论解决"
+      ],
+      "outcome": "文章把公开讨论问题列为党委会改进工作的具体方法之一。",
+      "methodology": [
+        "正式沟通",
+        "问题透明",
+        "集体讨论"
+      ],
+      "applicableProblems": [
+        "团队背后议论",
+        "会议回避真问题",
+        "跨部门矛盾",
+        "分歧长期积累"
+      ],
+      "transferMethod": "把争议写成可核实的问题陈述，明确相关事实、影响和需要共同决定的事项，再进入适当的正式渠道。",
+      "limits": "隐私、举报、医疗和人事敏感信息必须最小范围处理；公开不等于暴露个人。",
+      "keywords": [
+        "摆到桌面",
+        "背后议论",
+        "会议",
+        "分歧",
+        "正式沟通",
+        "透明"
+      ],
+      "source": {
+        "articleTitle": "党委会的工作方法",
+        "articleId": "147-党委会的工作方法.md",
+        "anchor": "p-on2zr6"
+      },
+      "evidence": [
+        {
+          "id": "put-problems-on-table-1949-primary-1",
+          "type": "primary",
+          "title": "党委会的工作方法",
+          "articleId": "147-党委会的工作方法.md",
+          "anchor": "p-on2zr6",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "就休想带领千百万人去作战，去建设。当然，书记和委员之间的关系是少数服从多数，这同班长和战士之间的关系是不一样的。这里不过是一个比方。 二、要把问题摆到桌面上来。不仅“班长”要这样做，委员也要这样做。不要在背后议论。有了问题就开会，摆到桌面上来讨论，规定它几条，问题就解决了。有问题而不摆到桌面上来，就会长期不得解决，甚至一拖几年。“班长”和委员还要能互相谅解。书记和委员，中央和各中央局，各中央局和区党委之间的谅解、支援和友谊，比什么都重要。这一点过去大家不",
+          "excerptHash": "f8779d18027441b8fd1ff87973e4a4cfdd8d1b9e0c37f482fc86557444d1b4c3"
+        },
+        {
+          "id": "put-problems-on-table-1949-history-2",
+          "type": "authoritative-history",
+          "title": "毛泽东：《党委会的工作方法》",
+          "publisher": "共产党员网",
+          "url": "https://news.12371.cn/2016/02/26/ARTI1456421688871699.shtml",
+          "supports": [
+            "context",
+            "actions"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "团队背后议论",
+          "会议回避真问题",
+          "跨部门矛盾",
+          "分歧长期积累",
+          "正式沟通",
+          "问题透明",
+          "集体讨论",
+          "摆到桌面",
+          "背后议论",
+          "会议",
+          "分歧",
+          "透明"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "exchange-information-1949",
+      "title": "互通情报：先建立共同信息面再作决定",
+      "period": "1949年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "needs-communication",
+        "organization-governance",
+        "risk-decision"
+      ],
+      "challenge": "领导成员之间如果缺少信息交换，容易在事实基础不同的情况下作出相互冲突的判断。",
+      "sourceBoundary": "这是党委协作方法，不能据此突破隐私、商业秘密和数据权限；共享范围必须符合现代合规要求。",
+      "actions": [
+        "领导成员相互通报掌握的信息",
+        "让共同决策基于较完整材料",
+        "减少信息不对称造成的误判"
+      ],
+      "outcome": "文章把互通情报列入党委会形成共同语言、改善协作的工作方法。",
+      "methodology": [
+        "信息同步",
+        "共同事实",
+        "协同决策"
+      ],
+      "applicableProblems": [
+        "信息孤岛",
+        "跨部门各说各话",
+        "领导决策依据不一致",
+        "远程团队协作"
+      ],
+      "transferMethod": "决策前用同一张事实表同步已知、未知、来源和更新时间；观点与事实分栏，权限受限的信息只提供必要结论。",
+      "limits": "不得以互通情报为由泄露个人信息、患者信息、客户秘密或未公开重大信息。",
+      "keywords": [
+        "互通情报",
+        "信息孤岛",
+        "共同事实",
+        "同步",
+        "协同",
+        "决策"
+      ],
+      "source": {
+        "articleTitle": "党委会的工作方法",
+        "articleId": "147-党委会的工作方法.md",
+        "anchor": "p-on2zr6"
+      },
+      "evidence": [
+        {
+          "id": "exchange-information-1949-primary-1",
+          "type": "primary",
+          "title": "党委会的工作方法",
+          "articleId": "147-党委会的工作方法.md",
+          "anchor": "p-on2zr6",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "、支援和友谊，比什么都重要。这一点过去大家不注意，七次代表大会以来，在这方面大有进步，友好团结关系大大增进了。今后仍然应该不断注意。 三、“互通情报”。就是说，党委各委员之间要把彼此知道的情况互相通知、互相交流。这对于取得共同的语言是很重要的。有些人不是这样做，而是像老子说的“鸡犬之声相闻，老死不相往来”⑴，结果彼此之间就缺乏共同的语言。我们有些高级干部，在马克思列宁主义的基本理论问题上也有不同的语言，原因是学习还不够。现在党内的语言比较一致了",
+          "excerptHash": "cc29d412d02d3f5378c951a7b45b148a5bb126a208ed90dd5110845ac1884c17"
+        },
+        {
+          "id": "exchange-information-1949-history-2",
+          "type": "authoritative-history",
+          "title": "毛泽东：《党委会的工作方法》",
+          "publisher": "共产党员网",
+          "url": "https://news.12371.cn/2016/02/26/ARTI1456421688871699.shtml",
+          "supports": [
+            "context",
+            "actions"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "信息孤岛",
+          "跨部门各说各话",
+          "领导决策依据不一致",
+          "远程团队协作",
+          "信息同步",
+          "共同事实",
+          "协同决策",
+          "互通情报",
+          "同步",
+          "协同",
+          "决策"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "unite-different-opinions-1949",
+      "title": "团结不同意见者：把异议保留在共同工作中",
+      "period": "1949年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "team-conflict",
+        "organization-governance",
+        "cooperation-boundaries"
+      ],
+      "challenge": "领导班子需要与意见不同、过去有过分歧的成员共同工作，避免只和赞同者合作。",
+      "sourceBoundary": "这是党委内部团结方法，不要求现代组织容忍违法、骚扰、歧视或持续破坏规则的行为。",
+      "actions": [
+        "识别并保留不同意见",
+        "在共同目标和决定下继续合作",
+        "避免因过去分歧排斥成员"
+      ],
+      "outcome": "文章把团结意见不同者作为党委会应注意的工作方法。",
+      "methodology": [
+        "异议管理",
+        "共同目标",
+        "合作边界"
+      ],
+      "applicableProblems": [
+        "团队只剩同温层",
+        "与反对者无法合作",
+        "过去分歧影响当前项目",
+        "领导层排斥异议"
+      ],
+      "transferMethod": "明确不可违反的规则、已经形成的决定和仍可讨论的范围；允许异议记录，同时要求按共同决定执行。",
+      "limits": "团结不等于取消问责，也不能压制举报、专业意见和少数权益。",
+      "keywords": [
+        "不同意见",
+        "团结",
+        "异议",
+        "同温层",
+        "共同工作",
+        "边界"
+      ],
+      "source": {
+        "articleTitle": "党委会的工作方法",
+        "articleId": "147-党委会的工作方法.md",
+        "anchor": "p-on2zr6"
+      },
+      "evidence": [
+        {
+          "id": "unite-different-opinions-1949-primary-1",
+          "type": "primary",
+          "title": "党委会的工作方法",
+          "articleId": "147-党委会的工作方法.md",
+          "anchor": "p-on2zr6",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "，这是不好的。如果没有准备，就不要急于开会。 九、“精兵简政”。讲话、演说、写文章和写决议案，都应当简明扼要。会议也不要开得太长。 十、注意团结那些和自己意见不同的同志一道工作。不论在地方上或部队里，都应该注意这一条。对党外人士也是一样。我们都是从五湖四海汇集拢来的，我们不仅要善于团结和自己意见相同的同志，而且要善于团结和自己意见不同的同志一道工作。我们当中还有犯过很大错误的人，不要嫌这些人，要准备和他们一道工作。 十一、力戒骄傲。这对领导者是一个原则问题，也是保",
+          "excerptHash": "99578fd0a616d5d92d61463723cfbdfa757ec8835b41dcdf39b8fdc812433fb7"
+        },
+        {
+          "id": "unite-different-opinions-1949-history-2",
+          "type": "authoritative-history",
+          "title": "毛泽东：《党委会的工作方法》",
+          "publisher": "共产党员网",
+          "url": "https://news.12371.cn/2016/02/26/ARTI1456421688871699.shtml",
+          "supports": [
+            "context",
+            "actions"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "团队只剩同温层",
+          "与反对者无法合作",
+          "过去分歧影响当前项目",
+          "领导层排斥异议",
+          "异议管理",
+          "共同目标",
+          "合作边界",
+          "不同意见",
+          "团结",
+          "异议",
+          "同温层",
+          "共同工作",
+          "边界"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "learn-from-below-1949",
+      "title": "不懂就问下级：用一线知识修正领导判断",
+      "period": "1949年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "investigation",
+        "needs-communication",
+        "learning-growth"
+      ],
+      "challenge": "领导者对具体情况不了解时，容易碍于身份不愿请教，使决策脱离一线事实。",
+      "sourceBoundary": "这是党委工作方法，不能把组织层级直接套用到所有关系；向一线学习也不能替代专业研究和数据验证。",
+      "actions": [
+        "承认不了解的事项",
+        "向掌握实际情况的下级请教",
+        "先学习具体情况再作判断"
+      ],
+      "outcome": "文章明确把向下级询问不懂事项列为有效领导方法。",
+      "methodology": [
+        "一线学习",
+        "承认未知",
+        "调查研究"
+      ],
+      "applicableProblems": [
+        "管理者不了解一线",
+        "新岗位知识不足",
+        "产品决策脱离用户",
+        "不敢承认不知道"
+      ],
+      "transferMethod": "列出当前判断中三个未知项，分别找最接近现场的人核实，并记录原判断被哪些事实改变。",
+      "limits": "不能把个别人的经验当作完整样本；涉及专业风险仍需合格专业人员判断。",
+      "keywords": [
+        "问下级",
+        "一线",
+        "不知道",
+        "请教",
+        "学习",
+        "调查"
+      ],
+      "source": {
+        "articleTitle": "党委会的工作方法",
+        "articleId": "147-党委会的工作方法.md",
+        "anchor": "p-on2zr6"
+      },
+      "evidence": [
+        {
+          "id": "learn-from-below-1949-primary-1",
+          "type": "primary",
+          "title": "党委会的工作方法",
+          "articleId": "147-党委会的工作方法.md",
+          "anchor": "p-on2zr6",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "习还不够。现在党内的语言比较一致了，但是，问题还没有完全解决。例如，在土地改革中，对什么是“中农”和什么是“富农”，就还有不同的了解。 四、不懂得和不了解的东西要问下级，不要轻易表示赞成或反对。有些文件起草出来压下暂时不发，就是因为其中还有些问题没有弄清楚，需要先征求下级的意见。我们切不可强不知以为知，要“不耻下问”⑵，要善于倾听下面干部的意见。先做学生，然后再做先生；先向下面干部请教，然后再下命令。各中央局、各前委处理问题的时候，除军事情况紧急和事情已经弄清楚者",
+          "excerptHash": "194ae8b32fc3453a69a55f330991eecfe8ea082182a36ce6e47df61a07670a1a"
+        },
+        {
+          "id": "learn-from-below-1949-history-2",
+          "type": "authoritative-history",
+          "title": "毛泽东：《党委会的工作方法》",
+          "publisher": "共产党员网",
+          "url": "https://news.12371.cn/2016/02/26/ARTI1456421688871699.shtml",
+          "supports": [
+            "context",
+            "actions"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "管理者不了解一线",
+          "新岗位知识不足",
+          "产品决策脱离用户",
+          "不敢承认不知道",
+          "一线学习",
+          "承认未知",
+          "调查研究",
+          "问下级",
+          "一线",
+          "不知道",
+          "请教",
+          "学习",
+          "调查"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "democratic-centralism-1929",
+      "title": "古田会议前后的纠偏：集中指导下扩大讨论",
+      "period": "1929年",
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "organization-governance",
+        "team-conflict",
+        "needs-communication"
+      ],
+      "challenge": "红四军党内存在组织观念薄弱、上下级关系不当和讨论不足等问题，需要形成既有充分讨论又能统一执行的组织生活。",
+      "sourceBoundary": "这是红军党内建设史，不能直接套用于公司治理，更不能为压制员工合法权利或强制思想一致提供依据。",
+      "actions": [
+        "提出集中指导下的民主生活",
+        "让成员充分发表意见",
+        "在讨论基础上形成组织决议并执行"
+      ],
+      "outcome": "古田会议决议系统纠正党内错误思想，并成为人民军队建设的重要历史文献。",
+      "methodology": [
+        "民主讨论",
+        "统一执行",
+        "组织纠偏"
+      ],
+      "applicableProblems": [
+        "团队讨论不足",
+        "决定后仍各行其是",
+        "上下级沟通僵化",
+        "组织规则不清"
+      ],
+      "transferMethod": "决策前明确征求意见期限和反方证据，决策后记录负责人、期限与复议条件；让讨论权和执行责任同时清晰。",
+      "limits": "现代组织必须服从劳动法、公司章程和申诉制度；统一执行不能覆盖违法命令。",
+      "keywords": [
+        "古田会议",
+        "民主集中",
+        "讨论",
+        "执行",
+        "组织生活",
+        "纠偏"
+      ],
+      "source": {
+        "articleTitle": "关于纠正党内的错误思想",
+        "articleId": "004-关于纠正党内的错误思想.md",
+        "anchor": "p-177twfi"
+      },
+      "evidence": [
+        {
+          "id": "democratic-centralism-1929-primary-1",
+          "type": "primary",
+          "title": "关于纠正党内的错误思想",
+          "articleId": "004-关于纠正党内的错误思想.md",
+          "anchor": "p-177twfi",
+          "supports": [
+            "challenge",
+            "actions"
+          ],
+          "excerpt": "自由散漫性。这种自由散漫性带到党内，就成了政治上的和组织上的极端民主化的思想。这种思想是和无产阶级的斗争任务根本不相容的。 （二）在组织上，厉行集中指导下的民主生活。其路线是： 1 党的领导机关要有正确的指导路线，遇事要拿出办法，以建立领导的中枢。 2 上级机关要明了下级机关的情况和群众生活的情况，成为正确指导的客观基础。 3 党的各级机关解决问题，不要太随便。一成决议，就须坚决执行。 4 上级机关的决议，凡属重要一点的，必须迅速地传达到下级机关和党员群众中去",
+          "excerptHash": "b9e78fb44be18b9802c4199c10c935aa231753012e0ddb7134c5df79f2837dfc"
+        },
+        {
+          "id": "democratic-centralism-1929-history-2",
+          "type": "authoritative-history",
+          "title": "古田会议永放光芒",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2024/01/08/ARTI1704700112442529.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "团队讨论不足",
+          "决定后仍各行其是",
+          "上下级沟通僵化",
+          "组织规则不清",
+          "民主讨论",
+          "统一执行",
+          "组织纠偏",
+          "古田会议",
+          "民主集中",
+          "讨论",
+          "执行",
+          "组织生活",
+          "纠偏"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "masses-recognition-cycle-1943",
+      "title": "从群众中来、到群众中去：形成认识与验证闭环",
+      "period": "1943年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "investigation",
+        "execution-experiment",
+        "needs-communication"
+      ],
+      "challenge": "领导意见如果只停留在少数人的一般号召，既可能脱离群众经验，也难以转化为能够检验和修正的行动。",
+      "sourceBoundary": "这是党的领导方法论，不能把现代用户、员工或公民抽象成同质群体；收集意见必须尊重知情同意和代表性。",
+      "actions": [
+        "收集分散的实际经验",
+        "经过分析形成较系统的意见",
+        "回到实践中宣传、执行并检验修正"
+      ],
+      "outcome": "文章将这一反复循环概括为基本领导方法，并强调在实践中检验意见是否正确。",
+      "methodology": [
+        "群众路线",
+        "认识循环",
+        "实践验证"
+      ],
+      "applicableProblems": [
+        "方案只在会议室形成",
+        "用户反馈没有闭环",
+        "政策落地困难",
+        "试点后不复盘"
+      ],
+      "transferMethod": "把流程固定成收集现场材料、归纳假设、小范围实施、回访结果、修正方案五步，并保留反例。",
+      "limits": "反馈数量不等于代表性；医学、法律和工程问题不能用多数意见替代专业标准。",
+      "keywords": [
+        "从群众中来",
+        "到群众中去",
+        "反馈闭环",
+        "实践",
+        "验证",
+        "试点"
+      ],
+      "source": {
+        "articleTitle": "关于领导方法的若干问题",
+        "articleId": "070-关于领导方法的若干问题.md",
+        "anchor": "p-yntdkq"
+      },
+      "evidence": [
+        {
+          "id": "masses-recognition-cycle-1943-primary-1",
+          "type": "primary",
+          "title": "关于领导方法的若干问题",
+          "articleId": "070-关于领导方法的若干问题.md",
+          "anchor": "p-yntdkq",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "作，除采取一般号召和个别指导相结合的方法以外，都须采取领导骨干和广大群众相结合的方法。 （四）在我党的一切实际工作中，凡属正确的领导，必须是从群众中来，到群众中去。这就是说，将群众的意见（分散的无系统的意见）集中起来（经过研究，化为集中的系统的意见），又到群众中去作宣传解释，化为群众的意见，使群众坚持下去，见之于行动，并在群众行动中考验这些意见是否正确。然后再从群众中集中起来，再到群众中坚持下去。如此无限循环，一次比一次地更正确、更生动、更丰富。这就是马克思",
+          "excerptHash": "727ce856f34788bb220a95c573aa0d10148f7b0d8fea60c85f8e206c96f77aed"
+        },
+        {
+          "id": "masses-recognition-cycle-1943-history-2",
+          "type": "authoritative-history",
+          "title": "党的群众路线的理论逻辑与实践逻辑",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/07/08/ARTI1625710739919203.shtml",
+          "supports": [
+            "context",
+            "actions"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "方案只在会议室形成",
+          "用户反馈没有闭环",
+          "政策落地困难",
+          "试点后不复盘",
+          "群众路线",
+          "认识循环",
+          "实践验证",
+          "从群众中来",
+          "到群众中去",
+          "反馈闭环",
+          "实践",
+          "验证",
+          "试点"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "concentrate-one-by-one-1946",
+      "title": "集中优势逐个解决：资源有限时避免平均用力",
+      "period": "1946年",
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "priority",
+        "resource-constraint",
+        "execution-experiment"
+      ],
+      "challenge": "全面内战初期，面对多路进攻和有限兵力，需要确定如何配置力量，避免分散使用而处处被动。",
+      "sourceBoundary": "这是战争作战方针，绝不能用于把市场、同事或社会关系军事化；只迁移资源集中与任务排序方法。",
+      "actions": [
+        "选择可形成局部优势的目标",
+        "集中力量逐个处理",
+        "完成一项后再转向下一项"
+      ],
+      "outcome": "电报提出集中优势兵力、各个歼灭敌人的作战方法，作为当时战局中的具体部署。",
+      "methodology": [
+        "资源集中",
+        "逐个突破",
+        "优先级"
+      ],
+      "applicableProblems": [
+        "资源分散",
+        "多个项目同时推进",
+        "预算和人手不足",
+        "每件事都做不深"
+      ],
+      "transferMethod": "按价值、可行性和依赖关系选择一个主任务，给足完成条件；其他任务明确暂停或维持最低投入。",
+      "limits": "不能照搬军事语言或零和逻辑；安全、合规与基本服务不能因集中资源而停摆。",
+      "keywords": [
+        "集中优势",
+        "逐个解决",
+        "优先级",
+        "资源分散",
+        "主任务",
+        "聚焦"
+      ],
+      "source": {
+        "articleTitle": "集中优势兵力，各个歼灭敌人",
+        "articleId": "102-集中优势兵力，各个歼灭敌人.md",
+        "anchor": "p-3r2ckx"
+      },
+      "evidence": [
+        {
+          "id": "concentrate-one-by-one-1946-primary-1",
+          "type": "primary",
+          "title": "集中优势兵力，各个歼灭敌人",
+          "articleId": "102-集中优势兵力，各个歼灭敌人.md",
+          "anchor": "p-3r2ckx",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "（一）集中优势兵力、各个歼灭敌人⑴的作战方法，不但必须应用于战役的部署方面，而且必须应用于战术的部署方面。 （二）在战役的部署方面，当着敌人使用许多个旅⑵（或团）分几路向我军前进的时候，我军必须集中绝对优势的兵力，即集中六倍、或五倍、或四倍于敌的兵力、至少也要有三倍于敌的兵力，于适当时机，首先包围歼击敌军的一个旅（或团）。这个旅（",
+          "excerptHash": "87fb5487023afce3788a7ff56eb7680448c64edc4e49fbeb32a286f5c052de05"
+        },
+        {
+          "id": "concentrate-one-by-one-1946-history-2",
+          "type": "authoritative-history",
+          "title": "集中优势兵力，各个歼灭敌人",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2023/07/31/ARTI1690757500005447.shtml",
+          "supports": [
+            "context",
+            "actions"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "资源分散",
+          "多个项目同时推进",
+          "预算和人手不足",
+          "每件事都做不深",
+          "资源集中",
+          "逐个突破",
+          "优先级",
+          "集中优势",
+          "逐个解决",
+          "主任务",
+          "聚焦"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "grasp-tight-1949",
+      "title": "抓而不紧等于不抓：把决定落实到检查节点",
+      "period": "1949年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "execution-experiment",
+        "organization-governance",
+        "priority"
+      ],
+      "challenge": "工作虽然被提出和安排，但缺少持续检查，容易停留在口号与会议决定上。",
+      "sourceBoundary": "这是党委领导方法，不能变成无边界加班、微观控制或以结果为由牺牲劳动权益。",
+      "actions": [
+        "对主要工作提出明确要求",
+        "持续检查执行进度",
+        "发现松动时及时纠正"
+      ],
+      "outcome": "文章用鲜明表述强调抓工作必须具体而持续。",
+      "methodology": [
+        "执行检查",
+        "闭环管理",
+        "责任落实"
+      ],
+      "applicableProblems": [
+        "计划总不落地",
+        "会议决定无人跟进",
+        "项目拖延",
+        "负责人和期限不清"
+      ],
+      "transferMethod": "每项决定只保留一个负责人、一个交付物、一个检查日期和一个偏差处理规则。",
+      "limits": "检查必须与任务风险匹配；不能以紧抓为由监控私人生活或制造不合理劳动强度。",
+      "keywords": [
+        "抓紧",
+        "落实",
+        "检查",
+        "闭环",
+        "拖延",
+        "负责人"
+      ],
+      "source": {
+        "articleTitle": "党委会的工作方法",
+        "articleId": "147-党委会的工作方法.md",
+        "anchor": "p-on2zr6"
+      },
+      "evidence": [
+        {
+          "id": "grasp-tight-1949-primary-1",
+          "type": "primary",
+          "title": "党委会的工作方法",
+          "articleId": "147-党委会的工作方法.md",
+          "anchor": "p-on2zr6",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "必须学好“弹钢琴”。 六、要“抓紧”。就是说，党委对主要工作不但一定要“抓”，而且一定要“抓紧”。什么东西只有抓得很紧，毫不放松，才能抓住。抓而不紧，等于不抓。伸着巴掌，当然什么也抓不住。就是把手握起来，但是不握紧，样子像抓，还是抓不住东西。我们有些同志，也抓主要工作，但是抓而不紧，所以工作还是不能做好。不抓不行，抓而不紧也不行。 七、胸中有“数”。这是说，对情况和问题一定要注意到它们的数量方面，要有基本的数量的分析。任何质量都表现为一定的数量，没有数量",
+          "excerptHash": "d8760bf8a1b97c4ed5acd2f73942ffb9bb3db8dc29d2d233cde1137e416b0b19"
+        },
+        {
+          "id": "grasp-tight-1949-history-2",
+          "type": "authoritative-history",
+          "title": "毛泽东：《党委会的工作方法》",
+          "publisher": "共产党员网",
+          "url": "https://news.12371.cn/2016/02/26/ARTI1456421688871699.shtml",
+          "supports": [
+            "context",
+            "actions"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "计划总不落地",
+          "会议决定无人跟进",
+          "项目拖延",
+          "负责人和期限不清",
+          "执行检查",
+          "闭环管理",
+          "责任落实",
+          "抓紧",
+          "落实",
+          "检查",
+          "闭环",
+          "拖延",
+          "负责人"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "meeting-notice-1949",
+      "title": "安民告示：会前把议题和材料准备清楚",
+      "period": "1949年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "organization-governance",
+        "needs-communication",
+        "execution-experiment"
+      ],
+      "challenge": "临时召集会议、议题不清和材料不足，会让参与者无法准备，会议容易变成低效讨论。",
+      "sourceBoundary": "这是党委会议方法，现代会议还应按组织规模、保密要求和紧急程度调整，不能机械套用。",
+      "actions": [
+        "会前通知讨论事项",
+        "让参与者提前准备",
+        "对需要形成决定的问题先提供必要材料"
+      ],
+      "outcome": "文章把会前通知比作安民告示，列为改善党委会工作的方法。",
+      "methodology": [
+        "会前准备",
+        "议题管理",
+        "有效会议"
+      ],
+      "applicableProblems": [
+        "会议低效",
+        "临时开会",
+        "参会者没有准备",
+        "讨论没有结论"
+      ],
+      "transferMethod": "会前发出目标、议题、所需决定、材料和准备要求；没有信息输入或明确决定项的会议改为异步同步。",
+      "limits": "紧急事件可能无法提前通知；敏感材料需按最小权限提供。",
+      "keywords": [
+        "安民告示",
+        "会前通知",
+        "议题",
+        "会议低效",
+        "材料",
+        "准备"
+      ],
+      "source": {
+        "articleTitle": "党委会的工作方法",
+        "articleId": "147-党委会的工作方法.md",
+        "anchor": "p-on2zr6"
+      },
+      "evidence": [
+        {
+          "id": "meeting-notice-1949-primary-1",
+          "type": "primary",
+          "title": "党委会的工作方法",
+          "articleId": "147-党委会的工作方法.md",
+          "anchor": "p-on2zr6",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "极拥护的有多少，反对的有多少，处于中间状态的有多少，这些都必须有个基本的调查，基本的分析，不可无根据地、主观地决定问题。 八、“安民告示”。开会要事先通知，像出安民告示一样，让大家知道要讨论什么问题，解决什么问题，并且早作准备。有些地方开干部会，事前不准备好报告和决议草案，等开会的人到了才临时凑合，好像“兵马已到，粮草未备”，这是不好的。如果没有准备，就不要急于开会。 九、“精兵简政”。讲话、演说、写文章和写决议案，都应当简明扼要。会议也不要开得太长",
+          "excerptHash": "7520135f0b822228a4cbb65c9e968cd4ec456227d8ddc7401b6cff86fa6c1d23"
+        },
+        {
+          "id": "meeting-notice-1949-history-2",
+          "type": "authoritative-history",
+          "title": "毛泽东：《党委会的工作方法》",
+          "publisher": "共产党员网",
+          "url": "https://news.12371.cn/2016/02/26/ARTI1456421688871699.shtml",
+          "supports": [
+            "context",
+            "actions"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "会议低效",
+          "临时开会",
+          "参会者没有准备",
+          "讨论没有结论",
+          "会前准备",
+          "议题管理",
+          "有效会议",
+          "安民告示",
+          "会前通知",
+          "议题",
+          "材料",
+          "准备"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "seasonal-plan-1948",
+      "title": "注意季节：计划必须服从真实时间窗口",
+      "period": "1948年",
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "execution-experiment",
+        "risk-decision",
+        "priority"
+      ],
+      "challenge": "土地改革与整党工作安排必须考虑农业季节，不当时机会影响生产与工作效果。",
+      "sourceBoundary": "这是特定历史时期的土地改革部署，不能直接用于现代土地、农业或行政决策；迁移的是时间窗口意识。",
+      "actions": [
+        "把生产季节纳入工作计划",
+        "按地区实际调整进度",
+        "避免行政日程压过现场条件"
+      ],
+      "outcome": "相关工作部署明确要求注意季节，并据此安排不同地区的改革进程。",
+      "methodology": [
+        "时间窗口",
+        "现场条件",
+        "节奏管理"
+      ],
+      "applicableProblems": [
+        "项目时机不对",
+        "忽视用户周期",
+        "计划与现场冲突",
+        "发布节奏安排"
+      ],
+      "transferMethod": "在排期前列出用户、供应、政策和自然周期中的不可逆窗口，再决定先后顺序和缓冲时间。",
+      "limits": "历史土地改革的目标与手段不能类比现代项目管理；现代农业和政策问题需专业评估。",
+      "keywords": [
+        "季节",
+        "时机",
+        "窗口",
+        "排期",
+        "节奏",
+        "现场条件"
+      ],
+      "source": {
+        "articleTitle": "一九四八年的土地改革工作和整党工作",
+        "articleId": "127-一九四八年的土地改革工作和整党工作.md",
+        "anchor": "p-1ardey3"
+      },
+      "evidence": [
+        {
+          "id": "seasonal-plan-1948-primary-1",
+          "type": "primary",
+          "title": "一九四八年的土地改革工作和整党工作",
+          "articleId": "127-一九四八年的土地改革工作和整党工作.md",
+          "anchor": "p-1ardey3",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "必须注意季节。必须利用今年整个秋季和冬季，即自今年九月至明年三月，共七个月时间，在各中央局和分局所划定的地区内，依次完成下列各项工作：（甲）乡村情况调查。（乙）按照正确政策实行初步整党。上级派到乡村的工作团或工作组，必须首先团结当地党的支部组织内的一切积极分子和较好分子，共同领导当地的土地改革工作。（丙）组织或",
+          "excerptHash": "731e82a95495718f81558a4da5dc5b8d3585b3ed5ab0d8066eaf8de7e3471553"
+        },
+        {
+          "id": "seasonal-plan-1948-history-2",
+          "type": "authoritative-history",
+          "title": "党史百年·天天读｜1月18日",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/04/23/ARTI1619161068548667.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "项目时机不对",
+          "忽视用户周期",
+          "计划与现场冲突",
+          "发布节奏安排",
+          "时间窗口",
+          "现场条件",
+          "节奏管理",
+          "季节",
+          "时机",
+          "窗口",
+          "排期",
+          "节奏"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "healthy-committee-system-1948",
+      "title": "健全党委制：重大问题由集体讨论形成决定",
+      "period": "1948年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "organization-governance",
+        "risk-decision",
+        "team-conflict"
+      ],
+      "challenge": "部分地方重大问题由个人决定，集体领导制度不健全，容易造成个人包办或成员各自处理。",
+      "sourceBoundary": "这是党委制度文件，不能替代现代公司章程、董事会规则或公共机构法定程序。",
+      "actions": [
+        "重要问题交委员会讨论",
+        "建立定期会议制度",
+        "明确集体决定与个人分工的关系"
+      ],
+      "outcome": "文件把健全党委制作为保证集体领导、防止个人包办的重要制度要求。",
+      "methodology": [
+        "集体决策",
+        "制度治理",
+        "权责分工"
+      ],
+      "applicableProblems": [
+        "创始人一人拍板",
+        "重大决策缺少复核",
+        "管理层权责不清",
+        "个人包办"
+      ],
+      "transferMethod": "按风险设决策权限：日常事项个人负责，重大事项必须有书面材料、反方意见、集体记录和明确负责人。",
+      "limits": "集体决策不能稀释个人责任，也不能违反法定治理结构和利益冲突规则。",
+      "keywords": [
+        "党委制",
+        "集体领导",
+        "个人包办",
+        "重大决策",
+        "治理",
+        "权限"
+      ],
+      "source": {
+        "articleTitle": "关于健全党委制",
+        "articleId": "129-关于健全党委制.md",
+        "anchor": "p-1bhqbh8"
+      },
+      "evidence": [
+        {
+          "id": "healthy-committee-system-1948-primary-1",
+          "type": "primary",
+          "title": "关于健全党委制",
+          "articleId": "129-关于健全党委制.md",
+          "anchor": "p-1bhqbh8",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "党委制是保证集体领导、防止个人包办的党的重要制度。近查有些（当然不是一切）领导机关，个人包办和个人解决重要问题的习气甚为浓厚。重要问题的解决，不是由党委会议做决定，而是由个人做决定，党委委员等于虚设。委员间意见分歧的事亦无由解决，并且听任这些分歧长期地不加解决。党委委员间所保持的只是形式上的一致，而不是实质上的一致。此种情形必须加以",
+          "excerptHash": "872f653a54915e1ff5ec3e4fff37daae3387c3e90e0ebb7b1359904efc70f5fd"
+        },
+        {
+          "id": "healthy-committee-system-1948-history-2",
+          "type": "authoritative-history",
+          "title": "党史百年·天天读｜9月20日",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/09/17/ARTI1631861926140238.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "创始人一人拍板",
+          "重大决策缺少复核",
+          "管理层权责不清",
+          "个人包办",
+          "集体决策",
+          "制度治理",
+          "权责分工",
+          "党委制",
+          "集体领导",
+          "重大决策",
+          "治理",
+          "权限"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "division-coordination-1949",
+      "title": "书记当好班长：集体领导下协调分工",
+      "period": "1949年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "organization-governance",
+        "needs-communication",
+        "execution-experiment"
+      ],
+      "challenge": "领导班子既要集体决定问题，又需要有人协调成员、准备会议并推动决定落实。",
+      "sourceBoundary": "这是党委领导方法，班长只是比喻，不能据此赋予现代管理者超越章程和法律的权力。",
+      "actions": [
+        "负责人组织协调班子成员",
+        "重大问题由集体讨论决定",
+        "在分工基础上形成共同节奏"
+      ],
+      "outcome": "文章以班长比喻说明书记在委员会中的组织协调职责。",
+      "methodology": [
+        "协调分工",
+        "集体领导",
+        "负责人机制"
+      ],
+      "applicableProblems": [
+        "多人负责等于无人负责",
+        "领导班子协同差",
+        "跨部门推进困难",
+        "集体决策后没人协调"
+      ],
+      "transferMethod": "明确主持人负责汇集信息和推进流程，但不替代集体决策；每项任务另设直接负责人和完成标准。",
+      "limits": "协调者不能越权决定法定集体事项，也不能以协调为名压制异议。",
+      "keywords": [
+        "班长",
+        "协调",
+        "集体领导",
+        "分工",
+        "负责人",
+        "班子"
+      ],
+      "source": {
+        "articleTitle": "党委会的工作方法",
+        "articleId": "147-党委会的工作方法.md",
+        "anchor": "p-on2zr6"
+      },
+      "evidence": [
+        {
+          "id": "division-coordination-1949-primary-1",
+          "type": "primary",
+          "title": "党委会的工作方法",
+          "articleId": "147-党委会的工作方法.md",
+          "anchor": "p-on2zr6",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "一、党委书记要善于当“班长”。党的委员会有一二十个人，像军队的一个班，书记好比是“班长”。要把这个班带好，的确不容易。目前各中央局、分局都领导很大的地区，担负很繁重的任务。领导工作不仅要决定方针政策，还要制定正确的工作方法。有了正确的方针政策，如果在工作方法上疏忽了，还是要发生问题。党委要完成自己的领导任务，就必须依靠党委这“",
+          "excerptHash": "d5a73f5fc53be88b78fafefe26e360603371c4410a020939425f972abbcad155"
+        },
+        {
+          "id": "division-coordination-1949-history-2",
+          "type": "authoritative-history",
+          "title": "毛泽东：《党委会的工作方法》",
+          "publisher": "共产党员网",
+          "url": "https://news.12371.cn/2016/02/26/ARTI1456421688871699.shtml",
+          "supports": [
+            "context",
+            "actions"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "多人负责等于无人负责",
+          "领导班子协同差",
+          "跨部门推进困难",
+          "集体决策后没人协调",
+          "协调分工",
+          "集体领导",
+          "负责人机制",
+          "班长",
+          "协调",
+          "分工",
+          "负责人",
+          "班子"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "unified-discipline-1947",
+      "title": "重行颁布纪律：组织扩张时统一基本规则",
+      "period": "1947年",
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "organization-governance",
+        "cooperation-boundaries",
+        "execution-experiment"
+      ],
+      "challenge": "军队发展和行动范围变化后，各地纪律条文存在差异，需要重新统一规定并公开执行。",
+      "sourceBoundary": "这是人民解放军纪律史，不能类比为企业对员工的无限服从要求；现代规则必须合法、必要并保障申诉。",
+      "actions": [
+        "汇总既有纪律规定",
+        "统一形成明确条目",
+        "重新颁布并要求全军执行"
+      ],
+      "outcome": "总部重行颁布三大纪律八项注意，使基本纪律采用统一规定。",
+      "methodology": [
+        "规则统一",
+        "组织扩张",
+        "制度执行"
+      ],
+      "applicableProblems": [
+        "团队扩张后规则混乱",
+        "不同地区标准不一",
+        "新人不知道底线",
+        "制度执行不一致"
+      ],
+      "transferMethod": "把分散规则合并成少量清晰底线，说明适用范围、例外、负责人和申诉渠道，并用实际案例校准。",
+      "limits": "现代规则不能违反劳动法、隐私权和反歧视要求；统一不等于取消合理地区差异。",
+      "keywords": [
+        "纪律",
+        "统一规定",
+        "组织扩张",
+        "标准",
+        "底线",
+        "执行"
+      ],
+      "source": {
+        "articleTitle": "中国人民解放军总部关于重行颁布三大纪律八项注意的训令",
+        "articleId": "111-中国人民解放军总部关于重行颁布三大纪律八项注意的训令.md",
+        "anchor": "p-uxi02d"
+      },
+      "evidence": [
+        {
+          "id": "unified-discipline-1947-primary-1",
+          "type": "primary",
+          "title": "中国人民解放军总部关于重行颁布三大纪律八项注意的训令",
+          "articleId": "111-中国人民解放军总部关于重行颁布三大纪律八项注意的训令.md",
+          "anchor": "p-uxi02d",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "一、本军三大纪律八项注意，实行多年⑴，其内容各地各军略有出入。现在统一规定，重行颁布。望即以此为准，深入教育，严格执行。至于其他应当注意事项，各地各军最高首长，可根据具体情况，规定若干项目，以命令施行之。 二、三大纪律如下： （一）一切行动听指挥；（二）不拿群众一针一线；（三）一切缴获要归公。 三、八项注意如下： （一）说话和气；（二）买卖公平；（三）借东西要还；（四）损坏东西要赔",
+          "excerptHash": "9c73959f4199e9786bdfb0b439dd84a00dc69115e0e8aaae7f90579cd4d15432"
+        },
+        {
+          "id": "unified-discipline-1947-history-2",
+          "type": "authoritative-history",
+          "title": "三大纪律八项注意的历史演进",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2024/11/20/ARTI1732082448911442.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "团队扩张后规则混乱",
+          "不同地区标准不一",
+          "新人不知道底线",
+          "制度执行不一致",
+          "规则统一",
+          "组织扩张",
+          "制度执行",
+          "纪律",
+          "统一规定",
+          "标准",
+          "底线",
+          "执行"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "intellectuals-integration-1939",
+      "title": "大量吸收知识分子：专业能力要与实际工作结合",
+      "period": "1939年",
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "learning-growth",
+        "organization-governance",
+        "cooperation-boundaries"
+      ],
+      "challenge": "抗战时期根据地建设需要文化与专业人才，同时也要让新加入者在共同工作中了解实际情况。",
+      "sourceBoundary": "这是抗战时期干部与人才政策，不能按出身给现代求职者贴标签，也不能成为思想审查或歧视依据。",
+      "actions": [
+        "重视吸收具有专业知识的人才",
+        "安排在实际工作中发挥能力",
+        "通过共同实践增进对现实与组织任务的理解"
+      ],
+      "outcome": "文件强调没有知识分子参加，革命胜利是不可能的，并要求各地注意吸收。",
+      "methodology": [
+        "人才吸收",
+        "专业互补",
+        "实践融合"
+      ],
+      "applicableProblems": [
+        "团队缺少专业人才",
+        "专家与业务脱节",
+        "新人融入困难",
+        "只重经验不重知识"
+      ],
+      "transferMethod": "先定义缺失能力，再让专业人才进入真实任务，与现场人员共同负责可验证成果，而不是只做外围建议。",
+      "limits": "招聘和任用必须遵守平等就业与反歧视规则，不能要求个人接受政治立场。",
+      "keywords": [
+        "知识分子",
+        "人才",
+        "专业能力",
+        "实践",
+        "融入",
+        "互补"
+      ],
+      "source": {
+        "articleTitle": "大量吸收知识分子",
+        "articleId": "039-大量吸收知识分子.md",
+        "anchor": "p-vx7r6o"
+      },
+      "evidence": [
+        {
+          "id": "intellectuals-integration-1939-primary-1",
+          "type": "primary",
+          "title": "大量吸收知识分子",
+          "articleId": "039-大量吸收知识分子.md",
+          "anchor": "p-vx7r6o",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "一、在长期的和残酷的民族解放战争中，在建立新中国的伟大斗争中，共产党必须善于吸收知识分子，才能组织伟大的抗战力量，组织千百万农民群众，发展革命的文化运动和发展革命的统一战线。没有知识分子的参加，革命的胜利是不可能的。 二、三年以来，我党我军在吸收知识分子方面，已经尽了相当的努力，吸收了大批革命知识分子参加党，参加军队，参加政府工作，进行文化运动和民众运动，发展了统一战线，这是一个大的成",
+          "excerptHash": "889c7d66f268112882bac54c2401864fa3d2cc50943b50395c2795d523924f1f"
+        },
+        {
+          "id": "intellectuals-integration-1939-history-2",
+          "type": "authoritative-history",
+          "title": "党史百年·天天读｜12月1日",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/03/08/ARTI1615188830005636.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "团队缺少专业人才",
+          "专家与业务脱节",
+          "新人融入困难",
+          "只重经验不重知识",
+          "人才吸收",
+          "专业互补",
+          "实践融合",
+          "知识分子",
+          "人才",
+          "专业能力",
+          "实践",
+          "融入",
+          "互补"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "material-benefits-base-1945",
+      "title": "看得见的物质利益：动员必须回应现实需要",
+      "period": "1945年",
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "needs-communication",
+        "resource-constraint",
+        "execution-experiment"
+      ],
+      "challenge": "在东北建立根据地不能只靠口号，需要处理群众的现实生活和生产问题，形成实际支持基础。",
+      "sourceBoundary": "这是解放战争初期的政治经济部署，不能把现代用户关系等同于群众动员，也不能替代公共政策和商业合规。",
+      "actions": [
+        "把群众现实利益纳入工作部署",
+        "结合生产和生活问题开展工作",
+        "用可感知结果检验组织是否扎根"
+      ],
+      "outcome": "电报明确提出给东北人民以看得见的物质利益，并把这项工作与建立巩固根据地相联系。",
+      "methodology": [
+        "现实需求",
+        "利益分析",
+        "结果验证"
+      ],
+      "applicableProblems": [
+        "用户不接受方案",
+        "员工只听到口号",
+        "公益项目缺少参与",
+        "政策沟通脱离实际利益"
+      ],
+      "transferMethod": "先访谈受影响者的实际成本与收益，再把抽象目标转成能被观察、能被核验的具体改善。",
+      "limits": "不能把短期利益诱导当作真实支持，也不能用利益交换规避知情同意、劳动权益或公共程序。",
+      "keywords": [
+        "物质利益",
+        "现实需要",
+        "用户价值",
+        "参与",
+        "获得感",
+        "扎根"
+      ],
+      "source": {
+        "articleTitle": "建立巩固的东北根据地",
+        "articleId": "098-建立巩固的东北根据地.md",
+        "anchor": "p-1fahywv"
+      },
+      "evidence": [
+        {
+          "id": "material-benefits-base-1945-primary-1",
+          "type": "primary",
+          "title": "建立巩固的东北根据地",
+          "articleId": "098-建立巩固的东北根据地.md",
+          "anchor": "p-1fahywv",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "众的武装和人民的政权，把群众斗争从经济斗争迅速提高到政治斗争，参加根据地的建设。最近热河省委的发动群众斗争的指示⑵，可以应用于东北。我党必须给东北人民以看得见的物质利益，群众才会拥护我们，反对国民党的进攻。否则，群众分不清国民党和共产党的优劣，可能一时接受国民党的欺骗宣传，甚至反对我党，造成我们在东北非常不利的形势。 （四）我党现时在东北有一项主观上的困难。这就是大批干部和军队初到东北，地理民情不熟。干部对于不能占领大城市表示不满，对于发动群众建立根据地的艰苦工作",
+          "excerptHash": "b82e2ba2c2d2be455abc5047d7554bc8bafda0e2efd29c1fe9e24a3c87de0d98"
+        },
+        {
+          "id": "material-benefits-base-1945-history-2",
+          "type": "authoritative-history",
+          "title": "党史百年·天天读｜12月28日",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/12/23/ARTI1640247136521162.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "用户不接受方案",
+          "员工只听到口号",
+          "公益项目缺少参与",
+          "政策沟通脱离实际利益",
+          "现实需求",
+          "利益分析",
+          "结果验证",
+          "物质利益",
+          "现实需要",
+          "用户价值",
+          "参与",
+          "获得感",
+          "扎根"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "service-feedback-1944",
+      "title": "为人民服务中的纠错：只要对人民有利就改正",
+      "period": "1944年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "needs-communication",
+        "failure-recovery",
+        "learning-growth"
+      ],
+      "challenge": "组织工作出现缺点时，能否接受来自组织内外的批评，并以是否符合人民利益来判断是否改正。",
+      "sourceBoundary": "这是追悼会上的政治演讲，不能替代现代申诉、审计和专业纠错制度，也不能把所有意见视为同等可靠。",
+      "actions": [
+        "允许他人指出缺点",
+        "判断意见是否有事实和公共利益依据",
+        "确认正确后采取改正行动"
+      ],
+      "outcome": "演讲明确表达不怕批评、正确意见就改正的原则。",
+      "methodology": [
+        "开放反馈",
+        "事实纠错",
+        "服务对象检验"
+      ],
+      "applicableProblems": [
+        "害怕负面反馈",
+        "用户投诉被忽视",
+        "犯错后不愿承认",
+        "团队缺少纠错渠道"
+      ],
+      "transferMethod": "对反馈分别记录事实、影响、证据和建议；不按身份决定对错，先核验，再公开改进项与复查日期。",
+      "limits": "开放批评不等于容忍侮辱或网络暴力；敏感举报必须保护当事人。",
+      "keywords": [
+        "为人民服务",
+        "批评",
+        "改正",
+        "反馈",
+        "投诉",
+        "缺点"
+      ],
+      "source": {
+        "articleTitle": "为人民服务",
+        "articleId": "076-为人民服务.md",
+        "anchor": "p-qdtyw3"
+      },
+      "evidence": [
+        {
+          "id": "service-feedback-1944-primary-1",
+          "type": "primary",
+          "title": "为人民服务",
+          "articleId": "076-为人民服务.md",
+          "anchor": "p-qdtyw3",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "，替剥削人民和压迫人民的人去死，就比鸿毛还轻。张思德同志是为人民利益而死的，他的死是比泰山还要重的。 因为我们是为人民服务的，所以，我们如果有缺点，就不怕别人批评指出。不管是什么人，谁向我们指出都行。只要你说得对，我们就改正。你说的办法对人民有好处，我们就照你的办。“精兵简政”这一条意见，就是党外人士李鼎铭⑶先生提出来的；他提得好，对人民有好处，我们就采用了。只要我们为人民的利益坚持好的，为人民的利益改正错的，我们这个队伍就一定会兴旺起来。 我们都是来自五湖四海",
+          "excerptHash": "261224f38976cfc9880c61219bae9949ffae27ca5d3c28fab8194d9cc2de405c"
+        },
+        {
+          "id": "service-feedback-1944-history-2",
+          "type": "authoritative-history",
+          "title": "党史百年·天天读｜9月8日",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/09/08/ARTI1631060506676691.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "害怕负面反馈",
+          "用户投诉被忽视",
+          "犯错后不愿承认",
+          "团队缺少纠错渠道",
+          "开放反馈",
+          "事实纠错",
+          "服务对象检验",
+          "为人民服务",
+          "批评",
+          "改正",
+          "反馈",
+          "投诉",
+          "缺点"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "youth-characteristics-1953",
+      "title": "照顾青年特点：同一目标需要适配对象差异",
+      "period": "1953年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "needs-communication",
+        "execution-experiment",
+        "learning-growth"
+      ],
+      "challenge": "青年团工作如果完全照搬其他组织方式，容易忽视青年在学习、活动和身心发展上的特点。",
+      "sourceBoundary": "这是1953年的青年团工作讲话，不能作为现代教育、心理或未成年人保护的专业依据。",
+      "actions": [
+        "承认青年群体具有自身特点",
+        "在共同任务下采用适合对象的工作方式",
+        "避免用单一模板覆盖不同人群"
+      ],
+      "outcome": "讲话明确提出青年团工作要照顾青年的特点。",
+      "methodology": [
+        "对象分析",
+        "差异化方法",
+        "因人制宜"
+      ],
+      "applicableProblems": [
+        "沟通方式不适合受众",
+        "培训一刀切",
+        "年轻成员参与度低",
+        "产品没有分层"
+      ],
+      "transferMethod": "先区分对象的能力、动机、约束和使用场景，再保持目标一致、调整表达与支持方式，并用反馈验证。",
+      "limits": "不得用年龄刻板印象替代个体了解；教育和心理问题应遵循现代专业规范。",
+      "keywords": [
+        "青年特点",
+        "受众",
+        "差异化",
+        "一刀切",
+        "参与度",
+        "适配"
+      ],
+      "source": {
+        "articleTitle": "青年团的工作要照顾青年的特点",
+        "articleId": "187-青年团的工作要照顾青年的特点.md",
+        "anchor": "p-1d2ypja"
+      },
+      "evidence": [
+        {
+          "id": "youth-characteristics-1953-primary-1",
+          "type": "primary",
+          "title": "青年团的工作要照顾青年的特点",
+          "articleId": "187-青年团的工作要照顾青年的特点.md",
+          "anchor": "p-1d2ypja",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "顾青年的特点，要有自己的系统的工作，同时又要受各级党委的领导。这并不是什么新发明，老早就有了的，马克思主义历来就是这么讲的。这是从实际出发。青年就是青年，不然，何必要搞青年团呢？青年人和成年人不同，女青年和男青年也不同，不照顾这些特点，就会脱离群众。你们现在有九百万团员，如果不注意青年的特点，也许就只有一百万拥护你们，八百万不拥护你们。",
+          "excerptHash": "4b101addda50fa1ef430a65e87ec9b8aadbe692f2ab6f46c03513f427a791b53"
+        },
+        {
+          "id": "youth-characteristics-1953-history-2",
+          "type": "authoritative-history",
+          "title": "毛泽东谈青年工作",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2019/04/17/ARTI1555474628255626.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "沟通方式不适合受众",
+          "培训一刀切",
+          "年轻成员参与度低",
+          "产品没有分层",
+          "对象分析",
+          "差异化方法",
+          "因人制宜",
+          "青年特点",
+          "受众",
+          "差异化",
+          "一刀切",
+          "参与度",
+          "适配"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "editor-audience-1948",
+      "title": "报纸工作人员向群众学习：表达前先理解受众",
+      "period": "1948年",
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "investigation",
+        "needs-communication",
+        "learning-growth"
+      ],
+      "challenge": "报纸承担宣传与教育任务，但编辑如果缺少实际经验，就难以理解群众面对的具体问题，内容也可能脱离实际。",
+      "sourceBoundary": "这是晋绥日报编辑工作谈话，不能直接当作现代新闻伦理或传播规范；现代媒体还需遵守事实核查与独立性原则。",
+      "actions": [
+        "让编辑参加一段实际群众工作",
+        "研究来自现场的材料",
+        "把受众经验转化为编辑自己的实际知识"
+      ],
+      "outcome": "谈话把向群众学习和参加实际工作作为编辑承担教育任务的必要条件。",
+      "methodology": [
+        "受众研究",
+        "现场学习",
+        "内容反馈"
+      ],
+      "applicableProblems": [
+        "内容没人看",
+        "产品文案脱离用户",
+        "专家表达听不懂",
+        "传播只讲自己想讲的"
+      ],
+      "transferMethod": "在发布前访谈目标受众，记录他们使用的词、真实疑问与误解，再用可理解性测试修改内容。",
+      "limits": "理解受众不等于迎合错误信息；新闻与专业传播必须坚持证据和伦理。",
+      "keywords": [
+        "报纸",
+        "受众",
+        "内容",
+        "向群众学习",
+        "传播",
+        "编辑"
+      ],
+      "source": {
+        "articleTitle": "对晋绥日报编辑人员的谈话",
+        "articleId": "124-对晋绥日报编辑人员的谈话.md",
+        "anchor": "p-8z6t8o"
+      },
+      "evidence": [
+        {
+          "id": "editor-audience-1948-primary-1",
+          "type": "primary",
+          "title": "对晋绥日报编辑人员的谈话",
+          "articleId": "124-对晋绥日报编辑人员的谈话.md",
+          "anchor": "p-8z6t8o",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "就是落后于群众的觉悟程度，不能领导群众前进，而且反对群众前进。这些问题有许多同志还不懂得。我们的报纸要好好地宣传这些观点，使大家都能明白。 报纸工作人员为了教育群众，首先要向群众学习。同志们都是知识分子。知识分子往往不懂事，对于实际事物往往没有经历，或者经历很少。你们对于一九三三年制订的《怎样分析农村阶级》的小册子，就看不大懂；这一点，农民比你们强，只要给他们一说就都懂得了。崞县⑵两个区的农民一百八十多人，开了五天会，解决了分配土地中的许多问题。假如你们的编辑",
+          "excerptHash": "0e058b97b14bf3e64e235b0466e92da21e816a4a095cee5e29374baa519b4720"
+        },
+        {
+          "id": "editor-audience-1948-history-2",
+          "type": "authoritative-history",
+          "title": "毛泽东谈新闻舆论工作",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/03/29/ARTI1616981833699447.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "内容没人看",
+          "产品文案脱离用户",
+          "专家表达听不懂",
+          "传播只讲自己想讲的",
+          "受众研究",
+          "现场学习",
+          "内容反馈",
+          "报纸",
+          "受众",
+          "内容",
+          "向群众学习",
+          "传播",
+          "编辑"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "economic-work-1933",
+      "title": "必须注意经济工作：中心任务也需要条件保障",
+      "period": "1933年",
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "resource-constraint",
+        "priority",
+        "organization-governance"
+      ],
+      "challenge": "革命战争环境下，部分干部只注意军事和动员，忽视经济建设对供给、群众生活和持续工作的保障作用。",
+      "sourceBoundary": "这是中央苏区特定政治经济条件下的报告，不能作为现代宏观经济或企业经营政策依据。",
+      "actions": [
+        "把经济建设纳入重要议程",
+        "组织经济战线的具体工作",
+        "让资源保障服务于中心任务和群众生活"
+      ],
+      "outcome": "报告要求立即开展经济战线上的运动，并系统讨论当时经济工作的任务。",
+      "methodology": [
+        "条件保障",
+        "资源配置",
+        "系统任务"
+      ],
+      "applicableProblems": [
+        "只顾增长忽视现金流",
+        "核心任务缺少后勤",
+        "团队忽视基础设施",
+        "战略没有资源保障"
+      ],
+      "transferMethod": "在主目标之外列出现金、人员、工具和生活保障四类约束，找到最可能让主任务中断的一项优先处理。",
+      "limits": "现代财务、税务和经济决策必须依据专业数据与法律，不能用历史政策直接推导。",
+      "keywords": [
+        "经济工作",
+        "保障",
+        "现金流",
+        "后勤",
+        "资源",
+        "中心任务"
+      ],
+      "source": {
+        "articleTitle": "必须注意经济工作",
+        "articleId": "007-必须注意经济工作.md",
+        "anchor": "p-16grx1t"
+      },
+      "evidence": [
+        {
+          "id": "economic-work-1933-primary-1",
+          "type": "primary",
+          "title": "必须注意经济工作",
+          "articleId": "007-必须注意经济工作.md",
+          "anchor": "p-16grx1t",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "革命战争的激烈发展，要求我们动员群众，立即开展经济战线上的运动，进行各项必要和可能的经济建设事业。为什么？现在我们的一切工作，都应当为着革命战争的胜利，首先是粉碎敌人第五次“围剿”⑴的战争的彻底胜利；为着争取物质上的条件去保障红军的给养和供给；为着改善人民群众的生活，由此更加激发人民群众参加革命战争的积极性；为着在经济战线上把广大人民群众组织起来，并且教育他们",
+          "excerptHash": "985725b0c3109ec375d84499c922a4b53b1b118e88256cf07a4d753853aa6191"
+        },
+        {
+          "id": "economic-work-1933-history-2",
+          "type": "authoritative-history",
+          "title": "毛泽东在中央苏区领导经济建设的实践与探索",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2022/04/25/ARTI1650856490966888.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "只顾增长忽视现金流",
+          "核心任务缺少后勤",
+          "团队忽视基础设施",
+          "战略没有资源保障",
+          "条件保障",
+          "资源配置",
+          "系统任务",
+          "经济工作",
+          "保障",
+          "现金流",
+          "后勤",
+          "资源",
+          "中心任务"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "public-private-economy-1934",
+      "title": "多种经济成分并用：按条件配置不同供给方式",
+      "period": "1934年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "resource-constraint",
+        "cooperation-boundaries",
+        "risk-decision"
+      ],
+      "challenge": "中央苏区经济建设需要在战争和封锁条件下发展供给，必须处理国营、合作社与私人经济之间的关系。",
+      "sourceBoundary": "这是中央苏区经济政策，不能直接套用到现代所有制、投资或监管问题；现代制度必须依据现行法律。",
+      "actions": [
+        "区分不同经济成分的作用",
+        "在规定范围内允许私人经济发展",
+        "用合作社和国营经济补足关键供给"
+      ],
+      "outcome": "报告系统阐述当时多种经济成分并存和发展的政策边界。",
+      "methodology": [
+        "多元供给",
+        "边界治理",
+        "条件配置"
+      ],
+      "applicableProblems": [
+        "自建还是合作",
+        "单一供应渠道风险",
+        "平台与伙伴边界",
+        "资源获取方式选择"
+      ],
+      "transferMethod": "按战略控制、成本、速度和合规要求，把能力分成必须自建、适合合作和可市场采购三类。",
+      "limits": "不能据此推导现代公私政策或投资结论；具体问题需依法和按市场证据判断。",
+      "keywords": [
+        "经济政策",
+        "自建",
+        "合作",
+        "采购",
+        "多元供给",
+        "边界"
+      ],
+      "source": {
+        "articleTitle": "我们的经济政策",
+        "articleId": "009-我们的经济政策.md",
+        "anchor": "p-18oyh13"
+      },
+      "evidence": [
+        {
+          "id": "public-private-economy-1934-primary-1",
+          "type": "primary",
+          "title": "我们的经济政策",
+          "articleId": "009-我们的经济政策.md",
+          "anchor": "p-18oyh13",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "三方面组成的。 国家经营的经济事业，在目前，只限于可能的和必要的一部分。国营的工业或商业，都已经开始发展，它们的前途是不可限量的。 我们对于私人经济，只要不出于政府法律范围之外，不但不加阻止，而且加以提倡和奖励。因为目前私人经济的发展，是国家的利益和人民的利益所需要的。私人经济，不待说，现时是占着绝对的优势，并且在相当长的期间内也必然还是优势。目前私人经济在红色区域是取着小规模经营的形式。 合作社事业，是在极迅速的发展中。据一九三三年九月江西福建两省十七个县的统计，共有各",
+          "excerptHash": "ef53d316b240fbce5cdffb12a0e4acf429a1ac9557c97701f1b87412859553ed"
+        },
+        {
+          "id": "public-private-economy-1934-history-2",
+          "type": "authoritative-history",
+          "title": "毛泽东在中央苏区的经济探索",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/01/21/ARTI1611193856955367.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "自建还是合作",
+          "单一供应渠道风险",
+          "平台与伙伴边界",
+          "资源获取方式选择",
+          "多元供给",
+          "边界治理",
+          "条件配置",
+          "经济政策",
+          "自建",
+          "合作",
+          "采购",
+          "边界"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "learn-economic-work-1945",
+      "title": "从不会到学会：在实践中建立经济工作能力",
+      "period": "1945年",
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "learning-growth",
+        "resource-constraint",
+        "failure-recovery"
+      ],
+      "challenge": "抗日根据地面对严重财政经济困难，干部起初缺乏经济工作经验，需要在实际问题中学习并形成办法。",
+      "sourceBoundary": "这是抗日根据地经济工作总结，不能替代现代企业经营、宏观经济和财务专业知识。",
+      "actions": [
+        "承认原有经验不足",
+        "在生产和财政实践中试验办法",
+        "总结有效做法并推广"
+      ],
+      "outcome": "报告总结根据地干部开始学会经济工作，并把生产运动与克服财政困难联系起来。",
+      "methodology": [
+        "实践学习",
+        "能力建设",
+        "经验总结"
+      ],
+      "applicableProblems": [
+        "接手陌生业务",
+        "团队不会做经营",
+        "学习停留在课程",
+        "危机中建立新能力"
+      ],
+      "transferMethod": "选一个真实但可控的任务，先做基线、请教专业者、短周期执行，再把错误与有效步骤写成团队流程。",
+      "limits": "实践学习不能替代执照、审计和专业责任；高风险领域必须由合格人员负责。",
+      "keywords": [
+        "学会经济工作",
+        "实践学习",
+        "陌生业务",
+        "能力建设",
+        "生产",
+        "经验"
+      ],
+      "source": {
+        "articleTitle": "必须学会做经济工作",
+        "articleId": "079-必须学会做经济工作.md",
+        "anchor": "p-u8n32q"
+      },
+      "evidence": [
+        {
+          "id": "learn-economic-work-1945-primary-1",
+          "type": "primary",
+          "title": "必须学会做经济工作",
+          "articleId": "079-必须学会做经济工作.md",
+          "anchor": "p-u8n32q",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "。 你们的经验，这次会议做了总结。这个总结文件说得很好，不但这里适用，各地也可以适用，我就不讲这些了。我想讲一点我们的经济工作。 近几年中，我们开始学会了经济工作，我们在经济工作中有了很大的成绩，但这还只是开始。我们必须在两三年内，使陕甘宁边区和敌后各解放区，做到粮食和工业品的全部或大部的自给，并有盈余。我们必须使农业、工业、贸易三方面都比现在有更大的成绩。到了那时，才算学得更多，学得更好。如果哪一个地方的军民生活没有改善，为着反攻而准备的物质基础还不稳固，",
+          "excerptHash": "6c358e61bfcd732a00dbd0a8511427b06e37f69e2c8aca5bf2e4a33cc1cde642"
+        },
+        {
+          "id": "learn-economic-work-1945-history-2",
+          "type": "authoritative-history",
+          "title": "《毛泽东选集》第三卷",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/special/mzdxj/d3j/",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "接手陌生业务",
+          "团队不会做经营",
+          "学习停留在课程",
+          "危机中建立新能力",
+          "实践学习",
+          "能力建设",
+          "经验总结",
+          "学会经济工作",
+          "陌生业务",
+          "生产",
+          "经验"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "self-reliance-production-1945",
+      "title": "生产自给中的组织方法：统一领导、分散经营",
+      "period": "1945年",
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "resource-constraint",
+        "organization-governance",
+        "execution-experiment"
+      ],
+      "challenge": "抗战根据地供给困难，军队生产既要有统一政策和检查，又要适应各单位、各地区的具体条件。",
+      "sourceBoundary": "这是战争年代军队生产经验，不能为现代组织强迫成员从事额外劳动或规避工资、健康和安全责任提供依据。",
+      "actions": [
+        "确立统一领导和政策",
+        "允许各单位按条件分散经营",
+        "通过计划与检查协调生产"
+      ],
+      "outcome": "文章总结生产自给经验，并将统一领导、分散经营列为组织原则。",
+      "methodology": [
+        "分布式执行",
+        "统一标准",
+        "自力更生"
+      ],
+      "applicableProblems": [
+        "总部与地方如何分权",
+        "多个团队执行同一目标",
+        "资源短缺下自建能力",
+        "统一标准与地方适配冲突"
+      ],
+      "transferMethod": "中央层只统一目标、底线和指标，执行团队按本地条件选择办法；用定期复盘而非逐项审批保持一致。",
+      "limits": "自力更生不等于拒绝外部合作，也不能牺牲员工合法权益和安全标准。",
+      "keywords": [
+        "统一领导",
+        "分散经营",
+        "自力更生",
+        "分权",
+        "地方适配",
+        "生产"
+      ],
+      "source": {
+        "articleTitle": "论军队生产自给，兼论整风和生产两大运动的重要性",
+        "articleId": "084-论军队生产自给，兼论整风和生产两大运动的重要性.md",
+        "anchor": "p-jph329"
+      },
+      "evidence": [
+        {
+          "id": "self-reliance-production-1945-primary-1",
+          "type": "primary",
+          "title": "论军队生产自给，兼论整风和生产两大运动的重要性",
+          "articleId": "084-论军队生产自给，兼论整风和生产两大运动的重要性.md",
+          "anchor": "p-jph329",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "去发动广大群众自力更生的积极性，虽然上面费尽了气力，结果将是上下交困，在目前条件下永远也不能解决问题。几年来的经验，已经充分证明了这一点。“统一领导，分散经营”的原则，已被证明是我们解放区在目前条件下组织一切经济生活的正确的原则。 解放区的军队，已经达到了九十多万。为着打败日本侵略者，还需要扩大军队到几个九十万。但是我们还没有外援。就是假定将来有了外援，生活资料也只能由我们自己来供给，这是一点主观主义也来不得的。在不久的将来，我们需要集中必要的兵团，离开",
+          "excerptHash": "9ec1d001481424a53b4cd6b1f2afe1b37a6f914417a2110d5e4d838b82bc4eb9"
+        },
+        {
+          "id": "self-reliance-production-1945-history-2",
+          "type": "authoritative-history",
+          "title": "党史百年·天天读｜4月21日",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/04/21/ARTI1618993932288271.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "总部与地方如何分权",
+          "多个团队执行同一目标",
+          "资源短缺下自建能力",
+          "统一标准与地方适配冲突",
+          "分布式执行",
+          "统一标准",
+          "自力更生",
+          "统一领导",
+          "分散经营",
+          "分权",
+          "地方适配",
+          "生产"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "unite-struggle-policy-1940",
+      "title": "又联合又斗争：合作中保留原则与独立性",
+      "period": "1940年",
+      "caseKind": "method-text",
+      "problemTypes": [
+        "cooperation-boundaries",
+        "team-conflict",
+        "risk-decision"
+      ],
+      "challenge": "抗日统一战线中既需要维持合作，又要应对摩擦和反共活动，必须处理联合与独立自主之间的关系。",
+      "sourceBoundary": "这是抗日统一战线策略，不能把现代伙伴、同事或家人敌我化，也不能为胁迫、报复或不诚信谈判提供依据。",
+      "actions": [
+        "在共同目标上维持联合",
+        "对破坏合作的行为保留原则性回应",
+        "保持自身判断与行动能力"
+      ],
+      "outcome": "文章系统阐述当时统一战线中联合、斗争和独立自主的策略关系。",
+      "methodology": [
+        "合作边界",
+        "原则协商",
+        "独立自主"
+      ],
+      "applicableProblems": [
+        "依赖单一合作伙伴",
+        "合作中不断让步",
+        "既要合作又有分歧",
+        "客户关系边界不清"
+      ],
+      "transferMethod": "合作前写清共同目标、不可让渡底线、信息与决策权限、违约处理和退出条件；争议只针对行为与条款。",
+      "limits": "现代合作必须依法、诚信并尊重人格；不能套用斗争语言制造对立。",
+      "keywords": [
+        "联合",
+        "斗争",
+        "合作边界",
+        "独立自主",
+        "让步",
+        "退出条件"
+      ],
+      "source": {
+        "articleTitle": "目前抗日统一战线中的策略问题",
+        "articleId": "051-目前抗日统一战线中的策略问题.md",
+        "anchor": "p-1pwwbr0"
+      },
+      "evidence": [
+        {
+          "id": "unite-struggle-policy-1940-primary-1",
+          "type": "primary",
+          "title": "目前抗日统一战线中的策略问题",
+          "articleId": "051-目前抗日统一战线中的策略问题.md",
+          "anchor": "p-1pwwbr0",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "反对顽固势力的策略，这是不可分离的三个环节，而以斗争为达到团结一切抗日势力的手段。在抗日统一战线时期中，斗争是团结的手段，团结是斗争的目的。以斗争求团结则团结存，以退让求团结则团结亡，这一真理，已经逐渐为党内同志们所了解。但不了解的依然还多，他们或者认为斗争会破裂统一战线，或者认为斗争可以无限制地使用，或者对于中间势力采取不正确的策略，或者对顽固势力有错误的认识，这些都是必须纠正的。 （三）发展进步势力，就是发展无产阶级、农民阶级和城市小资产阶级的力量，就",
+          "excerptHash": "846f7a9cbe247c4c92c77e7caaeb98553fbdca6f785b6eab44661888fe1b2343"
+        },
+        {
+          "id": "unite-struggle-policy-1940-history-2",
+          "type": "authoritative-history",
+          "title": "党史百年·天天读｜3月11日",
+          "publisher": "共产党员网",
+          "url": "https://www.12371.cn/2021/03/07/ARTI1615096891267396.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "依赖单一合作伙伴",
+          "合作中不断让步",
+          "既要合作又有分歧",
+          "客户关系边界不清",
+          "合作边界",
+          "原则协商",
+          "独立自主",
+          "联合",
+          "斗争",
+          "让步",
+          "退出条件"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    },
+    {
+      "id": "technical-craft-bethune-1939",
+      "title": "白求恩的技术态度：把专业标准落实到日常工作",
+      "period": "1939年",
+      "caseKind": "historical-event",
+      "problemTypes": [
+        "learning-growth",
+        "execution-experiment",
+        "organization-governance"
+      ],
+      "challenge": "抗战医疗条件困难，白求恩承担医疗工作；文章需要总结其工作责任感与专业态度。",
+      "sourceBoundary": "这是对白求恩精神的纪念文章，不是医学操作指南，也不能据此要求无边界牺牲或忽视职业健康。",
+      "actions": [
+        "对工作承担高度责任",
+        "持续改进专业技术",
+        "把专业能力用于实际需要"
+      ],
+      "outcome": "文章把对工作极端负责、对技术精益求精概括为白求恩的重要品质。",
+      "methodology": [
+        "专业主义",
+        "持续改进",
+        "责任意识"
+      ],
+      "applicableProblems": [
+        "工作质量不稳定",
+        "技能长期没有进步",
+        "只求完成不求质量",
+        "专业标准难落实"
+      ],
+      "transferMethod": "为关键工作定义可检查的质量标准，每轮选一个缺陷做刻意练习，并保留同行评审和错误记录。",
+      "limits": "专业负责不等于过劳；医疗、工程等工作必须遵守现代资质、安全和循证规范。",
+      "keywords": [
+        "白求恩",
+        "精益求精",
+        "专业",
+        "质量",
+        "责任",
+        "持续改进"
+      ],
+      "source": {
+        "articleTitle": "纪念白求恩",
+        "articleId": "042-纪念白求恩.md",
+        "anchor": "p-19dm3it"
+      },
+      "evidence": [
+        {
+          "id": "technical-craft-bethune-1939-primary-1",
+          "type": "primary",
+          "title": "纪念白求恩",
+          "articleId": "042-纪念白求恩.md",
+          "anchor": "p-19dm3it",
+          "supports": [
+            "challenge",
+            "actions",
+            "outcome"
+          ],
+          "excerpt": "看过白求恩医生的工作的，无不为之感动。每一个共产党员，一定要学习白求恩同志的这种真正共产主义者的精神。 白求恩同志是个医生，他以医疗为职业，对技术精益求精；在整个八路军医务系统中，他的医术是很高明的。这对于一班见异思迁的人，对于一班鄙薄技术工作以为不足道、以为无出路的人，也是一个极好的教训。 我和白求恩同志只见过一面。后来他给我来过许多信。可是因为忙，仅回过他一封信，还不知他收到没有。对于他的死，我是很悲痛的。现在大家纪念他，可见他的精神感人之深。我",
+          "excerptHash": "f94f1b5598107d7fa3ca58b13c47945e3433234daa68da63d5b51ae9b6e05039"
+        },
+        {
+          "id": "technical-craft-bethune-1939-history-2",
+          "type": "authoritative-history",
+          "title": "纪念白求恩",
+          "publisher": "共产党员网",
+          "url": "https://news.12371.cn/2015/01/19/ARTI1421618073049382.shtml",
+          "supports": [
+            "context",
+            "outcome"
+          ],
+          "accessedAt": "2026-07-14"
+        }
+      ],
+      "retrieval": {
+        "aliases": [
+          "工作质量不稳定",
+          "技能长期没有进步",
+          "只求完成不求质量",
+          "专业标准难落实",
+          "专业主义",
+          "持续改进",
+          "责任意识",
+          "白求恩",
+          "精益求精",
+          "专业",
+          "质量",
+          "责任"
+        ],
+        "negativeCues": []
+      },
+      "verification": {
+        "status": "cross-checked",
+        "checkedAt": "2026-07-14"
+      },
+      "review": {
+        "status": "source-reviewed",
+        "sourceCheck": "passed",
+        "citationCheck": "passed",
+        "analogyCheck": "passed",
+        "reviewedAt": "2026-07-14",
+        "reviewerType": "source-audit",
+        "batchId": "source-audit-2026-07-14-60"
+      }
+    }
+  ]
+}

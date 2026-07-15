@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://redwisdom.xyz/schemas/history-case.v3.json",
+  "title": "Red Wisdom verified history case",
+  "type": "object",
+  "required": [
+    "id", "title", "period", "caseKind", "problemTypes", "challenge", "sourceBoundary",
+    "actions", "outcome", "methodology", "applicableProblems", "transferMethod", "limits",
+    "keywords", "retrieval", "source", "evidence", "verification", "review"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "title": { "type": "string", "minLength": 4 },
+    "period": { "type": "string", "minLength": 2 },
+    "caseKind": { "enum": ["historical-event", "method-text"] },
+    "problemTypes": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string" } },
+    "retrieval": {
+      "type": "object",
+      "required": ["aliases", "negativeCues"],
+      "properties": {
+        "aliases": { "type": "array", "items": { "type": "string" } },
+        "negativeCues": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "review": {
+      "type": "object",
+      "required": ["status", "sourceCheck", "citationCheck", "analogyCheck", "reviewedAt", "reviewerType"],
+      "properties": {
+        "status": { "enum": ["draft", "source-reviewed", "editor-approved", "rejected"] },
+        "sourceCheck": { "enum": ["pending", "passed", "failed"] },
+        "citationCheck": { "enum": ["pending", "passed", "failed"] },
+        "analogyCheck": { "enum": ["pending", "passed", "failed"] },
+        "reviewedAt": { "type": "string", "format": "date" },
+        "reviewerType": { "enum": ["source-audit", "human-editor"] },
+        "batchId": { "type": "string" }
+      }
+    }
+  }
+}

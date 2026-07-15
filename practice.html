@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实践 - Red Wisdom</title>
+    <meta name="description" content="把毛选方法转成今日实践、结果记录和复盘。">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'warm-rice': '#F7F4ED',
+                        'china-red': '#BC2D22',
+                        'ink-black': '#2B2B2B',
+                        'dark-beige': '#D6C6B0',
+                    },
+                    fontFamily: {
+                        'mao': ['"Ma Shan Zheng"', 'cursive'],
+                        'serif': ['"Noto Serif SC"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .practice-focus-ring {
+            outline: 3px solid rgba(188, 45, 34, 0.35);
+            outline-offset: 3px;
+        }
+    </style>
+</head>
+
+<body class="bg-warm-rice min-h-[100dvh] text-ink-black font-serif">
+    <header class="bg-china-red text-warm-rice px-5 py-4 shadow">
+        <div class="max-w-5xl mx-auto flex items-center justify-between gap-4">
+            <a href="index.html" class="font-mao text-2xl">Red Wisdom</a>
+            <div class="flex items-center gap-3">
+                <nav class="hidden md:flex items-center gap-3 text-sm" aria-label="主导航">
+                    <a class="hover:underline" href="reading.html" data-i18n="nav.reading">阅读</a>
+                    <a class="hover:underline" href="chat.html" data-i18n="nav.chat">问道</a>
+                    <a class="hover:underline" href="problems.html" data-i18n="nav.problems">我的问题</a>
+                    <a class="hover:underline" href="me.html" data-i18n="nav.me">我的</a>
+                    <a class="hover:underline" href="login.html" data-i18n="nav.login">登录</a>
+                </nav>
+                <label class="sr-only" for="practiceLocaleSelect" data-i18n="practice.localeLabel">语言</label>
+                <select id="practiceLocaleSelect"
+                    class="rounded border border-warm-rice/40 bg-china-red px-2 py-1 text-xs text-warm-rice">
+                    <option value="zh-CN">中文</option>
+                    <option value="en">EN</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-6 pb-24">
+        <section id="problemContextBar" class="hidden mb-5"></section>
+        <section class="mb-6">
+            <p class="text-sm text-china-red font-bold mb-2" data-i18n="practice.banner">本机私密保存 · 登录后可同步到个人账户</p>
+            <h1 class="font-mao text-4xl text-china-red mb-2" data-i18n="practice.title">实践</h1>
+            <p class="text-gray-700 leading-relaxed" data-i18n="practice.subtitle">
+                把一次抽卡、阅读或问答转成一个最小行动。先做，再记录结果，最后复盘。
+            </p>
+        </section>
+
+        <section id="accountPanel" class="mb-6 bg-white/80 border border-dark-beige/50 rounded-lg p-4"></section>
+
+        <section id="summary" class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6"></section>
+
+        <section class="bg-white/80 border border-dark-beige/50 rounded-lg p-4 mb-6">
+            <h2 class="font-mao text-2xl text-china-red mb-3" data-i18n="practice.newTitle">新建实践</h2>
+            <form id="practiceForm" class="grid gap-3">
+                <input id="titleInput" class="rounded border border-dark-beige/70 px-3 py-2" placeholder="标题，例如：用实践论处理拖延"
+                    data-i18n-placeholder="practice.titlePlaceholder">
+                <textarea id="problemInput" class="rounded border border-dark-beige/70 px-3 py-2" rows="3"
+                    placeholder="我的现实问题" data-i18n-placeholder="practice.problemPlaceholder"></textarea>
+                <fieldset class="grid gap-3 rounded-lg border border-red-100 bg-red-50/50 p-3">
+                    <legend class="px-1 font-mao text-xl text-china-red" data-i18n="practice.methodAnalysis">方法分析</legend>
+                    <div class="grid gap-3 md:grid-cols-2">
+                        <label class="grid gap-1 text-sm text-gray-700">
+                            <span data-i18n="practice.mainContradiction">主要矛盾</span>
+                            <textarea id="mainContradictionInput" class="rounded border border-dark-beige/70 px-3 py-2" rows="2"
+                                placeholder="例如：需求范围不清与交付时间固定之间的矛盾"
+                                data-i18n-placeholder="practice.mainContradictionPlaceholder"></textarea>
+                        </label>
+                        <label class="grid gap-1 text-sm text-gray-700">
+                            <span data-i18n="practice.investigation">缺少的调查</span>
+                            <textarea id="investigationTodoInput" class="rounded border border-dark-beige/70 px-3 py-2" rows="2"
+                                placeholder="例如：今天问清三个必须保留的需求"
+                                data-i18n-placeholder="practice.investigationPlaceholder"></textarea>
+                        </label>
+                        <label class="grid gap-1 text-sm text-gray-700">
+                            <span data-i18n="practice.forces">可用力量</span>
+                            <textarea id="availableForcesInput" class="rounded border border-dark-beige/70 px-3 py-2" rows="2"
+                                placeholder="例如：两名同事、今晚一小时"
+                                data-i18n-placeholder="practice.forcesPlaceholder"></textarea>
+                        </label>
+                        <label class="grid gap-1 text-sm text-gray-700">
+                            <span data-i18n="practice.expectedResult">复盘标准</span>
+                            <input id="expectedResultInput" class="rounded border border-dark-beige/70 px-3 py-2"
+                                placeholder="例如：明天看是否减少返工" data-i18n-placeholder="practice.expectedResultPlaceholder">
+                        </label>
+                    </div>
+                </fieldset>
+                <textarea id="actionInput" class="rounded border border-dark-beige/70 px-3 py-2" rows="3"
+                    placeholder="今日最小行动" data-i18n-placeholder="practice.actionPlaceholder"></textarea>
+                <input id="tagsInput" class="rounded border border-dark-beige/70 px-3 py-2" placeholder="方法论标签，用逗号分隔，例如：调查研究, 实践检验"
+                    data-i18n-placeholder="practice.tagsPlaceholder">
+                <button class="justify-self-start px-4 py-2 bg-china-red text-warm-rice rounded hover:bg-red-800"
+                    type="submit" data-i18n="practice.savePractice">保存实践</button>
+            </form>
+        </section>
+
+        <section>
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="font-mao text-2xl text-china-red" data-i18n="practice.recordsTitle">实践记录</h2>
+                <a href="me.html" class="text-sm text-china-red hover:underline" data-i18n="practice.viewArchive">查看档案</a>
+            </div>
+            <div id="practiceList" class="grid gap-4"></div>
+        </section>
+    </main>
+
+    <nav class="mobile-bottom-nav md:hidden fixed inset-x-0 bottom-0 z-40 border-t border-dark-beige/60 bg-warm-rice/95 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] backdrop-blur pb-[calc(0.35rem+env(safe-area-inset-bottom))]"
+        aria-label="移动端主导航">
+        <div class="mx-auto grid max-w-md grid-cols-5">
+            <a data-mobile-nav-item="home" href="index.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                    <path d="M7 9h4"></path>
+                    <path d="M7 13h10"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.cards">抽卡</span>
+            </a>
+            <a data-mobile-nav-item="reading" href="reading.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.reading">阅读</span>
+            </a>
+            <a data-mobile-nav-item="chat" href="chat.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.chat">问道</span>
+            </a>
+            <a data-mobile-nav-item="practice" href="practice.html" aria-current="page"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-china-red font-bold">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M9 11l3 3L22 4"></path>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.practice">实践</span>
+            </a>
+            <a data-mobile-nav-item="me" href="me.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M20 21a8 8 0 0 0-16 0"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.me">我的</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="js/i18n.js"></script>
+    <script src="config.js?v=7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/auth-utils.js"></script>
+    <script src="js/cloud-sync.js"></script>
+    <script src="js/auto-sync.js"></script>
+    <script src="js/auto-sync-bootstrap.js"></script>
+    <script src="js/register-pwa.js?v=4"></script>
+    <script src="js/practice-store.js"></script>
+    <script src="js/problem-case-store.js"></script>
+    <script src="js/practice-focus.js"></script>
+    <script src="js/practice-review-prompts.js"></script>
+    <script>
+        const store = window.RedWisdomPractice.createPracticeStore(localStorage);
+        const problemCaseStore = window.RedWisdomProblemCases.createProblemCaseStore(localStorage);
+        const problemCaseId = new URLSearchParams(window.location.search).get('case') || '';
+        const activeProblemCase = problemCaseId ? problemCaseStore.getCase(problemCaseId) : null;
+        const form = document.getElementById('practiceForm');
+        const accountPanel = document.getElementById('accountPanel');
+        const practiceLocaleSelect = document.getElementById('practiceLocaleSelect');
+        const authConfig = typeof CONFIG !== 'undefined' ? CONFIG : {};
+        let authStatus = { configured: false, missing: [] };
+        let authClient = null;
+        let currentLocale = window.RedWisdomI18n.getStoredLocale(localStorage);
+        let currentProfile = null;
+
+        if (activeProblemCase) {
+            const problemContextBar = document.getElementById('problemContextBar');
+            problemContextBar.classList.remove('hidden');
+            problemContextBar.innerHTML = `
+                <div class="flex flex-wrap items-center justify-between gap-2 border-l-4 border-china-red bg-white/80 px-4 py-3 text-sm">
+                    <div><span class="text-gray-500">正在实践：</span><strong>${escapeHtml(activeProblemCase.title)}</strong></div>
+                    <a class="text-china-red hover:underline" href="problems.html?id=${encodeURIComponent(activeProblemCase.id)}">返回问题工作台</a>
+                </div>
+            `;
+            document.getElementById('problemInput').value = activeProblemCase.realProblem || '';
+            document.getElementById('mainContradictionInput').value = activeProblemCase.mainContradiction || '';
+            document.getElementById('availableForcesInput').value = activeProblemCase.availableForces || '';
+            document.getElementById('actionInput').value = activeProblemCase.nextAction || '';
+        }
+
+        practiceLocaleSelect.value = currentLocale;
+        window.RedWisdomI18n.applyTranslations(document, currentLocale);
+        practiceLocaleSelect.addEventListener('change', () => {
+            currentLocale = window.RedWisdomI18n.setStoredLocale(localStorage, practiceLocaleSelect.value);
+            practiceLocaleSelect.value = currentLocale;
+            window.RedWisdomI18n.applyTranslations(document, currentLocale);
+            render();
+            initAccountPanel();
+        });
+
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            const practice = store.createPractice({
+                problemCaseId,
+                title: document.getElementById('titleInput').value,
+                realProblem: document.getElementById('problemInput').value,
+                mainContradiction: document.getElementById('mainContradictionInput').value,
+                investigationTodo: document.getElementById('investigationTodoInput').value,
+                availableForces: document.getElementById('availableForcesInput').value,
+                actionPlan: document.getElementById('actionInput').value,
+                expectedResult: document.getElementById('expectedResultInput').value,
+                methodologyTags: document.getElementById('tagsInput').value.split(/[,，]/).map(tag => tag.trim()).filter(Boolean),
+                sourceType: 'manual',
+                sourceTitle: t('practice.manualSource'),
+            });
+            if (activeProblemCase) {
+                problemCaseStore.addActivity(activeProblemCase.id, {
+                    type: 'practice',
+                    referenceId: practice.id,
+                    title: practice.title,
+                    detail: practice.actionPlan,
+                    sourceHref: `practice.html?case=${encodeURIComponent(activeProblemCase.id)}#${encodeURIComponent(practice.id)}`,
+                });
+            }
+            form.reset();
+            window.RedWisdomI18n.applyTranslations(document, currentLocale);
+            render();
+        });
+
+        function render() {
+            const practices = store.listPractices();
+            renderSummary(practices);
+            renderList(practices);
+        }
+
+        async function initAccountPanel() {
+            await Promise.resolve(window.REDWISDOM_CONFIG_READY).catch(() => authConfig);
+            authStatus = window.RedWisdomAuth.getAuthConfigStatus(authConfig);
+            if (!authStatus.configured) {
+                accountPanel.innerHTML = `
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                        <div>
+                            <h2 class="font-mao text-2xl text-china-red">${escapeHtml(t('practice.account.localTitle'))}</h2>
+                            <p class="text-sm text-gray-700 leading-relaxed">${escapeHtml(t('practice.account.localDetail'))}</p>
+                        </div>
+                        <a href="login.html" class="self-start md:self-auto px-3 py-2 border border-dark-beige rounded text-sm hover:bg-dark-beige/20">${escapeHtml(t('practice.account.settings'))}</a>
+                    </div>
+                `;
+                return;
+            }
+
+            authClient = authClient || window.RedWisdomAuth.createSupabaseClient(authConfig, window.supabase);
+            if (!authClient) {
+                accountPanel.innerHTML = `
+                    <h2 class="font-mao text-2xl text-china-red">${escapeHtml(t('practice.account.unavailableTitle'))}</h2>
+                    <p class="text-sm text-gray-700 leading-relaxed">${escapeHtml(t('practice.account.unavailableDetail'))}</p>
+                `;
+                return;
+            }
+
+            try {
+                const session = await window.RedWisdomAuth.getCurrentSession(authClient);
+                currentProfile = window.RedWisdomAuth.getSessionProfile(session);
+                renderAccountPanel();
+            } catch (error) {
+                accountPanel.innerHTML = `
+                    <h2 class="font-mao text-2xl text-china-red">${escapeHtml(t('practice.account.errorTitle'))}</h2>
+                    <p class="text-sm text-gray-700 leading-relaxed">${escapeHtml(error.message || t('practice.account.errorFallback'))}</p>
+                `;
+            }
+        }
+
+        function renderAccountPanel() {
+            if (!currentProfile) {
+                accountPanel.innerHTML = `
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                        <div>
+                            <h2 class="font-mao text-2xl text-china-red">${escapeHtml(t('practice.account.signedOutTitle'))}</h2>
+                            <p class="text-sm text-gray-700 leading-relaxed">${escapeHtml(t('practice.account.signedOutDetail'))}</p>
+                        </div>
+                        <a href="login.html" class="self-start md:self-auto px-3 py-2 bg-china-red text-warm-rice rounded text-sm hover:bg-red-800">${escapeHtml(t('practice.account.signInSync'))}</a>
+                    </div>
+                `;
+                return;
+            }
+
+            accountPanel.innerHTML = `
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                    <div>
+                        <h2 class="font-mao text-2xl text-china-red">${escapeHtml(t('practice.account.signedInTitle'))}</h2>
+                        <p class="text-sm text-gray-700 leading-relaxed">${escapeHtml(currentProfile.email)} · ${escapeHtml(t('practice.account.signedInDetail'))}</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button id="syncPracticeBtn" class="px-3 py-2 bg-china-red text-warm-rice rounded text-sm hover:bg-red-800" type="button">${escapeHtml(t('practice.account.sync'))}</button>
+                        <a href="login.html" class="px-3 py-2 border border-dark-beige rounded text-sm hover:bg-dark-beige/20">${escapeHtml(t('practice.account.settings'))}</a>
+                    </div>
+                </div>
+                <p id="syncStatus" class="mt-3 text-sm text-gray-600"></p>
+            `;
+
+            document.getElementById('syncPracticeBtn').addEventListener('click', syncPracticesToCloud);
+        }
+
+        async function syncPracticesToCloud(event) {
+            const button = event.currentTarget;
+            const statusEl = document.getElementById('syncStatus');
+            const practices = store.listPractices();
+
+            if (practices.length === 0) {
+                statusEl.textContent = t('practice.account.noPractices');
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = t('practice.account.syncing');
+            statusEl.textContent = '';
+
+            try {
+                const count = await window.RedWisdomCloudSync.pushPracticesToSupabase(authClient, currentProfile.id, practices);
+                statusEl.textContent = `${t('practice.account.syncedPrefix')} ${count} ${t('practice.account.syncedSuffix')}`;
+            } catch (error) {
+                statusEl.textContent = error.message || t('practice.account.syncFailed');
+            } finally {
+                button.disabled = false;
+                button.textContent = t('practice.account.sync');
+            }
+        }
+
+        function renderSummary(practices) {
+            const summary = window.RedWisdomPractice.summarizePracticeArchive(practices);
+            const statusCounts = summary.statusCounts;
+            document.getElementById('summary').innerHTML = [
+                metricCard(t('practice.total'), summary.total),
+                metricCard(t('practice.status.draft'), statusCounts.draft || 0),
+                metricCard(t('practice.status.active'), statusCounts.active || 0),
+                metricCard(t('practice.status.reviewed'), statusCounts.reviewed || 0),
+            ].join('');
+        }
+
+        function renderList(practices) {
+            const list = document.getElementById('practiceList');
+            if (practices.length === 0) {
+                list.innerHTML = `
+                    <div class="bg-white/80 border border-dark-beige/50 rounded-lg p-6 text-center text-gray-600">
+                        ${escapeHtml(t('practice.emptyState'))}
+                    </div>
+                `;
+                return;
+            }
+
+            list.innerHTML = practices.map(practice => `
+                <article class="bg-white/85 border border-dark-beige/50 rounded-lg p-4 scroll-mt-6" id="${escapeAttribute(practice.id)}" data-id="${escapeAttribute(practice.id)}">
+                    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
+                        <div>
+                            <h3 class="font-bold text-lg text-china-red">${escapeHtml(practice.title)}</h3>
+                            <p class="text-sm text-gray-500">${escapeHtml(practice.sourceTitle || t('practice.personalSource'))} · ${formatDate(practice.createdAt)}</p>
+                        </div>
+                        <select class="statusInput rounded border border-dark-beige/70 px-2 py-1 text-sm">
+                            ${statusOption('draft', t('practice.status.draft'), practice.status)}
+                            ${statusOption('active', t('practice.status.active'), practice.status)}
+                            ${statusOption('done', t('practice.status.done'), practice.status)}
+                            ${statusOption('reviewed', t('practice.status.reviewed'), practice.status)}
+                            ${statusOption('archived', t('practice.status.archived'), practice.status)}
+                        </select>
+                    </div>
+                    <div class="mt-3 grid gap-3">
+                        ${fieldBlock(t('practice.field.realProblem'), practice.realProblem)}
+                        ${fieldBlock(t('practice.field.actionPlan'), practice.actionPlan)}
+                        ${methodContextBlock(practice)}
+                        ${practice.relatedQuote ? fieldBlock(t('practice.field.relatedQuote'), practice.relatedQuote) : ''}
+                        ${reviewPromptBlock(practice, currentLocale)}
+                        <textarea class="actualInput rounded border border-dark-beige/70 px-3 py-2" rows="2" placeholder="${escapeAttribute(t('practice.actualResultPlaceholder'))}">${escapeHtml(practice.actualResult)}</textarea>
+                        <textarea class="reflectionInput rounded border border-dark-beige/70 px-3 py-2" rows="2" placeholder="${escapeAttribute(t('practice.reflectionPlaceholder'))}">${escapeHtml(practice.reflection)}</textarea>
+                        <textarea class="nextInput rounded border border-dark-beige/70 px-3 py-2" rows="2" placeholder="${escapeAttribute(t('practice.nextActionPlaceholder'))}">${escapeHtml(practice.nextAction)}</textarea>
+                    </div>
+                    <div class="mt-3 flex flex-wrap gap-2">
+                        ${(practice.methodologyTags || []).map(tag => `<span class="text-xs px-2 py-1 rounded-full bg-red-50 text-china-red border border-red-100">${escapeHtml(tag)}</span>`).join('')}
+                    </div>
+                    <div class="mt-4 flex gap-2">
+                        <button class="saveBtn px-3 py-2 bg-china-red text-warm-rice rounded text-sm">${escapeHtml(t('practice.saveReview'))}</button>
+                        <button class="deleteBtn px-3 py-2 border border-dark-beige rounded text-sm">${escapeHtml(t('practice.delete'))}</button>
+                    </div>
+                </article>
+            `).join('');
+
+            list.querySelectorAll('article[data-id]').forEach(card => {
+                const id = card.dataset.id;
+                card.querySelector('.saveBtn').addEventListener('click', () => {
+                    store.updatePractice(id, {
+                        status: card.querySelector('.statusInput').value,
+                        actualResult: card.querySelector('.actualInput').value,
+                        reflection: card.querySelector('.reflectionInput').value,
+                        nextAction: card.querySelector('.nextInput').value,
+                    });
+                    render();
+                });
+                card.querySelector('.deleteBtn').addEventListener('click', () => {
+                    store.deletePractice(id);
+                    render();
+                });
+            });
+            focusPracticeFromHash(practices);
+        }
+
+        function focusPracticeFromHash(practices) {
+            if (!window.RedWisdomPracticeFocus) return;
+
+            const practiceId = window.RedWisdomPracticeFocus.getPracticeIdFromHash(window.location);
+            if (!practiceId) return;
+
+            const practice = window.RedWisdomPracticeFocus.findPracticeById(practices, practiceId);
+            const card = practice ? document.getElementById(practiceId) : null;
+            if (!card) return;
+
+            document.querySelectorAll('.practice-focus-ring').forEach(element => {
+                element.classList.remove('practice-focus-ring', 'border-china-red', 'shadow-lg');
+            });
+
+            card.classList.add('practice-focus-ring', 'border-china-red', 'shadow-lg');
+            card.scrollIntoView({ block: 'start', behavior: 'smooth' });
+
+            const focusSelector = window.RedWisdomPracticeFocus.chooseReviewFocusSelector(practice);
+            const focusTarget = card.querySelector(focusSelector);
+            window.requestAnimationFrame(() => {
+                window.setTimeout(() => {
+                    focusTarget?.focus({ preventScroll: true });
+                }, 120);
+            });
+        }
+
+        function metricCard(label, value) {
+            return `
+                <div class="bg-white/80 border border-dark-beige/50 rounded-lg p-4">
+                    <div class="text-sm text-gray-500">${label}</div>
+                    <div class="text-2xl font-bold text-china-red">${value}</div>
+                </div>
+            `;
+        }
+
+        function statusOption(value, label, current) {
+            return `<option value="${value}" ${value === current ? 'selected' : ''}>${label}</option>`;
+        }
+
+        function fieldBlock(label, value) {
+            return `
+                <div>
+                    <div class="text-xs text-gray-500 mb-1">${label}</div>
+                    <p class="leading-relaxed whitespace-pre-wrap">${escapeHtml(value || t('practice.noValue'))}</p>
+                </div>
+            `;
+        }
+
+        function methodContextBlock(practice) {
+            const rows = [
+                methodContextItem(t('practice.mainContradiction'), practice.mainContradiction),
+                methodContextItem(t('practice.investigation'), practice.investigationTodo),
+                methodContextItem(t('practice.forces'), practice.availableForces),
+                methodContextItem(t('practice.expectedResult'), practice.expectedResult),
+            ].filter(Boolean);
+
+            if (rows.length === 0) return '';
+
+            return `
+                <section class="rounded-lg border border-red-100 bg-red-50/60 p-3" aria-label="${escapeAttribute(t('practice.methodAnalysis'))}">
+                    <h4 class="font-mao text-xl text-china-red mb-2">${escapeHtml(t('practice.methodAnalysis'))}</h4>
+                    <div class="grid gap-3 md:grid-cols-2">
+                        ${rows.join('')}
+                    </div>
+                </section>
+            `;
+        }
+
+        function methodContextItem(label, value) {
+            const normalized = String(value || '').trim();
+            if (!normalized) return '';
+
+            return `
+                <div>
+                    <div class="text-xs text-china-red/80 mb-1">${escapeHtml(label)}</div>
+                    <p class="text-sm leading-relaxed whitespace-pre-wrap text-ink-black/80">${escapeHtml(normalized)}</p>
+                </div>
+            `;
+        }
+
+        function reviewPromptBlock(practice, locale = currentLocale) {
+            const fallbackPrompts = [
+                { label: '对照预期', question: '实际结果和预期标准差在哪里？' },
+                { label: '核对事实', question: '今天补到了哪些事实？哪些判断仍只是猜测？' },
+                { label: '检查矛盾', question: '实际过程证明主要矛盾判断准确吗？' },
+                { label: '下一步', question: '下一步调查或行动是什么？越小越好。' },
+            ];
+            const prompts = window.RedWisdomPracticeReviewPrompts
+                ? window.RedWisdomPracticeReviewPrompts.buildReviewPrompts(practice, locale)
+                : fallbackPrompts;
+
+            return `
+                <section class="rounded-lg border border-dark-beige/50 bg-white/70 p-3" aria-label="${escapeAttribute(t('practice.reviewPrompts'))}">
+                    <h4 class="font-mao text-xl text-china-red mb-2">${escapeHtml(t('practice.reviewPrompts'))}</h4>
+                    <ol class="grid gap-2 md:grid-cols-2">
+                        ${prompts.map(prompt => `
+                            <li class="rounded border border-dark-beige/40 bg-warm-rice/70 p-3">
+                                <div class="text-xs font-bold text-china-red mb-1">${escapeHtml(prompt.label)}</div>
+                                <p class="text-sm leading-relaxed text-ink-black/80">${escapeHtml(prompt.question)}</p>
+                            </li>
+                        `).join('')}
+                    </ol>
+                </section>
+            `;
+        }
+
+        function formatDate(value) {
+            return new Date(value).toLocaleDateString(currentLocale === 'en' ? 'en-US' : 'zh-CN');
+        }
+
+        function t(key) {
+            return window.RedWisdomI18n.translate(currentLocale, key);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text || '';
+            return div.innerHTML;
+        }
+
+        function escapeAttribute(text) {
+            return escapeHtml(text).replace(/"/g, '&quot;');
+        }
+
+        initAccountPanel();
+        render();
+    </script>
+</body>
+
+</html>

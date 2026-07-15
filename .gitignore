@@ -8,3 +8,5 @@
 毛泽东语录.csv
 毛泽东语录.numbers
 convert_csv.py
+.vercel
+.env*
