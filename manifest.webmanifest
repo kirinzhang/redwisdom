@@ -19,6 +19,7 @@
   "shortcuts": [
     { "name": "阅读毛选", "url": "./reading.html" },
     { "name": "问道毛选", "url": "./chat.html" },
-    { "name": "我的问题", "url": "./problems.html" }
+    { "name": "我的问题", "url": "./problems.html" },
+    { "name": "党史时间线", "url": "./timeline.html" }
   ]
 }

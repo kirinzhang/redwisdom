@@ -11,6 +11,7 @@ const pages = [
     ['chat.html', 'chat'],
     ['practice.html', 'practice'],
     ['me.html', 'me'],
+    ['timeline.html', 'reading'],
 ];
 
 const navTargets = [
