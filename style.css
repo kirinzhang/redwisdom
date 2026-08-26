@@ -63,7 +63,7 @@
 
 /* Back of Card (Initial View) */
 .card-back {
-    background-image: url('assets/bg_back.png');
+    background-image: url('assets/bg_back.jpg');
     background-size: cover;
     background-position: center;
     color: #F7F4ED;
@@ -75,7 +75,7 @@
 /* Front of Card (Revealed) */
 /* Front of Card (Revealed) */
 .card-front {
-    background-image: url('assets/bg_front.png');
+    background-image: url('assets/bg_front.jpg');
     background-size: cover;
     background-position: center;
     color: #2B2B2B;

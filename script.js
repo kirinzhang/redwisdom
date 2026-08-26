@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Portrait (Painting Style) - Now background layer bottom right
         const portrait = document.createElement('img');
-        portrait.src = 'assets/portrait_color.png';
+        portrait.src = 'assets/portrait_color.jpg';
         portrait.className = 'portrait-container';
         portrait.alt = '';
         portrait.setAttribute('aria-hidden', 'true');
