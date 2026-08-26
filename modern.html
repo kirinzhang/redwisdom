@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>毛选思维 · 现代问题 | Red Wisdom</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="把毛选思维用在现代人最常见的困惑上：职场打压、精神内耗、迷茫焦虑、拖延、团队协作。每个案例附原文依据，一键直达毛选原文。">
+    <meta name="keywords" content="毛选思维,现代问题,职场,精神内耗,焦虑,拖延,矛盾论,实践论,论持久战">
+    <meta name="author" content="Red Wisdom">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'warm-rice': '#F7F4ED',
+                        'china-red': '#BC2D22',
+                        'ink-black': '#2B2B2B',
+                        'dark-beige': '#D6C6B0',
+                    },
+                    fontFamily: {
+                        'mao': ['"Ma Shan Zheng"', 'cursive'],
+                        'serif': ['"Noto Serif SC"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #BC2D22;
+            border-radius: 3px;
+        }
+
+        /* Period-style filter chips */
+        .period-tab {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 9999px;
+            padding: 0.375rem 0.875rem;
+            font-size: 0.8125rem;
+            border: 1px solid #D6C6B0;
+            background: rgba(255, 255, 255, 0.7);
+            color: #4b5563;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .period-tab:hover {
+            border-color: #BC2D22;
+            color: #BC2D22;
+        }
+
+        .period-tab.is-active {
+            background: #BC2D22;
+            border-color: #BC2D22;
+            color: #fff;
+        }
+
+        .period-tab-count {
+            border-radius: 9999px;
+            background: rgba(0, 0, 0, 0.08);
+            padding: 0 0.4375rem;
+            font-size: 0.6875rem;
+            line-height: 1.25rem;
+        }
+
+        .period-tab.is-active .period-tab-count {
+            background: rgba(255, 255, 255, 0.22);
+        }
+
+        /* Cards */
+        .decision-card {
+            border-radius: 0.75rem;
+            border: 1px solid rgba(214, 198, 176, 0.7);
+            background: rgba(255, 255, 255, 0.88);
+            padding: 1rem 1.125rem;
+            transition: box-shadow 0.2s;
+        }
+
+        .decision-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .category-badge {
+            flex: none;
+            border-radius: 9999px;
+            background: rgba(188, 45, 34, 0.08);
+            border: 1px solid rgba(188, 45, 34, 0.35);
+            color: #BC2D22;
+            padding: 0.125rem 0.5625rem;
+            font-size: 0.6875rem;
+            font-weight: 600;
+        }
+
+        /* Toggle */
+        .decision-toggle {
+            margin-top: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: #BC2D22;
+            transition: color 0.2s;
+        }
+
+        .decision-toggle:hover {
+            color: #8B1F19;
+        }
+
+        .decision-toggle-icon {
+            height: 1rem;
+            width: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .decision-toggle[aria-expanded="true"] .decision-toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Expanded content */
+        .case-detail {
+            margin-top: 0.625rem;
+            border-top: 1px dashed #D6C6B0;
+            padding-top: 0.875rem;
+        }
+
+        .quote-block {
+            border-left: 3px solid #BC2D22;
+            background: rgba(188, 45, 34, 0.05);
+            padding: 0.75rem 1rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .quote-text-line {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #BC2D22;
+        }
+
+        .quote-source {
+            margin-top: 0.375rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        /* Article chips (same look as timeline page) */
+        .timeline-chip {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 9999px;
+            border: 1px solid #BC2D22;
+            color: #BC2D22;
+            background: rgba(188, 45, 34, 0.06);
+            padding: 0.1875rem 0.625rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .timeline-chip:hover {
+            background: #BC2D22;
+            color: #fff;
+        }
+
+        .timeline-chip-muted {
+            border-color: #D6C6B0;
+            color: #9ca3af;
+            background: transparent;
+            cursor: default;
+        }
+
+        .case-section {
+            margin-top: 0.875rem;
+        }
+
+        .case-heading {
+            font-size: 0.8125rem;
+            font-weight: 700;
+            color: #2B2B2B;
+            margin-bottom: 0.375rem;
+        }
+
+        .case-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.375rem;
+        }
+
+        .case-li {
+            position: relative;
+            padding-left: 1.25rem;
+            font-size: 0.875rem;
+            line-height: 1.65;
+            color: #374151;
+        }
+
+        ol.case-li,
+        .case-list>li {
+            counter-increment: none;
+        }
+
+        ol.case-list {
+            list-style: decimal;
+            padding-left: 1.25rem;
+        }
+
+        ol.case-list>.case-li {
+            padding-left: 0.25rem;
+        }
+
+        ul.case-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul.case-list>.case-li::before {
+            content: "□";
+            position: absolute;
+            left: 0;
+            color: #BC2D22;
+            font-weight: 700;
+        }
+
+        .boundary-note {
+            margin-top: 0.875rem;
+            border-radius: 0.5rem;
+            background: rgba(214, 198, 176, 0.35);
+            padding: 0.5rem 0.75rem;
+            font-size: 0.8125rem;
+            line-height: 1.65;
+            color: #57534e;
+        }
+
+        .ask-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            border-radius: 9999px;
+            background: #BC2D22;
+            color: #fff;
+            padding: 0.4375rem 1rem;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .ask-link:hover {
+            background: #8B1F19;
+        }
+    </style>
+</head>
+
+<body class="bg-warm-rice min-h-screen pb-24 md:pb-0">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-30 border-b border-dark-beige/60 bg-warm-rice/95 backdrop-blur">
+        <div class="mx-auto max-w-4xl px-4 py-4 md:px-6">
+            <div class="flex items-center justify-between gap-3">
+                <a href="reading.html"
+                    class="inline-flex items-center gap-1.5 text-sm text-gray-600 hover:text-china-red transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
+                    返回阅读
+                </a>
+                <a href="index.html" class="text-sm text-gray-600 hover:text-china-red transition">首页</a>
+            </div>
+            <div class="mt-3 flex flex-wrap items-baseline justify-between gap-2">
+                <h1 class="font-mao text-3xl text-china-red md:text-4xl">毛选思维 · 现代问题</h1>
+                <p id="casesCount" class="text-sm text-gray-500">常见困惑 · 持续更新</p>
+            </div>
+            <p class="mt-1 text-sm leading-relaxed text-gray-600">
+                把毛选的思维用在今天最常见的困惑上。点开卡片看「原文依据 + 思维拆解 + 行动清单」，还可以把问题直接带去问道。
+            </p>
+        </div>
+    </header>
+
+    <main class="mx-auto max-w-4xl px-4 py-6 md:px-6">
+
+        <!-- Category filter -->
+        <div id="categoryChips" class="mb-3 flex gap-2 overflow-x-auto pb-1" role="group" aria-label="按分类筛选"></div>
+        <p id="casesStatus" class="mb-4 text-xs text-gray-500" aria-live="polite"></p>
+
+        <!-- Cases grid -->
+        <div id="casesGrid" class="grid gap-4 md:grid-cols-2"></div>
+
+        <!-- Footnote -->
+        <footer class="mt-10 border-t border-dark-beige/60 pt-5 text-xs leading-relaxed text-gray-500">
+            <p>说明：本栏目是方法论演绎——引文均为《毛泽东选集》原文（可点击回阅读页核对），但历史经验不能简单套用到现代情境，每篇都标注了适用边界。涉及心理、法律、财务等专业问题时，请优先寻求专业帮助。</p>
+        </footer>
+    </main>
+
+    <!-- Mobile bottom nav -->
+    <nav class="mobile-bottom-nav md:hidden fixed inset-x-0 bottom-0 z-40 border-t border-dark-beige/60 bg-warm-rice/95 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] backdrop-blur pb-[calc(0.35rem+env(safe-area-inset-bottom))]"
+        aria-label="移动端主导航">
+        <div class="mx-auto grid max-w-md grid-cols-5">
+            <a data-mobile-nav-item="home" href="index.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                    <path d="M7 9h4"></path>
+                    <path d="M7 13h10"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.cards">抽卡</span>
+            </a>
+            <a data-mobile-nav-item="reading" href="reading.html" aria-current="page"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-china-red font-bold">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.reading">阅读</span>
+            </a>
+            <a data-mobile-nav-item="chat" href="chat.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.chat">问道</span>
+            </a>
+            <a data-mobile-nav-item="practice" href="practice.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M9 11l3 3L22 4"></path>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.practice">实践</span>
+            </a>
+            <a data-mobile-nav-item="me" href="me.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M20 21a8 8 0 0 0-16 0"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.me">我的</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="config.js?v=7"></script>
+    <script src="js/register-pwa.js?v=4"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/modern-cases.js"></script>
+    <script src="js/modern.js"></script>
+</body>
+
+</html>
