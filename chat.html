@@ -46,6 +46,15 @@
         }
     </script>
     <style>
+        /* 生成中：发送按钮变为深色「停止」按钮 */
+        #sendBtn.stop-mode {
+            background: #2B2B2B;
+        }
+
+        #sendBtn.stop-mode:hover {
+            background: #a62015;
+        }
+
         .typing-cursor::after {
             content: '▌';
             animation: blink 1s infinite;
@@ -490,6 +499,8 @@
 
         // ===== 状态 =====
         let isGenerating = false;
+        let activeAbortController = null;
+        let stoppedByUser = false;
         let maoContextSourcesPromise = null;
         let currentLocale = window.RedWisdomI18n.getStoredLocale(localStorage);
         let chatMode = 'direct';
@@ -756,10 +767,12 @@
 
         function setChatBusy(busy) {
             isGenerating = busy;
-            sendBtn.disabled = busy;
-            userInput.disabled = busy;
+            // 生成中：发送按钮切换为「停止」并保持可点击；输入框保持可用，方便提前补充问题
+            sendBtn.disabled = false;
+            userInput.disabled = false;
             sendBtn.setAttribute('aria-busy', String(busy));
-            sendBtnLabel.textContent = window.RedWisdomI18n.translate(currentLocale, busy ? 'chat.sending' : 'chat.send');
+            sendBtnLabel.textContent = window.RedWisdomI18n.translate(currentLocale, busy ? 'chat.stop' : 'chat.send');
+            sendBtn.classList.toggle('stop-mode', busy);
         }
 
         function finalizeAssistantMessage(element) {
@@ -910,6 +923,8 @@
             let fullResponse = '';
             let finishReason = '';
             const abortController = new AbortController();
+            activeAbortController = abortController;
+            stoppedByUser = false;
             let inactivityTimeout = null;
             const sourceStatusTimer = window.setTimeout(() => setAssistantStatus(contentElement, 'chat.waiting.sources'), 4000);
             const longStatusTimer = window.setTimeout(() => setAssistantStatus(contentElement, 'chat.waiting.long'), 12000);
@@ -1040,33 +1055,72 @@
 
             } catch (error) {
                 console.error('发送消息失败:', error);
+                const isAbort = error.name === 'AbortError';
+                const userStopped = isAbort && stoppedByUser;
 
-                contentElement.closest('[data-chat-message]')?.remove();
-
-                // 从历史中移除失败的消息
-                session.conversationHistory.pop();
-
-                if (!userInput.value) userInput.value = userMessage;
-
-                if (error.name === 'AbortError') {
-                    addErrorMessage(`${window.RedWisdomI18n.translate(currentLocale, 'chat.error.prefix')}${window.RedWisdomI18n.translate(currentLocale, 'chat.error.timeout')}`, requestMode);
-                } else if (error.message.includes('401') || error.message.includes('Invalid')) {
-                    addErrorMessage('API Key 无效，请重新设置。', requestMode);
-                    showApiKeyModal();
+                if (userStopped && fullResponse.trim()) {
+                    // 用户手动停止且已有部分回答：保留内容，允许继续提问或续写
+                    const partial = `${fullResponse}\n\n（回答被手动停止，尚未回答完）`;
+                    session.conversationHistory.push({ role: 'assistant', content: partial });
+                    updateAssistantMessage(fullResponse, contentElement, requestMode);
+                    finalizeAssistantMessage(contentElement);
+                    appendStoppedNotice(contentElement);
+                    if (session.activeConversationId) {
+                        conversationStore.appendMessage(session.activeConversationId, {
+                            role: 'assistant',
+                            content: partial,
+                            methodologyTags: inferMethodologyTags(fullResponse),
+                        });
+                    }
+                    addContinueAnswerAction(contentElement, requestMode);
+                } else if (userStopped) {
+                    // 还没生成内容就停止：把问题放回输入框，补充完整后再发
+                    contentElement.closest('[data-chat-message]')?.remove();
+                    session.conversationHistory.pop();
+                    userInput.value = userMessage;
+                    userInput.style.height = 'auto';
+                    userInput.style.height = Math.min(userInput.scrollHeight, 120) + 'px';
+                    addErrorMessage(window.RedWisdomI18n.translate(currentLocale, 'chat.error.stopped'), requestMode);
                 } else {
-                    const isNetworkError = error instanceof TypeError && /fetch|network|load/i.test(error.message);
-                    const message = isNetworkError
-                        ? window.RedWisdomI18n.translate(currentLocale, 'chat.error.network')
-                        : error.message;
-                    addErrorMessage(`${window.RedWisdomI18n.translate(currentLocale, 'chat.error.prefix')}${message}`, requestMode);
+                    console.error('发送消息失败:', error);
+
+                    contentElement.closest('[data-chat-message]')?.remove();
+
+                    // 从历史中移除失败的消息
+                    session.conversationHistory.pop();
+
+                    if (!userInput.value) userInput.value = userMessage;
+
+                    if (isAbort) {
+                        addErrorMessage(`${window.RedWisdomI18n.translate(currentLocale, 'chat.error.prefix')}${window.RedWisdomI18n.translate(currentLocale, 'chat.error.timeout')}`, requestMode);
+                    } else if (error.message.includes('401') || error.message.includes('Invalid')) {
+                        addErrorMessage('API Key 无效，请重新设置。', requestMode);
+                        showApiKeyModal();
+                    } else {
+                        const isNetworkError = error instanceof TypeError && /fetch|network|load/i.test(error.message);
+                        const message = isNetworkError
+                            ? window.RedWisdomI18n.translate(currentLocale, 'chat.error.network')
+                            : error.message;
+                        addErrorMessage(`${window.RedWisdomI18n.translate(currentLocale, 'chat.error.prefix')}${message}`, requestMode);
+                    }
                 }
             } finally {
+                activeAbortController = null;
+                stoppedByUser = false;
                 window.clearTimeout(inactivityTimeout);
                 window.clearTimeout(sourceStatusTimer);
                 window.clearTimeout(longStatusTimer);
                 setChatBusy(false);
                 userInput.focus();
             }
+        }
+
+        function appendStoppedNotice(element) {
+            if (!element) return;
+            const notice = document.createElement('p');
+            notice.className = 'mt-2 text-xs text-gray-500';
+            notice.textContent = window.RedWisdomI18n.translate(currentLocale, 'chat.stoppedNotice');
+            element.appendChild(notice);
         }
 
         async function readApiErrorMessage(response) {
@@ -1263,17 +1317,31 @@
 
         // ===== 事件处理 =====
         sendBtn.addEventListener('click', () => {
+            // 生成中点击 = 中止回答
+            if (isGenerating) {
+                stopGeneration();
+                return;
+            }
             const message = userInput.value.trim();
-            if (message && !isGenerating) {
+            if (message) {
                 userInput.value = '';
                 handleSubmittedMessage(message);
             }
         });
 
+        function stopGeneration() {
+            if (!isGenerating || !activeAbortController) return;
+            stoppedByUser = true;
+            activeAbortController.abort();
+        }
+
         userInput.addEventListener('keydown', (e) => {
+            // 输入法组词中（如拼音确认候选词）按 Enter 不应触发发送
+            if (e.isComposing || e.keyCode === 229) return;
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
-                sendBtn.click();
+                // 生成中按 Enter 不触发停止，停止只能通过点击按钮，避免误触
+                if (!isGenerating) sendBtn.click();
             }
         });
 

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'redwisdom-shell-v11';
+const CACHE_NAME = 'redwisdom-shell-v12';
 const SHELL_FILES = [
     './', './index.html', './reading.html', './chat.html', './practice.html', './problems.html', './me.html', './login.html',
     './timeline.html', './modern.html',
