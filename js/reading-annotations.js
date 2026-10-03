@@ -64,6 +64,11 @@
         return `《${String(title || '').replace(/《/g, '〈').replace(/》/g, '〉')}》`;
     }
 
+    function quoted(text) {
+        const t = String(text || '');
+        return /^[“"]/.test(t) ? t : `“${t}”`;
+    }
+
     function readingHref(articleId, anchor) {
         const params = new URLSearchParams({ article: articleId });
         if (anchor) params.set('anchor', anchor);
@@ -71,7 +76,7 @@
     }
 
     function renderConceptCard(concept) {
-        const passages = concept.keyPassages.map((p) => `<a class="concept-quote" href="${readingHref(p.articleId, p.anchor)}">“${escapeHtml(p.quote)}”<span>${escapeHtml(bookTitle(p.title))} 读原文 →</span></a>`).join('');
+        const passages = concept.keyPassages.map((p) => `<a class="concept-quote" href="${readingHref(p.articleId, p.anchor)}">${escapeHtml(quoted(p.quote))}<span>${escapeHtml(bookTitle(p.title))} 读原文 →</span></a>`).join('');
         const articles = concept.articles.slice(0, 6).map((a) => `<a href="${readingHref(a.articleId)}">${escapeHtml(bookTitle(a.title))}<small>${a.count}处</small></a>`).join('');
         const cases = concept.historyCases.map((c) => `<li><a href="${readingHref(c.articleId, c.anchor)}">${escapeHtml(c.title)}</a><span>${escapeHtml(c.period)} · ${escapeHtml(c.transferMethod)}</span></li>`).join('');
         const campaigns = (concept.campaigns || []).map((c) => `<a class="concept-campaign" href="campaign.html?id=${encodeURIComponent(c.id)}">▶ 沙盘：${escapeHtml(c.title)}</a>`).join('');
