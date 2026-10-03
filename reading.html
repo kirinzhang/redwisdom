@@ -19,34 +19,14 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/favicon.png">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="assets/tailwind.css?v=1">
+    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.4/dist/purify.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;700&display=swap"
         rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'warm-rice': '#F7F4ED',
-                        'china-red': '#BC2D22',
-                        'ink-black': '#2B2B2B',
-                        'dark-beige': '#D6C6B0',
-                        'sidebar-bg': '#1a1a1a',
-                        'sidebar-hover': '#2d2d2d',
-                    },
-                    fontFamily: {
-                        'mao': ['"Ma Shan Zheng"', 'cursive'],
-                        'serif': ['"Noto Serif SC"', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         /* Custom scrollbar */
         ::-webkit-scrollbar {
@@ -976,7 +956,13 @@
         }
 
         // Load article content
+        // 已更正的篇名：旧链接、旧书签仍能打开对应文章。
+        const LEGACY_ARTICLE_IDS = {
+            '131-关于淮海战役的的作战方针.md': '131-关于淮海战役的作战方针.md',
+        };
+
         async function loadArticle(filename, targetAnchor = '') {
+            filename = LEGACY_ARTICLE_IDS[filename] || filename;
             const welcomeEl = document.getElementById('welcomeMessage');
             const loadingEl = document.getElementById('loadingState');
             const bodyEl = document.getElementById('articleBody');

@@ -7,30 +7,12 @@
     <title>实践 - Red Wisdom</title>
     <meta name="description" content="把毛选方法转成今日实践、结果记录和复盘。">
     <link rel="icon" type="image/png" href="/assets/favicon.png">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/tailwind.css?v=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;700&display=swap"
         rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'warm-rice': '#F7F4ED',
-                        'china-red': '#BC2D22',
-                        'ink-black': '#2B2B2B',
-                        'dark-beige': '#D6C6B0',
-                    },
-                    fontFamily: {
-                        'mao': ['"Ma Shan Zheng"', 'cursive'],
-                        'serif': ['"Noto Serif SC"', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         .practice-focus-ring {
             outline: 3px solid rgba(188, 45, 34, 0.35);
@@ -181,7 +163,7 @@
 
     <script src="js/i18n.js"></script>
     <script src="config.js?v=7"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.109.0"></script>
     <script src="js/auth-utils.js"></script>
     <script src="js/cloud-sync.js"></script>
     <script src="js/auto-sync.js"></script>

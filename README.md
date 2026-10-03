@@ -31,7 +31,8 @@ Red Wisdom 是一个以《毛泽东选集》为核心内容和方法论来源的
 - 历史类比必须同时说明相似点、差异和适用边界，不能把历史结果当作现实预测。
 - 问答会保存为本机私密历史，并在我的档案页展示最近记录。
 - AI 回答可以收藏到本机学习档案，也可以继续保存为实践任务。
-- API 代理限制模型白名单、消息数量、内容长度和输出 token，降低公开代理滥用风险。
+- 系统提示词、毛选原文检索和党史案例检索都在服务端完成；浏览器只提交对话内容，不能改写教练提示词，也不再下载 4MB 的全文索引。
+- API 代理固定模型和输出 token，限制消息数量与长度，只接受本站页面的请求，按访问者 IP 限流，用户中止回答时同步中止模型请求。
 
 ### 3. 阅读毛选
 
@@ -96,6 +97,25 @@ DEEPSEEK_API_KEY=你的 DeepSeek API Key
 ```
 
 未配置 DeepSeek Key 时，可以使用 `OPENROUTER_API_KEY` 回退到 OpenRouter 上的 `deepseek/deepseek-v4-pro`。部署到 Vercel 时，需要在项目环境变量中单独配置密钥；本机 `.env` 不会上传。
+
+问道接口的限流与来源限制（均为可选环境变量）：
+
+```text
+CHAT_LIMIT_PER_MINUTE=6          # 每个 IP 每分钟提问次数，默认 6
+CHAT_LIMIT_PER_DAY=60            # 每个 IP 每天提问次数，默认 60
+CHAT_GLOBAL_LIMIT_PER_DAY=0      # 全站每日总量上限，0 表示不限
+UPSTASH_REDIS_REST_URL=...       # 配置后跨函数实例共享计数（推荐生产环境使用）
+UPSTASH_REDIS_REST_TOKEN=...
+CHAT_ALLOWED_ORIGINS=https://redwisdom.xyz   # 额外允许的来源，本站域名默认允许
+```
+
+未配置 Upstash 时，计数只保存在单个函数实例的内存里，只能挡住连续刷接口；正式环境建议在 Vercel Marketplace 接入 Upstash Redis。
+
+页面样式使用预先生成的 `assets/tailwind.css`。修改页面里的 Tailwind 类名后运行：
+
+```bash
+npm run build:css
+```
 
 账户系统需要在 `config.js` 中填写 Supabase 项目配置：
 
