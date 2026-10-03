@@ -1,4 +1,4 @@
-const CACHE_NAME = 'redwisdom-shell-v13';
+const CACHE_NAME = 'redwisdom-shell-v14';
 const SHELL_FILES = [
     './', './index.html', './reading.html', './chat.html', './practice.html', './problems.html', './me.html', './login.html',
     './timeline.html', './modern.html',
@@ -7,7 +7,7 @@ const SHELL_FILES = [
     './js/i18n.js', './js/auth-utils.js', './js/cloud-sync.js', './js/auto-sync.js', './js/auto-sync-bootstrap.js',
     './js/problem-case-store.js', './js/practice-store.js', './js/conversation-store.js', './js/reading-notes-store.js',
     './js/reading-progress-store.js', './js/full-text-search.js', './js/text-anchors.js', './js/reading-guides.js',
-    './js/history-case-retrieval.js',
+    './js/history-case-retrieval.js', './js/reading-annotations.js', './data/concepts.json',
     './js/timeline-data.js', './js/timeline.js',
     './js/modern-cases.js', './js/modern.js',
     './data/catalog.json', './data/text-edition.json', './data/history-cases.json', './data/history-problem-types.json'

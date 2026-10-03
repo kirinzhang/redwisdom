@@ -1,0 +1,200 @@
+{
+    "note": "概念层的人工编辑源。summary 为编辑概括，不是毛选原话；keyPassages 的 phrase 必须是原文逐字片段。运行 npm run build:concepts 生成 data/concepts.json。",
+    "concepts": [
+        {
+            "id": "shishi-qiushi",
+            "term": "实事求是",
+            "aliases": [],
+            "summary": "从客观存在的实际情况出发，研究其中的规律，再据此决定怎么做。反对主观臆断和照搬现成结论。",
+            "keyPassages": [
+                { "articleId": "059-改造我们的学习.md", "phrase": "“实事”就是客观存在着的一切事物" }
+            ],
+            "caseTags": ["实事求是", "具体问题具体分析", "问题导向"]
+        },
+        {
+            "id": "diaocha-yanjiu",
+            "term": "调查研究",
+            "aliases": ["没有调查，没有发言权", "调查会"],
+            "summary": "判断要建立在亲自获得的一手材料上：先弄清情况，再下结论。结论应当出现在调查的末尾，而不是开头。",
+            "keyPassages": [
+                { "articleId": "006-反对本本主义.md", "phrase": "没有调查，没有发言权" },
+                { "articleId": "006-反对本本主义.md", "phrase": "调查就像“十月怀胎”" }
+            ],
+            "caseTags": ["调查研究", "调查会", "交叉验证"]
+        },
+        {
+            "id": "shijian",
+            "term": "实践",
+            "aliases": ["实践论", "再实践、再认识"],
+            "summary": "认识来源于实践，又要回到实践中检验和修正。按“实践、认识、再实践、再认识”的循环不断加深对事物的理解。",
+            "keyPassages": [
+                { "articleId": "016-实践论.md", "phrase": "实践、认识、再实践、再认识" },
+                { "articleId": "016-实践论.md", "phrase": "亲口吃一吃" }
+            ],
+            "caseTags": ["实践检验", "理论联系实际", "经验总结", "试点"]
+        },
+        {
+            "id": "zhuyao-maodun",
+            "term": "主要矛盾",
+            "aliases": ["矛盾的主要方面", "矛盾论"],
+            "summary": "复杂局面中同时存在多个矛盾，其中有一个起决定作用。抓住它，其他问题就容易解决；主要矛盾会随情况变化而转移。",
+            "keyPassages": [
+                { "articleId": "017-矛盾论.md", "phrase": "就要用全力找出它的主要矛盾" },
+                { "articleId": "017-矛盾论.md", "phrase": "捉住了这个主要矛盾" }
+            ],
+            "caseTags": ["主要矛盾", "抓住重点", "矛盾分类"]
+        },
+        {
+            "id": "qunzhong-luxian",
+            "term": "群众路线",
+            "aliases": ["从群众中来，到群众中去"],
+            "summary": "把群众分散的意见集中起来形成主张，再拿回群众中去宣传、执行和检验，如此反复。",
+            "keyPassages": [
+                { "articleId": "070-关于领导方法的若干问题.md", "phrase": "从群众中来，到群众中去" }
+            ],
+            "caseTags": ["群众路线", "真实需求", "群众创造", "信息反馈"]
+        },
+        {
+            "id": "chijiu-zhan",
+            "term": "持久战",
+            "aliases": ["论持久战", "战略相持"],
+            "summary": "敌强我弱但形势可变时，不幻想速胜也不悲观失败，把长期斗争分成防御、相持、反攻几个阶段，逐步改变力量对比。",
+            "keyPassages": [
+                { "articleId": "026-论持久战.md", "phrase": "中国会亡吗？答复：不会亡，最后胜利是中国的" }
+            ],
+            "caseTags": ["持久战", "阶段论", "长期主义", "趋势判断"]
+        },
+        {
+            "id": "yundong-zhan",
+            "term": "运动战",
+            "aliases": ["打得赢就打，打不赢就走"],
+            "summary": "在敌强我弱、没有固定战线的条件下，不死守阵地，在运动中寻找有利战机消灭敌人。",
+            "keyPassages": [
+                { "articleId": "012-中国革命战争的战略问题.md", "phrase": "打得赢就打，打不赢就走" }
+            ],
+            "caseTags": []
+        },
+        {
+            "id": "jizhong-bingli",
+            "term": "集中兵力",
+            "aliases": ["集中优势兵力", "各个歼灭"],
+            "summary": "把有限的力量集中用在一个关键点上，形成局部优势，逐个解决，而不是平均分散、处处出击。",
+            "keyPassages": [
+                { "articleId": "102-集中优势兵力，各个歼灭敌人.md", "phrase": "集中优势兵力，各个歼灭敌人" },
+                { "articleId": "012-中国革命战争的战略问题.md", "phrase": "伤其十指不如断其一指" }
+            ],
+            "caseTags": ["力量集中", "资源整合"]
+        },
+        {
+            "id": "zhanlve-tuique",
+            "term": "战略退却",
+            "aliases": ["诱敌深入"],
+            "summary": "劣势一方面对优势进攻时，为保存力量、等待和创造反攻条件而有计划地后退，后退是为了前进。",
+            "keyPassages": [
+                { "articleId": "012-中国革命战争的战略问题.md", "phrase": "战略退却，是劣势军队处在优势军队进攻面前" }
+            ],
+            "caseTags": []
+        },
+        {
+            "id": "gongnong-wuzhuang-geju",
+            "term": "工农武装割据",
+            "aliases": ["星星之火，可以燎原", "农村包围城市"],
+            "summary": "在敌人统治薄弱的农村建立和发展革命根据地，以小块红色区域的长期存在和发展积累力量。",
+            "keyPassages": [
+                { "articleId": "002-中国的红色政权为什么能够存在？.md", "phrase": "工农武装割据" },
+                { "articleId": "005-星星之火，可以燎原.md", "phrase": "星星之火，可以燎原" }
+            ],
+            "caseTags": []
+        },
+        {
+            "id": "duli-zizhu",
+            "term": "独立自主",
+            "aliases": ["既统一，又独立"],
+            "summary": "在合作中保持自己的判断和主动权，依据本国本组织的实际做决定，不盲从外部指挥。",
+            "keyPassages": [
+                { "articleId": "028-统一战线中的独立自主问题.md", "phrase": "既统一，又独立" }
+            ],
+            "caseTags": ["独立自主", "原则性与灵活性", "合作边界"]
+        },
+        {
+            "id": "tongyi-zhanxian",
+            "term": "统一战线",
+            "aliases": [],
+            "summary": "为实现共同目标，团结一切可以团结的力量，同时在合作中划清原则边界。",
+            "keyPassages": [
+                { "articleId": "028-统一战线中的独立自主问题.md", "phrase": "既统一，又独立" }
+            ],
+            "caseTags": ["统一战线", "共同目标", "利益相关者分析", "合作边界"]
+        },
+        {
+            "id": "piping-ziwo-piping",
+            "term": "批评与自我批评",
+            "aliases": ["批评和自我批评", "惩前毖后，治病救人", "有则改之，无则加勉"],
+            "summary": "公开指出缺点和错误，也主动检查自己，目的是改正错误、增进团结，而不是整人。",
+            "keyPassages": [
+                { "articleId": "082-论联合政府.md", "phrase": "有则改之，无则加勉" }
+            ],
+            "caseTags": ["批评与自我批评", "团结批评团结", "团结纠错", "修正错误"]
+        },
+        {
+            "id": "wei-renmin-fuwu",
+            "term": "为人民服务",
+            "aliases": ["全心全意地为人民服务"],
+            "summary": "把人民的利益作为工作的出发点和检验标准。",
+            "keyPassages": [
+                { "articleId": "082-论联合政府.md", "phrase": "全心全意地为人民服务" }
+            ],
+            "caseTags": []
+        },
+        {
+            "id": "tan-gangqin",
+            "term": "弹钢琴",
+            "aliases": ["学会“弹钢琴”"],
+            "summary": "领导工作要统筹全局，既抓中心工作，又照顾其他方面，有节奏地安排各项工作。",
+            "keyPassages": [
+                { "articleId": "147-党委会的工作方法.md", "phrase": "学会“弹钢琴”" }
+            ],
+            "caseTags": ["工作方法", "会议方法", "集体领导"]
+        },
+        {
+            "id": "zhi-laohu",
+            "term": "纸老虎",
+            "aliases": ["一切反动派都是纸老虎"],
+            "summary": "从长远和本质看，看似强大的反动力量并不可怕；但在具体斗争中仍要认真对待。即战略上藐视、战术上重视。",
+            "keyPassages": [
+                { "articleId": "101-和美国记者安娜·路易斯·斯特朗的谈话.md", "phrase": "一切反动派都是纸老虎" }
+            ],
+            "caseTags": []
+        },
+        {
+            "id": "zili-gengsheng",
+            "term": "自力更生",
+            "aliases": ["自己动手", "丰衣足食"],
+            "summary": "立足自身力量解决困难，不把希望寄托在外援上；外部帮助是补充而不是依靠。",
+            "keyPassages": [
+                { "articleId": "072-开展根据地的减租、生产和拥政爱民运动.md", "phrase": "丰衣足食" }
+            ],
+            "caseTags": ["自力更生", "生产导向", "资源约束", "组织起来"]
+        },
+        {
+            "id": "benben-zhuyi",
+            "term": "本本主义",
+            "aliases": ["教条主义"],
+            "summary": "脱离实际、照搬书本和上级文件的工作方法。克服它的办法是调查研究。",
+            "keyPassages": [
+                { "articleId": "006-反对本本主义.md", "phrase": "本本主义" }
+            ],
+            "caseTags": ["反对本本主义", "理论联系实际"]
+        },
+        {
+            "id": "yugong-yishan",
+            "term": "愚公移山",
+            "aliases": [],
+            "summary": "认定目标后坚持不懈、持续用力，相信积小成大。",
+            "keyPassages": [
+                { "articleId": "083-愚公移山.md", "phrase": "愚公移山" }
+            ],
+            "caseTags": ["长期主义"]
+        }
+    ]
+}
