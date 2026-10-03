@@ -55,6 +55,12 @@
         return `<div class="mt-2.5 flex flex-wrap gap-1.5">${battles}</div>`;
     }
 
+    function campaignChip(item) {
+        if (!item.campaign) return '';
+        const href = `campaign.html?id=${encodeURIComponent(item.campaign)}`;
+        return `<div class="mt-3"><a class="timeline-chip timeline-chip-sandbox" href="${href}" title="在长征沙盘中逐日推演这场战役">▶ 沙盘推演</a></div>`;
+    }
+
     function eventCard(event) {
         const lessonHtml = event.lesson
             ? `<p class="mt-2 text-sm leading-relaxed"><span class="font-bold text-china-red">启示：</span>${escapeHtml(event.lesson)}</p>`
@@ -71,6 +77,7 @@
                     ${lessonHtml}
                     ${battleChips(event)}
                     ${articleChips(event.articles)}
+                    ${campaignChip(event)}
                 </div>
             </li>`;
     }
@@ -251,6 +258,7 @@
                             <p class="text-sm leading-relaxed text-gray-700"><span class="font-bold text-china-red">背景：</span>${escapeHtml(point.background || '')}</p>
                         </div>
                         ${articleChips(point.articles)}
+                        ${campaignChip(point)}
                     </article>
                 `).join('')}
             </div>`;

@@ -50,7 +50,18 @@ Red Wisdom 是一个以《毛泽东选集》为核心内容和方法论来源的
 - 支持本机阅读进度、文章收藏和原文摘录。
 - 当前正文为项目整理的在线文本，并非出版社官方电子版；严肃引用应以人民出版社纸质版本复核。
 
-### 4. 问题、实践与档案
+### 4. 长征沙盘
+
+- `campaign.html` 提供长征关键战役的立体沙盘推演，当前收录「四渡赤水」和「强渡大渡河 · 飞夺泸定桥」。
+- 沙盘使用原生 WebGL2 渲染程序化地形（无第三方 3D 库），可拖动旋转、缩放、切换全景/俯视/低空/跟随红军视角，并调节垂直夸张。
+- 时间轴逐日推进：红军路线、各路国民党军（按派系分色）的动向与轨迹、渡口、战斗和关键注记同步变化。
+- 右侧简报按章节列出各方的命令、判断与决策，并提供各方档案和《毛选》原文对照（直达阅读页段落锚点）。
+- 页面底部用毛选方法复盘：主要矛盾、关键判断、可迁移方法和适用边界，可带着原文上下文跳转问道。
+- 时间线中的相关事件和「路线之争」决策点带有「沙盘推演」入口。
+- 战役数据集中在 `js/campaign-data.js`，新增战役只需按同一格式补充地理、部队关键帧、章节和复盘；`tests/campaign-data.test.js` 会校验坐标范围、时间顺序、派系引用和毛选引文锚点。
+- 战役内容目前为「史实初核 · 待编辑终审」状态，审核口径参照 `docs/content/history-case-editorial-policy.md`。
+
+### 5. 问题、实践与档案
 
 - 「我的问题」统一保存现实问题、事实与判断、主要矛盾、待调查事项、可用力量和下一步行动。
 - 问答、阅读笔记和实践可以关联同一个问题，并在问题时间线中按类型筛选。
@@ -170,6 +181,8 @@ node --check js/saved-quotes-store.js
 node --check js/saved-answers-store.js
 node --check js/practice-store.js
 node --check js/practice-review-prompts.js
+node --check js/campaign-engine.js
+node --check js/campaign.js
 node --check api/openrouter-guard.mjs
 node --check api/chat.js
 ```
@@ -182,6 +195,7 @@ redwisdom/
 ├── chat.html                   # 问道毛选 - AI 实践教练
 ├── reading.html                # 毛选阅读页
 ├── timeline.html               # 党史时间线与大事汇总
+├── campaign.html               # 长征沙盘：战役立体推演
 ├── modern.html                 # 毛选思维 · 现代问题栏目
 ├── problems.html               # 现实问题工作台与时间线
 ├── practice.html               # 实践任务与复盘
@@ -211,6 +225,9 @@ redwisdom/
 │   ├── saved-answers-store.js  # 本机私密 AI 回答收藏
 │   ├── timeline-data.js        # 党史时间线数据（事件、决策点、党代会）
 │   ├── timeline.js             # 党史时间线页渲染与筛选
+│   ├── campaign-data.js        # 长征战役沙盘数据（地理、部队、章节、复盘）
+│   ├── campaign-engine.js      # WebGL2 立体沙盘渲染器
+│   ├── campaign.js             # 长征沙盘页面控制
 │   ├── modern-cases.js         # 现代问题案例数据（场景、原文依据、行动清单）
 │   ├── modern.js               # 现代问题栏目渲染与筛选
 │   └── reading-guides.js       # 阅读导读和主题路径
