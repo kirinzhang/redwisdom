@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>长征沙盘 | Red Wisdom</title>
-    <meta name="description" content="长征战役立体沙盘推演：四渡赤水、强渡大渡河与飞夺泸定桥。逐日展示红军与各路国民党军的行动、命令与决策，并对照《毛泽东选集》原文复盘。">
+    <meta name="description" content="在真实中国地形图上推演中央红军长征：长征全图与湘江、四渡赤水、金沙江、大渡河、腊子口、直罗镇六场战役的立体沙盘。逐日展示红军与各路国民党军的行动、命令与决策，并对照《毛泽东选集》原文复盘。">
     <meta name="keywords" content="长征,四渡赤水,强渡大渡河,飞夺泸定桥,沙盘推演,毛选,中国革命战争的战略问题">
     <meta name="author" content="Red Wisdom">
     <meta property="og:title" content="长征沙盘">
@@ -14,7 +14,7 @@
     <link rel="icon" type="image/png" href="/assets/favicon.png">
     <link rel="manifest" href="manifest.webmanifest">
 
-    <link rel="stylesheet" href="assets/tailwind.css?v=2">
+    <link rel="stylesheet" href="assets/tailwind.css?v=3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -90,6 +90,16 @@
         .method-card li::before { content: ''; position: absolute; left: 0; top: .7em; width: .375rem; height: .375rem; border-radius: 9999px; background: #BC2D22; }
         .ask-link { display: inline-flex; align-items: center; gap: .35rem; border-radius: .625rem; background: #BC2D22; color: #fff; padding: .55rem 1rem; font-size: .875rem; font-weight: 700; }
         .ask-link:hover { background: #8B1F19; }
+        .sandbox-view.is-overview { background: #E3E6DF; }
+        .sb-lb.camp { pointer-events: auto; cursor: pointer; border: 1px solid #C4281C; background: rgba(255,250,240,.95); color: #9c1f15; font-weight: 700; font-size: 12.5px; padding: 1px 8px; border-radius: 9999px; box-shadow: 0 1px 4px rgba(0,0,0,.25); }
+        .sb-lb.camp:hover, .sb-lb.camp:focus-visible { background: #C4281C; color: #fff; }
+        .sb-lb.camp.is-active { background: #C4281C; color: #fff; }
+        .sb-inset { position: absolute; right: .75rem; bottom: .75rem; border: 1px solid rgba(120,90,60,.45); border-radius: 4px; background: #dfe8ea; box-shadow: 0 1px 6px rgba(0,0,0,.18); line-height: 0; overflow: hidden; pointer-events: none; }
+        .sandbox-loading { position: absolute; inset: 0; display: grid; place-items: center; color: #6b5a44; font-size: .875rem; letter-spacing: .1em; pointer-events: none; }
+        .enter-campaign { display: block; border-radius: .5rem; background: #BC2D22; color: #fff; padding: .55rem .8rem; font-size: .875rem; font-weight: 700; text-align: center; margin-bottom: .75rem; }
+        .enter-campaign:hover { background: #9c1f15; }
+        .campaign-chip.is-overview { font-weight: 700; }
+        @media (max-width: 639px) { .sb-inset svg { width: 104px; height: auto; } .sandbox-view.is-overview .sb-inset svg { width: 62px; } }
         .no-webgl { position: absolute; inset: 0; display: grid; place-items: center; padding: 1.5rem; text-align: center; color: #6b7280; font-size: .875rem; }
         .decision-overlay { position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; padding: 1rem; background: rgba(43,43,43,.28); }
         .decision-card { width: min(560px, 100%); max-height: 100%; overflow-y: auto; border-radius: .875rem; border: 1px solid #D6C6B0; background: #fffdf8; box-shadow: 0 16px 40px rgba(0,0,0,.25); padding: 1.1rem 1.25rem 1.25rem; }
@@ -156,6 +166,8 @@
                 <div class="sandbox-view" id="sandboxView">
                     <canvas id="sandboxCanvas" class="sandbox-canvas" aria-label="战役立体沙盘，可拖动旋转"></canvas>
                     <div id="sandboxLabels" class="sandbox-labels"></div>
+                    <div id="sandboxLoading" class="sandbox-loading" hidden>正在载入地形……</div>
+                    <div id="sandboxInset" class="sb-inset" hidden></div>
                     <div id="sandboxLegend" class="legend-box absolute left-3 top-3 hidden sm:grid" aria-hidden="true"></div>
                     <div class="absolute right-3 top-3 flex flex-wrap justify-end gap-1.5">
                         <button type="button" class="view-btn" data-preset="all">全景</button>
@@ -250,7 +262,7 @@
         </section>
 
         <footer class="mt-10 border-t border-dark-beige/60 pt-5 text-xs leading-relaxed text-gray-500">
-            <p>说明：沙盘地形依据大致地势程序生成，并非实测高程；河流、地名按经纬度近似放置，部队位置与行军路线经过简化，用于理解战役态势。史实经公开党史资料初核，严肃引用请以《中国共产党历史》等权威出版物复核。</p>
+            <p>说明：沙盘地形依据 GEBCO 2024 全球高程栅格（约 5 公里分辨率，叠加了细部起伏并按战役放大垂直比例），国界、省界、海岸线与主要河流依据 Natural Earth 公共领域数据绘制，采用 Albers 等积圆锥投影；行政区划为今日区划，仅作方位参考，不是 1930 年代的政区。部分支流、地名按经纬度近似放置，部队位置与行军路线经过简化，用于理解战役态势。本图为教学示意图，不作为国界和行政区域界线的权威依据。史实经公开党史资料初核，严肃引用请以《中国共产党历史》等权威出版物复核。</p>
             <p class="mt-2">参考资料：<span id="campaignSources"></span></p>
             <p class="mt-2">快捷键：空格播放/暂停，左右方向键切换章节。</p>
         </footer>

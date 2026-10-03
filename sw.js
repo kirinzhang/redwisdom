@@ -1,8 +1,8 @@
-const CACHE_NAME = 'redwisdom-shell-v15';
+const CACHE_NAME = 'redwisdom-shell-v16';
 const SHELL_FILES = [
     './', './index.html', './reading.html', './chat.html', './practice.html', './problems.html', './me.html', './login.html',
     './timeline.html', './modern.html', './campaign.html',
-    './style.css?v=3', './assets/tailwind.css?v=2', './script.js?v=3', './config.js?v=7', './manifest.webmanifest',
+    './style.css?v=3', './assets/tailwind.css?v=3', './script.js?v=3', './config.js?v=7', './manifest.webmanifest',
     './assets/favicon.png', './assets/bg_back.jpg', './assets/bg_front.jpg', './assets/portrait_color.jpg',
     './js/i18n.js', './js/auth-utils.js', './js/cloud-sync.js', './js/auto-sync.js', './js/auto-sync-bootstrap.js',
     './js/problem-case-store.js', './js/practice-store.js', './js/conversation-store.js', './js/reading-notes-store.js',
@@ -11,6 +11,7 @@ const SHELL_FILES = [
     './js/timeline-data.js', './js/timeline.js',
     './js/modern-cases.js', './js/modern.js',
     './js/campaign-data.js', './js/campaign-engine.js', './js/campaign.js',
+    './data/terrain/index.json', './data/terrain/overview.bin', './data/map/overview.json',
     './data/catalog.json', './data/text-edition.json', './data/history-cases.json', './data/history-problem-types.json'
 ];
 

@@ -57,13 +57,16 @@
     }
 
     function renderSwitcher() {
+        const O = data.OVERVIEW;
+        const overview = `<a class="campaign-chip is-overview${campaign.id === O.id ? ' is-active' : ''}" href="campaign.html?id=${O.id}" data-campaign="${O.id}"${campaign.id === O.id ? ' aria-current="true"' : ''}>${escapeHtml(O.shortTitle)}<small>1934—1935</small></a>`;
         const active = data.CAMPAIGNS.map((c) => `<a class="campaign-chip${c.id === campaign.id ? ' is-active' : ''}" href="campaign.html?id=${encodeURIComponent(c.id)}" data-campaign="${escapeHtml(c.id)}"${c.id === campaign.id ? ' aria-current="true"' : ''}>${escapeHtml(c.shortTitle || c.title)}<small>${escapeHtml(c.startDate.slice(0, 7).replace('-', '.'))}</small></a>`);
         const planned = data.PLANNED.map((p) => `<span class="campaign-chip" aria-disabled="true">${escapeHtml(p.title)}<small>筹备中</small></span>`);
-        $('campaignSwitcher').innerHTML = active.concat(planned).join('');
+        $('campaignSwitcher').innerHTML = [overview].concat(active, planned).join('');
     }
 
     function renderIntro() {
         document.title = `${campaign.title} · 长征沙盘 | Red Wisdom`;
+        $('sandboxView').classList.toggle('is-overview', Boolean(campaign.geo.overview));
         $('campaignTitle').textContent = campaign.title;
         $('campaignPeriod').textContent = campaign.period;
         $('campaignSummary').textContent = campaign.summary;
@@ -187,9 +190,9 @@
             <div class="move-head">${factionDot(f)}${escapeHtml(factionName(f))}<span class="move-tag">${escapeHtml(tag)}</span></div>
             <p class="ml-[18px] text-sm leading-7">${escapeHtml(text)}</p>
         </li>`).join('');
-        $('briefRefs').innerHTML = (c.refs || []).length
-            ? `<p class="text-xs tracking-widest text-gray-500">对照原文</p>${c.refs.map((r) => refCard(r)).join('')}`
-            : '';
+        const linked = c.campaign && data.getCampaign(c.campaign);
+        $('briefRefs').innerHTML = (linked ? `<a class="enter-campaign" href="campaign.html?id=${encodeURIComponent(linked.id)}" data-campaign="${escapeHtml(linked.id)}">▶ 进入「${escapeHtml(linked.title)}」立体沙盘</a>` : '')
+            + ((c.refs || []).length ? `<p class="text-xs tracking-widest text-gray-500">对照原文</p>${c.refs.map((r) => refCard(r)).join('')}` : '');
         chapterButtons.forEach((b, i) => { b.classList.toggle('is-active', i === k); b.classList.toggle('is-done', i < k); });
         chapterButtons[k].scrollIntoView({ block: 'nearest', inline: 'nearest' });
     }
@@ -249,37 +252,77 @@
         if (el) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     }
 
-    function mountSandbox() {
+    let mountToken = 0;
+    function noWebgl(text) {
+        $('sandboxView').insertAdjacentHTML('beforeend', `<div class="no-webgl">${escapeHtml(text)}</div>`);
+    }
+    function overviewRoute() {
+        return data.OVERVIEW.units[0].k.map((k) => [k[1], k[2]]);
+    }
+    async function renderInset(target) {
+        const box = $('sandboxInset');
+        box.innerHTML = '';
+        box.hidden = true;
+        try {
+            const vec = await window.RedWisdomSandbox.loadVectors('overview');
+            if (target !== campaign) return;
+            const ins = window.RedWisdomSandbox.insetSvg;
+            if (campaign.geo.overview) {
+                box.innerHTML = ins({ vec: vec.scs, width: 84, height: 116, title: '南海诸岛' });
+                box.title = '南海诸岛附图';
+            } else {
+                box.innerHTML = ins({ vec, bbox: [73, 17.5, 135.5, 54], width: 150, height: 112, route: overviewRoute(), highlight: campaign.geo.bbox });
+                box.title = '战役在长征全图中的位置';
+            }
+            box.hidden = false;
+        } catch (error) {
+            console.warn('Inset map unavailable:', error);
+        }
+    }
+    async function mountSandbox() {
+        const token = ++mountToken;
+        const target = campaign;
         if (sandbox) { sandbox.destroy(); sandbox = null; }
-        $('sandboxView').querySelector('.no-webgl')?.remove();
+        $('sandboxView').querySelectorAll('.no-webgl').forEach((el) => el.remove());
+        $('sandboxLoading').hidden = false;
+        renderInset(target);
+        let map = null;
+        try {
+            map = await window.RedWisdomSandbox.loadMap(target.geo.map || target.id);
+        } catch (error) {
+            console.error('Map data failed to load:', error);
+        }
+        if (token !== mountToken) return;
+        $('sandboxLoading').hidden = true;
+        if (!map) { noWebgl('地形数据加载失败，请检查网络后刷新。右侧的战况与决策仍可随时间轴阅读。'); return; }
         try {
             sandbox = window.RedWisdomSandbox.create({
                 canvas: $('sandboxCanvas'),
                 labelLayer: $('sandboxLabels'),
-                campaign,
+                campaign: target,
+                map,
                 onUnitClick: showProfile,
                 onFollowChange: (v) => $('followBtn').setAttribute('aria-pressed', String(v)),
+                onCampaignClick: (id) => loadCampaign(id, { push: true, scroll: true }),
             });
         } catch (error) {
             console.error('Sandbox failed to start:', error);
             sandbox = null;
         }
-        if (!sandbox) {
-            $('sandboxView').insertAdjacentHTML('beforeend', '<div class="no-webgl">当前浏览器无法显示立体沙盘（需要 WebGL2）。右侧的战况与决策仍可随时间轴阅读。</div>');
-            return;
-        }
+        if (!sandbox) { noWebgl('当前浏览器无法显示立体沙盘（需要 WebGL2）。右侧的战况与决策仍可随时间轴阅读。'); return; }
         const ex = parseFloat($('exaggeration').value);
         if (ex !== 1) sandbox.setExaggeration(ex);
         $('exaggerationValue').textContent = `×${sandbox.exaggerationFactor(ex)}`;
         sandbox.setLayers(currentLayers());
         sandbox.setTime(T);
+        if (playing) sandbox.setFollow(true);
     }
     function currentLayers() {
         return { enemy: $('layerEnemy').checked, trail: $('layerTrail').checked, ghost: $('layerGhost').checked, place: $('layerPlace').checked };
     }
 
-    function loadCampaign(id, { push } = {}) {
-        campaign = data.getCampaign(id) || data.defaultCampaign();
+    function loadCampaign(id, { push, scroll } = {}) {
+        campaign = data.getCampaign(id || data.OVERVIEW.id) || data.OVERVIEW;
         closeDecision(false);
         shownDecisions = new Set();
         setPlaying(false);
@@ -289,6 +332,7 @@
         mountSandbox();
         seek(0);
         if (push) history.pushState({ id: campaign.id }, '', `campaign.html?id=${encodeURIComponent(campaign.id)}`);
+        if (scroll) $('sandboxView').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     function bind() {
@@ -316,6 +360,12 @@
         document.querySelectorAll('[data-preset]').forEach((b) => b.addEventListener('click', () => sandbox && sandbox.preset(b.dataset.preset)));
         $('followBtn').addEventListener('click', () => sandbox && sandbox.setFollow(!sandbox.isFollowing()));
         document.querySelectorAll('.brief-tab').forEach((b) => b.addEventListener('click', () => showTab(b.dataset.tab)));
+        $('briefRefs').addEventListener('click', (e) => {
+            const a = e.target.closest('[data-campaign]');
+            if (!a || e.metaKey || e.ctrlKey) return;
+            e.preventDefault();
+            loadCampaign(a.dataset.campaign, { push: true, scroll: true });
+        });
         $('campaignSwitcher').addEventListener('click', (e) => {
             const a = e.target.closest('[data-campaign]');
             if (!a || e.metaKey || e.ctrlKey) return;
