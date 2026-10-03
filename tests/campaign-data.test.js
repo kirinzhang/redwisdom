@@ -86,7 +86,7 @@ test('every Mao Selected Works reference resolves to an indexed passage that con
 });
 
 test('method review separates judgment, transfer and limits, with checkable sources', () => {
-    const allowedHosts = ['cpc.people.com.cn', 'www.news.cn', 'www.12371.cn'];
+    const allowedHosts = ['cpc.people.com.cn', 'www.news.cn', 'www.12371.cn', 'www.cac.gov.cn', 'www.chinawriter.com.cn'];
     for (const c of data.CAMPAIGNS) {
         const m = c.method;
         assert.ok(m.contradiction && m.limits, `${c.id} states the main contradiction and limits`);
@@ -114,4 +114,39 @@ test('campaign page loads its scripts and is cached for offline use', () => {
     for (const file of ['./campaign.html', './js/campaign-data.js', './js/campaign-engine.js', './js/campaign.js']) {
         assert.ok(worker.includes(`'${file}'`), `service worker caches ${file}`);
     }
+});
+
+test('decision points are well formed and cite real passages', () => {
+    let total = 0;
+    for (const c of data.CAMPAIGNS) {
+        assert.ok((c.decisions || []).length >= 1, `${c.id} has at least one decision point`);
+        c.decisions.forEach((d, i) => {
+            total += 1;
+            assert.ok(d.day > 0 && d.day < c.maxDay, `${c.id} decision ${i} is inside the campaign`);
+            if (i > 0) assert.ok(d.day > c.decisions[i - 1].day, `${c.id} decisions are in time order`);
+            assert.ok(d.title && d.situation && d.question && d.reveal, `${c.id}/${d.title} is complete`);
+            assert.ok(d.options.length >= 2 && d.options.length <= 4, `${c.id}/${d.title} has 2-4 options`);
+            assert.ok(d.options.every((o) => o.label && o.note), `${c.id}/${d.title} options explain their trade-offs`);
+            assert.ok(Number.isInteger(d.answer) && d.answer >= 0 && d.answer < d.options.length, `${c.id}/${d.title} marks the historical choice`);
+            if (d.ref) {
+                const record = searchIndex.records.find((r) => r.articleId === d.ref.articleId && r.anchor === d.ref.anchor);
+                assert.ok(record && compact(record.text).includes(compact(d.ref.quote)), `${c.id}/${d.title} quote is verbatim`);
+            }
+        });
+    }
+    assert.ok(total >= 12, `enough decision points (${total})`);
+});
+
+test('the campaign list follows the Long March in time order and has a featured default', () => {
+    const dates = data.CAMPAIGNS.map((c) => c.startDate);
+    assert.deepEqual([...dates].sort(), dates);
+    assert.equal(data.defaultCampaign().id, 'sidu-chishui');
+    for (const id of ['xiangjiang', 'jinsha-river', 'lazikou', 'zhiluozhen']) assert.ok(data.getCampaign(id), `${id} exists`);
+});
+
+test('concept cards only link to campaigns that exist', () => {
+    const concepts = JSON.parse(fs.readFileSync(path.join(root, 'data/concepts.json'), 'utf8')).concepts;
+    const linked = concepts.flatMap((c) => c.campaigns || []);
+    assert.ok(linked.length >= 5, 'concepts link into the sandbox');
+    for (const item of linked) assert.ok(data.getCampaign(item.id), `concept links existing campaign ${item.id}`);
 });

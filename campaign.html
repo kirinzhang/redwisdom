@@ -14,28 +14,10 @@
     <link rel="icon" type="image/png" href="/assets/favicon.png">
     <link rel="manifest" href="manifest.webmanifest">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/tailwind.css?v=2">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'warm-rice': '#F7F4ED',
-                        'china-red': '#BC2D22',
-                        'ink-black': '#2B2B2B',
-                        'dark-beige': '#D6C6B0',
-                    },
-                    fontFamily: {
-                        'mao': ['"Ma Shan Zheng"', 'cursive'],
-                        'serif': ['"Noto Serif SC"', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         :root { --stage: #E6DFD0; }
         [hidden] { display: none !important; }
@@ -109,6 +91,26 @@
         .ask-link { display: inline-flex; align-items: center; gap: .35rem; border-radius: .625rem; background: #BC2D22; color: #fff; padding: .55rem 1rem; font-size: .875rem; font-weight: 700; }
         .ask-link:hover { background: #8B1F19; }
         .no-webgl { position: absolute; inset: 0; display: grid; place-items: center; padding: 1.5rem; text-align: center; color: #6b7280; font-size: .875rem; }
+        .decision-overlay { position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; padding: 1rem; background: rgba(43,43,43,.28); }
+        .decision-card { width: min(560px, 100%); max-height: 100%; overflow-y: auto; border-radius: .875rem; border: 1px solid #D6C6B0; background: #fffdf8; box-shadow: 0 16px 40px rgba(0,0,0,.25); padding: 1.1rem 1.25rem 1.25rem; }
+        .decision-kicker { font-size: .72rem; letter-spacing: .16em; color: #BC2D22; font-weight: 700; }
+        .decision-card h3 { font-family: 'Ma Shan Zheng', cursive; font-size: 1.9rem; line-height: 1.15; color: #2B2B2B; margin: .15rem 0 .4rem; }
+        .decision-option { display: grid; grid-template-columns: 1.75rem 1fr; gap: .5rem; width: 100%; text-align: left; border: 1px solid #D6C6B0; border-radius: .625rem; padding: .6rem .75rem; background: #fff; font-size: .9rem; line-height: 1.6; transition: all .15s; }
+        .decision-option:hover:not(:disabled) { border-color: #BC2D22; background: rgba(188,45,34,.04); }
+        .decision-option b { display: grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 9999px; background: #F7F4ED; color: #BC2D22; font-size: .8rem; }
+        .decision-option.is-chosen { border-color: #2B2B2B; border-width: 2px; }
+        .decision-option.is-history { background: rgba(188,45,34,.06); border-color: #BC2D22; }
+        .decision-option.is-history b { background: #BC2D22; color: #fff; }
+        .decision-option small { display: block; color: #6b7280; font-size: .78rem; margin-top: .15rem; }
+        .decision-reveal { margin-top: .9rem; border-top: 1px dashed #D6C6B0; padding-top: .8rem; font-size: .9rem; line-height: 1.8; }
+        .decision-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+        .decision-actions button { border-radius: .625rem; padding: .45rem .9rem; font-size: .85rem; border: 1px solid #D6C6B0; }
+        .decision-actions .primary { background: #BC2D22; border-color: #BC2D22; color: #fff; font-weight: 700; }
+        .control-tick.is-decision { top: 21px; z-index: 2; width: 14px; height: 14px; border-radius: 9999px; background: #2B2B2B; color: #fff; font-size: 9px; line-height: 14px; text-align: center; box-shadow: 0 0 0 2px #fff; }
+        .record-row { display: grid; gap: .2rem; padding: .7rem 0; border-bottom: 1px dashed #D6C6B0; font-size: .875rem; line-height: 1.7; }
+        .record-row:last-child { border-bottom: 0; }
+        .record-tag { display: inline-block; font-size: .7rem; border-radius: .25rem; padding: 0 .35rem; margin-left: .35rem; border: 1px solid #D6C6B0; color: #6b7280; }
+        .record-tag.same { border-color: #BC2D22; color: #BC2D22; }
         button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #BC2D22; outline-offset: 2px; }
     </style>
 </head>
@@ -162,6 +164,20 @@
                         <button type="button" class="view-btn" id="followBtn" aria-pressed="false">跟随红军</button>
                     </div>
                     <p class="absolute bottom-2 left-3 rounded bg-warm-rice/85 px-2 py-0.5 text-[11px] text-gray-500">拖动旋转 · 右键或双指平移 · 滚轮或捏合缩放</p>
+                    <div id="decisionOverlay" class="decision-overlay" hidden>
+                        <div class="decision-card" role="dialog" aria-modal="true" aria-labelledby="decisionTitle">
+                            <p id="decisionKicker" class="decision-kicker"></p>
+                            <h3 id="decisionTitle"></h3>
+                            <p id="decisionSituation" class="text-sm leading-7 text-gray-700"></p>
+                            <p id="decisionQuestion" class="mt-3 text-[15px] font-bold"></p>
+                            <div id="decisionOptions" class="mt-2 grid gap-2"></div>
+                            <div id="decisionReveal" class="decision-reveal" hidden></div>
+                            <div class="decision-actions">
+                                <button type="button" id="decisionContinue" class="primary" hidden>继续推演</button>
+                                <button type="button" id="decisionSkip">先不作答，继续</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="control-bar">
                     <div class="control-row">
@@ -183,6 +199,7 @@
                         <label><input type="checkbox" id="layerTrail" checked>敌军轨迹</label>
                         <label><input type="checkbox" id="layerGhost" checked>红军全程</label>
                         <label><input type="checkbox" id="layerPlace" checked>地名</label>
+                        <label><input type="checkbox" id="decisionPause" checked>决策点暂停</label>
                         <label>垂直夸张 <input type="range" id="exaggeration" min="0.5" max="2.2" step="0.1" value="1" class="w-28"> <span id="exaggerationValue" class="font-bold text-ink-black">×8</span></label>
                     </div>
                 </div>
@@ -217,6 +234,14 @@
                 <div class="method-card"><h3>关键判断</h3><ul id="methodJudgments" class="mt-2 grid gap-1.5 text-sm leading-7"></ul></div>
                 <div class="method-card"><h3>可迁移的方法</h3><ul id="methodTransfer" class="mt-2 grid gap-1.5 text-sm leading-7"></ul></div>
                 <div class="method-card"><h3>适用边界</h3><p id="methodLimits" class="mt-2 text-sm leading-7"></p></div>
+            </div>
+            <div class="method-card mt-3">
+                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                    <h3>你的决策记录</h3>
+                    <p id="decisionSummary" class="text-xs text-gray-500"></p>
+                </div>
+                <p class="mt-1 text-xs text-gray-500">历史上的选择不一定是“正确答案”，湘江战役就是反面教训。对照的意义在于说清每个选择背后的判断。</p>
+                <div id="decisionRecord" class="mt-1"></div>
             </div>
             <div class="mt-4 flex flex-wrap items-center gap-3">
                 <a id="askLink" class="ask-link" href="chat.html">带着我的问题去问道 →</a>

@@ -14,9 +14,29 @@
     let currentChapter = -1;
     let lastFrame = performance.now();
     let chapterButtons = [];
+    let shownDecisions = new Set();
+    let activeDecision = -1;
+    const LETTERS = ['A', 'B', 'C', 'D'];
+    const STORE_KEY = 'redwisdom.campaign.decisions.v1';
+
+    function readAnswers() {
+        try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (error) { return {}; }
+    }
+    function saveAnswer(campaignId, index, option) {
+        const all = readAnswers();
+        all[campaignId] = { ...(all[campaignId] || {}), [index]: option };
+        try { localStorage.setItem(STORE_KEY, JSON.stringify(all)); } catch (error) { /* 本机存储不可用时只在本次会话中显示 */ }
+    }
+    function answersFor(campaignId) {
+        return readAnswers()[campaignId] || {};
+    }
 
     function articleTitle(articleId) {
         return String(articleId).replace(/^\d+-/, '').replace(/\.md$/, '');
+    }
+    function quoted(text) {
+        const t = String(text || '');
+        return /^[“"]/.test(t) ? t : `“${t}”`;
     }
     function readingHref(ref) {
         return `reading.html?article=${encodeURIComponent(ref.articleId)}&anchor=${encodeURIComponent(ref.anchor)}`;
@@ -24,7 +44,7 @@
     function refCard(ref, chapterTitle) {
         const meta = chapterTitle ? `${escapeHtml(chapterTitle)} · ` : '';
         return `<a class="ref-card" href="${readingHref(ref)}">
-            <span class="block text-sm leading-7">“${escapeHtml(ref.quote)}”</span>
+            <span class="block text-sm leading-7">${escapeHtml(quoted(ref.quote))}</span>
             <span class="mt-1 block text-xs text-china-red">${meta}《${escapeHtml(articleTitle(ref.articleId))}》 读原文 →</span>
         </a>`;
     }
@@ -56,7 +76,9 @@
             .map((key) => `<span>${factionDot(key)}${escapeHtml(factionName(key))}</span>`).join('');
         $('timeRange').max = campaign.maxDay;
         $('controlTicks').innerHTML = (campaign.markers || []).filter((m) => m.type === 'crossing').map((m) =>
-            `<button type="button" class="control-tick" style="left:${(m.day / campaign.maxDay * 100).toFixed(2)}%" data-seek="${m.day}" title="${escapeHtml(m.label)}">${escapeHtml(m.label.split(' · ')[0])}</button>`).join('');
+            `<button type="button" class="control-tick" style="left:${(m.day / campaign.maxDay * 100).toFixed(2)}%" data-seek="${m.day}" title="${escapeHtml(m.label)}">${escapeHtml(m.label.split(' · ')[0])}</button>`).join('')
+            + (campaign.decisions || []).map((d, i) =>
+                `<button type="button" class="control-tick is-decision" style="left:${(d.day / campaign.maxDay * 100).toFixed(2)}%" data-decision="${i}" title="决策点：${escapeHtml(d.title)}">?</button>`).join('');
         chapterButtons = campaign.chapters.map((c) => {
             const b = document.createElement('button');
             b.type = 'button'; b.className = 'chapter-btn';
@@ -81,6 +103,74 @@
         $('askLink').href = `chat.html?${new URLSearchParams({ prompt: m.askPrompt, quote: m.askQuote, source: m.askSource }).toString()}`;
         $('campaignSources').innerHTML = (campaign.sources || []).map((s) => `<a class="underline hover:text-china-red" href="${escapeHtml(s.url)}" target="_blank" rel="noopener">${escapeHtml(s.publisher)}：${escapeHtml(s.title)}</a>`).join('；');
         currentChapter = -1;
+        renderDecisionRecord();
+    }
+
+    function renderDecisionRecord() {
+        const decisions = campaign.decisions || [];
+        const answers = answersFor(campaign.id);
+        const answered = decisions.filter((d, i) => answers[i] != null);
+        const same = decisions.filter((d, i) => answers[i] === d.answer).length;
+        $('decisionSummary').textContent = decisions.length
+            ? `已作答 ${answered.length}/${decisions.length}，其中 ${same} 题与历史选择相同`
+            : '本战役暂无决策点';
+        $('decisionRecord').innerHTML = decisions.map((d, i) => {
+            const mine = answers[i];
+            const history = `${LETTERS[d.answer]}. ${escapeHtml(d.options[d.answer].label)}`;
+            const mineText = mine == null
+                ? `<button type="button" class="text-china-red underline" data-answer-decision="${i}">去作答</button>`
+                : `${LETTERS[mine]}. ${escapeHtml(d.options[mine].label)}<span class="record-tag${mine === d.answer ? ' same' : ''}">${mine === d.answer ? '与历史相同' : '与历史不同'}</span>`;
+            return `<div class="record-row">
+                <b>${escapeHtml(d.title)}</b>
+                <span>你的选择：${mineText}</span>
+                <span class="text-gray-600">${escapeHtml(d.historyLabel || '历史上的选择')}：${history}</span>
+            </div>`;
+        }).join('');
+    }
+
+    function openDecision(index) {
+        const d = campaign.decisions[index];
+        if (!d) return;
+        activeDecision = index;
+        shownDecisions.add(index);
+        setPlaying(false);
+        const date = data.dateForDay(campaign, d.day);
+        $('decisionKicker').textContent = `决策点 · ${date.getMonth() + 1}月${date.getDate()}日`;
+        $('decisionTitle').textContent = d.title;
+        $('decisionSituation').textContent = d.situation;
+        $('decisionQuestion').textContent = d.question;
+        $('decisionOptions').innerHTML = d.options.map((o, i) => `<button type="button" class="decision-option" data-option="${i}"><b>${LETTERS[i]}</b><span>${escapeHtml(o.label)}</span></button>`).join('');
+        $('decisionReveal').hidden = true;
+        $('decisionContinue').hidden = true;
+        $('decisionSkip').hidden = false;
+        $('decisionOverlay').hidden = false;
+        $('decisionOptions').querySelector('button')?.focus({ preventScroll: true });
+        const previous = answersFor(campaign.id)[index];
+        if (previous != null) revealDecision(previous, false);
+    }
+
+    function revealDecision(option, save = true) {
+        const d = campaign.decisions[activeDecision];
+        if (save) saveAnswer(campaign.id, activeDecision, option);
+        $('decisionOptions').querySelectorAll('.decision-option').forEach((button, i) => {
+            button.disabled = true;
+            button.classList.toggle('is-chosen', i === option);
+            button.classList.toggle('is-history', i === d.answer);
+            button.querySelector('span').innerHTML = `${escapeHtml(d.options[i].label)}<small>${escapeHtml(d.options[i].note)}</small>`;
+        });
+        const ref = d.ref ? `<a class="ref-card mt-2" href="${readingHref(d.ref)}"><span class="block text-sm leading-7">${escapeHtml(quoted(d.ref.quote))}</span><span class="mt-1 block text-xs text-china-red">《${escapeHtml(articleTitle(d.ref.articleId))}》 读原文 →</span></a>` : '';
+        $('decisionReveal').innerHTML = `<p><b class="text-china-red">${escapeHtml(d.historyLabel || '历史上的选择')}：${LETTERS[d.answer]}</b>　${escapeHtml(d.reveal)}</p>${ref}`;
+        $('decisionReveal').hidden = false;
+        $('decisionContinue').hidden = false;
+        $('decisionSkip').hidden = true;
+        $('decisionContinue').focus({ preventScroll: true });
+        renderDecisionRecord();
+    }
+
+    function closeDecision(resume) {
+        $('decisionOverlay').hidden = true;
+        activeDecision = -1;
+        if (resume) setPlaying(true);
     }
 
     function updateBrief() {
@@ -105,13 +195,16 @@
     }
 
     function seek(t) {
-        T = Math.max(0, Math.min(campaign.maxDay, t));
+        const target = Math.max(0, Math.min(campaign.maxDay, t));
+        if (target < T) shownDecisions = new Set([...shownDecisions].filter((i) => campaign.decisions[i].day < target));
+        T = target;
         hold = 0;
         $('timeRange').value = T;
         if (sandbox) sandbox.setTime(T);
         updateBrief();
     }
     function setPlaying(p) {
+        if (p && !$('decisionOverlay').hidden) { $('decisionOverlay').hidden = true; activeDecision = -1; }
         playing = p;
         if (p && T >= campaign.maxDay) seek(0);
         $('playBtn').textContent = p ? '❚❚ 暂停' : (T >= campaign.maxDay ? '↺ 重演' : '▶ 推演');
@@ -123,7 +216,19 @@
         lastFrame = now;
         if (!playing || !campaign || now < hold) return;
         const before = data.chapterAt(campaign, T);
+        const previousT = T;
         T += dt * (campaign.maxDay / 70) * parseFloat($('speedSelect').value);
+        if ($('decisionPause').checked) {
+            const next = (campaign.decisions || []).findIndex((d, i) => !shownDecisions.has(i) && d.day > previousT && d.day <= T);
+            if (next >= 0) {
+                T = campaign.decisions[next].day;
+                $('timeRange').value = T;
+                if (sandbox) sandbox.setTime(T);
+                updateBrief();
+                openDecision(next);
+                return;
+            }
+        }
         if (T >= campaign.maxDay) { T = campaign.maxDay; setPlaying(false); }
         if (data.chapterAt(campaign, T) !== before) hold = now + 2200;
         $('timeRange').value = T;
@@ -174,7 +279,9 @@
     }
 
     function loadCampaign(id, { push } = {}) {
-        campaign = data.getCampaign(id) || data.CAMPAIGNS[0];
+        campaign = data.getCampaign(id) || data.defaultCampaign();
+        closeDecision(false);
+        shownDecisions = new Set();
         setPlaying(false);
         T = 0;
         renderSwitcher();
@@ -187,7 +294,22 @@
     function bind() {
         $('playBtn').addEventListener('click', () => setPlaying(!playing));
         $('timeRange').addEventListener('input', (e) => seek(parseFloat(e.target.value)));
-        $('controlTicks').addEventListener('click', (e) => { const b = e.target.closest('[data-seek]'); if (b) seek(parseFloat(b.dataset.seek) - campaign.maxDay / 140); });
+        $('controlTicks').addEventListener('click', (e) => {
+            const d = e.target.closest('[data-decision]');
+            if (d) { const i = Number(d.dataset.decision); seek(campaign.decisions[i].day); openDecision(i); return; }
+            const b = e.target.closest('[data-seek]'); if (b) seek(parseFloat(b.dataset.seek) - campaign.maxDay / 140);
+        });
+        $('decisionOptions').addEventListener('click', (e) => { const b = e.target.closest('[data-option]'); if (b && !b.disabled) revealDecision(Number(b.dataset.option)); });
+        $('decisionContinue').addEventListener('click', () => closeDecision(true));
+        $('decisionSkip').addEventListener('click', () => closeDecision(true));
+        $('decisionRecord').addEventListener('click', (e) => {
+            const b = e.target.closest('[data-answer-decision]');
+            if (!b) return;
+            const i = Number(b.dataset.answerDecision);
+            seek(campaign.decisions[i].day);
+            $('sandboxView').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            openDecision(i);
+        });
         ['layerEnemy', 'layerTrail', 'layerGhost', 'layerPlace'].forEach((id) => $(id).addEventListener('change', () => sandbox && sandbox.setLayers(currentLayers())));
         $('exaggeration').addEventListener('change', (e) => { if (sandbox) sandbox.setExaggeration(parseFloat(e.target.value)); });
         $('exaggeration').addEventListener('input', (e) => { if (sandbox) $('exaggerationValue').textContent = `×${sandbox.exaggerationFactor(parseFloat(e.target.value))}`; });
@@ -203,6 +325,7 @@
         window.addEventListener('popstate', () => loadCampaign(new URLSearchParams(location.search).get('id')));
         document.addEventListener('keydown', (e) => {
             if (['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName) && e.key.startsWith('Arrow')) return;
+            if (!$('decisionOverlay').hidden) { if (e.key === 'Escape') closeDecision(false); return; }
             if (e.code === 'Space' && !['BUTTON', 'A', 'INPUT', 'TEXTAREA'].includes(e.target.tagName)) { e.preventDefault(); setPlaying(!playing); }
             else if (e.key === 'ArrowRight') { const k = Math.min(campaign.chapters.length - 1, data.chapterAt(campaign, T) + 1); seek(campaign.chapters[k].day + 0.01); }
             else if (e.key === 'ArrowLeft') { const k = data.chapterAt(campaign, T); const c = T - campaign.chapters[k].day > campaign.maxDay / 80 ? k : Math.max(0, k - 1); seek(campaign.chapters[c].day + 0.01); }
