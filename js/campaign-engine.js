@@ -17,16 +17,6 @@
         h = Math.imul(h ^ (h >>> 13), 1274126177);
         return ((h ^ (h >>> 16)) >>> 0) / 4294967295;
     }
-    function vnoise(x, y) {
-        const i = Math.floor(x), j = Math.floor(y), u = smooth(x - i), v = smooth(y - j);
-        const a = hash(i, j), b = hash(i + 1, j), c = hash(i, j + 1), d = hash(i + 1, j + 1);
-        return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
-    }
-    function fbm(x, y, octaves = 5) {
-        let s = 0, a = 0.5, f = 1, n = 0;
-        for (let k = 0; k < octaves; k += 1) { s += a * vnoise(x * f + k * 17.3, y * f - k * 9.1); n += a; f *= 2.07; a *= 0.5; }
-        return s / n;
-    }
     const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
     const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
     const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
@@ -90,14 +80,33 @@
     }
     const loadIndex = () => cached('index', () => fetchOk('data/terrain/index.json').then((r) => r.json()));
     const loadVectors = (key) => cached(`vec:${key}`, () => fetchOk(`data/map/${key}.json`).then((r) => r.json()));
+    // 植被类型栅格以灰度 PNG 存放（0–11 为植被类型，254 为湖泊等水面，255 为无数据）。
+    async function loadLandcover(file) {
+        try {
+            const blob = await fetchOk(`data/terrain/${file}`).then((r) => r.blob());
+            let img;
+            if (typeof createImageBitmap === 'function') img = await createImageBitmap(blob, { premultiplyAlpha: 'none', colorSpaceConversion: 'none' });
+            else img = await new Promise((resolve, reject) => { const im = new Image(); im.onload = () => resolve(im); im.onerror = reject; im.src = URL.createObjectURL(blob); });
+            const w = img.width, h = img.height, cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+            const ctx = cv.getContext('2d', { willReadFrequently: true }); ctx.drawImage(img, 0, 0);
+            const px = ctx.getImageData(0, 0, w, h).data, data = new Uint8Array(w * h);
+            for (let i = 0; i < data.length; i += 1) data[i] = px[i * 4];
+            return { w, h, data };
+        } catch (error) {
+            console.warn('Landcover unavailable:', error);
+            return null;
+        }
+    }
     function loadTerrain(key) {
-        return cached(`dem:${key}`, () => Promise.all([loadIndex(), fetchOk(`data/terrain/${key}.bin`).then((r) => r.arrayBuffer())]).then(([index, buf]) => {
+        return cached(`dem:${key}`, () => loadIndex().then((index) => {
             const meta = index[key];
             if (!meta) throw new Error(`terrain ${key} missing from index`);
-            const view = new DataView(buf), data = new Int16Array(meta.w * meta.h);
-            if (data.length * 2 !== buf.byteLength) throw new Error(`terrain ${key} has unexpected size`);
-            for (let i = 0; i < data.length; i += 1) data[i] = view.getInt16(i * 2, true);
-            return { ...meta, data };
+            return Promise.all([fetchOk(`data/terrain/${key}.bin`).then((r) => r.arrayBuffer()), meta.landcover ? loadLandcover(meta.landcover) : null]).then(([buf, lc]) => {
+                const view = new DataView(buf), data = new Int16Array(meta.w * meta.h);
+                if (data.length * 2 !== buf.byteLength) throw new Error(`terrain ${key} has unexpected size`);
+                for (let i = 0; i < data.length; i += 1) data[i] = view.getInt16(i * 2, true);
+                return { ...meta, data, lc: lc && lc.w === meta.w && lc.h === meta.h ? lc : null };
+            });
         }));
     }
     function loadMap(key) {
@@ -194,6 +203,12 @@ o=vec4(c,uColor.a);}`;
 
     // 统一的分层设色：低处偏沙黄，高原偏赭褐，极高处近雪白。
     const RAMP = [[0, [206, 208, 170]], [300, [218, 210, 170]], [700, [214, 196, 150]], [1200, [200, 176, 128]], [1800, [182, 154, 110]], [2600, [162, 136, 102]], [3600, [146, 124, 98]], [4600, [152, 142, 130]], [5400, [204, 200, 194]], [6500, [240, 238, 234]]];
+    // 植被类型配色（《中华人民共和国植被图》11 个植被型组），压低饱和度以配合沙盘底色。
+    const LC = [
+        [214, 201, 166], [98, 122, 82], [106, 130, 84], [118, 142, 88], [148, 156, 102], [220, 200, 150],
+        [194, 186, 128], [170, 172, 110], [158, 168, 114], [134, 158, 128], [170, 163, 132], [206, 198, 140],
+    ];
+    const WATER = [146, 182, 200];
     function ecol(e) {
         if (e <= RAMP[0][0]) return RAMP[0][1];
         for (let i = 0; i < RAMP.length - 1; i += 1) { const a = RAMP[i], b = RAMP[i + 1]; if (e <= b[0]) { const t = (e - a[0]) / (b[0] - a[0]); return [0, 1, 2].map((j) => a[1][j] + (b[1][j] - a[1][j]) * t); } }
@@ -230,7 +245,7 @@ o=vec4(c,uColor.a);}`;
             const x = Math.min(DW - 2, Math.floor(fx)), y = Math.min(DH - 2, Math.floor(fy)), u = fx - x, v = fy - y, i = y * DW + x;
             return DZ[i] * (1 - u) * (1 - v) + DZ[i + 1] * u * (1 - v) + DZ[i + DW] * (1 - u) * v + DZ[i + DW + 1] * u * v;
         }
-        const GW = OVERVIEW ? Math.min(520, Math.round(DW * 0.8)) : clamp(Math.round(DW * 1.5), 220, 340);
+        const GW = OVERVIEW ? Math.min(640, Math.round(DW * 0.5)) : clamp(DW, 260, 460);
         const GH = Math.max(2, Math.round((GW - 1) * (DH - 1) / (DW - 1)) + 1);
         const gLon = (gx) => TL0 + gx / (GW - 1) * (TL1 - TL0), gLat = (gy) => TB1 - gy / (GH - 1) * (TB1 - TB0);
         const tPx = (lon, W) => (lon - TL0) / (TL1 - TL0) * W, tPy = (lat, H) => (TB1 - lat) / (TB1 - TB0) * H;
@@ -241,9 +256,9 @@ o=vec4(c,uColor.a);}`;
             const m = new Float32Array(GW * GH);
             if (OVERVIEW || typeof document === 'undefined') return m;
             const cv = document.createElement('canvas'); cv.width = GW; cv.height = GH;
-            const ctx = cv.getContext('2d'); ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#fff';
+            const ctx = cv.getContext('2d', { willReadFrequently: true }); ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#fff';
             for (const r of allRivers) {
-                ctx.lineWidth = r.custom ? (r.wide ? 2.2 : 1.4) : r.rank <= 1 ? 2.4 : r.rank <= 6 ? 1.8 : 1.2;
+                ctx.lineWidth = r.custom ? (r.wide ? 3 : 2) : r.rank <= 1 ? 3.4 : r.rank <= 6 ? 2.6 : 1.8;
                 ctx.beginPath(); r.pts.forEach((p, i) => (i ? ctx.lineTo(tPx(p[0], GW - 1), tPy(p[1], GH - 1)) : ctx.moveTo(tPx(p[0], GW - 1), tPy(p[1], GH - 1)))); ctx.stroke();
             }
             const d = ctx.getImageData(0, 0, GW, GH).data;
@@ -257,16 +272,12 @@ o=vec4(c,uColor.a);}`;
         }
         const EG = new Float32Array(GW * GH);
         {
-            const mask = riverMask(), sc = 1 / (DEM.res * 1.2);
+            // 细部起伏与沟谷已在数据生成时按真实地势补出；这里只让 Natural Earth 干流和手绘支流落在谷底。
+            const mask = riverMask();
             for (let gy = 0; gy < GH; gy += 1) for (let gx = 0; gx < GW; gx += 1) {
-                const lon = gLon(gx), lat = gLat(gy), i = gy * GW + gx;
-                let e = demAt(lon, lat);
-                if (!OVERVIEW) {
-                    const relief = clamp((e - 200) / 1500, 0.15, 1);
-                    const n = fbm(lon * sc + 3, lat * sc + 7, 4), r = 1 - Math.abs(2 * fbm(lon * sc * 2.3, lat * sc * 2.3, 3) - 1);
-                    e += ((n - 0.5) * 170 + (r * r - 0.33) * 120) * relief;
-                    e -= mask[i] * Math.min(320, Math.max(0, e) * 0.2);
-                }
+                const i = gy * GW + gx;
+                let e = demAt(gLon(gx), gLat(gy));
+                if (!OVERVIEW) e -= mask[i] * Math.min(160, Math.max(0, e) * 0.1);
                 EG[i] = e;
             }
         }
@@ -287,12 +298,61 @@ o=vec4(c,uColor.a);}`;
             return out;
         }
         function contourStep() {
-            const s = Array.from(EG).filter((v) => v > 0).sort((a, b) => a - b);
+            const s = [];
+            for (let i = 0; i < EG.length; i += 7) if (EG[i] > 0) s.push(EG[i]);
             if (!s.length) return 100;
+            s.sort((a, b) => a - b);
             const rng = s[Math.floor(s.length * 0.98)] - s[Math.floor(s.length * 0.02)];
             return [50, 100, 200, 250, 500, 1000].find((c) => rng / c <= 28) || 1000;
         }
-        function buildTexture(maxSize) {
+        // 植被颜色栅格：每个 1 公里格点预先算好 RGB 与“是否水面”，取样时再平滑插值。
+        const LCC = (() => {
+            const L = DEM.lc;
+            if (!L) return null;
+            const col = new Float32Array(L.w * L.h * 4);
+            for (let i = 0; i < L.data.length; i += 1) {
+                const k = L.data[i], c = k < 12 ? LC[k] : k === 254 ? WATER : null;
+                if (c) { col[i * 4] = c[0]; col[i * 4 + 1] = c[1]; col[i * 4 + 2] = c[2]; col[i * 4 + 3] = k === 254 ? 2 : 1; }
+            }
+            return { w: L.w, h: L.h, col };
+        })();
+        const LCOUT = [0, 0, 0, 0, 0];
+        // 返回 false 表示无植被数据（境外）；否则写入 LCOUT = [r, g, b, 水面比例]。
+        function landcoverAt(fx, fy) {
+            const L = LCC;
+            // 植被图是 1 公里格网：先用平滑扰动打散格网边界，再做平滑插值，避免放大后出现方格。
+            fx += Math.sin(fy * 0.83 + Math.sin(fx * 0.31) * 2.1) * 0.75 + Math.sin(fy * 2.3 + fx * 1.7) * 0.3;
+            fy += Math.sin(fx * 0.79 + Math.sin(fy * 0.29) * 2.3) * 0.75 + Math.sin(fx * 2.1 - fy * 1.9) * 0.3;
+            fx = fx < 0 ? 0 : fx > L.w - 1 ? L.w - 1 : fx; fy = fy < 0 ? 0 : fy > L.h - 1 ? L.h - 1 : fy;
+            const x = Math.min(L.w - 2, fx | 0), y = Math.min(L.h - 2, fy | 0), u = smooth(fx - x), v = smooth(fy - y), i = (y * L.w + x) * 4, c = L.col, row = L.w * 4;
+            const w0 = (1 - u) * (1 - v), w1 = u * (1 - v), w2 = (1 - u) * v, w3 = u * v;
+            const a0 = c[i + 3] ? w0 : 0, a1 = c[i + 7] ? w1 : 0, a2 = c[i + row + 3] ? w2 : 0, a3 = c[i + row + 7] ? w3 : 0, sw = a0 + a1 + a2 + a3;
+            if (sw < 0.01) return false;
+            LCOUT[0] = (c[i] * a0 + c[i + 4] * a1 + c[i + row] * a2 + c[i + row + 4] * a3) / sw;
+            LCOUT[1] = (c[i + 1] * a0 + c[i + 5] * a1 + c[i + row + 1] * a2 + c[i + row + 5] * a3) / sw;
+            LCOUT[2] = (c[i + 2] * a0 + c[i + 6] * a1 + c[i + row + 2] * a2 + c[i + row + 6] * a3) / sw;
+            LCOUT[3] = ((c[i + 3] === 2 ? a0 : 0) + (c[i + 7] === 2 ? a1 : 0) + (c[i + row + 3] === 2 ? a2 : 0) + (c[i + row + 7] === 2 ? a3 : 0)) / sw;
+            return true;
+        }
+        function boxBlur(src, W, H, R) {
+            const tmp = new Float32Array(src.length), out = new Float32Array(src.length);
+            for (let y = 0; y < H; y += 1) {
+                const o = y * W; let acc = 0;
+                for (let x = -R; x <= R; x += 1) acc += src[o + clamp(x, 0, W - 1)];
+                for (let x = 0; x < W; x += 1) { tmp[o + x] = acc / (2 * R + 1); acc += src[o + Math.min(W - 1, x + R + 1)] - src[o + Math.max(0, x - R)]; }
+            }
+            for (let x = 0; x < W; x += 1) {
+                let acc = 0;
+                for (let y = -R; y <= R; y += 1) acc += tmp[clamp(y, 0, H - 1) * W + x];
+                for (let y = 0; y < H; y += 1) { out[y * W + x] = acc / (2 * R + 1); acc += tmp[Math.min(H - 1, y + R + 1) * W + x] - tmp[Math.max(0, y - R) * W + x]; }
+            }
+            return out;
+        }
+        // 海拔分层色查找表（每 10 米一档）
+        const RAMP_LUT = (() => { const t = new Float32Array(1000 * 3); for (let k = 0; k < 1000; k += 1) { const c = ecol(k * 10 - 500); t[k * 3] = c[0]; t[k * 3 + 1] = c[1]; t[k * 3 + 2] = c[2]; } return t; })();
+        const yieldFrame = () => new Promise((r) => setTimeout(r, 0));
+        // 分片计算，避免长时间阻塞页面；返回画好的 canvas。
+        async function buildTexture(maxSize, alive) {
             const midCos = Math.cos((TB0 + TB1) / 2 * Math.PI / 180), aspect = (TL1 - TL0) * midCos / (TB1 - TB0);
             const LIM = Math.min(maxSize, OVERVIEW ? 3600 : 2400);
             let TW = aspect >= 1 ? LIM : Math.round(LIM * aspect), TH = aspect >= 1 ? Math.round(LIM / aspect) : LIM;
@@ -300,24 +360,54 @@ o=vec4(c,uColor.a);}`;
             const cv = document.createElement('canvas'); cv.width = TW; cv.height = TH;
             const ctx = cv.getContext('2d'), img = ctx.createImageData(TW, TH), d = img.data, E = new Float32Array(TW * TH);
             for (let y = 0; y < TH; y += 1) { const lat = TB1 - y / (TH - 1) * (TB1 - TB0); for (let x = 0; x < TW; x += 1) E[y * TW + x] = elev(TL0 + x / (TW - 1) * (TL1 - TL0), lat); }
-            const pxM = (TB1 - TB0) * 110570 / TH, shadeK = 0.1 * Math.min(GEO.vex, 12) / pxM, ci = contourStep();
-            for (let y = 0; y < TH; y += 1) for (let x = 0; x < TW; x += 1) {
-                const i = y * TW + x, e = E[i], p = i * 4;
-                if (OVERVIEW && e < -2) {
-                    const lon = TL0 + x / (TW - 1) * (TL1 - TL0), lat = TB1 - y / (TH - 1) * (TB1 - TB0);
-                    if (!(lon > 87.5 && lon < 91 && lat > 41.8 && lat < 43.8)) { // 吐鲁番盆地低于海平面，但不是海
-                        const t = clamp(-e / 3000, 0, 1);
-                        d[p] = 184 - 34 * t; d[p + 1] = 206 - 22 * t; d[p + 2] = 214 - 8 * t; d[p + 3] = 255; continue;
+            await yieldFrame(); if (!alive()) return null;
+            // 多方向山体阴影 + 局部凹凸（近似环境光遮蔽），让沟谷与山脊在贴图上也分得清。
+            const pxX = (TL1 - TL0) * 111320 * midCos / TW, pxY = (TB1 - TB0) * 110570 / TH, zk = Math.min(GEO.vex, 14) * 0.6;
+            const blurR = Math.max(3, Math.round(TW / 260)), EB = boxBlur(E, TW, TH, blurR), EB2 = boxBlur(E, TW, TH, blurR * 4);
+            await yieldFrame(); if (!alive()) return null;
+            const aoK = 1 / Math.max(60, 900 / Math.sqrt(GEO.vex));
+            const LIGHTS = [[315, 45, 0.55], [270, 40, 0.2], [0, 40, 0.15], [225, 55, 0.1]].map(([az, alt, w]) => { const a = az * Math.PI / 180, h = alt * Math.PI / 180; return [Math.sin(a) * Math.cos(h) * w, Math.cos(a) * Math.cos(h) * w, Math.sin(h) * w]; });
+            const ci = contourStep(), snowAt = OVERVIEW ? 5600 : 5000, snowMax = OVERVIEW ? 0.6 : 0.85;
+            const lcSX = LCC ? (LCC.w - 1) / (TW - 1) : 0, lcSY = LCC ? (LCC.h - 1) / (TH - 1) : 0;
+            let t0 = performance.now();
+            for (let y = 0; y < TH; y += 1) {
+                if (performance.now() - t0 > 24) { await yieldFrame(); if (!alive()) return null; t0 = performance.now(); }
+                const lat = TB1 - y / (TH - 1) * (TB1 - TB0);
+                for (let x = 0; x < TW; x += 1) {
+                    const i = y * TW + x, e = E[i], p = i * 4;
+                    const hasLc = LCC ? landcoverAt(x * lcSX, y * lcSY) : false;
+                    if (OVERVIEW && e < -2 && !hasLc) {
+                        const lon = TL0 + x / (TW - 1) * (TL1 - TL0);
+                        if (!(lon > 87.5 && lon < 91 && lat > 41.8 && lat < 43.8)) { // 吐鲁番盆地低于海平面，但不是海
+                            const t = clamp(-e / 3000, 0, 1);
+                            d[p] = 184 - 34 * t; d[p + 1] = 206 - 22 * t; d[p + 2] = 214 - 8 * t; d[p + 3] = 255; continue;
+                        }
                     }
+                    if (hasLc && LCOUT[3] > 0.5) { d[p] = WATER[0]; d[p + 1] = WATER[1]; d[p + 2] = WATER[2]; d[p + 3] = 255; continue; }
+                    const right = E[i + (x < TW - 1 ? 1 : 0)], left = E[i - (x > 0 ? 1 : 0)], down = E[i + (y < TH - 1 ? TW : 0)], up = E[i - (y > 0 ? TW : 0)];
+                    const gx = (right - left) / (2 * pxX) * zk, gy = (down - up) / (2 * pxY) * zk; // gy 向南为正
+                    const nl = Math.sqrt(gx * gx + gy * gy + 1), nx = -gx / nl, ny = gy / nl, nz = 1 / nl;
+                    let shade = 0;
+                    for (let k = 0; k < 4; k += 1) { const L = LIGHTS[k], v = nx * L[0] + ny * L[1] + nz * L[2]; if (v > 0) shade += v; }
+                    let ao = 1 + (e - EB[i]) * aoK * 1.2 + (e - EB2[i]) * aoK * 0.5; ao = ao < 0.72 ? 0.72 : ao > 1.18 ? 1.18 : ao;
+                    let sh = (0.42 + shade * 0.78) * ao; sh = sh < 0.5 ? 0.5 : sh > 1.3 ? 1.3 : sh;
+                    // 颜色：植被类型为主，海拔分层色为辅；高原逐渐转为海拔色，极高处覆雪，陡坡露出岩土。
+                    const li = Math.max(0, Math.min(999, ((e + 500) / 10) | 0)) * 3;
+                    let r = RAMP_LUT[li], g = RAMP_LUT[li + 1], b = RAMP_LUT[li + 2];
+                    if (hasLc) {
+                        const k = 0.28 + 0.45 * smooth(clamp((e - 2600) / 2200, 0, 1));
+                        r = LCOUT[0] * (1 - k) + r * k; g = LCOUT[1] * (1 - k) + g * k; b = LCOUT[2] * (1 - k) + b * k;
+                    }
+                    const sn = e > snowAt - 200 ? smooth(clamp((e - snowAt - (1 - nz) * 900) / 700, 0, 1)) * snowMax : 0;
+                    if (sn > 0) { r = r * (1 - sn) + 246 * sn; g = g * (1 - sn) + 246 * sn; b = b * (1 - sn) + 246 * sn; }
+                    const rock = clamp((0.75 - nz) * 1.6, 0, 0.35);
+                    if (rock > 0) { r = r * (1 - rock) + 150 * rock; g = g * (1 - rock) + 132 * rock; b = b * (1 - rock) + 110 * rock; }
+                    const gr = sh * (0.96 + 0.08 * hash(x * 7 + 3, y * 13 + 1));
+                    r *= gr; g *= gr; b *= gr;
+                    const b0 = Math.floor(e / ci), b1 = Math.floor(right / ci), b2 = Math.floor(down / ci);
+                    if (e > 0 && (b0 !== b1 || b0 !== b2)) { const a = Math.max(b0, b1, b2) % 5 === 0 ? 0.2 : 0.07; r *= 1 - a; g *= 1 - a; b *= 1 - a * 0.9; }
+                    d[p] = r; d[p + 1] = g; d[p + 2] = b; d[p + 3] = 255;
                 }
-                const c = ecol(e);
-                const right = E[i + (x < TW - 1 ? 1 : 0)], down = E[i + (y < TH - 1 ? TW : 0)];
-                const ex = right - E[i - (x > 0 ? 1 : 0)], ey = down - E[i - (y > 0 ? TW : 0)];
-                const sh = clamp(1 + (-ex - ey) * shadeK, 0.68, 1.26), g = 0.95 + 0.1 * hash(x * 7 + 3, y * 13 + 1);
-                let r = c[0] * sh * g, gg = c[1] * sh * g, b = c[2] * sh * g;
-                const b0 = Math.floor(e / ci), b1 = Math.floor(right / ci), b2 = Math.floor(down / ci);
-                if (e > 0 && (b0 !== b1 || b0 !== b2)) { const a = Math.max(b0, b1, b2) % 5 === 0 ? 0.3 : 0.13; r *= 1 - a; gg *= 1 - a; b *= 1 - a * 0.9; }
-                d[p] = r; d[p + 1] = gg; d[p + 2] = b; d[p + 3] = 255;
             }
             ctx.putImageData(img, 0, 0);
 
@@ -730,7 +820,7 @@ o=vec4(c,uColor.a);}`;
         const fontsReady = document.fonts && document.fonts.load
             ? Promise.race([Promise.all([document.fonts.load('900 40px "Noto Serif SC"', glyphs), document.fonts.load('italic 600 40px "Noto Serif SC"', glyphs)]), new Promise((r) => setTimeout(r, 2500))])
             : Promise.resolve();
-        fontsReady.catch(() => {}).then(() => { if (!disposed) uploadTex(buildTexture(gl.getParameter(gl.MAX_TEXTURE_SIZE) || 4096)); });
+        fontsReady.catch(() => {}).then(() => (disposed ? null : buildTexture(gl.getParameter(gl.MAX_TEXTURE_SIZE) || 4096, () => !disposed))).then((cv) => { if (cv && !disposed) uploadTex(cv); }).catch((error) => console.error('Map texture failed:', error));
 
         return {
             setTime(t) { T = clamp(t, 0, C.maxDay); },

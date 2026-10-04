@@ -1,4 +1,4 @@
-const CACHE_NAME = 'redwisdom-shell-v16';
+const CACHE_NAME = 'redwisdom-shell-v17';
 const SHELL_FILES = [
     './', './index.html', './reading.html', './chat.html', './practice.html', './problems.html', './me.html', './login.html',
     './timeline.html', './modern.html', './campaign.html',
@@ -11,7 +11,7 @@ const SHELL_FILES = [
     './js/timeline-data.js', './js/timeline.js',
     './js/modern-cases.js', './js/modern.js',
     './js/campaign-data.js', './js/campaign-engine.js', './js/campaign.js',
-    './data/terrain/index.json', './data/terrain/overview.bin', './data/map/overview.json',
+    './data/terrain/index.json', './data/terrain/overview.lc.png', './data/map/overview.json',
     './data/catalog.json', './data/text-edition.json', './data/history-cases.json', './data/history-problem-types.json'
 ];
 

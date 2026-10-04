@@ -97,5 +97,18 @@ test('the home page links to the party history timeline and the Long March sandb
     assert.match(page, /<a href="reading\.html"[\s\S]*?阅读毛选[\s\S]*?<a href="timeline\.html" data-entry="timeline-nav"[\s\S]*?<a href="campaign\.html" data-entry="sandbox-nav"/, 'desktop nav lists both right under 阅读毛选');
     assert.match(page, /id="explore-entries"[^>]*md:hidden/, 'cards are the mobile entry; desktop uses the side nav');
     const worker = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
-    for (const file of ['./data/terrain/index.json', './data/terrain/overview.bin', './data/map/overview.json']) assert.ok(worker.includes(`'${file}'`), `service worker caches ${file}`);
+    for (const file of ['./data/terrain/index.json', './data/terrain/overview.lc.png', './data/map/overview.json']) assert.ok(worker.includes(`'${file}'`), `service worker caches ${file}`);
+});
+
+test('every map carries a vegetation layer on the same grid as its terrain', () => {
+    for (const [key, meta] of Object.entries(terrainIndex)) {
+        assert.equal(meta.landcover, `${key}.lc.png`, `${key} declares its landcover file`);
+        const png = fs.readFileSync(path.join(root, 'data/terrain', meta.landcover));
+        assert.equal(png.toString('latin1', 1, 4), 'PNG', `${key} landcover is a PNG`);
+        assert.equal(png.readUInt32BE(16), meta.w, `${key} landcover width matches terrain`);
+        assert.equal(png.readUInt32BE(20), meta.h, `${key} landcover height matches terrain`);
+        assert.equal(png[24], 8, 'landcover is 8-bit');
+        assert.equal(png[25], 0, 'landcover is grayscale');
+    }
+    for (const c of data.CAMPAIGNS) assert.ok(terrainIndex[c.id].res <= 0.01, `${c.id} terrain is refined to about 1 km`);
 });

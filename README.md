@@ -66,8 +66,10 @@ Red Wisdom 是一个以《毛泽东选集》为核心内容和方法论来源的
 - 地图数据由 `scripts/build-map-data.py` 预先生成并提交到仓库：`data/terrain/*.bin`（Int16 高程栅格）和 `data/map/*.json`（矢量图层）。来源与许可：
   - 高程：GEBCO Compilation Group (2024) GEBCO 2024 Grid（doi:10.5285/1c44ce99-0a0d-5f4f-e063-7086abc0ea0f），公共领域使用需注明来源；中国区域裁剪取自 ggmapcn-data。
   - 国界、南海断续线、省界、海岸线、河流：Natural Earth 1:10m（公共领域），国界采用其中国视角（CHN worldview）版本。
+  - 地表颜色：张新时等（2007）《中华人民共和国植被图（1:1000000）》1 公里栅格（经 ggmapcn-data 发布），按 11 个植被型组配色，湖泊等水面单独着色。
+  - 战役沙盘的地形插值到约 1 公里，并叠加按局部起伏缩放的分形细节和由高程推算的汇流沟谷，用于立体观感，不代表 1 公里尺度的实测地貌。
   - 行政区划为今日区划，仅作方位参考。本图为教学示意图；如需在中国境内公开发布，请按《地图管理条例》使用自然资源部标准地图或送审取得审图号。
-- 修改战役范围后重新生成地图数据：先按脚本说明导出 `campaigns.json`，再运行 `python3 scripts/build-map-data.py --dem gebco_2024_China.tif --ne natural-earth-vector/geojson --campaigns campaigns.json --out .`。
+- 修改战役范围后重新生成地图数据：先按脚本说明导出 `campaigns.json`，再运行 `python3 scripts/build-map-data.py --dem gebco_2024_China.tif --vege vege_1km_projected.tif --ne natural-earth-vector/geojson --campaigns campaigns.json --out .`。
 
 ### 5. 问题、实践与档案
 
@@ -249,7 +251,7 @@ redwisdom/
 │   ├── search-index.json       # 带段落锚点的全文检索索引
 │   ├── history-cases.json      # 历史问题案例库
 │   ├── text-edition.json       # 文本版本与来源说明
-│   ├── terrain/                # 长征沙盘高程栅格（GEBCO 2024）
+│   ├── terrain/                # 长征沙盘高程栅格（GEBCO 2024）与植被类型 PNG
 │   ├── map/                    # 长征沙盘矢量图层（Natural Earth）
 │   └── articles/               # 毛选文章 Markdown
 ├── tests/                      # Node 测试

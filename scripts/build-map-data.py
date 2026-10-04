@@ -15,7 +15,14 @@
   data/terrain/index.json、data/terrain/*.bin（Int16 小端高程，单位米，行从北到南）
   data/map/overview.json（长征全图，较粗简化，含南海诸岛附图图层 scs）、data/map/<战役id>.json（战役范围内的细节图层）
 
-依赖：numpy、tifffile（GeoTIFF 为 LZW 压缩，脚本内置解码，无需 imagecodecs）。
+  --vege  中国植被图 1km 栅格（可选），同一仓库的 data/vege_1km_projected.tif
+          原始数据：张新时等（2007）《中华人民共和国植被图（1:1000000）》，地质出版社；方位等距投影（105°E, 35°N）
+
+地形处理：战役范围按 0.01°（约 1 公里）双三次插值，再叠加两类细节——
+按局部起伏缩放的分形起伏，以及由高程推算的汇流网络刻出的沟谷。这些细节是
+“按真实地势补出来的”，用于让立体沙盘可读，不代表 1 公里尺度的实测地貌。
+
+依赖：numpy、scipy、tifffile、Pillow（GeoTIFF 为 LZW 压缩，脚本内置解码，无需 imagecodecs）。
 """
 import argparse
 import json
@@ -23,8 +30,14 @@ import math
 import os
 from collections import defaultdict
 
+import heapq
+import zlib
+import struct
+
 import numpy as np
 import tifffile
+from scipy import ndimage
+from PIL import Image, ImageDraw
 
 OVERVIEW_BBOX = [72.0, 15.0, 136.0, 54.5]
 SCS_BBOX = [105.0, 2.5, 125.0, 25.0]
@@ -79,11 +92,9 @@ def lzw_decode(data):
     return bytes(out)
 
 
-def read_dem(path):
+def read_lzw_tiff(path):
     tf = tifffile.TiffFile(path)
     page = tf.pages[0]
-    scale = page.tags['ModelPixelScaleTag'].value
-    tie = page.tags['ModelTiepointTag'].value
     height, width = page.shape
     dtype = '<f4' if tf.byteorder == '<' else '>f4'
     rows = []
@@ -94,40 +105,206 @@ def read_dem(path):
         if page.compression == 5:
             raw = lzw_decode(raw)
         rows.append(np.frombuffer(raw, dtype=dtype, count=len(raw) // 4))
-    grid = np.concatenate(rows)[: width * height].reshape(height, width).astype(np.float32)
-    grid = np.nan_to_num(grid, nan=0.0)
-    return {'grid': grid, 'lon0': tie[3], 'lat0': tie[4], 'res': scale[0]}
+    return page, np.concatenate(rows)[: width * height].reshape(height, width).astype(np.float32)
 
 
-def sample_dem(dem, bbox, res):
+def read_dem(path):
+    page, grid = read_lzw_tiff(path)
+    scale = page.tags['ModelPixelScaleTag'].value
+    tie = page.tags['ModelTiepointTag'].value
+    return {'grid': np.nan_to_num(grid, nan=0.0), 'lon0': tie[3], 'lat0': tie[4], 'res': scale[0]}
+
+
+def bicubic(dem, bbox, res):
     l0, b0, l1, b1 = bbox
     w = int(round((l1 - l0) / res)) + 1
     h = int(round((b1 - b0) / res)) + 1
     lons = l0 + np.arange(w) * res
     lats = b1 - np.arange(h) * res
-    fx = (lons - dem['lon0']) / dem['res']
-    fy = (dem['lat0'] - lats) / dem['res']
-    g = dem['grid']
-    x0 = np.clip(np.floor(fx).astype(int), 0, g.shape[1] - 2)
-    y0 = np.clip(np.floor(fy).astype(int), 0, g.shape[0] - 2)
-    u = np.clip(fx - x0, 0, 1)[None, :]
-    v = np.clip(fy - y0, 0, 1)[:, None]
-    a = g[y0[:, None], x0[None, :]]
-    b = g[y0[:, None], x0[None, :] + 1]
-    c = g[y0[:, None] + 1, x0[None, :]]
-    d = g[y0[:, None] + 1, x0[None, :] + 1]
-    out = a * (1 - u) * (1 - v) + b * u * (1 - v) + c * (1 - u) * v + d * u * v
-    if res > dem['res'] * 1.5:
-        # 降采样时先做邻域平均，避免锯齿
-        k = int(round(res / dem['res']))
-        pad = np.pad(g, k, mode='edge')
-        acc = np.zeros_like(out)
-        for dy in range(-k // 2, k // 2 + 1):
-            for dx in range(-k // 2, k // 2 + 1):
-                acc += pad[np.clip(np.round(fy).astype(int) + dy + k, 0, pad.shape[0] - 1)[:, None],
-                           np.clip(np.round(fx).astype(int) + dx + k, 0, pad.shape[1] - 1)[None, :]]
-        out = acc / ((k // 2 * 2 + 1) ** 2)
-    return np.clip(np.round(out), -9000, 9000).astype('<i2'), w, h
+    fx = (lons - dem['lon0']) / dem['res'] - 0.5   # GeoTIFF 像元中心
+    fy = (dem['lat0'] - lats) / dem['res'] - 0.5
+    yy, xx = np.meshgrid(fy, fx, indexing='ij')
+    out = ndimage.map_coordinates(dem['grid'], [yy, xx], order=3, mode='nearest')
+    return out.astype(np.float64), w, h, lons, lats
+
+
+def lattice_noise(lons, lats, wavelength, seed):
+    """按绝对经纬度取格点随机值再双三次插值，相邻战役范围的细节一致。"""
+    i0 = int(math.floor(lons[0] / wavelength)) - 2
+    i1 = int(math.ceil(lons[-1] / wavelength)) + 2
+    j0 = int(math.floor(lats[-1] / wavelength)) - 2
+    j1 = int(math.ceil(lats[0] / wavelength)) + 2
+    ii, jj = np.meshgrid(np.arange(i0, i1 + 1), np.arange(j0, j1 + 1), indexing='xy')
+    hsh = (ii.astype(np.int64) * 374761393 + jj.astype(np.int64) * 668265263 + seed * 2654435761) & 0xFFFFFFFF
+    hsh = ((hsh ^ (hsh >> 13)) * 1274126177) & 0xFFFFFFFF
+    vals = ((hsh ^ (hsh >> 16)) & 0xFFFFFF) / float(0xFFFFFF)
+    fx = lons / wavelength - i0
+    fy = lats / wavelength - j0
+    yy, xx = np.meshgrid(fy, fx, indexing='ij')
+    return ndimage.map_coordinates(vals, [yy, xx], order=3, mode='nearest')
+
+
+def priority_flood(z):
+    """填洼，保证每个格点都有向外的流路。"""
+    h, w = z.shape
+    filled = z.copy()
+    done = np.zeros(z.shape, bool)
+    heap = []
+    for y in range(h):
+        for x in (0, w - 1):
+            heap.append((filled[y, x], y, x)); done[y, x] = True
+    for x in range(1, w - 1):
+        for y in (0, h - 1):
+            heap.append((filled[y, x], y, x)); done[y, x] = True
+    heapq.heapify(heap)
+    nb = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+    while heap:
+        e, y, x = heapq.heappop(heap)
+        for dy, dx in nb:
+            yy, xx = y + dy, x + dx
+            if 0 <= yy < h and 0 <= xx < w and not done[yy, xx]:
+                done[yy, xx] = True
+                if filled[yy, xx] <= e:
+                    filled[yy, xx] = e + 1e-3
+                heapq.heappush(heap, (filled[yy, xx], yy, xx))
+    return filled
+
+
+def flow_accumulation(z):
+    h, w = z.shape
+    f = priority_flood(z)
+    pad = np.pad(f, 1, mode='edge')
+    best = np.zeros(z.shape)
+    recv = np.arange(h * w).reshape(h, w)
+    yy, xx = np.mgrid[0:h, 0:w]
+    for dy, dx in [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]:
+        drop = (f - pad[1 + dy:1 + dy + h, 1 + dx:1 + dx + w]) / math.hypot(dy, dx)
+        ty, tx = np.clip(yy + dy, 0, h - 1), np.clip(xx + dx, 0, w - 1)
+        better = drop > best
+        best[better] = drop[better]
+        recv[better] = (ty * w + tx)[better]
+    order = np.argsort(-f, axis=None)
+    acc = np.ones(h * w)
+    r = recv.ravel()
+    for i in order:
+        j = r[i]
+        if j != i:
+            acc[j] += acc[i]
+    return acc.reshape(h, w)
+
+
+def synth_terrain(dem, bbox, res):
+    """战役范围的细化地形：双三次插值 + 起伏相关的分形细节 + 汇流沟谷。"""
+    base, w, h, lons, lats = bicubic(dem, bbox, res)
+    # 轻度锐化：原始栅格约 5 公里，插值后山脊和谷地偏圆，适当拉开
+    base = base + (base - ndimage.gaussian_filter(base, 0.035 / res)) * 0.6
+    win = max(3, int(round(0.08 / res)))
+    mean = ndimage.uniform_filter(base, win)
+    std = np.sqrt(np.maximum(ndimage.uniform_filter(base * base, win) - mean * mean, 0))
+    amp = np.clip(0.3 * std + 25, 18, 260)
+    # 坐标扰动让细节不呈规则的圆斑
+    wx = (lattice_noise(lons, lats, 0.2, 3) - 0.5) * 0.09
+    wy = (lattice_noise(lons, lats, 0.2, 5) - 0.5) * 0.09
+    detail = np.zeros_like(base)
+    a, total, wl, k = 1.0, 0.0, 0.06, 0
+    while wl >= res * 1.5:
+        lo = lons[None, :] + wx
+        la = lats[:, None] + wy
+        i0 = np.floor(lo.min() / wl) - 2; j0 = np.floor(la.min() / wl) - 2
+        i1 = np.ceil(lo.max() / wl) + 2; j1 = np.ceil(la.max() / wl) + 2
+        ii, jj = np.meshgrid(np.arange(i0, i1 + 1), np.arange(j0, j1 + 1), indexing='xy')
+        hsh = (ii.astype(np.int64) * 374761393 + jj.astype(np.int64) * 668265263 + (11 + k) * 2654435761) & 0xFFFFFFFF
+        hsh = ((hsh ^ (hsh >> 13)) * 1274126177) & 0xFFFFFFFF
+        vals = ((hsh ^ (hsh >> 16)) & 0xFFFFFF) / float(0xFFFFFF)
+        n = ndimage.map_coordinates(vals, [la / wl - j0, lo / wl - i0], order=3, mode='nearest')
+        ridge = (1 - np.abs(2 * np.clip(n, 0, 1) - 1)) ** 1.5
+        detail += a * (ridge - 0.42)
+        total += a
+        a *= 0.62; wl /= 2; k += 1
+    z = base + amp * detail / max(total, 1e-6) * 1.15
+    acc = flow_accumulation(z)
+    depth = amp * 1.2 * np.clip(np.log10(acc) / 2.2, 0, 1.5)
+    depth[acc < 3] = 0
+    depth = ndimage.gaussian_filter(depth, 0.55)
+    z = z - depth
+    return np.clip(np.round(z), -9000, 9000).astype('<i2'), w, h
+
+
+# ---------- 植被 ----------
+WGS_A = 6378137.0
+WGS_F = 1 / 298.257223563
+WGS_B = WGS_A * (1 - WGS_F)
+
+
+def vincenty_inverse(lat1, lon1, lat2, lon2):
+    r = math.pi / 180
+    L = (lon2 - lon1) * r
+    U1 = np.arctan((1 - WGS_F) * np.tan(lat1 * r))
+    U2 = np.arctan((1 - WGS_F) * np.tan(lat2 * r))
+    sU1, cU1, sU2, cU2 = np.sin(U1), np.cos(U1), np.sin(U2), np.cos(U2)
+    lam = L.copy()
+    for _ in range(60):
+        sl, cl = np.sin(lam), np.cos(lam)
+        ss = np.sqrt((cU2 * sl) ** 2 + (cU1 * sU2 - sU1 * cU2 * cl) ** 2)
+        cs = sU1 * sU2 + cU1 * cU2 * cl
+        sig = np.arctan2(ss, cs)
+        sa = cU1 * cU2 * sl / np.where(ss == 0, 1, ss)
+        c2a = 1 - sa ** 2
+        c2sm = np.where(c2a == 0, 0, cs - 2 * sU1 * sU2 / np.where(c2a == 0, 1, c2a))
+        C = WGS_F / 16 * c2a * (4 + WGS_F * (4 - 3 * c2a))
+        prev = lam
+        lam = L + (1 - C) * WGS_F * sa * (sig + C * ss * (c2sm + C * cs * (-1 + 2 * c2sm ** 2)))
+        if np.max(np.abs(lam - prev)) < 1e-12:
+            break
+    u2 = c2a * (WGS_A ** 2 - WGS_B ** 2) / WGS_B ** 2
+    Ak = 1 + u2 / 16384 * (4096 + u2 * (-768 + u2 * (320 - 175 * u2)))
+    Bk = u2 / 1024 * (256 + u2 * (-128 + u2 * (74 - 47 * u2)))
+    ds = Bk * ss * (c2sm + Bk / 4 * (cs * (-1 + 2 * c2sm ** 2) - Bk / 6 * c2sm * (-3 + 4 * ss ** 2) * (-3 + 4 * c2sm ** 2)))
+    s = WGS_B * Ak * (sig - ds)
+    az = np.arctan2(cU2 * np.sin(lam), cU1 * sU2 - sU1 * cU2 * np.cos(lam))
+    return s, az
+
+
+def read_vege(path):
+    page, grid = read_lzw_tiff(path)
+    scale = page.tags['ModelPixelScaleTag'].value
+    tie = page.tags['ModelTiepointTag'].value
+    params = page.tags['GeoDoubleParamsTag'].value  # (中心纬度, 中心经度, 东偏, 北偏, 1/f, a)
+    classes = np.where(np.isnan(grid), 255, grid).astype(np.uint8)
+    return {'grid': classes, 'x0': tie[3], 'y0': tie[4], 'res': scale[0], 'lat0': params[0], 'lon0': params[1]}
+
+
+def sample_vege(vege, bbox, res, china_rings):
+    """取植被类型（0–11）；中国境内无数据的格点是湖泊等水面，记 254；境外记 255。"""
+    l0, b0, l1, b1 = bbox
+    w = int(round((l1 - l0) / res)) + 1
+    h = int(round((b1 - b0) / res)) + 1
+    lon, lat = np.meshgrid(l0 + np.arange(w) * res, b1 - np.arange(h) * res)
+    s, az = vincenty_inverse(np.full(lon.size, vege['lat0']), np.full(lon.size, vege['lon0']), lat.ravel(), lon.ravel())
+    px = np.floor((s * np.sin(az) - vege['x0']) / vege['res']).astype(int)
+    py = np.floor((vege['y0'] - s * np.cos(az)) / vege['res']).astype(int)
+    g = vege['grid']
+    ok = (px >= 0) & (px < g.shape[1]) & (py >= 0) & (py < g.shape[0])
+    out = np.full(px.shape, 255, np.uint8)
+    out[ok] = g[py[ok], px[ok]]
+    out = out.reshape(h, w)
+    mask = Image.new('L', (w, h), 0)
+    draw = ImageDraw.Draw(mask)
+    for ring in china_rings:
+        draw.polygon([((p[0] - l0) / res, (b1 - p[1]) / res) for p in ring], fill=1)
+    inside = np.array(mask, bool)
+    out[(out == 255) & inside] = 254
+    return out
+
+
+def write_gray_png(path, arr):
+    h, w = arr.shape
+    raw = b''.join(b'\x00' + arr[y].tobytes() for y in range(h))
+    def chunk(tag, data):
+        return struct.pack('>I', len(data)) + tag + data + struct.pack('>I', zlib.crc32(tag + data) & 0xFFFFFFFF)
+    with open(path, 'wb') as fh:
+        fh.write(b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', w, h, 8, 0, 0, 0, 0))
+                 + chunk(b'IDAT', zlib.compress(raw, 9)) + chunk(b'IEND', b''))
 
 
 # ---------- 矢量 ----------
@@ -368,6 +545,7 @@ def main():
     ap.add_argument('--dem', required=True)
     ap.add_argument('--ne', required=True)
     ap.add_argument('--campaigns', required=True)
+    ap.add_argument('--vege', default=None)
     ap.add_argument('--out', default='.')
     args = ap.parse_args()
 
@@ -380,9 +558,19 @@ def main():
     vec = build_vectors(args.ne)
     index = {}
 
-    grid, w, h = sample_dem(dem, OVERVIEW_BBOX, 0.1)
-    grid.tofile(os.path.join(terrain_dir, 'overview.bin'))
-    index['overview'] = {'bbox': OVERVIEW_BBOX, 'w': w, 'h': h, 'res': 0.1}
+    vege = read_vege(args.vege) if args.vege else None
+    china_rings = vec['china']
+
+    def save_landcover(key, bbox, res, meta):
+        if not vege:
+            return
+        write_gray_png(os.path.join(terrain_dir, f'{key}.lc.png'), sample_vege(vege, bbox, res, china_rings))
+        meta['landcover'] = f'{key}.lc.png'
+
+    base, w, h, _, _ = bicubic(dem, OVERVIEW_BBOX, 0.05)
+    np.clip(np.round(base), -9000, 9000).astype('<i2').tofile(os.path.join(terrain_dir, 'overview.bin'))
+    index['overview'] = {'bbox': OVERVIEW_BBOX, 'w': w, 'h': h, 'res': 0.05}
+    save_landcover('overview', OVERVIEW_BBOX, 0.05, index['overview'])
     overview = layer_for_bbox(vec, OVERVIEW_BBOX, 0.06, 2, 7, pad=1.0)
     overview['scs'] = layer_for_bbox(vec, SCS_BBOX, 0.05, 2, 0, pad=0.5)
     json.dump(overview, open(os.path.join(map_dir, 'overview.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
@@ -392,15 +580,16 @@ def main():
         mx = max((l1 - l0) * CAMPAIGN_MARGIN, 0.4)
         my = max((b1 - b0) * CAMPAIGN_MARGIN, 0.4)
         ext = [round(l0 - mx, 2), round(b0 - my, 2), round(l1 + mx, 2), round(b1 + my, 2)]
-        grid, w, h = sample_dem(dem, ext, 0.025)
+        grid, w, h = synth_terrain(dem, ext, 0.01)
         grid.tofile(os.path.join(terrain_dir, f"{c['id']}.bin"))
-        index[c['id']] = {'bbox': ext, 'w': w, 'h': h, 'res': 0.025}
+        index[c['id']] = {'bbox': ext, 'w': w, 'h': h, 'res': 0.01}
+        save_landcover(c['id'], ext, 0.01, index[c['id']])
         layer = layer_for_bbox(vec, ext, 0.008, 3, 9, pad=0.2, with_land=False)
         json.dump(layer, open(os.path.join(map_dir, f"{c['id']}.json"), 'w'), ensure_ascii=False, separators=(',', ':'))
 
     json.dump(index, open(os.path.join(terrain_dir, 'index.json'), 'w'), ensure_ascii=False, indent=2)
     for name in sorted(os.listdir(terrain_dir)) + sorted(os.listdir(map_dir)):
-        path = os.path.join(terrain_dir if name.endswith('.bin') or name == 'index.json' else map_dir, name)
+        path = os.path.join(terrain_dir if name.endswith(('.bin', '.png')) or name == 'index.json' else map_dir, name)
         print(f'{name:28s} {os.path.getsize(path) / 1024:8.1f} KB')
 
 
