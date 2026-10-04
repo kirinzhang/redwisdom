@@ -50,7 +50,28 @@ Red Wisdom 是一个以《毛泽东选集》为核心内容和方法论来源的
 - 支持本机阅读进度、文章收藏和原文摘录。
 - 当前正文为项目整理的在线文本，并非出版社官方电子版；严肃引用应以人民出版社纸质版本复核。
 
-### 4. 问题、实践与档案
+### 4. 长征沙盘
+
+- 首页有「党史时间线」和「长征沙盘推演」两个单独入口。
+- `campaign.html` 默认打开「长征全图」：在整幅中国地形图上推演中央红军从瑞金到陕北的全程（附南海诸岛附图），图上的战役标记和简报中的按钮可直接进入各战役沙盘。
+- 战役沙盘按时间顺序收录湘江战役、四渡赤水、巧渡金沙江、强渡大渡河 · 飞夺泸定桥、激战腊子口、直罗镇战役 6 场，右下角小地图标出战役在长征全图中的位置。
+- 沙盘使用原生 WebGL2 渲染（无第三方 3D 库），地形是真实高程，叠加国界、省界、海岸线和河流，采用 Albers 等积圆锥投影，边缘渐隐到底色；可拖动旋转、缩放、切换全景/俯视/低空/跟随红军视角，并调节垂直夸张。
+- 时间轴逐日推进：红军路线、各路国民党军（按派系分色）的动向与轨迹、渡口、战斗和关键注记同步变化。
+- 右侧简报按章节列出各方的命令、判断与决策，并提供各方档案和《毛选》原文对照（直达阅读页段落锚点）。
+- 决策点互动：推演到关键时刻自动暂停，先让用户自己选择，再揭晓历史上的选择、各选项的利弊和对应的毛选原文；作答记录保存在本机，并在复盘区汇总。历史选择不当作标准答案（例如湘江战役是反面教训）。
+- 页面底部用毛选方法复盘：主要矛盾、关键判断、可迁移方法和适用边界，可带着原文上下文跳转问道。
+- 时间线中的相关事件和「路线之争」决策点带有「沙盘推演」入口。
+- 战役数据集中在 `js/campaign-data.js`，新增战役只需按同一格式补充地理、部队关键帧、章节和复盘；`tests/campaign-data.test.js` 会校验坐标范围、时间顺序、派系引用和毛选引文锚点。
+- 战役内容目前为「史实初核 · 待编辑终审」状态，审核口径参照 `docs/content/history-case-editorial-policy.md`。
+- 地图数据由 `scripts/build-map-data.py` 预先生成并提交到仓库：`data/terrain/*.bin`（Int16 高程栅格）和 `data/map/*.json`（矢量图层）。来源与许可：
+  - 高程：GEBCO Compilation Group (2024) GEBCO 2024 Grid（doi:10.5285/1c44ce99-0a0d-5f4f-e063-7086abc0ea0f），公共领域使用需注明来源；中国区域裁剪取自 ggmapcn-data。
+  - 国界、南海断续线、省界、海岸线、河流：Natural Earth 1:10m（公共领域），国界采用其中国视角（CHN worldview）版本。
+  - 地表颜色：张新时等（2007）《中华人民共和国植被图（1:1000000）》1 公里栅格（经 ggmapcn-data 发布），按 11 个植被型组配色，湖泊等水面单独着色。
+  - 战役沙盘的地形插值到约 1 公里，并叠加按局部起伏缩放的分形细节和由高程推算的汇流沟谷，用于立体观感，不代表 1 公里尺度的实测地貌。
+  - 行政区划为今日区划，仅作方位参考。本图为教学示意图；如需在中国境内公开发布，请按《地图管理条例》使用自然资源部标准地图或送审取得审图号。
+- 修改战役范围后重新生成地图数据：先按脚本说明导出 `campaigns.json`，再运行 `python3 scripts/build-map-data.py --dem gebco_2024_China.tif --vege vege_1km_projected.tif --ne natural-earth-vector/geojson --campaigns campaigns.json --out .`。
+
+### 5. 问题、实践与档案
 
 - 「我的问题」统一保存现实问题、事实与判断、主要矛盾、待调查事项、可用力量和下一步行动。
 - 问答、阅读笔记和实践可以关联同一个问题，并在问题时间线中按类型筛选。
@@ -170,6 +191,8 @@ node --check js/saved-quotes-store.js
 node --check js/saved-answers-store.js
 node --check js/practice-store.js
 node --check js/practice-review-prompts.js
+node --check js/campaign-engine.js
+node --check js/campaign.js
 node --check api/openrouter-guard.mjs
 node --check api/chat.js
 ```
@@ -182,6 +205,7 @@ redwisdom/
 ├── chat.html                   # 问道毛选 - AI 实践教练
 ├── reading.html                # 毛选阅读页
 ├── timeline.html               # 党史时间线与大事汇总
+├── campaign.html               # 长征沙盘：战役立体推演
 ├── modern.html                 # 毛选思维 · 现代问题栏目
 ├── problems.html               # 现实问题工作台与时间线
 ├── practice.html               # 实践任务与复盘
@@ -211,6 +235,9 @@ redwisdom/
 │   ├── saved-answers-store.js  # 本机私密 AI 回答收藏
 │   ├── timeline-data.js        # 党史时间线数据（事件、决策点、党代会）
 │   ├── timeline.js             # 党史时间线页渲染与筛选
+│   ├── campaign-data.js        # 长征战役沙盘数据（地理、部队、章节、复盘）
+│   ├── campaign-engine.js      # WebGL2 立体沙盘渲染器（Albers 投影、真实高程、小地图）
+│   ├── campaign.js             # 长征沙盘页面控制
 │   ├── modern-cases.js         # 现代问题案例数据（场景、原文依据、行动清单）
 │   ├── modern.js               # 现代问题栏目渲染与筛选
 │   └── reading-guides.js       # 阅读导读和主题路径
@@ -224,6 +251,8 @@ redwisdom/
 │   ├── search-index.json       # 带段落锚点的全文检索索引
 │   ├── history-cases.json      # 历史问题案例库
 │   ├── text-edition.json       # 文本版本与来源说明
+│   ├── terrain/                # 长征沙盘高程栅格（GEBCO 2024）与植被类型 PNG
+│   ├── map/                    # 长征沙盘矢量图层（Natural Earth）
 │   └── articles/               # 毛选文章 Markdown
 ├── tests/                      # Node 测试
 ├── docs/database/

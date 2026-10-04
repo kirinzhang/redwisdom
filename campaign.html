@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>长征沙盘 | Red Wisdom</title>
+    <meta name="description" content="在真实中国地形图上推演中央红军长征：长征全图与湘江、四渡赤水、金沙江、大渡河、腊子口、直罗镇六场战役的立体沙盘。逐日展示红军与各路国民党军的行动、命令与决策，并对照《毛泽东选集》原文复盘。">
+    <meta name="keywords" content="长征,四渡赤水,强渡大渡河,飞夺泸定桥,沙盘推演,毛选,中国革命战争的战略问题">
+    <meta name="author" content="Red Wisdom">
+    <meta property="og:title" content="长征沙盘">
+    <meta property="og:description" content="在立体沙盘上逐日推演长征关键战役，并对照毛选原文复盘决策。">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link rel="manifest" href="manifest.webmanifest">
+
+    <link rel="stylesheet" href="assets/tailwind.css?v=3">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root { --stage: #E6DFD0; }
+        [hidden] { display: none !important; }
+        .campaign-chip { display: inline-flex; align-items: baseline; gap: .4rem; border-radius: 9999px; padding: .375rem .875rem; font-size: .8125rem; border: 1px solid #D6C6B0; background: rgba(255,255,255,.7); color: #4b5563; white-space: nowrap; transition: all .2s; }
+        .campaign-chip:hover { border-color: #BC2D22; color: #BC2D22; }
+        .campaign-chip.is-active { background: #BC2D22; border-color: #BC2D22; color: #fff; }
+        .campaign-chip small { font-size: .6875rem; opacity: .75; }
+        .campaign-chip[aria-disabled="true"] { cursor: default; color: #9ca3af; background: transparent; border-style: dashed; }
+        .campaign-chip[aria-disabled="true"]:hover { border-color: #D6C6B0; color: #9ca3af; }
+        .review-badge { display: inline-flex; align-items: center; gap: .35rem; border-radius: .375rem; border: 1px solid #D6C6B0; background: #fff8e8; color: #8a5a12; padding: .125rem .5rem; font-size: .75rem; }
+        .sandbox-view { position: relative; height: min(72vh, 820px); min-height: 380px; background: var(--stage); border: 1px solid rgba(214,198,176,.8); border-radius: .75rem; overflow: hidden; }
+        .sandbox-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
+        .sandbox-canvas.is-dragging { cursor: grabbing; }
+        .sandbox-labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+        .sb-lb { position: absolute; left: 0; top: 0; white-space: nowrap; font-size: 12.5px; will-change: transform; font-family: "Noto Serif SC", serif; }
+        .sb-lb.place { color: #2a241c; font-weight: 700; text-shadow: 0 0 3px #efe6cf, 0 0 3px #efe6cf, 0 0 2px #efe6cf; }
+        .sb-lb.place.city { font-size: 14.5px; font-weight: 900; }
+        .sb-lb.unit { pointer-events: auto; cursor: pointer; color: #fff; font-size: 11.5px; padding: 0 6px; border-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,.35); }
+        .sb-lb.redu { pointer-events: auto; cursor: pointer; background: #C4281C; color: #fff; padding: 1px 8px; border-radius: 2px; font-weight: 700; box-shadow: 0 1px 4px rgba(0,0,0,.4); }
+        .sb-lb.xing { pointer-events: auto; display: flex; align-items: center; gap: 5px; color: #7d1a12; font-weight: 700; text-shadow: 0 0 3px #f4ead2, 0 0 3px #f4ead2; }
+        .sb-lb.xing i { font-style: normal; width: 24px; height: 24px; border-radius: 50%; background: #C4281C; color: #fff; display: grid; place-items: center; font-size: 13px; font-weight: 900; text-shadow: none; box-shadow: 0 0 0 2px #f4ead2; }
+        .sb-lb.battle { color: #3a1d10; font-weight: 700; background: rgba(244,234,210,.9); padding: 0 6px; border-radius: 2px; border: 1px solid rgba(58,29,16,.35); }
+        .sb-lb.event { color: #5b3a06; font-weight: 700; background: rgba(250,236,200,.92); padding: 0 6px; border-radius: 2px; border: 1px solid rgba(140,96,20,.45); }
+        .sb-lb.note { color: #fff; background: rgba(32,36,52,.86); padding: 2px 7px; border-radius: 2px; font-size: 12px; }
+        .sb-lb.note.red { background: rgba(160,30,20,.88); }
+        .view-btn { border-radius: .5rem; border: 1px solid #D6C6B0; background: rgba(247,244,237,.92); padding: .3rem .7rem; font-size: .8125rem; color: #2B2B2B; transition: all .2s; }
+        .view-btn:hover { border-color: #BC2D22; color: #BC2D22; }
+        .view-btn[aria-pressed="true"] { background: #BC2D22; border-color: #BC2D22; color: #fff; }
+        .legend-box { background: rgba(247,244,237,.9); border: 1px solid rgba(214,198,176,.8); border-radius: .5rem; padding: .45rem .7rem; font-size: 12px; gap: 2px; }
+        .legend-box span { display: flex; align-items: center; gap: 7px; }
+        .legend-box i, .faction-dot { display: inline-block; width: 11px; height: 9px; border-radius: 2px; flex: none; }
+        .control-bar { display: grid; gap: .625rem; border-radius: .75rem; border: 1px solid rgba(214,198,176,.8); background: rgba(255,255,255,.85); padding: .75rem .875rem; }
+        .control-row { display: grid; grid-template-columns: auto auto minmax(0,1fr) auto; align-items: center; gap: .75rem; }
+        @media (max-width: 640px) { .control-row { grid-template-columns: auto auto 1fr; } .control-track { grid-column: 1 / -1; order: 5; } }
+        .play-btn { min-width: 5.5rem; border-radius: .625rem; background: #BC2D22; color: #fff; padding: .45rem .9rem; font-size: .875rem; font-weight: 700; }
+        .play-btn:hover { background: #8B1F19; }
+        .control-track { position: relative; padding-top: 18px; min-width: 0; }
+        .control-ticks { position: absolute; left: 0; right: 0; top: 0; height: 16px; }
+        .control-tick { position: absolute; transform: translateX(-50%); font-size: 11px; font-weight: 700; color: #BC2D22; white-space: nowrap; }
+        .time-range { width: 100%; accent-color: #BC2D22; }
+        .date-box { font-variant-numeric: tabular-nums; font-size: .875rem; font-weight: 700; white-space: nowrap; }
+        .chapter-row { display: flex; gap: .3rem; overflow-x: auto; padding-bottom: 2px; }
+        .chapter-btn { white-space: nowrap; border-radius: .5rem; border: 1px solid #D6C6B0; background: transparent; padding: .25rem .6rem; font-size: .75rem; color: #2B2B2B; display: inline-flex; gap: .35rem; align-items: baseline; }
+        .chapter-btn small { font-size: .6875rem; color: #9ca3af; }
+        .chapter-btn:hover { border-color: #BC2D22; }
+        .chapter-btn.is-active { background: #BC2D22; border-color: #BC2D22; color: #fff; }
+        .chapter-btn.is-active small { color: #fff; }
+        .chapter-btn.is-done { color: #9ca3af; }
+        .layer-row { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1.1rem; font-size: .8125rem; color: #6b7280; }
+        .layer-row label { display: inline-flex; gap: .35rem; align-items: center; cursor: pointer; }
+        .layer-row input { accent-color: #BC2D22; }
+        .brief-panel { display: flex; flex-direction: column; min-width: 0; border-radius: .75rem; border: 1px solid rgba(214,198,176,.8); background: rgba(255,255,255,.88); }
+        @media (min-width: 1024px) { .brief-panel { height: 0; min-height: 100%; } }
+        .brief-tabs { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid rgba(214,198,176,.8); flex: none; }
+        .brief-tab { padding: .7rem .25rem; font-size: .8125rem; color: #6b7280; border-bottom: 2px solid transparent; }
+        .brief-tab[aria-selected="true"] { color: #2B2B2B; font-weight: 700; border-bottom-color: #BC2D22; }
+        .brief-body { overflow-y: auto; padding: 1rem 1.125rem 1.25rem; flex: 1; min-height: 0; }
+        .move-item { display: grid; gap: .2rem; }
+        .move-head { display: flex; align-items: center; gap: .45rem; font-size: .8125rem; font-weight: 700; }
+        .move-tag { font-weight: 500; font-size: .6875rem; color: #6b7280; border: 1px solid #D6C6B0; padding: 0 .3rem; border-radius: .25rem; letter-spacing: .05em; }
+        .ref-card { display: block; border-radius: .625rem; border: 1px solid rgba(188,45,34,.35); background: rgba(188,45,34,.04); padding: .6rem .75rem; transition: all .2s; }
+        .ref-card:hover { background: rgba(188,45,34,.09); }
+        .profile-block { padding: .75rem 0; border-bottom: 1px dashed #D6C6B0; }
+        .profile-block.is-highlight { background: rgba(188,45,34,.06); margin-inline: -1.125rem; padding-inline: 1.125rem; }
+        .profile-block dl { display: grid; grid-template-columns: 3.4em 1fr; gap: .2rem .6rem; font-size: .8125rem; line-height: 1.75; margin-top: .35rem; }
+        .profile-block dt { color: #6b7280; }
+        .method-card { border-radius: .75rem; border: 1px solid rgba(214,198,176,.7); background: rgba(255,255,255,.85); padding: 1rem 1.125rem; }
+        .method-card h3 { font-family: 'Ma Shan Zheng', cursive; font-size: 1.375rem; color: #BC2D22; line-height: 1.2; }
+        .method-card li { position: relative; padding-left: 1rem; }
+        .method-card li::before { content: ''; position: absolute; left: 0; top: .7em; width: .375rem; height: .375rem; border-radius: 9999px; background: #BC2D22; }
+        .ask-link { display: inline-flex; align-items: center; gap: .35rem; border-radius: .625rem; background: #BC2D22; color: #fff; padding: .55rem 1rem; font-size: .875rem; font-weight: 700; }
+        .ask-link:hover { background: #8B1F19; }
+        .sandbox-view.is-overview { background: #E3E6DF; }
+        .sb-lb.camp { pointer-events: auto; cursor: pointer; border: 1px solid #C4281C; background: rgba(255,250,240,.95); color: #9c1f15; font-weight: 700; font-size: 12.5px; padding: 1px 8px; border-radius: 9999px; box-shadow: 0 1px 4px rgba(0,0,0,.25); }
+        .sb-lb.camp:hover, .sb-lb.camp:focus-visible { background: #C4281C; color: #fff; }
+        .sb-lb.camp.is-active { background: #C4281C; color: #fff; }
+        .sb-inset { position: absolute; right: .75rem; bottom: .75rem; border: 1px solid rgba(120,90,60,.45); border-radius: 4px; background: #dfe8ea; box-shadow: 0 1px 6px rgba(0,0,0,.18); line-height: 0; overflow: hidden; pointer-events: none; }
+        .sandbox-loading { position: absolute; inset: 0; display: grid; place-items: center; color: #6b5a44; font-size: .875rem; letter-spacing: .1em; pointer-events: none; }
+        .enter-campaign { display: block; border-radius: .5rem; background: #BC2D22; color: #fff; padding: .55rem .8rem; font-size: .875rem; font-weight: 700; text-align: center; margin-bottom: .75rem; }
+        .enter-campaign:hover { background: #9c1f15; }
+        .campaign-chip.is-overview { font-weight: 700; }
+        @media (max-width: 639px) { .sb-inset svg { width: 104px; height: auto; } .sandbox-view.is-overview .sb-inset svg { width: 62px; } }
+        .no-webgl { position: absolute; inset: 0; display: grid; place-items: center; padding: 1.5rem; text-align: center; color: #6b7280; font-size: .875rem; }
+        .decision-overlay { position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; padding: 1rem; background: rgba(43,43,43,.28); }
+        .decision-card { width: min(560px, 100%); max-height: 100%; overflow-y: auto; border-radius: .875rem; border: 1px solid #D6C6B0; background: #fffdf8; box-shadow: 0 16px 40px rgba(0,0,0,.25); padding: 1.1rem 1.25rem 1.25rem; }
+        .decision-kicker { font-size: .72rem; letter-spacing: .16em; color: #BC2D22; font-weight: 700; }
+        .decision-card h3 { font-family: 'Ma Shan Zheng', cursive; font-size: 1.9rem; line-height: 1.15; color: #2B2B2B; margin: .15rem 0 .4rem; }
+        .decision-option { display: grid; grid-template-columns: 1.75rem 1fr; gap: .5rem; width: 100%; text-align: left; border: 1px solid #D6C6B0; border-radius: .625rem; padding: .6rem .75rem; background: #fff; font-size: .9rem; line-height: 1.6; transition: all .15s; }
+        .decision-option:hover:not(:disabled) { border-color: #BC2D22; background: rgba(188,45,34,.04); }
+        .decision-option b { display: grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 9999px; background: #F7F4ED; color: #BC2D22; font-size: .8rem; }
+        .decision-option.is-chosen { border-color: #2B2B2B; border-width: 2px; }
+        .decision-option.is-history { background: rgba(188,45,34,.06); border-color: #BC2D22; }
+        .decision-option.is-history b { background: #BC2D22; color: #fff; }
+        .decision-option small { display: block; color: #6b7280; font-size: .78rem; margin-top: .15rem; }
+        .decision-reveal { margin-top: .9rem; border-top: 1px dashed #D6C6B0; padding-top: .8rem; font-size: .9rem; line-height: 1.8; }
+        .decision-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+        .decision-actions button { border-radius: .625rem; padding: .45rem .9rem; font-size: .85rem; border: 1px solid #D6C6B0; }
+        .decision-actions .primary { background: #BC2D22; border-color: #BC2D22; color: #fff; font-weight: 700; }
+        .control-tick.is-decision { top: 21px; z-index: 2; width: 14px; height: 14px; border-radius: 9999px; background: #2B2B2B; color: #fff; font-size: 9px; line-height: 14px; text-align: center; box-shadow: 0 0 0 2px #fff; }
+        .record-row { display: grid; gap: .2rem; padding: .7rem 0; border-bottom: 1px dashed #D6C6B0; font-size: .875rem; line-height: 1.7; }
+        .record-row:last-child { border-bottom: 0; }
+        .record-tag { display: inline-block; font-size: .7rem; border-radius: .25rem; padding: 0 .35rem; margin-left: .35rem; border: 1px solid #D6C6B0; color: #6b7280; }
+        .record-tag.same { border-color: #BC2D22; color: #BC2D22; }
+        button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #BC2D22; outline-offset: 2px; }
+    </style>
+</head>
+
+<body class="bg-warm-rice min-h-screen pb-24 md:pb-0 text-ink-black font-serif">
+    <header class="border-b border-dark-beige/60 bg-warm-rice/95">
+        <div class="mx-auto max-w-7xl px-4 py-4 md:px-6">
+            <div class="flex items-center justify-between gap-3">
+                <a href="timeline.html" class="inline-flex items-center gap-1.5 text-sm text-gray-600 hover:text-china-red transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
+                    返回时间线
+                </a>
+                <div class="flex gap-4 text-sm text-gray-600">
+                    <a href="reading.html" class="hover:text-china-red transition">阅读</a>
+                    <a href="index.html" class="hover:text-china-red transition">首页</a>
+                </div>
+            </div>
+            <div class="mt-3 flex flex-wrap items-baseline justify-between gap-2">
+                <h1 class="font-mao text-3xl text-china-red md:text-4xl">长征沙盘</h1>
+                <p class="text-sm text-gray-500">立体沙盘推演 · 对照毛选复盘</p>
+            </div>
+            <nav id="campaignSwitcher" class="mt-3 flex gap-2 overflow-x-auto pb-1" aria-label="选择战役"></nav>
+        </div>
+    </header>
+
+    <main class="mx-auto max-w-7xl px-4 py-5 md:px-6">
+        <section class="mb-4 flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
+            <div class="min-w-0 max-w-3xl">
+                <div class="flex flex-wrap items-center gap-2 text-xs text-gray-500">
+                    <span id="campaignPeriod"></span>
+                    <span id="reviewBadge" class="review-badge"></span>
+                </div>
+                <h2 id="campaignTitle" class="mt-1 font-mao text-4xl leading-tight text-china-red md:text-5xl"></h2>
+                <p id="campaignSummary" class="mt-1 text-sm leading-relaxed text-gray-700 md:text-base"></p>
+            </div>
+            <div id="campaignForces" class="flex gap-6 text-xs text-gray-600"></div>
+        </section>
+
+        <div class="grid gap-4 lg:grid-cols-[minmax(0,1fr)_380px]">
+            <div class="grid min-w-0 content-start gap-3">
+                <div class="sandbox-view" id="sandboxView">
+                    <canvas id="sandboxCanvas" class="sandbox-canvas" aria-label="战役立体沙盘，可拖动旋转"></canvas>
+                    <div id="sandboxLabels" class="sandbox-labels"></div>
+                    <div id="sandboxLoading" class="sandbox-loading" hidden>正在载入地形……</div>
+                    <div id="sandboxInset" class="sb-inset" hidden></div>
+                    <div id="sandboxLegend" class="legend-box absolute left-3 top-3 hidden sm:grid" aria-hidden="true"></div>
+                    <div class="absolute right-3 top-3 flex flex-wrap justify-end gap-1.5">
+                        <button type="button" class="view-btn" data-preset="all">全景</button>
+                        <button type="button" class="view-btn" data-preset="top">俯视</button>
+                        <button type="button" class="view-btn" data-preset="low">低空</button>
+                        <button type="button" class="view-btn" id="followBtn" aria-pressed="false">跟随红军</button>
+                    </div>
+                    <p class="absolute bottom-2 left-3 rounded bg-warm-rice/85 px-2 py-0.5 text-[11px] text-gray-500">拖动旋转 · 右键或双指平移 · 滚轮或捏合缩放</p>
+                    <div id="decisionOverlay" class="decision-overlay" hidden>
+                        <div class="decision-card" role="dialog" aria-modal="true" aria-labelledby="decisionTitle">
+                            <p id="decisionKicker" class="decision-kicker"></p>
+                            <h3 id="decisionTitle"></h3>
+                            <p id="decisionSituation" class="text-sm leading-7 text-gray-700"></p>
+                            <p id="decisionQuestion" class="mt-3 text-[15px] font-bold"></p>
+                            <div id="decisionOptions" class="mt-2 grid gap-2"></div>
+                            <div id="decisionReveal" class="decision-reveal" hidden></div>
+                            <div class="decision-actions">
+                                <button type="button" id="decisionContinue" class="primary" hidden>继续推演</button>
+                                <button type="button" id="decisionSkip">先不作答，继续</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-bar">
+                    <div class="control-row">
+                        <button type="button" id="playBtn" class="play-btn">▶ 推演</button>
+                        <select id="speedSelect" class="rounded-lg border border-dark-beige bg-white/80 px-2 py-1.5 text-sm" aria-label="推演速度">
+                            <option value="0.5">慢速</option>
+                            <option value="1" selected>常速</option>
+                            <option value="2">快速</option>
+                        </select>
+                        <div class="control-track">
+                            <div id="controlTicks" class="control-ticks"></div>
+                            <input id="timeRange" class="time-range" type="range" min="0" max="86" step="0.05" value="0" aria-label="时间轴">
+                        </div>
+                        <div id="dateBox" class="date-box">1935.01.19</div>
+                    </div>
+                    <div id="chapterRow" class="chapter-row" aria-label="章节"></div>
+                    <div class="layer-row">
+                        <label><input type="checkbox" id="layerEnemy" checked>敌军部队</label>
+                        <label><input type="checkbox" id="layerTrail" checked>敌军轨迹</label>
+                        <label><input type="checkbox" id="layerGhost" checked>红军全程</label>
+                        <label><input type="checkbox" id="layerPlace" checked>地名</label>
+                        <label><input type="checkbox" id="decisionPause" checked>决策点暂停</label>
+                        <label>垂直夸张 <input type="range" id="exaggeration" min="0.5" max="2.2" step="0.1" value="1" class="w-28"> <span id="exaggerationValue" class="font-bold text-ink-black">×8</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="brief-panel">
+                <div class="brief-tabs" role="tablist">
+                    <button type="button" class="brief-tab" role="tab" data-tab="situation" aria-selected="true">战况与决策</button>
+                    <button type="button" class="brief-tab" role="tab" data-tab="profiles" aria-selected="false">各方档案</button>
+                    <button type="button" class="brief-tab" role="tab" data-tab="refs" aria-selected="false">毛选对照</button>
+                </div>
+                <div class="brief-body" id="paneSituation" role="tabpanel">
+                    <p id="briefDate" class="text-xs tracking-wide text-gray-500"></p>
+                    <h3 id="briefTitle" class="mt-1 font-mao text-4xl leading-tight text-china-red"></h3>
+                    <p id="briefText" class="mt-2 text-[15px] leading-8"></p>
+                    <p class="mt-4 border-t border-dashed border-dark-beige pt-3 text-xs tracking-widest text-gray-500">各方命令、判断与决策</p>
+                    <ul id="briefMoves" class="mt-2 grid gap-3"></ul>
+                    <div id="briefRefs" class="mt-4 grid gap-2"></div>
+                </div>
+                <div class="brief-body" id="paneProfiles" role="tabpanel" hidden></div>
+                <div class="brief-body" id="paneRefs" role="tabpanel" hidden></div>
+            </aside>
+        </div>
+
+        <section class="mt-8" aria-labelledby="methodHeading">
+            <div class="flex flex-wrap items-baseline justify-between gap-2">
+                <h2 id="methodHeading" class="font-mao text-3xl text-china-red">用毛选方法复盘</h2>
+                <p class="text-xs text-gray-500">史料记载、编辑概括与现代迁移分开阅读</p>
+            </div>
+            <div class="mt-3 grid gap-3 md:grid-cols-2">
+                <div class="method-card"><h3>主要矛盾</h3><p id="methodContradiction" class="mt-2 text-sm leading-7"></p></div>
+                <div class="method-card"><h3>关键判断</h3><ul id="methodJudgments" class="mt-2 grid gap-1.5 text-sm leading-7"></ul></div>
+                <div class="method-card"><h3>可迁移的方法</h3><ul id="methodTransfer" class="mt-2 grid gap-1.5 text-sm leading-7"></ul></div>
+                <div class="method-card"><h3>适用边界</h3><p id="methodLimits" class="mt-2 text-sm leading-7"></p></div>
+            </div>
+            <div class="method-card mt-3">
+                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                    <h3>你的决策记录</h3>
+                    <p id="decisionSummary" class="text-xs text-gray-500"></p>
+                </div>
+                <p class="mt-1 text-xs text-gray-500">历史上的选择不一定是“正确答案”，湘江战役就是反面教训。对照的意义在于说清每个选择背后的判断。</p>
+                <div id="decisionRecord" class="mt-1"></div>
+            </div>
+            <div class="mt-4 flex flex-wrap items-center gap-3">
+                <a id="askLink" class="ask-link" href="chat.html">带着我的问题去问道 →</a>
+                <span class="text-xs text-gray-500">会把相关原文作为上下文带到问道页</span>
+            </div>
+        </section>
+
+        <footer class="mt-10 border-t border-dark-beige/60 pt-5 text-xs leading-relaxed text-gray-500">
+            <p>说明：沙盘地形依据 GEBCO 2024 全球高程栅格（原始约 5 公里分辨率；战役沙盘插值到约 1 公里，并按真实地势补出沟谷与细部起伏，垂直比例按战役放大），地表颜色依据《中华人民共和国植被图（1:100 万）》的植被型组，国界、省界、海岸线与主要河流依据 Natural Earth 公共领域数据绘制，采用 Albers 等积圆锥投影；行政区划为今日区划，仅作方位参考，不是 1930 年代的政区。部分支流、地名按经纬度近似放置，部队位置与行军路线经过简化，用于理解战役态势。本图为教学示意图，不作为国界和行政区域界线的权威依据。史实经公开党史资料初核，严肃引用请以《中国共产党历史》等权威出版物复核。</p>
+            <p class="mt-2">参考资料：<span id="campaignSources"></span></p>
+            <p class="mt-2">快捷键：空格播放/暂停，左右方向键切换章节。</p>
+        </footer>
+    </main>
+
+    <!-- Mobile bottom nav -->
+    <nav class="mobile-bottom-nav md:hidden fixed inset-x-0 bottom-0 z-40 border-t border-dark-beige/60 bg-warm-rice/95 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] backdrop-blur pb-[calc(0.35rem+env(safe-area-inset-bottom))]"
+        aria-label="移动端主导航">
+        <div class="mx-auto grid max-w-md grid-cols-5">
+            <a data-mobile-nav-item="home" href="index.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                    <path d="M7 9h4"></path>
+                    <path d="M7 13h10"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.cards">抽卡</span>
+            </a>
+            <a data-mobile-nav-item="reading" href="reading.html" aria-current="page"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-china-red font-bold">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.reading">阅读</span>
+            </a>
+            <a data-mobile-nav-item="chat" href="chat.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.chat">问道</span>
+            </a>
+            <a data-mobile-nav-item="practice" href="practice.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M9 11l3 3L22 4"></path>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.practice">实践</span>
+            </a>
+            <a data-mobile-nav-item="me" href="me.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M20 21a8 8 0 0 0-16 0"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.me">我的</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="config.js?v=7"></script>
+    <script src="js/register-pwa.js?v=4"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/campaign-data.js"></script>
+    <script src="js/campaign-engine.js"></script>
+    <script src="js/campaign.js"></script>
+</body>
+
+</html>

@@ -25,7 +25,7 @@
     <link rel="preload" as="image" href="assets/bg_front.jpg">
     <link rel="preload" as="image" href="assets/portrait_color.jpg">
 
-    <link rel="stylesheet" href="assets/tailwind.css?v=1">
+    <link rel="stylesheet" href="assets/tailwind.css?v=3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Added Cinzel to the fonts -->
@@ -83,6 +83,36 @@
         </button>
     </div>
 
+    <!-- 党史时间线与长征沙盘入口 -->
+    <section id="explore-entries" class="mt-8 grid w-full max-w-xl grid-cols-2 gap-3 fade-in-up delay-300 md:hidden" aria-label="党史专题">
+        <a href="timeline.html" data-entry="timeline"
+            class="group flex min-h-[112px] flex-col justify-between rounded-xl border border-dark-beige/70 bg-white/70 p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-china-red hover:shadow-md">
+            <span class="flex flex-col items-start gap-1 text-china-red sm:flex-row sm:items-center sm:gap-2">
+                <svg class="h-6 w-6 flex-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M12 3v18"></path>
+                    <circle cx="12" cy="6" r="2"></circle>
+                    <circle cx="12" cy="13" r="2"></circle>
+                    <path d="M14 6h6M4 13h6M14 19h5"></path>
+                </svg>
+                <span class="whitespace-nowrap font-mao text-lg sm:text-2xl">党史时间线</span>
+            </span>
+            <span class="mt-2 text-xs leading-5 text-ink-black/70 sm:text-sm">1921年建党至今的大事、路线之争与历次党代会，直达毛选原文</span>
+        </a>
+        <a href="campaign.html" data-entry="sandbox"
+            class="group flex min-h-[112px] flex-col justify-between rounded-xl border border-dark-beige/70 bg-white/70 p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-china-red hover:shadow-md">
+            <span class="flex flex-col items-start gap-1 text-china-red sm:flex-row sm:items-center sm:gap-2">
+                <svg class="h-6 w-6 flex-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M3 7l6-3 6 3 6-3v13l-6 3-6-3-6 3z"></path>
+                    <path d="M9 4v13M15 7v13"></path>
+                </svg>
+                <span class="whitespace-nowrap font-mao text-lg sm:text-2xl">长征沙盘推演</span>
+            </span>
+            <span class="mt-2 text-xs leading-5 text-ink-black/70 sm:text-sm">在中国地形图上看长征全程，点进湘江、四渡赤水等六场战役做决策</span>
+        </a>
+    </section>
+
     <!-- Navigation Buttons -->
     <div class="hidden md:flex fixed bottom-6 right-6 z-50 flex-col gap-3">
         <a href="chat.html"
@@ -101,6 +131,26 @@
                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
             </svg>
             阅读毛选
+        </a>
+        <a href="timeline.html" data-entry="timeline-nav"
+            class="flex items-center gap-2 px-5 py-3 bg-warm-rice text-china-red border-2 border-china-red font-mao text-lg rounded-full hover:bg-china-red hover:text-warm-rice transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 3v18"></path>
+                <circle cx="12" cy="6" r="2"></circle>
+                <circle cx="12" cy="13" r="2"></circle>
+                <path d="M14 6h6M4 13h6M14 19h5"></path>
+            </svg>
+            党史时间线
+        </a>
+        <a href="campaign.html" data-entry="sandbox-nav"
+            class="flex items-center gap-2 px-5 py-3 bg-warm-rice text-china-red border-2 border-china-red font-mao text-lg rounded-full hover:bg-china-red hover:text-warm-rice transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M3 7l6-3 6 3 6-3v13l-6 3-6-3-6 3z"></path>
+                <path d="M9 4v13M15 7v13"></path>
+            </svg>
+            长征沙盘推演
         </a>
         <a href="practice.html"
             class="flex items-center gap-2 px-5 py-3 bg-warm-rice text-china-red border-2 border-china-red font-mao text-lg rounded-full hover:bg-china-red hover:text-warm-rice transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">

@@ -91,7 +91,12 @@
           "anchor": "p-1y33927"
         }
       ],
-      "campaigns": []
+      "campaigns": [
+        {
+          "id": "lazikou",
+          "title": "激战腊子口"
+        }
+      ]
     },
     {
       "id": "diaocha-yanjiu",
@@ -391,7 +396,12 @@
           "anchor": "p-18993xi"
         }
       ],
-      "campaigns": []
+      "campaigns": [
+        {
+          "id": "dadu-river",
+          "title": "强渡大渡河 · 飞夺泸定桥"
+        }
+      ]
     },
     {
       "id": "qunzhong-luxian",
@@ -630,7 +640,16 @@
         }
       ],
       "historyCases": [],
-      "campaigns": []
+      "campaigns": [
+        {
+          "id": "sidu-chishui",
+          "title": "四渡赤水"
+        },
+        {
+          "id": "jinsha-river",
+          "title": "巧渡金沙江"
+        }
+      ]
     },
     {
       "id": "jizhong-bingli",
@@ -714,7 +733,16 @@
           "anchor": "p-1tyvl1b"
         }
       ],
-      "campaigns": []
+      "campaigns": [
+        {
+          "id": "zhiluozhen",
+          "title": "直罗镇战役"
+        },
+        {
+          "id": "sidu-chishui",
+          "title": "四渡赤水"
+        }
+      ]
     },
     {
       "id": "zhanlve-tuique",
@@ -769,7 +797,12 @@
         }
       ],
       "historyCases": [],
-      "campaigns": []
+      "campaigns": [
+        {
+          "id": "sidu-chishui",
+          "title": "四渡赤水"
+        }
+      ]
     },
     {
       "id": "gongnong-wuzhuang-geju",
@@ -1444,7 +1477,12 @@
           "anchor": "p-niogqj"
         }
       ],
-      "campaigns": []
+      "campaigns": [
+        {
+          "id": "xiangjiang",
+          "title": "湘江战役"
+        }
+      ]
     },
     {
       "id": "yugong-yishan",
