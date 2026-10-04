@@ -41,6 +41,7 @@ export function loadContextSources() {
     const search = readJson('data/search-index.json', { records: [] });
     const history = readJson('data/history-cases.json', { cases: [] });
     const types = readJson('data/history-problem-types.json', { types: [], noAnalogyCues: [] });
+    const concepts = readJson('data/concepts.json', { concepts: [] });
     cachedSources = {
         quotes: quotes.quotes || [],
         guides: buildGuideSources(),
@@ -48,8 +49,34 @@ export function loadContextSources() {
         historyCases: history.cases || [],
         historyProblemTypes: types.types || [],
         noAnalogyCues: types.noAnalogyCues || [],
+        concepts: concepts.concepts || [],
     };
     return cachedSources;
+}
+
+// 用户提到的毛选概念（术语或别名），最多取两个，附上编辑概括和原文出处。
+export function matchConcepts(userMessage, concepts, limit = 2) {
+    const text = String(userMessage || '');
+    return (concepts || [])
+        .map((concept) => {
+            const words = [concept.term, ...(concept.aliases || [])].filter((word) => word && text.includes(word));
+            return { concept, weight: words.reduce((max, word) => Math.max(max, word.length), 0) };
+        })
+        .filter((entry) => entry.weight > 0)
+        .sort((a, b) => b.weight - a.weight)
+        .slice(0, limit)
+        .map((entry) => entry.concept);
+}
+
+function buildConceptMessage(concepts) {
+    if (!concepts.length) return '';
+    return [
+        '用户提到的毛选概念（释义为编辑概括，不是原话；引用时以原文出处为准）：',
+        ...concepts.map((concept) => {
+            const sources = concept.keyPassages.map((p) => `《${p.title}》“${p.quote}”（定位：reading.html?article=${encodeURIComponent(p.articleId)}&anchor=${encodeURIComponent(p.anchor)}）`).join('；');
+            return `- ${concept.term}：${concept.summary} 原文出处：${sources}`;
+        }),
+    ].join('\n');
 }
 
 export function buildRetrievalContext(userMessage, sources = loadContextSources()) {
@@ -74,7 +101,8 @@ export function buildRetrievalContext(userMessage, sources = loadContextSources(
     });
     const originalContext = contexts.length ? buildContextMessage(contexts) : null;
     const historyContext = History.buildHistoryContextMessage(historyCases);
-    const content = [originalContext?.content, historyContext?.content].filter(Boolean).join('\n\n');
+    const conceptContext = buildConceptMessage(matchConcepts(userMessage, sources.concepts));
+    const content = [conceptContext, originalContext?.content, historyContext?.content].filter(Boolean).join('\n\n');
     return {
         message: content ? { role: 'system', content } : null,
         historyMirror: History.buildHistoryMirrorModel(historyCases).slice(0, 3),

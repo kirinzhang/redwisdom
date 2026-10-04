@@ -1,0 +1,1505 @@
+{
+  "version": 1,
+  "note": "由 scripts/build-concepts.mjs 生成，请编辑 data/concepts.source.json",
+  "concepts": [
+    {
+      "id": "shishi-qiushi",
+      "term": "实事求是",
+      "aliases": [],
+      "summary": "从客观存在的实际情况出发，研究其中的规律，再据此决定怎么做。反对主观臆断和照搬现成结论。",
+      "keyPassages": [
+        {
+          "articleId": "059-改造我们的学习.md",
+          "title": "改造我们的学习",
+          "anchor": "p-g5z28s",
+          "quote": "“实事”就是客观存在着的一切事物"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "027-中国共产党在民族战争中的地位.md",
+          "title": "中国共产党在民族战争中的地位",
+          "count": 3
+        },
+        {
+          "articleId": "059-改造我们的学习.md",
+          "title": "改造我们的学习",
+          "count": 3
+        },
+        {
+          "articleId": "043-新民主主义论.md",
+          "title": "新民主主义论",
+          "count": 2
+        },
+        {
+          "articleId": "063-整顿党的作风.md",
+          "title": "整顿党的作风",
+          "count": 1
+        },
+        {
+          "articleId": "064-反对党八股.md",
+          "title": "反对党八股",
+          "count": 1
+        },
+        {
+          "articleId": "069-抗日时期的经济问题和财政问题.md",
+          "title": "抗日时期的经济问题和财政问题",
+          "count": 1
+        },
+        {
+          "articleId": "075-学习和时局.md",
+          "title": "学习和时局",
+          "count": 1
+        },
+        {
+          "articleId": "080-游击区也能够进行生产.md",
+          "title": "游击区也能够进行生产",
+          "count": 1
+        }
+      ],
+      "historyCases": [
+        {
+          "id": "hunan-investigation-1927",
+          "title": "三十二天湖南考察：用一手材料纠正主观判断",
+          "period": "1927年",
+          "transferMethod": "先设计一份短周期调查：明确要核实的争议，选择直接了解情况的人，用事实表修正原假设。",
+          "articleId": "001-湖南农民运动考察报告.md",
+          "anchor": "p-mh33pi"
+        },
+        {
+          "id": "investigation-meeting-1930",
+          "title": "调查会：把困难问题的来源和现状弄明白",
+          "period": "1930年",
+          "transferMethod": "围绕一个中心问题组织小型调查会，让不同位置的人互相补证；会后分开记录事实、推断和待验证项。",
+          "articleId": "006-反对本本主义.md",
+          "anchor": "p-xpxgs3"
+        },
+        {
+          "id": "gutian-organization-correction-1929",
+          "title": "古田会议：队伍快速扩大后怎样统一方向和工作方法",
+          "period": "1929年",
+          "transferMethod": "先把组织问题拆成可观察行为、形成原因和制度缺口，再分别采用事实教育、流程调整和反馈机制，避免只给成员贴标签。",
+          "articleId": "004-关于纠正党内的错误思想.md",
+          "anchor": "p-1pslcyl"
+        },
+        {
+          "id": "reporting-system-1948",
+          "title": "建立报告制度：组织扩张后用短报告减少信息失真",
+          "period": "1948年",
+          "transferMethod": "设置固定周期的负责人短报告，只写关键变化、风险、争议、已采取行动和需要决策的事项，并保留紧急例外通道。",
+          "articleId": "113-关于建立报告制度.md",
+          "anchor": "p-1y33927"
+        }
+      ],
+      "campaigns": []
+    },
+    {
+      "id": "diaocha-yanjiu",
+      "term": "调查研究",
+      "aliases": [
+        "没有调查，没有发言权",
+        "调查会"
+      ],
+      "summary": "判断要建立在亲自获得的一手材料上：先弄清情况，再下结论。结论应当出现在调查的末尾，而不是开头。",
+      "keyPassages": [
+        {
+          "articleId": "006-反对本本主义.md",
+          "title": "反对本本主义",
+          "anchor": "p-1ueeepj",
+          "quote": "没有调查，没有发言权"
+        },
+        {
+          "articleId": "006-反对本本主义.md",
+          "title": "反对本本主义",
+          "anchor": "p-1cv7v49",
+          "quote": "调查就像“十月怀胎”"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "006-反对本本主义.md",
+          "title": "反对本本主义",
+          "count": 8
+        },
+        {
+          "articleId": "089-抗日战争胜利后的时局和我们的方针.md",
+          "title": "抗日战争胜利后的时局和我们的方针",
+          "count": 6
+        },
+        {
+          "articleId": "058-《农村调查》的序言和跋.md",
+          "title": "《农村调查》的序言和跋",
+          "count": 4
+        },
+        {
+          "articleId": "063-整顿党的作风.md",
+          "title": "整顿党的作风",
+          "count": 4
+        },
+        {
+          "articleId": "059-改造我们的学习.md",
+          "title": "改造我们的学习",
+          "count": 2
+        },
+        {
+          "articleId": "215-在省市自治区党委书记会议上的讲话.md",
+          "title": "在省市自治区党委书记会议上的讲话",
+          "count": 2
+        },
+        {
+          "articleId": "001-湖南农民运动考察报告.md",
+          "title": "湖南农民运动考察报告",
+          "count": 1
+        },
+        {
+          "articleId": "064-反对党八股.md",
+          "title": "反对党八股",
+          "count": 1
+        }
+      ],
+      "historyCases": [
+        {
+          "id": "investigation-outline-participants-1930",
+          "title": "调查会怎么开：围绕中心问题让真正知情者互相补证",
+          "period": "1930年",
+          "transferMethod": "围绕一个可回答的中心问题，邀请3至7名来自不同环节的知情者；会前发出事实清单，会中标注一致事实、争议判断和待补证项目。",
+          "articleId": "006-反对本本主义.md",
+          "anchor": "p-xpxgs3"
+        },
+        {
+          "id": "investigation-meeting-1930",
+          "title": "调查会：把困难问题的来源和现状弄明白",
+          "period": "1930年",
+          "transferMethod": "围绕一个中心问题组织小型调查会，让不同位置的人互相补证；会后分开记录事实、推断和待验证项。",
+          "articleId": "006-反对本本主义.md",
+          "anchor": "p-xpxgs3"
+        },
+        {
+          "id": "hunan-investigation-1927",
+          "title": "三十二天湖南考察：用一手材料纠正主观判断",
+          "period": "1927年",
+          "transferMethod": "先设计一份短周期调查：明确要核实的争议，选择直接了解情况的人，用事实表修正原假设。",
+          "articleId": "001-湖南农民运动考察报告.md",
+          "anchor": "p-mh33pi"
+        },
+        {
+          "id": "stakeholder-map-1925",
+          "title": "先辨明利益关系：从社会位置判断可依靠、可争取和有冲突的力量",
+          "period": "1925年",
+          "transferMethod": "列出相关人的实际利益、可承受成本、决策权和既往行动，区分核心支持、可协商、中立和存在根本冲突四类，再设计不同沟通方式。",
+          "articleId": "000-中国社会各阶级的分析.md",
+          "anchor": "p-h6xbo2"
+        }
+      ],
+      "campaigns": []
+    },
+    {
+      "id": "shijian",
+      "term": "实践",
+      "aliases": [
+        "实践论",
+        "再实践、再认识"
+      ],
+      "summary": "认识来源于实践，又要回到实践中检验和修正。按“实践、认识、再实践、再认识”的循环不断加深对事物的理解。",
+      "keyPassages": [
+        {
+          "articleId": "016-实践论.md",
+          "title": "实践论",
+          "anchor": "p-niogqj",
+          "quote": "实践、认识、再实践、再认识"
+        },
+        {
+          "articleId": "016-实践论.md",
+          "title": "实践论",
+          "anchor": "p-niogqj",
+          "quote": "亲口吃一吃"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "016-实践论.md",
+          "title": "实践论",
+          "count": 107
+        },
+        {
+          "articleId": "073-评国民党十一中全会和三届二次国民参政会.md",
+          "title": "评国民党十一中全会和三届二次国民参政会",
+          "count": 15
+        },
+        {
+          "articleId": "043-新民主主义论.md",
+          "title": "新民主主义论",
+          "count": 12
+        },
+        {
+          "articleId": "065-在延安文艺座谈会上的讲话.md",
+          "title": "在延安文艺座谈会上的讲话",
+          "count": 11
+        },
+        {
+          "articleId": "082-论联合政府.md",
+          "title": "论联合政府",
+          "count": 11
+        },
+        {
+          "articleId": "017-矛盾论.md",
+          "title": "矛盾论",
+          "count": 10
+        },
+        {
+          "articleId": "037-《共产党人》发刊词.md",
+          "title": "《共产党人》发刊词",
+          "count": 8
+        },
+        {
+          "articleId": "217-在中国共产党全国宣传工作会议上的讲话.md",
+          "title": "在中国共产党全国宣传工作会议上的讲话",
+          "count": 8
+        }
+      ],
+      "historyCases": [
+        {
+          "id": "leadership-pilot-1943",
+          "title": "一般号召与个别指导：先做试点再推广",
+          "period": "1943年",
+          "transferMethod": "选一个有代表性且风险可控的样本，明确验证指标，跑通后记录适用条件再扩大。",
+          "articleId": "070-关于领导方法的若干问题.md",
+          "anchor": "p-yntdkq"
+        },
+        {
+          "id": "practice-facts-before-theory-1937",
+          "title": "知识从实践中来：先用事实检验认识，再讨论理论是否适用",
+          "period": "1937年",
+          "transferMethod": "把当前结论写成可证伪假设，列出支持与反对事实，设计一个低风险行动取得新证据，再更新判断。",
+          "articleId": "016-实践论.md",
+          "anchor": "p-niogqj"
+        },
+        {
+          "id": "zunyi-correction-1935",
+          "title": "遵义会议纠正错误：重大损失后重新检验路线",
+          "period": "1935年",
+          "transferMethod": "把失败拆成事实、原假设和决策过程，先停止继续放大损失的动作，再用结果证据决定保留什么、纠正什么，并设一个短周期验证点。",
+          "articleId": "012-中国革命战争的战略问题.md",
+          "anchor": "p-pcvcli"
+        },
+        {
+          "id": "rectification-learning-1942",
+          "title": "延安整风：用批评和自我批评解决思想与实践脱节",
+          "period": "1942至1945年",
+          "transferMethod": "围绕共同目标开一次基于事实的复盘：每个人先陈述自己的判断和证据，再说明自身可改之处，最后只确定少量可验证的协作规则。",
+          "articleId": "082-论联合政府.md",
+          "anchor": "p-g97dxc"
+        }
+      ],
+      "campaigns": []
+    },
+    {
+      "id": "zhuyao-maodun",
+      "term": "主要矛盾",
+      "aliases": [
+        "矛盾的主要方面",
+        "矛盾论"
+      ],
+      "summary": "复杂局面中同时存在多个矛盾，其中有一个起决定作用。抓住它，其他问题就容易解决；主要矛盾会随情况变化而转移。",
+      "keyPassages": [
+        {
+          "articleId": "017-矛盾论.md",
+          "title": "矛盾论",
+          "anchor": "p-15j7hhl",
+          "quote": "就要用全力找出它的主要矛盾"
+        },
+        {
+          "articleId": "017-矛盾论.md",
+          "title": "矛盾论",
+          "anchor": "p-15j7hhl",
+          "quote": "捉住了这个主要矛盾"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "017-矛盾论.md",
+          "title": "矛盾论",
+          "count": 12
+        },
+        {
+          "articleId": "225-做革命的促进派.md",
+          "title": "做革命的促进派",
+          "count": 5
+        },
+        {
+          "articleId": "040-中国革命和中国共产党.md",
+          "title": "中国革命和中国共产党",
+          "count": 2
+        },
+        {
+          "articleId": "179-工人阶级与资产阶级的矛盾是国内的主要矛盾.md",
+          "title": "工人阶级与资产阶级的矛盾是国内的主要矛盾",
+          "count": 2
+        },
+        {
+          "articleId": "030-五四运动.md",
+          "title": "五四运动",
+          "count": 1
+        },
+        {
+          "articleId": "031-青年运动的方向.md",
+          "title": "青年运动的方向",
+          "count": 1
+        },
+        {
+          "articleId": "043-新民主主义论.md",
+          "title": "新民主主义论",
+          "count": 1
+        },
+        {
+          "articleId": "154-丢掉幻想，准备斗争.md",
+          "title": "丢掉幻想，准备斗争",
+          "count": 1
+        }
+      ],
+      "historyCases": [
+        {
+          "id": "principal-contradiction-focus-1937",
+          "title": "复杂问题先找主要矛盾：识别最能影响其他问题的关键关系",
+          "period": "1937年",
+          "transferMethod": "画出问题之间的因果和依赖关系，优先处理能解除最多阻塞、且证据最充分的一项；为主要矛盾判断设复查日期。",
+          "articleId": "017-矛盾论.md",
+          "anchor": "p-15j7hhl"
+        },
+        {
+          "id": "focus-front-1950",
+          "title": "不要四面出击：复杂局面中减少对立面",
+          "period": "1950年",
+          "transferMethod": "列出所有战线，明确唯一主攻方向、需要稳定的关系和暂缓事项，每周重新核对。",
+          "articleId": "165-不要四面出击.md",
+          "anchor": "p-19rrbnv"
+        },
+        {
+          "id": "committee-working-method-1949",
+          "title": "党委会的工作方法：任务繁重时怎样形成有效的集体领导",
+          "period": "1949年",
+          "transferMethod": "为核心会议建立固定机制：会前明确议题和事实，会中公开分歧并形成责任人、期限和判断指标，会后跟踪少数重点决定。",
+          "articleId": "147-党委会的工作方法.md",
+          "anchor": "p-on2zr6"
+        },
+        {
+          "id": "internal-contradictions-method-1957",
+          "title": "人民内部矛盾：先判断问题性质，再选择讨论、批评和说服的方法",
+          "period": "1957年",
+          "transferMethod": "先判断是利益分配、事实认知、价值分歧、程序问题还是违法伤害；对可协商分歧用事实讨论和制度改进，对违法或安全问题另走专业程序。",
+          "articleId": "216-关于正确处理人民内部矛盾的问题.md",
+          "anchor": "p-18993xi"
+        }
+      ],
+      "campaigns": []
+    },
+    {
+      "id": "qunzhong-luxian",
+      "term": "群众路线",
+      "aliases": [
+        "从群众中来，到群众中去"
+      ],
+      "summary": "把群众分散的意见集中起来形成主张，再拿回群众中去宣传、执行和检验，如此反复。",
+      "keyPassages": [
+        {
+          "articleId": "070-关于领导方法的若干问题.md",
+          "title": "关于领导方法的若干问题",
+          "anchor": "p-yntdkq",
+          "quote": "从群众中来，到群众中去"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "124-对晋绥日报编辑人员的谈话.md",
+          "title": "对晋绥日报编辑人员的谈话",
+          "count": 6
+        },
+        {
+          "articleId": "224-一九五七年夏季的形势.md",
+          "title": "一九五七年夏季的形势",
+          "count": 3
+        },
+        {
+          "articleId": "171-镇压反革命必须实行党的群众路线.md",
+          "title": "镇压反革命必须实行党的群众路线",
+          "count": 2
+        },
+        {
+          "articleId": "214-在中国共产党第八届中央委员会第二次全体会议上的讲话.md",
+          "title": "在中国共产党第八届中央委员会第二次全体会议上的讲话",
+          "count": 2
+        },
+        {
+          "articleId": "223-打退资产阶级右派的进攻.md",
+          "title": "打退资产阶级右派的进攻",
+          "count": 2
+        },
+        {
+          "articleId": "070-关于领导方法的若干问题.md",
+          "title": "关于领导方法的若干问题",
+          "count": 1
+        },
+        {
+          "articleId": "075-学习和时局.md",
+          "title": "学习和时局",
+          "count": 1
+        },
+        {
+          "articleId": "114-关于目前党的政策中的几个重要问题.md",
+          "title": "关于目前党的政策中的几个重要问题",
+          "count": 1
+        }
+      ],
+      "historyCases": [
+        {
+          "id": "changgang-caixi-service-1934",
+          "title": "长冈乡与才溪乡：先解决真实需求再动员",
+          "period": "1934年",
+          "transferMethod": "先找出相关人的切身阻力，解决一个最影响参与的实际问题，再观察支持度是否变化。",
+          "articleId": "010-关心群众生活，注意工作方法.md",
+          "anchor": "p-1ro09p7"
+        },
+        {
+          "id": "hunan-investigation-1927",
+          "title": "三十二天湖南考察：用一手材料纠正主观判断",
+          "period": "1927年",
+          "transferMethod": "先设计一份短周期调查：明确要核实的争议，选择直接了解情况的人，用事实表修正原假设。",
+          "articleId": "001-湖南农民运动考察报告.md",
+          "anchor": "p-mh33pi"
+        },
+        {
+          "id": "organize-mutual-aid-1943",
+          "title": "组织起来：资源分散时用自愿互助释放已有力量",
+          "period": "1943年",
+          "transferMethod": "先列出每个人可提供和需要的资源，围绕一个具体任务建立小规模、可退出、收益透明的自愿互助机制，再用结果决定是否扩大。",
+          "articleId": "074-组织起来.md",
+          "anchor": "p-1tyvl1b"
+        },
+        {
+          "id": "reporting-system-1948",
+          "title": "建立报告制度：组织扩张后用短报告减少信息失真",
+          "period": "1948年",
+          "transferMethod": "设置固定周期的负责人短报告，只写关键变化、风险、争议、已采取行动和需要决策的事项，并保留紧急例外通道。",
+          "articleId": "113-关于建立报告制度.md",
+          "anchor": "p-1y33927"
+        }
+      ],
+      "campaigns": []
+    },
+    {
+      "id": "chijiu-zhan",
+      "term": "持久战",
+      "aliases": [
+        "论持久战",
+        "战略相持"
+      ],
+      "summary": "敌强我弱但形势可变时，不幻想速胜也不悲观失败，把长期斗争分成防御、相持、反攻几个阶段，逐步改变力量对比。",
+      "keyPassages": [
+        {
+          "articleId": "026-论持久战.md",
+          "title": "论持久战",
+          "anchor": "p-j5yzrx",
+          "quote": "中国会亡吗？答复：不会亡，最后胜利是中国的"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "026-论持久战.md",
+          "title": "论持久战",
+          "count": 57
+        },
+        {
+          "articleId": "012-中国革命战争的战略问题.md",
+          "title": "中国革命战争的战略问题",
+          "count": 7
+        },
+        {
+          "articleId": "025-抗日游击战争的战略问题.md",
+          "title": "抗日游击战争的战略问题",
+          "count": 5
+        },
+        {
+          "articleId": "075-学习和时局.md",
+          "title": "学习和时局",
+          "count": 4
+        },
+        {
+          "articleId": "029-战争和战略问题.md",
+          "title": "战争和战略问题",
+          "count": 3
+        },
+        {
+          "articleId": "011-论反对日本帝国主义的策略.md",
+          "title": "论反对日本帝国主义的策略",
+          "count": 2
+        },
+        {
+          "articleId": "027-中国共产党在民族战争中的地位.md",
+          "title": "中国共产党在民族战争中的地位",
+          "count": 2
+        },
+        {
+          "articleId": "030-五四运动.md",
+          "title": "五四运动",
+          "count": 2
+        }
+      ],
+      "historyCases": [
+        {
+          "id": "spark-strategy-1930",
+          "title": "悲观时期的趋势判断：区分当前规模与发展条件",
+          "period": "1930年",
+          "transferMethod": "不要只问现在有多小；列出增长条件、积累机制、领先指标和停止条件，再决定是否继续。",
+          "articleId": "005-星星之火，可以燎原.md",
+          "anchor": "p-17xpm52"
+        },
+        {
+          "id": "protracted-war-stages-1938",
+          "title": "持久战三阶段：在明显劣势下管理节奏",
+          "period": "1938年",
+          "transferMethod": "先判断自己处于保存力量、形成相持还是扩大优势阶段，为每个阶段只设对应任务和转段指标。",
+          "articleId": "026-论持久战.md",
+          "anchor": "p-1nqfjpy"
+        },
+        {
+          "id": "yugong-persistence-1945",
+          "title": "愚公移山：把长期困难转化为持续行动",
+          "period": "1945年",
+          "transferMethod": "先重新核验目标是否值得做，再把未来两周能验证方向的最小行动列出来；每轮根据结果决定继续、调整或停止。",
+          "articleId": "083-愚公移山.md",
+          "anchor": "p-r1qq86"
+        }
+      ],
+      "campaigns": []
+    },
+    {
+      "id": "yundong-zhan",
+      "term": "运动战",
+      "aliases": [
+        "打得赢就打，打不赢就走"
+      ],
+      "summary": "在敌强我弱、没有固定战线的条件下，不死守阵地，在运动中寻找有利战机消灭敌人。",
+      "keyPassages": [
+        {
+          "articleId": "012-中国革命战争的战略问题.md",
+          "title": "中国革命战争的战略问题",
+          "anchor": "p-1pcbfxc",
+          "quote": "打得赢就打，打不赢就走"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "026-论持久战.md",
+          "title": "论持久战",
+          "count": 58
+        },
+        {
+          "articleId": "012-中国革命战争的战略问题.md",
+          "title": "中国革命战争的战略问题",
+          "count": 16
+        },
+        {
+          "articleId": "025-抗日游击战争的战略问题.md",
+          "title": "抗日游击战争的战略问题",
+          "count": 14
+        },
+        {
+          "articleId": "075-学习和时局.md",
+          "title": "学习和时局",
+          "count": 9
+        },
+        {
+          "articleId": "022-和英国记者贝特兰的谈话.md",
+          "title": "和英国记者贝特兰的谈话",
+          "count": 3
+        },
+        {
+          "articleId": "037-《共产党人》发刊词.md",
+          "title": "《共产党人》发刊词",
+          "count": 3
+        },
+        {
+          "articleId": "109-解放战争第二年的战略方针.md",
+          "title": "解放战争第二年的战略方针",
+          "count": 3
+        },
+        {
+          "articleId": "029-战争和战略问题.md",
+          "title": "战争和战略问题",
+          "count": 2
+        }
+      ],
+      "historyCases": [],
+      "campaigns": []
+    },
+    {
+      "id": "jizhong-bingli",
+      "term": "集中兵力",
+      "aliases": [
+        "集中优势兵力",
+        "各个歼灭"
+      ],
+      "summary": "把有限的力量集中用在一个关键点上，形成局部优势，逐个解决，而不是平均分散、处处出击。",
+      "keyPassages": [
+        {
+          "articleId": "102-集中优势兵力，各个歼灭敌人.md",
+          "title": "集中优势兵力，各个歼灭敌人",
+          "anchor": "p-11f2dlw",
+          "quote": "集中优势兵力，各个歼灭敌人"
+        },
+        {
+          "articleId": "012-中国革命战争的战略问题.md",
+          "title": "中国革命战争的战略问题",
+          "anchor": "p-y1vihz",
+          "quote": "伤其十指不如断其一指"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "012-中国革命战争的战略问题.md",
+          "title": "中国革命战争的战略问题",
+          "count": 18
+        },
+        {
+          "articleId": "102-集中优势兵力，各个歼灭敌人.md",
+          "title": "集中优势兵力，各个歼灭敌人",
+          "count": 17
+        },
+        {
+          "articleId": "026-论持久战.md",
+          "title": "论持久战",
+          "count": 7
+        },
+        {
+          "articleId": "025-抗日游击战争的战略问题.md",
+          "title": "抗日游击战争的战略问题",
+          "count": 3
+        },
+        {
+          "articleId": "104-三个月总结.md",
+          "title": "三个月总结",
+          "count": 2
+        },
+        {
+          "articleId": "003-井冈山的斗争.md",
+          "title": "井冈山的斗争",
+          "count": 1
+        },
+        {
+          "articleId": "029-战争和战略问题.md",
+          "title": "战争和战略问题",
+          "count": 1
+        },
+        {
+          "articleId": "067-第二次世界大战的转折点.md",
+          "title": "第二次世界大战的转折点",
+          "count": 1
+        }
+      ],
+      "historyCases": [
+        {
+          "id": "focus-front-1950",
+          "title": "不要四面出击：复杂局面中减少对立面",
+          "period": "1950年",
+          "transferMethod": "列出所有战线，明确唯一主攻方向、需要稳定的关系和暂缓事项，每周重新核对。",
+          "articleId": "165-不要四面出击.md",
+          "anchor": "p-19rrbnv"
+        },
+        {
+          "id": "organize-mutual-aid-1943",
+          "title": "组织起来：资源分散时用自愿互助释放已有力量",
+          "period": "1943年",
+          "transferMethod": "先列出每个人可提供和需要的资源，围绕一个具体任务建立小规模、可退出、收益透明的自愿互助机制，再用结果决定是否扩大。",
+          "articleId": "074-组织起来.md",
+          "anchor": "p-1tyvl1b"
+        }
+      ],
+      "campaigns": []
+    },
+    {
+      "id": "zhanlve-tuique",
+      "term": "战略退却",
+      "aliases": [
+        "诱敌深入"
+      ],
+      "summary": "劣势一方面对优势进攻时，为保存力量、等待和创造反攻条件而有计划地后退，后退是为了前进。",
+      "keyPassages": [
+        {
+          "articleId": "012-中国革命战争的战略问题.md",
+          "title": "中国革命战争的战略问题",
+          "anchor": "p-1optm7n",
+          "quote": "战略退却，是劣势军队处在优势军队进攻面前"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "012-中国革命战争的战略问题.md",
+          "title": "中国革命战争的战略问题",
+          "count": 30
+        },
+        {
+          "articleId": "026-论持久战.md",
+          "title": "论持久战",
+          "count": 3
+        },
+        {
+          "articleId": "075-学习和时局.md",
+          "title": "学习和时局",
+          "count": 3
+        },
+        {
+          "articleId": "034-关于国际新形势对新华日报记者的谈话.md",
+          "title": "关于国际新形势对新华日报记者的谈话",
+          "count": 1
+        },
+        {
+          "articleId": "035-和中央社、扫荡报、新民报三记者的谈话.md",
+          "title": "和中央社、扫荡报、新民报三记者的谈话",
+          "count": 1
+        },
+        {
+          "articleId": "067-第二次世界大战的转折点.md",
+          "title": "第二次世界大战的转折点",
+          "count": 1
+        },
+        {
+          "articleId": "219-事情正在起变化.md",
+          "title": "事情正在起变化",
+          "count": 1
+        }
+      ],
+      "historyCases": [],
+      "campaigns": []
+    },
+    {
+      "id": "gongnong-wuzhuang-geju",
+      "term": "工农武装割据",
+      "aliases": [
+        "星星之火，可以燎原",
+        "农村包围城市"
+      ],
+      "summary": "在敌人统治薄弱的农村建立和发展革命根据地，以小块红色区域的长期存在和发展积累力量。",
+      "keyPassages": [
+        {
+          "articleId": "002-中国的红色政权为什么能够存在？.md",
+          "title": "中国的红色政权为什么能够存在？",
+          "anchor": "p-omul76",
+          "quote": "工农武装割据"
+        },
+        {
+          "articleId": "005-星星之火，可以燎原.md",
+          "title": "星星之火，可以燎原",
+          "anchor": "p-xw9nat",
+          "quote": "星星之火，可以燎原"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "005-星星之火，可以燎原.md",
+          "title": "星星之火，可以燎原",
+          "count": 3
+        },
+        {
+          "articleId": "002-中国的红色政权为什么能够存在？.md",
+          "title": "中国的红色政权为什么能够存在？",
+          "count": 2
+        },
+        {
+          "articleId": "003-井冈山的斗争.md",
+          "title": "井冈山的斗争",
+          "count": 2
+        },
+        {
+          "articleId": "012-中国革命战争的战略问题.md",
+          "title": "中国革命战争的战略问题",
+          "count": 2
+        },
+        {
+          "articleId": "075-学习和时局.md",
+          "title": "学习和时局",
+          "count": 1
+        },
+        {
+          "articleId": "212-我们党的—些历史经验.md",
+          "title": "我们党的—些历史经验",
+          "count": 1
+        }
+      ],
+      "historyCases": [],
+      "campaigns": []
+    },
+    {
+      "id": "duli-zizhu",
+      "term": "独立自主",
+      "aliases": [
+        "既统一，又独立"
+      ],
+      "summary": "在合作中保持自己的判断和主动权，依据本国本组织的实际做决定，不盲从外部指挥。",
+      "keyPassages": [
+        {
+          "articleId": "028-统一战线中的独立自主问题.md",
+          "title": "统一战线中的独立自主问题",
+          "anchor": "p-15vcgwn",
+          "quote": "既统一，又独立"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "028-统一战线中的独立自主问题.md",
+          "title": "统一战线中的独立自主问题",
+          "count": 6
+        },
+        {
+          "articleId": "023-上海太原失陷以后抗日战争的形势和任务.md",
+          "title": "上海太原失陷以后抗日战争的形势和任务",
+          "count": 5
+        },
+        {
+          "articleId": "022-和英国记者贝特兰的谈话.md",
+          "title": "和英国记者贝特兰的谈话",
+          "count": 3
+        },
+        {
+          "articleId": "025-抗日游击战争的战略问题.md",
+          "title": "抗日游击战争的战略问题",
+          "count": 3
+        },
+        {
+          "articleId": "052-放手发展抗日力量，抵抗反共顽固派的进攻.md",
+          "title": "放手发展抗日力量，抵抗反共顽固派的进攻",
+          "count": 3
+        },
+        {
+          "articleId": "054-论政策.md",
+          "title": "论政策",
+          "count": 3
+        },
+        {
+          "articleId": "012-中国革命战争的战略问题.md",
+          "title": "中国革命战争的战略问题",
+          "count": 1
+        },
+        {
+          "articleId": "019-为动员一切力量争取抗战胜利而斗争.md",
+          "title": "为动员一切力量争取抗战胜利而斗争",
+          "count": 1
+        }
+      ],
+      "historyCases": [
+        {
+          "id": "united-front-independence-1938",
+          "title": "统一战线中的独立自主：合作时既守共同目标也守必要边界",
+          "period": "1938年",
+          "transferMethod": "合作前写清共同目标、各自保留事项、决策权限和退出条件；合作中既履行共同承诺，也持续建设不依赖对方的核心能力。",
+          "articleId": "028-统一战线中的独立自主问题.md",
+          "anchor": "p-1cuknk2"
+        },
+        {
+          "id": "unite-struggle-policy-1940",
+          "title": "又联合又斗争：合作中保留原则与独立性",
+          "period": "1940年",
+          "transferMethod": "合作前写清共同目标、不可让渡底线、信息与决策权限、违约处理和退出条件；争议只针对行为与条款。",
+          "articleId": "051-目前抗日统一战线中的策略问题.md",
+          "anchor": "p-1pwwbr0"
+        },
+        {
+          "id": "unite-different-opinions-1949",
+          "title": "团结不同意见者：把异议保留在共同工作中",
+          "period": "1949年",
+          "transferMethod": "明确不可违反的规则、已经形成的决定和仍可讨论的范围；允许异议记录，同时要求按共同决定执行。",
+          "articleId": "147-党委会的工作方法.md",
+          "anchor": "p-on2zr6"
+        }
+      ],
+      "campaigns": []
+    },
+    {
+      "id": "tongyi-zhanxian",
+      "term": "统一战线",
+      "aliases": [],
+      "summary": "为实现共同目标，团结一切可以团结的力量，同时在合作中划清原则边界。",
+      "keyPassages": [
+        {
+          "articleId": "028-统一战线中的独立自主问题.md",
+          "title": "统一战线中的独立自主问题",
+          "anchor": "p-15vcgwn",
+          "quote": "既统一，又独立"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "021-国共合作成立后的迫切任务.md",
+          "title": "国共合作成立后的迫切任务",
+          "count": 49
+        },
+        {
+          "articleId": "026-论持久战.md",
+          "title": "论持久战",
+          "count": 37
+        },
+        {
+          "articleId": "037-《共产党人》发刊词.md",
+          "title": "《共产党人》发刊词",
+          "count": 36
+        },
+        {
+          "articleId": "014-中国共产党在抗日时期的任务.md",
+          "title": "中国共产党在抗日时期的任务",
+          "count": 33
+        },
+        {
+          "articleId": "023-上海太原失陷以后抗日战争的形势和任务.md",
+          "title": "上海太原失陷以后抗日战争的形势和任务",
+          "count": 29
+        },
+        {
+          "articleId": "043-新民主主义论.md",
+          "title": "新民主主义论",
+          "count": 29
+        },
+        {
+          "articleId": "011-论反对日本帝国主义的策略.md",
+          "title": "论反对日本帝国主义的策略",
+          "count": 28
+        },
+        {
+          "articleId": "051-目前抗日统一战线中的策略问题.md",
+          "title": "目前抗日统一战线中的策略问题",
+          "count": 24
+        }
+      ],
+      "historyCases": [
+        {
+          "id": "united-front-independence-1938",
+          "title": "统一战线中的独立自主：合作时既守共同目标也守必要边界",
+          "period": "1938年",
+          "transferMethod": "合作前写清共同目标、各自保留事项、决策权限和退出条件；合作中既履行共同承诺，也持续建设不依赖对方的核心能力。",
+          "articleId": "028-统一战线中的独立自主问题.md",
+          "anchor": "p-1cuknk2"
+        },
+        {
+          "id": "stakeholder-map-1925",
+          "title": "先辨明利益关系：从社会位置判断可依靠、可争取和有冲突的力量",
+          "period": "1925年",
+          "transferMethod": "列出相关人的实际利益、可承受成本、决策权和既往行动，区分核心支持、可协商、中立和存在根本冲突四类，再设计不同沟通方式。",
+          "articleId": "000-中国社会各阶级的分析.md",
+          "anchor": "p-h6xbo2"
+        },
+        {
+          "id": "unite-different-opinions-1949",
+          "title": "团结不同意见者：把异议保留在共同工作中",
+          "period": "1949年",
+          "transferMethod": "明确不可违反的规则、已经形成的决定和仍可讨论的范围；允许异议记录，同时要求按共同决定执行。",
+          "articleId": "147-党委会的工作方法.md",
+          "anchor": "p-on2zr6"
+        },
+        {
+          "id": "focus-front-1950",
+          "title": "不要四面出击：复杂局面中减少对立面",
+          "period": "1950年",
+          "transferMethod": "列出所有战线，明确唯一主攻方向、需要稳定的关系和暂缓事项，每周重新核对。",
+          "articleId": "165-不要四面出击.md",
+          "anchor": "p-19rrbnv"
+        }
+      ],
+      "campaigns": []
+    },
+    {
+      "id": "piping-ziwo-piping",
+      "term": "批评与自我批评",
+      "aliases": [
+        "批评和自我批评",
+        "惩前毖后，治病救人",
+        "有则改之，无则加勉"
+      ],
+      "summary": "公开指出缺点和错误，也主动检查自己，目的是改正错误、增进团结，而不是整人。",
+      "keyPassages": [
+        {
+          "articleId": "082-论联合政府.md",
+          "title": "论联合政府",
+          "anchor": "p-g97dxc",
+          "quote": "有则改之，无则加勉"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "082-论联合政府.md",
+          "title": "论联合政府",
+          "count": 4
+        },
+        {
+          "articleId": "199-在中国共产党全国代表会议上的讲话.md",
+          "title": "在中国共产党全国代表会议上的讲话",
+          "count": 4
+        },
+        {
+          "articleId": "217-在中国共产党全国宣传工作会议上的讲话.md",
+          "title": "在中国共产党全国宣传工作会议上的讲话",
+          "count": 4
+        },
+        {
+          "articleId": "075-学习和时局.md",
+          "title": "学习和时局",
+          "count": 3
+        },
+        {
+          "articleId": "166-做一个完全的革命派.md",
+          "title": "做一个完全的革命派",
+          "count": 3
+        },
+        {
+          "articleId": "216-关于正确处理人民内部矛盾的问题.md",
+          "title": "关于正确处理人民内部矛盾的问题",
+          "count": 3
+        },
+        {
+          "articleId": "065-在延安文艺座谈会上的讲话.md",
+          "title": "在延安文艺座谈会上的讲话",
+          "count": 2
+        },
+        {
+          "articleId": "164-为争取国家财政经济状况的基本好转而斗争.md",
+          "title": "为争取国家财政经济状况的基本好转而斗争",
+          "count": 2
+        }
+      ],
+      "historyCases": [
+        {
+          "id": "rectification-learning-1942",
+          "title": "延安整风：用批评和自我批评解决思想与实践脱节",
+          "period": "1942至1945年",
+          "transferMethod": "围绕共同目标开一次基于事实的复盘：每个人先陈述自己的判断和证据，再说明自身可改之处，最后只确定少量可验证的协作规则。",
+          "articleId": "082-论联合政府.md",
+          "anchor": "p-g97dxc"
+        },
+        {
+          "id": "zunyi-correction-1935",
+          "title": "遵义会议纠正错误：重大损失后重新检验路线",
+          "period": "1935年",
+          "transferMethod": "把失败拆成事实、原假设和决策过程，先停止继续放大损失的动作，再用结果证据决定保留什么、纠正什么，并设一个短周期验证点。",
+          "articleId": "012-中国革命战争的战略问题.md",
+          "anchor": "p-pcvcli"
+        },
+        {
+          "id": "internal-contradictions-method-1957",
+          "title": "人民内部矛盾：先判断问题性质，再选择讨论、批评和说服的方法",
+          "period": "1957年",
+          "transferMethod": "先判断是利益分配、事实认知、价值分歧、程序问题还是违法伤害；对可协商分歧用事实讨论和制度改进，对违法或安全问题另走专业程序。",
+          "articleId": "216-关于正确处理人民内部矛盾的问题.md",
+          "anchor": "p-18993xi"
+        },
+        {
+          "id": "learning-history-unity-1944",
+          "title": "总结历史但不纠缠个人：弄清错误根源并保持共同工作",
+          "period": "1944至1945年",
+          "transferMethod": "复盘时分别写环境条件、错误判断、制度原因和个人责任；先修复制度，再按事实处理责任，并明确哪些问题结论后不再反复争论。",
+          "articleId": "075-学习和时局.md",
+          "anchor": "p-1i9v139"
+        }
+      ],
+      "campaigns": []
+    },
+    {
+      "id": "wei-renmin-fuwu",
+      "term": "为人民服务",
+      "aliases": [
+        "全心全意地为人民服务"
+      ],
+      "summary": "把人民的利益作为工作的出发点和检验标准。",
+      "keyPassages": [
+        {
+          "articleId": "082-论联合政府.md",
+          "title": "论联合政府",
+          "anchor": "p-g97dxc",
+          "quote": "全心全意地为人民服务"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "082-论联合政府.md",
+          "title": "论联合政府",
+          "count": 5
+        },
+        {
+          "articleId": "076-为人民服务.md",
+          "title": "为人民服务",
+          "count": 3
+        },
+        {
+          "articleId": "217-在中国共产党全国宣传工作会议上的讲话.md",
+          "title": "在中国共产党全国宣传工作会议上的讲话",
+          "count": 3
+        },
+        {
+          "articleId": "218-坚持艰苦奋斗，密切联系群众.md",
+          "title": "坚持艰苦奋斗，密切联系群众",
+          "count": 3
+        },
+        {
+          "articleId": "216-关于正确处理人民内部矛盾的问题.md",
+          "title": "关于正确处理人民内部矛盾的问题",
+          "count": 2
+        },
+        {
+          "articleId": "065-在延安文艺座谈会上的讲话.md",
+          "title": "在延安文艺座谈会上的讲话",
+          "count": 1
+        },
+        {
+          "articleId": "078-文化工作中的统一战线.md",
+          "title": "文化工作中的统一战线",
+          "count": 1
+        },
+        {
+          "articleId": "164-为争取国家财政经济状况的基本好转而斗争.md",
+          "title": "为争取国家财政经济状况的基本好转而斗争",
+          "count": 1
+        }
+      ],
+      "historyCases": [
+        {
+          "id": "service-feedback-1944",
+          "title": "为人民服务中的纠错：只要对人民有利就改正",
+          "period": "1944年",
+          "transferMethod": "对反馈分别记录事实、影响、证据和建议；不按身份决定对错，先核验，再公开改进项与复查日期。",
+          "articleId": "076-为人民服务.md",
+          "anchor": "p-qdtyw3"
+        }
+      ],
+      "campaigns": []
+    },
+    {
+      "id": "tan-gangqin",
+      "term": "弹钢琴",
+      "aliases": [
+        "学会“弹钢琴”"
+      ],
+      "summary": "领导工作要统筹全局，既抓中心工作，又照顾其他方面，有节奏地安排各项工作。",
+      "keyPassages": [
+        {
+          "articleId": "147-党委会的工作方法.md",
+          "title": "党委会的工作方法",
+          "anchor": "p-on2zr6",
+          "quote": "学会“弹钢琴”"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "147-党委会的工作方法.md",
+          "title": "党委会的工作方法",
+          "count": 4
+        }
+      ],
+      "historyCases": [
+        {
+          "id": "committee-working-method-1949",
+          "title": "党委会的工作方法：任务繁重时怎样形成有效的集体领导",
+          "period": "1949年",
+          "transferMethod": "为核心会议建立固定机制：会前明确议题和事实，会中公开分歧并形成责任人、期限和判断指标，会后跟踪少数重点决定。",
+          "articleId": "147-党委会的工作方法.md",
+          "anchor": "p-on2zr6"
+        },
+        {
+          "id": "changgang-caixi-service-1934",
+          "title": "长冈乡与才溪乡：先解决真实需求再动员",
+          "period": "1934年",
+          "transferMethod": "先找出相关人的切身阻力，解决一个最影响参与的实际问题，再观察支持度是否变化。",
+          "articleId": "010-关心群众生活，注意工作方法.md",
+          "anchor": "p-1ro09p7"
+        },
+        {
+          "id": "division-coordination-1949",
+          "title": "书记当好班长：集体领导下协调分工",
+          "period": "1949年",
+          "transferMethod": "明确主持人负责汇集信息和推进流程，但不替代集体决策；每项任务另设直接负责人和完成标准。",
+          "articleId": "147-党委会的工作方法.md",
+          "anchor": "p-on2zr6"
+        },
+        {
+          "id": "piano-priorities-1949",
+          "title": "学会弹钢琴：突出中心工作，同时保持必要配合",
+          "period": "1949年",
+          "transferMethod": "确定一个周期内唯一中心目标，列出必须同步维持的底线工作，为每项规定容量、依赖和停止条件。",
+          "articleId": "147-党委会的工作方法.md",
+          "anchor": "p-on2zr6"
+        }
+      ],
+      "campaigns": []
+    },
+    {
+      "id": "zhi-laohu",
+      "term": "纸老虎",
+      "aliases": [
+        "一切反动派都是纸老虎"
+      ],
+      "summary": "从长远和本质看，看似强大的反动力量并不可怕；但在具体斗争中仍要认真对待。即战略上藐视、战术上重视。",
+      "keyPassages": [
+        {
+          "articleId": "101-和美国记者安娜·路易斯·斯特朗的谈话.md",
+          "title": "和美国记者安娜·路易斯·斯特朗的谈话",
+          "anchor": "p-1bw0wzf",
+          "quote": "一切反动派都是纸老虎"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "101-和美国记者安娜·路易斯·斯特朗的谈话.md",
+          "title": "和美国记者安娜·路易斯·斯特朗的谈话",
+          "count": 13
+        },
+        {
+          "articleId": "228-一切反动派都是纸老虎.md",
+          "title": "一切反动派都是纸老虎",
+          "count": 9
+        },
+        {
+          "articleId": "210-美帝国主义是纸老虎.md",
+          "title": "美帝国主义是纸老虎",
+          "count": 6
+        },
+        {
+          "articleId": "045-团结一切抗日力量，反对反共顽固派.md",
+          "title": "团结一切抗日力量，反对反共顽固派",
+          "count": 1
+        }
+      ],
+      "historyCases": [
+        {
+          "id": "paper-tiger-confidence-1946",
+          "title": "战略上藐视、战术上重视：信心与具体分析并存",
+          "period": "1946年",
+          "transferMethod": "分别写下长期成立的有利条件和眼前可能失败的具体环节；长期判断决定是否继续，具体风险决定下一步如何试验和防护。",
+          "articleId": "101-和美国记者安娜·路易斯·斯特朗的谈话.md",
+          "anchor": "p-1bw0wzf"
+        }
+      ],
+      "campaigns": []
+    },
+    {
+      "id": "zili-gengsheng",
+      "term": "自力更生",
+      "aliases": [
+        "自己动手",
+        "丰衣足食"
+      ],
+      "summary": "立足自身力量解决困难，不把希望寄托在外援上；外部帮助是补充而不是依靠。",
+      "keyPassages": [
+        {
+          "articleId": "072-开展根据地的减租、生产和拥政爱民运动.md",
+          "title": "开展根据地的减租、生产和拥政爱民运动",
+          "anchor": "p-gcwvje",
+          "quote": "丰衣足食"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "035-和中央社、扫荡报、新民报三记者的谈话.md",
+          "title": "和中央社、扫荡报、新民报三记者的谈话",
+          "count": 5
+        },
+        {
+          "articleId": "074-组织起来.md",
+          "title": "组织起来",
+          "count": 5
+        },
+        {
+          "articleId": "072-开展根据地的减租、生产和拥政爱民运动.md",
+          "title": "开展根据地的减租、生产和拥政爱民运动",
+          "count": 3
+        },
+        {
+          "articleId": "054-论政策.md",
+          "title": "论政策",
+          "count": 2
+        },
+        {
+          "articleId": "069-抗日时期的经济问题和财政问题.md",
+          "title": "抗日时期的经济问题和财政问题",
+          "count": 2
+        },
+        {
+          "articleId": "079-必须学会做经济工作.md",
+          "title": "必须学会做经济工作",
+          "count": 2
+        },
+        {
+          "articleId": "084-论军队生产自给，兼论整风和生产两大运动的重要性.md",
+          "title": "论军队生产自给，兼论整风和生产两大运动的重要性",
+          "count": 2
+        },
+        {
+          "articleId": "089-抗日战争胜利后的时局和我们的方针.md",
+          "title": "抗日战争胜利后的时局和我们的方针",
+          "count": 2
+        }
+      ],
+      "historyCases": [
+        {
+          "id": "border-economy-1942",
+          "title": "根据地经济困难：从节流转向发展生产",
+          "period": "1941至1942年",
+          "transferMethod": "同时列出必须守住的消耗和可形成新增供给的能力，优先做能反复产生价值的小生产系统。",
+          "articleId": "069-抗日时期的经济问题和财政问题.md",
+          "anchor": "p-68ggqc"
+        },
+        {
+          "id": "self-reliance-production-1945",
+          "title": "生产自给中的组织方法：统一领导、分散经营",
+          "period": "1945年",
+          "transferMethod": "中央层只统一目标、底线和指标，执行团队按本地条件选择办法；用定期复盘而非逐项审批保持一致。",
+          "articleId": "084-论军队生产自给，兼论整风和生产两大运动的重要性.md",
+          "anchor": "p-jph329"
+        },
+        {
+          "id": "organize-mutual-aid-1943",
+          "title": "组织起来：资源分散时用自愿互助释放已有力量",
+          "period": "1943年",
+          "transferMethod": "先列出每个人可提供和需要的资源，围绕一个具体任务建立小规模、可退出、收益透明的自愿互助机制，再用结果决定是否扩大。",
+          "articleId": "074-组织起来.md",
+          "anchor": "p-1tyvl1b"
+        }
+      ],
+      "campaigns": []
+    },
+    {
+      "id": "benben-zhuyi",
+      "term": "本本主义",
+      "aliases": [
+        "教条主义"
+      ],
+      "summary": "脱离实际、照搬书本和上级文件的工作方法。克服它的办法是调查研究。",
+      "keyPassages": [
+        {
+          "articleId": "006-反对本本主义.md",
+          "title": "反对本本主义",
+          "anchor": "p-sdl8k9",
+          "quote": "本本主义"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "075-学习和时局.md",
+          "title": "学习和时局",
+          "count": 20
+        },
+        {
+          "articleId": "017-矛盾论.md",
+          "title": "矛盾论",
+          "count": 12
+        },
+        {
+          "articleId": "064-反对党八股.md",
+          "title": "反对党八股",
+          "count": 11
+        },
+        {
+          "articleId": "063-整顿党的作风.md",
+          "title": "整顿党的作风",
+          "count": 10
+        },
+        {
+          "articleId": "216-关于正确处理人民内部矛盾的问题.md",
+          "title": "关于正确处理人民内部矛盾的问题",
+          "count": 10
+        },
+        {
+          "articleId": "219-事情正在起变化.md",
+          "title": "事情正在起变化",
+          "count": 10
+        },
+        {
+          "articleId": "006-反对本本主义.md",
+          "title": "反对本本主义",
+          "count": 8
+        },
+        {
+          "articleId": "016-实践论.md",
+          "title": "实践论",
+          "count": 6
+        }
+      ],
+      "historyCases": [
+        {
+          "id": "investigation-meeting-1930",
+          "title": "调查会：把困难问题的来源和现状弄明白",
+          "period": "1930年",
+          "transferMethod": "围绕一个中心问题组织小型调查会，让不同位置的人互相补证；会后分开记录事实、推断和待验证项。",
+          "articleId": "006-反对本本主义.md",
+          "anchor": "p-xpxgs3"
+        },
+        {
+          "id": "rectification-learning-1942",
+          "title": "延安整风：用批评和自我批评解决思想与实践脱节",
+          "period": "1942至1945年",
+          "transferMethod": "围绕共同目标开一次基于事实的复盘：每个人先陈述自己的判断和证据，再说明自身可改之处，最后只确定少量可验证的协作规则。",
+          "articleId": "082-论联合政府.md",
+          "anchor": "p-g97dxc"
+        },
+        {
+          "id": "practice-facts-before-theory-1937",
+          "title": "知识从实践中来：先用事实检验认识，再讨论理论是否适用",
+          "period": "1937年",
+          "transferMethod": "把当前结论写成可证伪假设，列出支持与反对事实，设计一个低风险行动取得新证据，再更新判断。",
+          "articleId": "016-实践论.md",
+          "anchor": "p-niogqj"
+        }
+      ],
+      "campaigns": []
+    },
+    {
+      "id": "yugong-yishan",
+      "term": "愚公移山",
+      "aliases": [],
+      "summary": "认定目标后坚持不懈、持续用力，相信积小成大。",
+      "keyPassages": [
+        {
+          "articleId": "083-愚公移山.md",
+          "title": "愚公移山",
+          "anchor": "p-jzzxm5",
+          "quote": "愚公移山"
+        }
+      ],
+      "articles": [
+        {
+          "articleId": "083-愚公移山.md",
+          "title": "愚公移山",
+          "count": 3
+        },
+        {
+          "articleId": "085-赫尔利和蒋介石的双簧已经破产.md",
+          "title": "赫尔利和蒋介石的双簧已经破产",
+          "count": 1
+        },
+        {
+          "articleId": "086-评赫尔利政策的危险.md",
+          "title": "评赫尔利政策的危险",
+          "count": 1
+        },
+        {
+          "articleId": "089-抗日战争胜利后的时局和我们的方针.md",
+          "title": "抗日战争胜利后的时局和我们的方针",
+          "count": 1
+        }
+      ],
+      "historyCases": [
+        {
+          "id": "spark-strategy-1930",
+          "title": "悲观时期的趋势判断：区分当前规模与发展条件",
+          "period": "1930年",
+          "transferMethod": "不要只问现在有多小；列出增长条件、积累机制、领先指标和停止条件，再决定是否继续。",
+          "articleId": "005-星星之火，可以燎原.md",
+          "anchor": "p-17xpm52"
+        },
+        {
+          "id": "yugong-persistence-1945",
+          "title": "愚公移山：把长期困难转化为持续行动",
+          "period": "1945年",
+          "transferMethod": "先重新核验目标是否值得做，再把未来两周能验证方向的最小行动列出来；每轮根据结果决定继续、调整或停止。",
+          "articleId": "083-愚公移山.md",
+          "anchor": "p-r1qq86"
+        }
+      ],
+      "campaigns": []
+    }
+  ]
+}

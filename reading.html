@@ -545,6 +545,42 @@
                 transform: rotate(360deg);
             }
         }
+
+        /* 注释就地弹出与概念层 */
+        .fn-ref { display: inline; padding: 0 1px; margin: 0 1px; border-radius: 3px; color: #BC2D22; font-size: .82em; vertical-align: super; line-height: 1; cursor: pointer; background: rgba(188,45,34,.08); }
+        .fn-ref:hover, .fn-ref[aria-expanded="true"] { background: #BC2D22; color: #fff; }
+        .concept-ref { display: inline; padding: 0; font: inherit; color: inherit; background: none; border-bottom: 1.5px dotted #BC2D22; cursor: pointer; }
+        .concept-ref:hover, .concept-ref[aria-expanded="true"] { color: #BC2D22; background: rgba(188,45,34,.06); }
+        .fn-ref:focus-visible, .concept-ref:focus-visible { outline: 2px solid #BC2D22; outline-offset: 2px; }
+        .annotation-popover { position: absolute; z-index: 60; max-height: 70vh; overflow-y: auto; border-radius: .75rem; border: 1px solid #D6C6B0; background: #fffdf8; box-shadow: 0 12px 32px rgba(43,43,43,.18); padding: 1rem 1.125rem 1.125rem; font-size: .9rem; line-height: 1.75; color: #2B2B2B; }
+        .annotation-popover.is-centered { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(420px, calc(100vw - 32px)); }
+        .annotation-popover.is-sheet { position: fixed; left: 0 !important; right: 0; bottom: 0; top: auto !important; width: auto !important; max-height: 72vh; border-radius: 1rem 1rem 0 0; padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px)); }
+        .annotation-close { position: absolute; right: .5rem; top: .35rem; width: 2rem; height: 2rem; border-radius: 9999px; font-size: 1.25rem; color: #6b7280; }
+        .annotation-close:focus-visible { outline: 2px solid #BC2D22; outline-offset: 1px; }
+        .annotation-close:hover { background: rgba(0,0,0,.05); color: #BC2D22; }
+        .concept-kicker { font-size: .7rem; letter-spacing: .14em; color: #9ca3af; }
+        .concept-card h3 { font-family: 'Ma Shan Zheng', cursive; font-size: 1.75rem; color: #BC2D22; line-height: 1.2; margin: .1rem 0 .4rem; }
+        .concept-summary { margin: 0; }
+        .concept-note { margin-left: .4rem; font-size: .68rem; color: #8a5a12; border: 1px solid #e7d3a8; background: #fff8e8; border-radius: .25rem; padding: 0 .3rem; white-space: nowrap; }
+        .concept-label { margin: .85rem 0 .35rem; font-size: .72rem; letter-spacing: .12em; color: #6b7280; }
+        .concept-quotes { display: grid; gap: .4rem; }
+        .concept-quote { display: block; border-left: 3px solid #BC2D22; padding: .25rem .6rem; background: rgba(188,45,34,.04); border-radius: 0 .375rem .375rem 0; }
+        .concept-quote span { display: block; font-size: .75rem; color: #BC2D22; }
+        .concept-articles { display: flex; flex-wrap: wrap; gap: .35rem; }
+        .concept-articles a { font-size: .78rem; border: 1px solid #D6C6B0; border-radius: 9999px; padding: .05rem .55rem; }
+        .concept-articles a:hover { border-color: #BC2D22; color: #BC2D22; }
+        .concept-articles small { margin-left: .25rem; color: #9ca3af; }
+        .concept-cases { display: grid; gap: .45rem; padding: 0; margin: 0; list-style: none; }
+        .concept-cases a { font-weight: 700; }
+        .concept-cases a:hover { color: #BC2D22; }
+        .concept-cases span { display: block; font-size: .78rem; color: #6b7280; line-height: 1.6; }
+        .concept-campaigns { margin-top: .75rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+        .concept-campaign { font-size: .78rem; border-radius: 9999px; background: #2B2B2B; color: #F7F4ED; padding: .1rem .65rem; }
+        .concept-ask { display: inline-block; margin-top: 1rem; font-size: .85rem; font-weight: 700; color: #BC2D22; }
+        .note-card p:last-child { margin: .35rem 0 0; }
+        .concept-index { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; }
+        .concept-index button { border-radius: 9999px; border: 1px solid #D6C6B0; background: rgba(255,255,255,.7); padding: .35rem .9rem; font-size: .875rem; transition: all .2s; }
+        .concept-index button:hover { border-color: #BC2D22; color: #BC2D22; }
     </style>
 </head>
 
@@ -684,6 +720,11 @@
                     <p class="text-gray-600 text-center mb-6" data-i18n="reading.themeIntro">先选一个现实问题方向，再进入对应原文。</p>
                     <div id="themeTracks" class="grid md:grid-cols-2 gap-4"></div>
                 </div>
+                <div class="mt-12 text-left">
+                    <h2 class="font-mao text-3xl text-china-red text-center mb-2">概念索引</h2>
+                    <p class="text-gray-600 text-center mb-6">毛选里反复出现的方法和概念。点开看原文出处、常见篇目和相关党史案例；读原文时，正文中的概念也可以直接点开。</p>
+                    <div id="conceptIndex" class="concept-index"></div>
+                </div>
             </div>
 
             <!-- Loading State -->
@@ -817,6 +858,7 @@
     <script src="js/reading-progress-store.js"></script>
     <script src="js/problem-case-store.js"></script>
     <script src="js/text-anchors.js"></script>
+    <script src="js/reading-annotations.js"></script>
     <script src="js/full-text-search.js"></script>
     <script>
         let catalog = null;
@@ -873,6 +915,8 @@
                 // Check URL hash for direct article link
                 const params = new URLSearchParams(window.location.search);
                 const linkedArticle = params.get('article');
+                renderConceptIndex();
+                if (params.get('concept')) openConcept(params.get('concept'));
                 const linkedAnchor = params.get('anchor');
                 if (linkedArticle) {
                     loadArticle(linkedArticle, linkedAnchor);
@@ -956,6 +1000,37 @@
         }
 
         // Load article content
+        // ===== 注释与概念层 =====
+        let conceptsPromise = null;
+        let annotationPopover = null;
+        function loadConcepts() {
+            if (!conceptsPromise) {
+                conceptsPromise = fetch('data/concepts.json')
+                    .then((response) => (response.ok ? response.json() : { concepts: [] }))
+                    .then((payload) => payload.concepts || [])
+                    .catch(() => []);
+            }
+            return conceptsPromise;
+        }
+        function getAnnotationPopover() {
+            if (!annotationPopover) annotationPopover = window.RedWisdomAnnotations.createPopover(document);
+            return annotationPopover;
+        }
+        async function openConcept(id) {
+            const concept = (await loadConcepts()).find((item) => item.id === id || item.term === id);
+            if (concept) getAnnotationPopover().open(null, window.RedWisdomAnnotations.renderConceptCard(concept));
+        }
+        async function renderConceptIndex() {
+            const container = document.getElementById('conceptIndex');
+            if (!container) return;
+            const concepts = await loadConcepts();
+            container.innerHTML = concepts.map((c) => `<button type="button" data-open-concept="${escapeHtml(c.id)}">${escapeHtml(c.term)}</button>`).join('');
+            container.addEventListener('click', (event) => {
+                const button = event.target.closest('[data-open-concept]');
+                if (button) openConcept(button.dataset.openConcept);
+            });
+        }
+
         // 已更正的篇名：旧链接、旧书签仍能打开对应文章。
         const LEGACY_ARTICLE_IDS = {
             '131-关于淮海战役的的作战方针.md': '131-关于淮海战役的作战方针.md',
@@ -990,6 +1065,15 @@
                 bodyEl.innerHTML = `${renderReadingGuide(guide)}${html}`;
                 const articleRoot = bodyEl.querySelector(':scope > h1')?.parentElement || bodyEl;
                 window.RedWisdomTextAnchors.assignTextAnchors(articleRoot);
+                try {
+                    window.RedWisdomAnnotations.enhanceArticle(articleRoot, {
+                        notes: window.RedWisdomAnnotations.parseNotes(markdown),
+                        concepts: await loadConcepts(),
+                        popover: getAnnotationPopover(),
+                    });
+                } catch (annotationError) {
+                    console.warn('注释与概念层加载失败:', annotationError);
+                }
                 renderReadingTools(articleMeta);
                 attachGuidePracticeAction(articleMeta, guide);
                 attachReadingNoteAction(articleMeta);
