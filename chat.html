@@ -19,32 +19,14 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/favicon.png">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/tailwind.css?v=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;700&display=swap"
         rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.4/dist/purify.min.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'warm-rice': '#F7F4ED',
-                        'china-red': '#BC2D22',
-                        'ink-black': '#2B2B2B',
-                        'dark-beige': '#D6C6B0',
-                    },
-                    fontFamily: {
-                        'mao': ['"Ma Shan Zheng"', 'cursive'],
-                        'serif': ['"Noto Serif SC"', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         /* 生成中：发送按钮变为深色「停止」按钮 */
         #sendBtn.stop-mode {
@@ -455,8 +437,6 @@
     <script src="js/auto-sync-bootstrap.js"></script>
     <script src="js/register-pwa.js?v=4"></script>
     <script src="js/ai-methodology.js"></script>
-    <script src="js/ai-context.js"></script>
-    <script src="js/history-case-retrieval.js"></script>
     <script src="js/i18n.js"></script>
     <script src="js/reading-guides.js"></script>
     <script src="js/analysis-guide.js"></script>
@@ -501,7 +481,6 @@
         let isGenerating = false;
         let activeAbortController = null;
         let stoppedByUser = false;
-        let maoContextSourcesPromise = null;
         let currentLocale = window.RedWisdomI18n.getStoredLocale(localStorage);
         let chatMode = 'direct';
         const chatSessions = {
@@ -938,9 +917,8 @@
                 armInactivityTimeout();
                 const apiUrl = getApiUrl();
                 const useWorker = !!WORKER_URL;
-                const contextBundle = await buildContextMessageForUser(userMessage);
-                const contextMessage = contextBundle.message;
-                const localeMessage = window.RedWisdomI18n.createLocaleInstructionMessage(currentLocale);
+                // 同源代理只接收对话内容，系统提示词和毛选检索都在服务端完成。
+                const retrieval = { historyMirror: [], classificationLabel: '' };
 
                 const headers = {
                     'Content-Type': 'application/json'
@@ -956,13 +934,18 @@
                 const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: headers,
-                    body: JSON.stringify(window.RedWisdomAI.buildChatPayload({
-                        model: MODEL,
-                        contextMessage,
-                        localeMessage,
-                        conversationHistory: session.conversationHistory,
-                        mode: requestMode,
-                    })),
+                    body: JSON.stringify(useWorker
+                        ? {
+                            mode: requestMode,
+                            locale: currentLocale,
+                            messages: session.conversationHistory,
+                        }
+                        : window.RedWisdomAI.buildChatPayload({
+                            model: MODEL,
+                            localeMessage: window.RedWisdomI18n.createLocaleInstructionMessage(currentLocale),
+                            conversationHistory: session.conversationHistory,
+                            mode: requestMode,
+                        })),
                     signal: abortController.signal
                 });
 
@@ -979,6 +962,11 @@
                     if (!data || data === '[DONE]') return;
                     try {
                         const parsed = JSON.parse(data);
+                        if (parsed.redwisdom) {
+                            retrieval.historyMirror = parsed.redwisdom.historyMirror || [];
+                            retrieval.classificationLabel = parsed.redwisdom.classificationLabel || '';
+                            return;
+                        }
                         finishReason = parsed.choices?.[0]?.finish_reason || finishReason;
                         const content = parsed.choices?.[0]?.delta?.content || '';
                         if (content) {
@@ -1035,7 +1023,7 @@
                 }
 
                 finalizeAssistantMessage(contentElement);
-                addHistoryMirror(contentElement, contextBundle.historyCases, contextBundle.classification);
+                addHistoryMirror(contentElement, retrieval.historyMirror, retrieval.classificationLabel);
                 const answerTags = inferMethodologyTags(fullResponse);
                 const answerId = `${session.activeConversationId || requestMode}-assistant-${session.conversationHistory.length - 1}`;
                 addPracticeSaveAction(contentElement, {
@@ -1141,72 +1129,8 @@
             problemCaseStore.addActivity(activeProblemCase.id, activity);
         }
 
-        async function buildContextMessageForUser(userMessage) {
-            try {
-                const sources = await loadMaoContextSources();
-                const contexts = window.RedWisdomAIContext.findRelevantMaoContexts({
-                    userMessage,
-                    quotes: sources.quotes,
-                    guides: sources.guides,
-                    passages: sources.passages,
-                    limit: 4,
-                });
-                const historyCases = window.RedWisdomHistoryCases.findRelevantHistoryCases({
-                    userMessage,
-                    cases: sources.historyCases,
-                    problemTypes: sources.historyProblemTypes,
-                    noAnalogyCues: sources.noAnalogyCues,
-                    limit: 3,
-                });
-                const classification = window.RedWisdomHistoryCases.classifyProblem({
-                    userMessage,
-                    problemTypes: sources.historyProblemTypes,
-                    noAnalogyCues: sources.noAnalogyCues,
-                });
-                const originalContext = contexts.length ? window.RedWisdomAIContext.buildContextMessage(contexts) : null;
-                const historyContext = window.RedWisdomHistoryCases.buildHistoryContextMessage(historyCases);
-                const content = [originalContext?.content, historyContext?.content].filter(Boolean).join('\n\n');
-                return {
-                    message: content ? { role: 'system', content } : null,
-                    historyCases,
-                    classification,
-                };
-            } catch (error) {
-                console.warn('加载毛选上下文失败:', error);
-                return { message: null, historyCases: [], classification: null };
-            }
-        }
-
-        function loadMaoContextSources() {
-            if (!maoContextSourcesPromise) {
-                maoContextSourcesPromise = Promise.all([
-                    fetch('data/quotes.json').then(response => response.ok ? response.json() : { quotes: [] }),
-                    Promise.resolve(buildGuideContextSources()),
-                    fetch('data/search-index.json').then(response => response.ok ? response.json() : { records: [] }),
-                    fetch('data/history-cases.json').then(response => response.ok ? response.json() : { cases: [] }),
-                    fetch('data/history-problem-types.json').then(response => response.ok ? response.json() : { types: [], noAnalogyCues: [] }),
-                ]).then(([quoteData, guides, searchData, historyData, historyTypes]) => ({
-                    quotes: quoteData.quotes || [],
-                    guides,
-                    passages: searchData.records || [],
-                    historyCases: historyData.cases || [],
-                    historyProblemTypes: historyTypes.types || [],
-                    noAnalogyCues: historyTypes.noAnalogyCues || [],
-                })).catch(() => ({
-                    quotes: [],
-                    guides: [],
-                    passages: [],
-                    historyCases: [],
-                    historyProblemTypes: [],
-                    noAnalogyCues: [],
-                }));
-            }
-
-            return maoContextSourcesPromise;
-        }
-
-        function addHistoryMirror(contentElement, cases, classification) {
-            const models = window.RedWisdomHistoryCases.buildHistoryMirrorModel(cases).slice(0, 3);
+        function addHistoryMirror(contentElement, mirrorModels, classificationLabel) {
+            const models = (mirrorModels || []).slice(0, 3);
             if (!models.length) return;
 
             const section = document.createElement('section');
@@ -1214,7 +1138,7 @@
             section.dataset.historyMirror = 'true';
             section.setAttribute('aria-label', '党史镜鉴');
 
-            const typeLabel = classification?.types?.[0]?.label || '相关案例';
+            const typeLabel = classificationLabel || '相关案例';
             section.innerHTML = `
                 <div class="history-mirror__label">
                     <span>党史镜鉴</span>
@@ -1244,22 +1168,6 @@
             contentElement.appendChild(section);
         }
 
-        function buildGuideContextSources() {
-            if (!window.RedWisdomReadingGuides) return [];
-            const titles = new Set();
-            window.RedWisdomReadingGuides.getThemeTracks().forEach(track => {
-                track.articles.forEach(title => titles.add(title));
-            });
-
-            return [...titles].map(articleTitle => {
-                const guide = window.RedWisdomReadingGuides.getReadingGuide(articleTitle);
-                if (!guide) return null;
-                return {
-                    articleTitle,
-                    ...guide,
-                };
-            }).filter(Boolean);
-        }
 
         function inferMethodologyTags(text) {
             const tagKeywords = [

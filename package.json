@@ -7,6 +7,7 @@
     "build:history": "node scripts/build-history-case-library.mjs",
     "build:history-eval": "node scripts/generate-history-evaluation.mjs",
     "eval:history": "node scripts/evaluate-history-retrieval.mjs",
-    "validate:history": "node scripts/validate-history-cases.mjs"
+    "validate:history": "node scripts/validate-history-cases.mjs",
+    "build:css": "npx tailwindcss@3.4.17 -c tailwind.config.js -i styles/tailwind.input.css -o assets/tailwind.css --minify"
   }
 }
