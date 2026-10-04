@@ -11,7 +11,12 @@
     const ACTIVE_CASE_KEY = 'redwisdom.activeProblemCase.v1';
     const VALID_STATUSES = ['active', 'paused', 'resolved', 'archived'];
     const VALID_STAGES = ['define', 'investigate', 'analyze', 'act', 'review'];
-    const VALID_ACTIVITY_TYPES = ['conversation', 'reading', 'note', 'practice', 'evidence', 'review'];
+    const VALID_ACTIVITY_TYPES = ['conversation', 'reading', 'note', 'practice', 'evidence', 'review', 'analysis'];
+    const VALID_VERDICTS = ['pending', 'confirmed', 'refuted', 'partial'];
+    const VERDICT_LABELS = { pending: '待核实', confirmed: '证实', refuted: '推翻', partial: '部分证实' };
+    const MAX_INVESTIGATIONS = 40;
+    const MAX_CONTRADICTIONS = 12;
+    const MAX_VERSIONS = 30;
 
     function createProblemCaseStore(storage, now = () => Date.now()) {
         return {
@@ -52,6 +57,8 @@
                     emotions: sanitizeText(input.emotions, 2000),
                     mainContradiction: sanitizeText(input.mainContradiction, 3000),
                     investigationTasks: normalizeList(input.investigationTasks),
+                    investigations: sanitizeInvestigations(input.investigations),
+                    contradictionMap: sanitizeContradictionMap(input.contradictionMap),
                     availableForces: sanitizeText(input.availableForces, 3000),
                     nextAction: sanitizeText(input.nextAction, 3000),
                     methodologyTags: normalizeTags(input.methodologyTags),
@@ -123,6 +130,101 @@
                 });
             },
 
+            // ===== 调查清单 =====
+            addInvestigation(id, input) {
+                const problemCase = this.getCase(id);
+                if (!problemCase) throw new Error('问题不存在');
+                const question = sanitizeText(input.question, 300);
+                if (!question) throw new Error('请写下要核实的判断');
+                const timestamp = createTimestamp(now);
+                const item = {
+                    id: `inv-${now()}-${Math.random().toString(36).slice(2, 8)}`,
+                    question,
+                    source: sanitizeText(input.source, 300),
+                    method: sanitizeText(input.method, 300),
+                    finding: '',
+                    verdict: 'pending',
+                    createdAt: timestamp,
+                    updatedAt: timestamp,
+                    resolvedAt: '',
+                };
+                const investigations = [...getInvestigations(problemCase), item];
+                const patch = { investigations, investigationTasks: pendingQuestions(investigations) };
+                if (problemCase.stage === 'define') patch.stage = 'investigate';
+                return this.updateCase(id, patch);
+            },
+
+            updateInvestigation(id, investigationId, input) {
+                const problemCase = this.getCase(id);
+                if (!problemCase) throw new Error('问题不存在');
+                const timestamp = createTimestamp(now);
+                let resolved = null;
+                const investigations = getInvestigations(problemCase).map((item) => {
+                    if (item.id !== investigationId) return item;
+                    const next = { ...item, updatedAt: timestamp };
+                    ['question', 'source', 'method'].forEach((key) => {
+                        if (Object.prototype.hasOwnProperty.call(input, key)) next[key] = sanitizeText(input[key], 300);
+                    });
+                    if (Object.prototype.hasOwnProperty.call(input, 'finding')) next.finding = sanitizeText(input.finding, 2000);
+                    if (Object.prototype.hasOwnProperty.call(input, 'verdict')) {
+                        next.verdict = normalizeEnum(input.verdict, VALID_VERDICTS, 'pending');
+                        if (next.verdict !== 'pending' && next.verdict !== item.verdict) {
+                            next.resolvedAt = timestamp;
+                            resolved = next;
+                        }
+                        if (next.verdict === 'pending') next.resolvedAt = '';
+                    }
+                    return next;
+                });
+                const updated = this.updateCase(id, { investigations, investigationTasks: pendingQuestions(investigations) });
+                if (!resolved) return updated;
+                return this.addActivity(id, {
+                    type: 'evidence',
+                    referenceId: resolved.id,
+                    title: `调查结果：${VERDICT_LABELS[resolved.verdict]}`,
+                    detail: `判断：${resolved.question}${resolved.finding ? `\n查到：${resolved.finding}` : ''}`,
+                });
+            },
+
+            removeInvestigation(id, investigationId) {
+                const problemCase = this.getCase(id);
+                if (!problemCase) throw new Error('问题不存在');
+                const investigations = getInvestigations(problemCase).filter((item) => item.id !== investigationId);
+                return this.updateCase(id, { investigations, investigationTasks: pendingQuestions(investigations) });
+            },
+
+            // ===== 矛盾分析画布 =====
+            saveContradictionMap(id, input, options = {}) {
+                const problemCase = this.getCase(id);
+                if (!problemCase) throw new Error('问题不存在');
+                const current = sanitizeContradictionMap(problemCase.contradictionMap);
+                const next = sanitizeContradictionMap({ ...current, items: input.items, mainAspect: input.mainAspect });
+                const mainText = next.items[0]?.text || '';
+                const patch = { contradictionMap: next, mainContradiction: mainText };
+                if (options.recordVersion && next.items.length) {
+                    const previous = current.versions[current.versions.length - 1];
+                    const version = {
+                        id: `ver-${now()}-${Math.random().toString(36).slice(2, 6)}`,
+                        at: createTimestamp(now),
+                        mainText,
+                        mainAspect: next.mainAspect,
+                        ranking: next.items.map((item) => item.text),
+                        note: sanitizeText(options.note, 500),
+                    };
+                    patch.contradictionMap = { ...next, versions: [...current.versions, version].slice(-MAX_VERSIONS) };
+                    if (problemCase.stage === 'define' || problemCase.stage === 'investigate') patch.stage = 'analyze';
+                    const updated = this.updateCase(id, patch);
+                    const shifted = previous && previous.mainText && previous.mainText !== mainText;
+                    return this.addActivity(id, {
+                        type: 'analysis',
+                        referenceId: version.id,
+                        title: shifted ? '主要矛盾转移' : '记录矛盾分析',
+                        detail: shifted ? `由“${previous.mainText}”转为“${mainText}”${version.note ? `\n依据：${version.note}` : ''}` : `主要矛盾：${mainText}${version.note ? `\n依据：${version.note}` : ''}`,
+                    }) || updated;
+                }
+                return this.updateCase(id, patch);
+            },
+
             deleteCase(id) {
                 writeCases(storage, readCases(storage).filter((problemCase) => problemCase.id !== id));
                 if (storage.getItem(ACTIVE_CASE_KEY) === id) storage.removeItem(ACTIVE_CASE_KEY);
@@ -175,6 +277,12 @@
         }
         if (Object.prototype.hasOwnProperty.call(patch, 'status')) {
             output.status = normalizeEnum(patch.status, VALID_STATUSES, 'active');
+        }
+        if (Object.prototype.hasOwnProperty.call(patch, 'investigations')) {
+            output.investigations = sanitizeInvestigations(patch.investigations);
+        }
+        if (Object.prototype.hasOwnProperty.call(patch, 'contradictionMap')) {
+            output.contradictionMap = sanitizeContradictionMap(patch.contradictionMap);
         }
         if (Object.prototype.hasOwnProperty.call(patch, 'activities')) {
             output.activities = Array.isArray(patch.activities) ? patch.activities.slice(0, 500) : [];
@@ -229,6 +337,63 @@
         }, {});
     }
 
+    // 旧数据只有“待调查事项”文本列表时，转换为待核实的调查条目。
+    function getInvestigations(problemCase) {
+        const list = sanitizeInvestigations(problemCase?.investigations);
+        if (list.length || !(problemCase?.investigationTasks || []).length) return list;
+        return problemCase.investigationTasks.map((question, index) => ({
+            id: `inv-legacy-${index}`,
+            question: sanitizeText(question, 300),
+            source: '',
+            method: '',
+            finding: '',
+            verdict: 'pending',
+            createdAt: problemCase.updatedAt || problemCase.createdAt || '',
+            updatedAt: problemCase.updatedAt || problemCase.createdAt || '',
+            resolvedAt: '',
+        }));
+    }
+
+    function pendingQuestions(investigations) {
+        return normalizeList(investigations.filter((item) => item.verdict === 'pending').map((item) => item.question));
+    }
+
+    function sanitizeInvestigations(list) {
+        if (!Array.isArray(list)) return [];
+        return list.slice(0, MAX_INVESTIGATIONS).map((item) => ({
+            id: sanitizeText(item?.id, 80) || `inv-${Math.random().toString(36).slice(2, 10)}`,
+            question: sanitizeText(item?.question, 300),
+            source: sanitizeText(item?.source, 300),
+            method: sanitizeText(item?.method, 300),
+            finding: sanitizeText(item?.finding, 2000),
+            verdict: normalizeEnum(item?.verdict, VALID_VERDICTS, 'pending'),
+            createdAt: sanitizeText(item?.createdAt, 40),
+            updatedAt: sanitizeText(item?.updatedAt, 40),
+            resolvedAt: sanitizeText(item?.resolvedAt, 40),
+        })).filter((item) => item.question);
+    }
+
+    function sanitizeContradictionMap(map) {
+        const items = Array.isArray(map?.items) ? map.items : [];
+        const versions = Array.isArray(map?.versions) ? map.versions : [];
+        return {
+            items: items.slice(0, MAX_CONTRADICTIONS).map((item) => ({
+                id: sanitizeText(item?.id, 80) || `con-${Math.random().toString(36).slice(2, 10)}`,
+                text: sanitizeText(item?.text, 300),
+                note: sanitizeText(item?.note, 500),
+            })).filter((item) => item.text),
+            mainAspect: sanitizeText(map?.mainAspect, 500),
+            versions: versions.slice(-MAX_VERSIONS).map((version) => ({
+                id: sanitizeText(version?.id, 80),
+                at: sanitizeText(version?.at, 40),
+                mainText: sanitizeText(version?.mainText, 300),
+                mainAspect: sanitizeText(version?.mainAspect, 500),
+                ranking: (Array.isArray(version?.ranking) ? version.ranking : []).slice(0, MAX_CONTRADICTIONS).map((text) => sanitizeText(text, 300)).filter(Boolean),
+                note: sanitizeText(version?.note, 500),
+            })).filter((version) => version.at && version.mainText),
+        };
+    }
+
     function createTimestamp(now) {
         return new Date(now()).toISOString();
     }
@@ -239,7 +404,11 @@
         VALID_ACTIVITY_TYPES,
         VALID_STAGES,
         VALID_STATUSES,
+        VALID_VERDICTS,
+        VERDICT_LABELS,
         createProblemCaseStore,
+        getInvestigations,
+        sanitizeContradictionMap,
         summarizeProblemCases,
     };
 });

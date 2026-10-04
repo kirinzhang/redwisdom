@@ -11,6 +11,52 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        #problemForm, #problemForm > * { min-width: 0; }
+        .loop-section { min-width: 0; }
+        .loop-section h2 { font-family: 'Ma Shan Zheng', cursive; }
+        .loop-hint { font-size: .85rem; color: #6b7280; line-height: 1.7; }
+        .loop-hint a { color: #BC2D22; }
+        .loop-chip { display: inline-flex; align-items: center; gap: .3rem; border-radius: 9999px; border: 1px solid #D6C6B0; background: rgba(255,255,255,.7); padding: .05rem .6rem; font-size: .75rem; color: #4b5563; }
+        .inv-card { border: 1px solid rgba(214,198,176,.8); border-left-width: 4px; border-radius: .5rem; background: #fff; padding: .75rem .9rem; display: grid; gap: .5rem; }
+        .inv-card[data-verdict="pending"] { border-left-color: #D6C6B0; }
+        .inv-card[data-verdict="confirmed"] { border-left-color: #2E7D4F; }
+        .inv-card[data-verdict="refuted"] { border-left-color: #BC2D22; }
+        .inv-card[data-verdict="partial"] { border-left-color: #C9861A; }
+        .verdict-group { display: inline-flex; flex-wrap: wrap; gap: .25rem; }
+        .verdict-group button { border: 1px solid #D6C6B0; border-radius: .375rem; padding: .1rem .55rem; font-size: .78rem; background: #fff; color: #4b5563; }
+        .verdict-group button[aria-pressed="true"][data-verdict="pending"] { background: #6b7280; border-color: #6b7280; color: #fff; }
+        .verdict-group button[aria-pressed="true"][data-verdict="confirmed"] { background: #2E7D4F; border-color: #2E7D4F; color: #fff; }
+        .verdict-group button[aria-pressed="true"][data-verdict="refuted"] { background: #BC2D22; border-color: #BC2D22; color: #fff; }
+        .verdict-group button[aria-pressed="true"][data-verdict="partial"] { background: #C9861A; border-color: #C9861A; color: #fff; }
+        .con-item { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .5rem; border: 1px solid rgba(214,198,176,.8); border-radius: .5rem; background: #fff; padding: .45rem .6rem; }
+        .con-item.is-main { border: 2px solid #BC2D22; background: rgba(188,45,34,.04); }
+        .con-item.is-dragging { opacity: .45; }
+        .con-item.is-over { box-shadow: 0 -3px 0 #BC2D22; }
+        .con-handle { cursor: grab; color: #9ca3af; font-size: 1rem; padding: 0 .2rem; user-select: none; }
+        .con-rank { font-size: .7rem; color: #9ca3af; white-space: nowrap; }
+        .con-item.is-main .con-rank { color: #BC2D22; font-weight: 700; }
+        .con-item input { width: 100%; border: 0; background: transparent; font-size: .9rem; padding: .15rem 0; }
+        .con-item input:focus { outline: 1px dashed #D6C6B0; }
+        .con-actions { display: inline-flex; gap: .15rem; }
+        .con-actions button { width: 1.75rem; height: 1.75rem; border-radius: .375rem; color: #6b7280; }
+        .con-actions button:hover { background: #F7F4ED; color: #BC2D22; }
+        .version-row { display: grid; grid-template-columns: 5.5rem 1fr; gap: .5rem; font-size: .82rem; line-height: 1.6; padding: .35rem 0; border-bottom: 1px dashed #D6C6B0; }
+        .version-row.is-shift b { color: #BC2D22; }
+        .spiral-wrap { max-width: 100%; overflow-x: auto; border: 1px solid rgba(214,198,176,.6); border-radius: .75rem; background: #fffdf8; }
+        .spiral-svg { display: block; margin: 0 auto; }
+        .spiral-svg text { font-family: 'Noto Serif SC', serif; }
+        .round-grid { max-width: 100%; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(250px, 1fr); gap: .75rem; overflow-x: auto; padding-bottom: .25rem; }
+        .round-card { border: 1px solid rgba(214,198,176,.8); border-radius: .75rem; background: #fff; padding: .8rem .9rem; font-size: .82rem; line-height: 1.7; }
+        .round-card h3 { font-weight: 700; font-size: .95rem; }
+        .round-card dt { margin-top: .45rem; font-size: .72rem; letter-spacing: .1em; color: #BC2D22; }
+        .round-card dd { margin: 0; color: #374151; }
+        .round-card.is-ongoing { border-style: dashed; }
+        .loop-btn { border-radius: .375rem; border: 1px solid #BC2D22; color: #BC2D22; padding: .35rem .8rem; font-size: .85rem; background: #fff; }
+        .loop-btn:hover { background: rgba(188,45,34,.06); }
+        .loop-btn.primary { background: #BC2D22; color: #F7F4ED; }
+        .loop-input { border-radius: .375rem; border: 1px solid rgba(214,198,176,.8); background: #fff; padding: .45rem .65rem; font-size: .875rem; width: 100%; }
+    </style>
 </head>
 
 <body class="min-h-[100dvh] bg-warm-rice font-serif text-ink-black">
@@ -87,13 +133,42 @@
                         <div class="grid gap-3 md:grid-cols-2">
                             <label class="grid gap-1 text-sm text-gray-600"><span>已知事实</span><textarea id="problemFacts" rows="4" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="只写可观察、可核实的材料"></textarea></label>
                             <label class="grid gap-1 text-sm text-gray-600"><span>判断与假设</span><textarea id="problemJudgments" rows="4" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="哪些结论还需要验证？"></textarea></label>
-                            <label class="grid gap-1 text-sm text-gray-600"><span>主要矛盾</span><textarea id="problemContradiction" rows="3" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="当前最决定局面的矛盾是什么？"></textarea></label>
-                            <label class="grid gap-1 text-sm text-gray-600"><span>待调查事项</span><textarea id="problemInvestigation" rows="3" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="每行一个需要补充的事实"></textarea></label>
                             <label class="grid gap-1 text-sm text-gray-600"><span>可用力量</span><textarea id="problemForces" rows="3" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="时间、人员、经验、资源和支持"></textarea></label>
                             <label class="grid gap-1 text-sm text-gray-600"><span>下一步行动</span><textarea id="problemNextAction" rows="3" class="rounded border border-dark-beige/80 bg-white px-3 py-2" placeholder="今天或本周可以验证判断的一步"></textarea></label>
                         </div>
                     </section>
 
+                    <section class="loop-section border-t border-dark-beige/60 pt-5" id="investigationSection">
+                        <div class="flex flex-wrap items-baseline justify-between gap-2">
+                            <h2 class="text-2xl text-china-red">调查清单</h2>
+                            <div id="investigationStats" class="flex flex-wrap gap-1.5"></div>
+                        </div>
+                        <p class="loop-hint mt-1">先写下要核实的判断，再去找直接了解情况的人和材料。结论放在调查之后，不放在调查之前。<a href="reading.html?concept=diaocha-yanjiu">没有调查，没有发言权 →</a></p>
+                        <div class="mt-3 grid gap-2 md:grid-cols-[2fr_1fr_1fr_auto]">
+                            <input id="invQuestion" class="loop-input" placeholder="要核实的判断，例如：客户流失主要是因为价格">
+                            <input id="invSource" class="loop-input" placeholder="找谁问 / 看什么">
+                            <input id="invMethod" class="loop-input" placeholder="怎么问 / 怎么查">
+                            <button id="addInvestigationBtn" type="button" class="loop-btn primary">加入清单</button>
+                        </div>
+                        <p id="investigationStatus" class="mt-1 text-xs text-gray-500" aria-live="polite"></p>
+                        <div id="investigationList" class="mt-3 grid gap-2"></div>
+                    </section>
+                    <section class="loop-section border-t border-dark-beige/60 pt-5" id="contradictionSection">
+                        <h2 class="text-2xl text-china-red">矛盾分析</h2>
+                        <p class="loop-hint mt-1">把这个问题里的矛盾都列出来，拖动或用箭头排序，排在最上面的就是你判断的主要矛盾。情况变了就重新排，再记录一版，看主要矛盾有没有转移。<a href="reading.html?concept=zhuyao-maodun">找出主要矛盾 →</a></p>
+                        <div class="mt-3 flex gap-2">
+                            <input id="conInput" class="loop-input" placeholder="例如：需求频繁变化 与 交付时间固定">
+                            <button id="addContradictionBtn" type="button" class="loop-btn primary whitespace-nowrap">添加</button>
+                        </div>
+                        <ol id="contradictionList" class="mt-3 grid gap-2" aria-label="矛盾排序，第一项为主要矛盾"></ol>
+                        <label class="mt-3 grid gap-1 text-sm text-gray-600"><span>主要矛盾的主要方面：哪一方起主导作用？</span><input id="conMainAspect" class="loop-input" placeholder="例如：需求变化这一方，交付时间是被动受影响的"></label>
+                        <div class="mt-3 grid gap-2 md:grid-cols-[1fr_auto]">
+                            <input id="conVersionNote" class="loop-input" placeholder="这一版判断的依据（可选），例如：访谈了三位客户之后">
+                            <button id="recordVersionBtn" type="button" class="loop-btn">记录这一版判断</button>
+                        </div>
+                        <p id="contradictionStatus" class="mt-1 text-xs text-gray-500" aria-live="polite"></p>
+                        <div id="versionList" class="mt-2"></div>
+                    </section>
                     <section class="border-t border-dark-beige/60 pt-5">
                         <h2 class="font-mao text-2xl text-china-red">行动复盘</h2>
                         <p class="mt-1 text-sm text-gray-600">用结果和证据检查原判断，不把“做过了”当成“有效了”。</p>
@@ -111,6 +186,15 @@
                         </div>
                     </section>
 
+                    <section class="loop-section border-t border-dark-beige/60 pt-5" id="spiralSection">
+                        <div class="flex flex-wrap items-baseline justify-between gap-2">
+                            <h2 class="text-2xl text-china-red">实践—认识螺旋</h2>
+                            <p id="spiralStats" class="text-xs text-gray-500"></p>
+                        </div>
+                        <p class="loop-hint mt-1">每做一次复盘，就完成一轮“认识 → 实践 → 检验 → 再认识”。这里根据你的调查、矛盾分析、实践和复盘自动整理，不需要额外填写。<a href="reading.html?concept=shijian">实践、认识、再实践、再认识 →</a></p>
+                        <div class="spiral-wrap mt-3"><svg id="spiralSvg" class="spiral-svg" role="img" aria-label="实践认识螺旋图"></svg></div>
+                        <div id="roundGrid" class="round-grid mt-3"></div>
+                    </section>
                     <div class="flex flex-wrap gap-2 border-b border-dark-beige/60 pb-5">
                         <button class="rounded bg-china-red px-4 py-2 text-warm-rice hover:bg-red-800" type="submit">保存问题</button>
                         <a id="askWithProblem" class="rounded border border-china-red px-4 py-2 text-china-red hover:bg-red-50" href="chat.html">用 AI 分析</a>
@@ -129,6 +213,8 @@
                                     <option value="note">阅读笔记</option>
                                     <option value="practice">实践</option>
                                     <option value="review">复盘</option>
+                                    <option value="evidence">调查结果</option>
+                                    <option value="analysis">矛盾分析</option>
                                 </select>
                             </label>
                         </div>
@@ -157,6 +243,8 @@
     <script src="js/register-pwa.js?v=4"></script>
     <script src="js/i18n.js"></script>
     <script src="js/problem-case-store.js"></script>
+    <script src="js/cognition-spiral.js"></script>
+    <script src="js/practice-loop-ui.js"></script>
     <script>
         const store = window.RedWisdomProblemCases.createProblemCaseStore(localStorage);
         const localeSelect = document.getElementById('problemLocaleSelect');
@@ -168,10 +256,15 @@
             window.RedWisdomI18n.applyTranslations(document, currentLocale);
         });
         const form = document.getElementById('problemForm');
+        const practiceLoop = window.RedWisdomPracticeLoopUI.mount({
+            store,
+            getCaseId: () => document.getElementById('problemId').value,
+            onActivitiesChanged: (updated) => renderActivities(updated.activities || []),
+        });
         const emptyState = document.getElementById('emptyState');
         const fieldIds = {
             title: 'problemTitle', realProblem: 'realProblem', goal: 'problemGoal', facts: 'problemFacts',
-            judgments: 'problemJudgments', mainContradiction: 'problemContradiction',
+            judgments: 'problemJudgments',
             availableForces: 'problemForces', nextAction: 'problemNextAction', stage: 'problemStage', status: 'problemStatus'
         };
         const stageLabels = { define: '明确问题', investigate: '调查事实', analyze: '分析矛盾', act: '采取行动', review: '复盘检验' };
@@ -202,13 +295,13 @@
             form.classList.remove('hidden');
             document.getElementById('problemId').value = selected.id;
             Object.entries(fieldIds).forEach(([key, id]) => { document.getElementById(id).value = selected[key] || ''; });
-            document.getElementById('problemInvestigation').value = (selected.investigationTasks || []).join('\n');
             document.getElementById('reviewNextAction').value = selected.nextAction || '';
             const encodedId = encodeURIComponent(selected.id);
             document.getElementById('askWithProblem').href = `chat.html?case=${encodedId}`;
             document.getElementById('readWithProblem').href = `reading.html?case=${encodedId}`;
             document.getElementById('practiceWithProblem').href = `practice.html?case=${encodedId}`;
             renderActivities(selected.activities || []);
+            practiceLoop.render(selected);
         }
 
         function renderList(cases) {
@@ -273,7 +366,6 @@
         function saveProblemFields(id) {
             const patch = {};
             Object.entries(fieldIds).forEach(([key, fieldId]) => { patch[key] = document.getElementById(fieldId).value; });
-            patch.investigationTasks = document.getElementById('problemInvestigation').value.split(/\r?\n/);
             return store.updateCase(id, patch);
         }
 

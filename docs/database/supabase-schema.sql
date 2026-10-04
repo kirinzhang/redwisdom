@@ -29,6 +29,8 @@ create table if not exists public.problem_cases (
     stage text not null default 'define',
     status text not null default 'active',
     activities jsonb not null default '[]'::jsonb,
+    investigations jsonb not null default '[]'::jsonb,
+    contradiction_map jsonb not null default '{}'::jsonb,
     created_at timestamptz not null default now(),
     updated_at timestamptz not null default now(),
     unique (user_id, local_id),

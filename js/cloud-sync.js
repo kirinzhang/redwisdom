@@ -36,6 +36,8 @@
             stage: problemCase.stage || 'define',
             status: problemCase.status || 'active',
             activities: problemCase.activities || [],
+            investigations: problemCase.investigations || [],
+            contradiction_map: problemCase.contradictionMap || {},
             created_at: problemCase.createdAt,
             updated_at: problemCase.updatedAt,
         };
@@ -58,6 +60,8 @@
             stage: row.stage || 'define',
             status: row.status || 'active',
             activities: row.activities || [],
+            investigations: row.investigations || [],
+            contradictionMap: row.contradiction_map || {},
             createdAt: row.created_at,
             updatedAt: row.updated_at,
         };
@@ -566,6 +570,11 @@
         return counts;
     }
 
+    // 云端数据库尚未执行新增列的迁移时，去掉这些列重试，保证其他字段照常同步。
+    const OPTIONAL_COLUMNS = {
+        problem_cases: ['investigations', 'contradiction_map'],
+    };
+
     async function upsertRows(client, table, rows, options) {
         if (rows.length === 0) return 0;
 
@@ -573,7 +582,19 @@
             .from(table)
             .upsert(rows, options);
 
-        if (error) throw error;
+        if (error) {
+            const optional = OPTIONAL_COLUMNS[table] || [];
+            const missing = optional.filter((column) => String(error.message || '').includes(column));
+            if (!missing.length) throw error;
+            const trimmed = rows.map((row) => {
+                const copy = { ...row };
+                optional.forEach((column) => { delete copy[column]; });
+                return copy;
+            });
+            const retry = await client.from(table).upsert(trimmed, options);
+            if (retry.error) throw retry.error;
+            console.warn(`云端 ${table} 缺少列 ${optional.join(', ')}，这些字段暂只保存在本机。请执行 docs/database/migrations/2026-10-04-practice-loop.sql。`);
+        }
         return rows.length;
     }
 
