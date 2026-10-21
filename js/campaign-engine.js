@@ -668,7 +668,10 @@ o=vec4(c,uColor.a);}`;
         // 竖屏时把相机拉远一些，保证全景能装下整个战场。
         const fit = () => { const r = canvas.getBoundingClientRect(), a = r.width && r.height ? r.width / r.height : 1.4; return clamp(1.3 / a, 1, 1.9); };
         const PRESETS = {
-            all: () => (GEO.camera
+            all: () => (GEO.camera && GEO.camera.portrait && fit() > 1.2
+                // 竖屏可单独指定取景（例如只框住事件集中的中东部），不再整体拉远
+                ? { th: GEO.camera.portrait.th ?? GEO.camera.th ?? 0.32, ph: GEO.camera.portrait.ph ?? GEO.camera.ph ?? 0.86, r: SIZE * GEO.camera.portrait.r, tg: camAt(GEO.camera.portrait.at) }
+                : GEO.camera
                 ? { th: GEO.camera.th ?? 0.32, ph: GEO.camera.ph ?? 0.86, r: SIZE * GEO.camera.r * fit(), tg: camAt(GEO.camera.at) }
                 : { th: 0.32, ph: 0.86, r: SIZE * 1.04 * fit(), tg: [0, 0, DD * 0.04] }),
             top: () => ({ th: 0, ph: 0.06, r: SIZE * (OVERVIEW ? 0.95 : 1.18) * fit(), tg: GEO.camera ? camAt(GEO.camera.at) : [0, 0, 0] }),

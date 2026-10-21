@@ -19,7 +19,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/favicon.png">
 
-    <link rel="stylesheet" href="assets/tailwind.css?v=3">
+    <link rel="stylesheet" href="assets/tailwind.css?v=4">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -339,10 +339,10 @@
         .tm-bands { position: absolute; left: 0; right: 0; top: 0; height: 14px; }
         .tm-band { position: absolute; top: 0; height: 100%; border-radius: 3px; overflow: hidden; font-size: 10px; line-height: 14px; color: #fff; padding: 0 4px; white-space: nowrap; }
         .tm-band em { font-style: normal; }
-        .tm-band-revolution { background: #b53a2c; }
-        .tm-band-socialism { background: #c47a2c; }
-        .tm-band-reform { background: #4f7a5a; }
-        .tm-band-new-era { background: #3d5f8f; }
+        .tm-band-revolution-founding { background: #c25a3a; }
+        .tm-band-revolution-land { background: #b53a2c; }
+        .tm-band-revolution-anti-japan { background: #8a4a2c; }
+        .tm-band-revolution-liberation { background: #a3281e; }
         .tm-ticks { position: absolute; left: 0; right: 0; top: 18px; height: 18px; }
         .tm-tick { position: absolute; bottom: 0; width: 5px; height: 9px; margin-left: -2.5px; border-radius: 1px; background: rgba(156,31,21,.55); }
         .tm-tick::after { content: ''; position: absolute; left: -3px; right: -3px; top: -6px; bottom: -4px; }
@@ -356,23 +356,43 @@
         .tm-years span { position: absolute; transform: translateX(-50%); font-size: 10px; color: #8a7560; }
         .tm-axis-note { margin-top: .5rem; font-size: 11px; line-height: 1.6; color: #8a7560; }
         @media (max-width: 639px) {
-            .tm-view { height: 50vh; min-height: 320px; }
-            .tm-caption { right: .5rem; left: .5rem; top: .5rem; max-width: none; padding: .4rem .65rem; }
-            .tm-cap-title { font-size: .9375rem; }
-            .tm-presets { top: auto; right: auto; left: .5rem; bottom: .5rem; }
-            .tm-axis { padding: .6rem .6rem .4rem; position: sticky; bottom: calc(4.6rem + env(safe-area-inset-bottom)); z-index: 20; background: rgba(250,247,240,.97); box-shadow: 0 -4px 16px rgba(0,0,0,.08); }
-            .tm-axis-note { display: none; }
-            .tm-axis-row { flex-wrap: wrap; gap: .5rem; }
-            .tm-track { order: 3; flex-basis: 100%; }
-            .tm-now { margin-left: auto; }
-            .tm-band em { display: none; }
-            .tm-years span:nth-child(even) { display: none; }
-            .tm-presets .view-btn[data-tm-preset] { display: none; }
-            .tm-card { left: .5rem; right: .5rem; width: auto; bottom: .5rem; max-height: 70%; }
-            .tm-inset svg { width: 56px; height: auto; }
-            .tm-help { display: none; }
-            .tm-now { min-width: 0; font-size: .8125rem; }
+            /* 手机：地图上只留当前事件，控件收进时间轴，简介改为底部抽屉 */
+            .tm-view { height: 54vh; min-height: 300px; border-radius: .6rem; }
+            .tm-caption { left: .5rem; right: .5rem; top: .5rem; max-width: none; flex-wrap: nowrap; align-items: center; gap: .5rem; padding: .4rem .6rem; border-left-width: 3px; }
+            .tm-cap-date { flex: none; font-size: .75rem; }
+            .tm-cap-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .875rem; }
+            .tm-cap-place { display: none; }
+            .tm-cap-more { flex: none; }
+            .tm-cap-more-text { display: none; }
+            .tm-presets, .tm-help { display: none; }
+            .tm-inset { right: .5rem; bottom: .5rem; }
+            .tm-inset svg { width: 46px; height: auto; }
+            .sb-lb.hist { font-size: 11px; padding: 1px 6px; }
+            .sb-lb.hist:not(.is-active) { display: none !important; }
             .sb-lb.hist small { display: none; }
+            .sb-lb.hist.is-active { font-size: 12.5px; padding: 2px 8px; }
+            .tm-axis { position: sticky; bottom: calc(4.6rem + env(safe-area-inset-bottom)); z-index: 20; margin-top: .5rem; padding: .5rem .6rem .35rem; background: rgba(250,247,240,.97); box-shadow: 0 -4px 16px rgba(0,0,0,.06); }
+            .tm-axis-row { gap: .5rem; }
+            .tm-play { width: 2.25rem; height: 2.25rem; padding: 0; font-size: 0; display: grid; place-items: center; border-radius: 9999px; }
+            .tm-play::before { content: '▶'; font-size: .8rem; }
+            .tm-play[aria-pressed="true"]::before { content: '❚❚'; font-size: .7rem; }
+            .tm-track { height: 46px; }
+            .tm-bands { height: 6px; }
+            .tm-band { border-radius: 2px; }
+            .tm-band em { display: none; }
+            .tm-ticks { top: 9px; height: 14px; }
+            .tm-tick { width: 3px; margin-left: -1.5px; height: 7px; }
+            .tm-tick.major { height: 12px; }
+            .tm-range { top: 20px; }
+            .tm-years { top: 35px; }
+            .tm-now { min-width: 0; font-size: .8125rem; }
+            .tm-axis-note, .tm-footnote { display: none; }
+            .tm-card { position: fixed; left: 0; right: 0; bottom: calc(4.6rem + env(safe-area-inset-bottom)); width: auto; max-height: 56vh; border-radius: 1rem 1rem 0 0; border-top-width: 0; padding: 1.3rem 1.1rem 1rem; z-index: 35; box-shadow: 0 -10px 30px rgba(0,0,0,.18); }
+            .tm-card::before { content: ''; position: absolute; left: 50%; top: .5rem; width: 2.5rem; height: 4px; margin-left: -1.25rem; border-radius: 9999px; background: #d8cbb8; }
+            .tm-card h3 { font-size: 1.0625rem; }
+            .tm-close { top: .6rem; right: .6rem; }
+            #timelineTabs { margin-bottom: .75rem; gap: .25rem; }
+            #timelineTabs .tab-button { padding: .4rem .8rem; font-size: .8125rem; }
         }
     </style>
 </head>
@@ -380,8 +400,8 @@
 <body class="bg-warm-rice min-h-screen pb-24 md:pb-0">
 
     <!-- Header -->
-    <header class="sticky top-0 z-30 border-b border-dark-beige/60 bg-warm-rice/95 backdrop-blur">
-        <div class="mx-auto max-w-4xl px-4 py-4 md:px-6">
+    <header class="z-30 border-b border-dark-beige/60 bg-warm-rice/95 backdrop-blur md:sticky md:top-0">
+        <div class="mx-auto max-w-4xl px-4 py-3 md:px-6 md:py-4">
             <div class="flex items-center justify-between gap-3">
                 <a href="reading.html"
                     class="inline-flex items-center gap-1.5 text-sm text-gray-600 hover:text-china-red transition">
@@ -394,10 +414,10 @@
                 <a href="index.html" class="text-sm text-gray-600 hover:text-china-red transition">首页</a>
             </div>
             <div class="mt-3 flex flex-wrap items-baseline justify-between gap-2">
-                <h1 class="font-mao text-3xl text-china-red md:text-4xl">党史时间线</h1>
-                <p class="text-sm text-gray-500">1919—今 · 沙盘地图 · 大事汇总 · <a href="campaign.html" class="text-china-red hover:underline">长征沙盘</a></p>
+                <h1 class="font-mao text-2xl text-china-red sm:text-3xl md:text-4xl">党史时间线</h1>
+                <p class="text-sm text-gray-500"> 沙盘地图 1919—1949 · 大事汇总至今 · <a href="campaign.html" class="text-china-red hover:underline">长征沙盘</a></p>
             </div>
-            <p class="mt-1 text-sm leading-relaxed text-gray-600">
+            <p class="mt-1 hidden text-sm leading-relaxed text-gray-600 sm:block">
                 与《毛选》对照学习：每条大事标注了对应原文，点击直达阅读页。框架依据 2021 年第三个历史决议的四时期划分。
             </p>
         </div>
@@ -440,9 +460,9 @@
                     </div>
                     <div class="tm-now" data-tm="now" aria-live="polite"></div>
                 </div>
-                <p class="tm-axis-note">刻度为每一件大事（高刻度为重大节点，灰色为全国性事件、地图上不标点）。拖动或点击刻度，地图会在事件发生地标注；←/→ 键逐件切换。</p>
+                <p class="tm-axis-note">刻度为 1919 年五四运动到 1949 年新中国成立的每一件大事（高刻度为重大节点，灰色为地图上不标点的事件）；新中国成立后的大事见「时间线」。拖动或点击刻度，地图会在事件发生地标注；←/→ 键逐件切换。</p>
             </div>
-            <p class="mt-2 text-xs leading-relaxed text-gray-500">地图地形与国界、省界依据 GEBCO 2024 与 Natural Earth 绘制，行政区划为今日区划，地点为大致位置；本图为教学示意图。</p>
+            <p class="tm-footnote mt-2 text-xs leading-relaxed text-gray-500">地图地形与国界、省界依据 GEBCO 2024 与 Natural Earth 绘制，行政区划为今日区划，地点为大致位置；本图为教学示意图。</p>
         </section>
 
         <!-- Timeline view -->

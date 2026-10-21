@@ -32,14 +32,18 @@ test('every event either has a place on the map or says where it happened', () =
 
 test('map events run in date order and the scene marks every located event', () => {
     const events = tm.buildMapEvents(data);
-    assert.ok(events.length >= 100, `enough events (${events.length})`);
+    assert.ok(events.length >= 45, `enough events (${events.length})`);
+    assert.equal(events[0].title, '五四运动', 'the map starts with the May Fourth Movement');
+    assert.equal(events[events.length - 1].title, '中华人民共和国成立', 'the map ends with the founding of the PRC');
+    assert.ok(events.every((e) => e.year <= 1949), 'the map stops at 1949');
+    assert.ok(tm.buildMapEvents(data, { until: 2100 }).length > events.length, 'later events stay in the data for the list view');
     events.forEach((e, i) => {
         assert.equal(e.index, i);
         if (i > 0) assert.ok(e.value >= events[i - 1].value, `${e.title} is not earlier than ${events[i - 1].title}`);
     });
     const located = events.filter((e) => e.places.length);
-    assert.ok(located.length / events.length > 0.8, 'most events are located');
-    assert.ok(events.filter((e) => e.major).length >= 25, 'major events are flagged for the axis');
+    assert.ok(located.length / events.length > 0.9, 'almost every revolutionary-era event is located');
+    assert.ok(events.filter((e) => e.major).length >= 15, 'major events are flagged for the axis');
     const scene = tm.buildScene(events);
     assert.equal(scene.maxDay, events.length - 1);
     assert.equal(scene.units.length, 0);
@@ -50,7 +54,9 @@ test('map events run in date order and the scene marks every located event', () 
     assert.equal(tm.shortTitle('中共一大（上海→嘉兴南湖）'), '中共一大');
     const marks = tm.decadeMarks(events);
     assert.equal(marks[0].label, '1919');
-    assert.deepEqual(tm.periodBands(events).map((b) => b.id), data.PERIODS.map((p) => p.id));
+    assert.deepEqual(tm.stageBands(events).map((b) => b.label), ['建党与大革命', '土地革命战争', '全民族抗日战争', '解放战争']);
+    assert.equal(tm.compactDate({ date: '1945.8.15 / 9.2' }), '1945.8');
+    assert.equal(tm.compactDate({ date: '1933.9–1934.10' }), '1933.9');
 });
 
 test('the timeline page opens on the map tab and loads the map scripts', () => {

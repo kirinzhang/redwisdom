@@ -22,8 +22,12 @@
         return { year, month, day, value };
     }
 
-    // 按时间排序的全部大事；每条带 index（时间轴位置）和地点坐标（可能为空）。
-    function buildMapEvents(data) {
+    // 地图只讲到新中国成立：1919 年五四运动 — 1949 年 10 月开国大典。
+    const MAP_START = 1919;
+    const MAP_END = 1949 + 9 / 12;
+
+    // 按时间排序的大事（默认只取 1919—1949.10）；每条带 index（时间轴位置）和地点坐标（可能为空）。
+    function buildMapEvents(data, { from = MAP_START, until = MAP_END } = {}) {
         const places = data.PLACES || {};
         const list = [];
         let order = 0;
@@ -31,7 +35,7 @@
             for (const stage of period.stages) {
                 for (const event of stage.events) {
                     const parsed = parseEventDate(event.date);
-                    if (!parsed) continue;
+                    if (!parsed || parsed.value < from || parsed.value > until) continue;
                     const names = event.place ? [].concat(event.place) : [];
                     list.push({
                         ...event,
@@ -69,7 +73,7 @@
                 bbox: [73.5, 18, 134.8, 53.6],
                 vex: 22,
                 grid: 10,
-                camera: { at: [110.5, 32.5], r: 0.6, th: 0.06, ph: 0.6 },
+                camera: { at: [111.5, 31.2], r: 0.5, th: 0.06, ph: 0.62, portrait: { at: [112, 31.4], r: 0.62, ph: 0.5 } },
                 lowR: 0.22,
                 rivers: [],
                 regions: [],
@@ -87,30 +91,40 @@
         return String(title || '').replace(/（[^）]*）/g, '').trim() || String(title || '');
     }
 
-    // 时间轴刻度上的年代标签：每个年代第一次出现的事件位置
-    function decadeMarks(events) {
+    // 时间轴上的年份标签：每 5 年一个，取该年份之后的第一件事的位置；太挤的省略
+    function decadeMarks(events, step = 5) {
         const marks = [];
-        let last = null;
-        const gap = Math.max(2, events.length * 0.035);
-        for (const event of events) {
-            const decade = Math.floor(event.year / 10) * 10;
-            if (decade === last) continue;
-            last = decade;
+        if (!events.length) return marks;
+        const gap = Math.max(2, events.length * 0.09);
+        marks.push({ index: 0, label: String(events[0].year) });
+        const first = Math.ceil((events[0].year + 1) / step) * step;
+        for (let y = first; y <= events[events.length - 1].year; y += step) {
+            const e = events.find((x) => x.year >= y);
+            if (!e) break;
             const prev = marks[marks.length - 1];
-            if (prev && event.index - prev.index < gap) continue; // 太挤的年代标签省略
-            marks.push({ index: event.index, label: String(marks.length ? decade : event.year) });
+            if (e.index - prev.index < gap) continue;
+            marks.push({ index: e.index, label: String(y) });
         }
+        const lastE = events[events.length - 1];
+        if (lastE.index - marks[marks.length - 1].index >= gap && String(lastE.year) !== marks[marks.length - 1].label) marks.push({ index: lastE.index, label: String(lastE.year) });
         return marks;
     }
 
-    function periodBands(events) {
+    // 时间轴色带：按阶段（建党与大革命、土地革命战争、全民族抗日战争、解放战争）
+    function stageBands(events) {
         const bands = [];
         for (const event of events) {
             const last = bands[bands.length - 1];
-            if (last && last.id === event.period.id) last.end = event.index;
-            else bands.push({ id: event.period.id, label: event.period.label, start: event.index, end: event.index });
+            if (last && last.id === event.stage.id) last.end = event.index;
+            else bands.push({ id: event.stage.id, label: event.stage.label, start: event.index, end: event.index });
         }
         return bands;
+    }
+
+    // 紧凑日期：'1945.8.15 / 9.2' → '1945.8'，'1933.9–1934.10' → '1933.9'
+    function compactDate(event) {
+        const p = parseEventDate(event.date);
+        return p ? `${p.year}${p.month && !/年底/.test(event.date) ? `.${p.month}` : ''}` : String(event.date || '');
     }
 
     /* ---------- 浏览器端 ---------- */
@@ -143,7 +157,7 @@
 
         // 时间轴：时期色带、事件刻度、年代标签
         const pct = (i) => `${(i / (N - 1) * 100).toFixed(3)}%`;
-        $('[data-tm="bands"]').innerHTML = periodBands(events).map((b) =>
+        $('[data-tm="bands"]').innerHTML = stageBands(events).map((b) =>
             `<span class="tm-band tm-band-${escapeHtml(b.id)}" style="left:${pct(b.start)};width:calc(${pct(b.end)} - ${pct(b.start)})" title="${escapeHtml(b.label)}"><em>${escapeHtml(b.label)}</em></span>`).join('');
         $('[data-tm="ticks"]').innerHTML = events.map((e) =>
             `<button type="button" class="tm-tick${e.major ? ' major' : ''}${e.places.length ? '' : ' no-place'}" style="left:${pct(e.index)}" data-index="${e.index}" title="${escapeHtml(`${e.date} ${e.title}`)}" aria-label="${escapeHtml(`${e.date} ${e.title}`)}"></button>`).join('');
@@ -181,8 +195,8 @@
             if (i === current) return;
             current = i;
             const e = events[i];
-            nowBox.textContent = e.date;
-            caption.innerHTML = `<span class="tm-cap-date">${escapeHtml(e.date)}</span><span class="tm-cap-title">${escapeHtml(e.title)}</span><span class="tm-cap-place">📍 ${escapeHtml(placeText(e))}</span><span class="tm-cap-more">查看简介 ›</span>`;
+            nowBox.textContent = compactDate(e);
+            caption.innerHTML = `<span class="tm-cap-date">${escapeHtml(compactDate(e))}</span><span class="tm-cap-title">${escapeHtml(e.title)}</span><span class="tm-cap-place">📍 ${escapeHtml(placeText(e))}</span><span class="tm-cap-more"><span class="tm-cap-more-text">查看简介</span> ›</span>`;
             caption.dataset.index = String(i);
             rootEl.querySelectorAll('.tm-tick.is-active').forEach((el) => el.classList.remove('is-active'));
             const tick = rootEl.querySelector(`.tm-tick[data-index="${i}"]`);
@@ -275,5 +289,5 @@
         return { start, seek, setPlaying, events, get sandbox() { return sandbox; }, open: renderCard };
     }
 
-    return { parseEventDate, buildMapEvents, buildScene, shortTitle, decadeMarks, periodBands, mount };
+    return { MAP_START, MAP_END, parseEventDate, buildMapEvents, buildScene, shortTitle, compactDate, decadeMarks, stageBands, mount };
 });
