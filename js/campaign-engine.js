@@ -6,7 +6,8 @@
     // 投影为中国常用的 Albers 等积圆锥投影（中央经线 105°E，标准纬线 25°N、47°N）。
     // 用法：
     //   const map = await RedWisdomSandbox.loadMap(key);
-    //   RedWisdomSandbox.create({ canvas, labelLayer, campaign, map, onUnitClick, onFollowChange, onCampaignClick })
+    //   RedWisdomSandbox.create({ canvas, labelLayer, campaign, map, onUnitClick, onFollowChange, onCampaignClick, onMarkerClick })
+    // campaign.units 可以为空（例如党史地图只标注事件，不推演部队）。
     // 返回 { setTime, setLayers, setExaggeration, exaggerationFactor, preset, setFollow, isFollowing, destroy }。
 
     const smooth = (t) => t * t * (3 - 2 * t);
@@ -220,6 +221,7 @@ o=vec4(c,uColor.a);}`;
         const onUnitClick = opts.onUnitClick || (() => {});
         const onFollowChange = opts.onFollowChange || (() => {});
         const onCampaignClick = opts.onCampaignClick || (() => {});
+        const onMarkerClick = opts.onMarkerClick || (() => {});
         if (!map || !map.dem || !map.vec) throw new Error('map data is required');
         const gl = canvas.getContext('webgl2', { antialias: true });
         if (!gl) return null;
@@ -594,8 +596,8 @@ o=vec4(c,uColor.a);}`;
             }
             const l = k[k.length - 1]; return [l[1], l[2], l[3] ?? 1];
         }
-        const MAIN = UNITS.find((u) => u.main) || UNITS[0];
-        const MAIN_DENSE = dense(MAIN.k.map((k) => [k[1], k[2]]), MAIN.k.map((k) => k[0]));
+        const MAIN = UNITS.find((u) => u.main) || UNITS[0] || null;
+        const MAIN_DENSE = MAIN ? dense(MAIN.k.map((k) => [k[1], k[2]]), MAIN.k.map((k) => k[0])) : [];
         const TRAIL_SRC = UNITS.filter((u) => u !== MAIN && u.k.length > 2).map((u) => {
             const t0 = Math.max(u.k[0][0], Number.isFinite(u.from) ? u.from : u.k[0][0]), t1 = Math.min(u.k[u.k.length - 1][0], u.until), step = (C.maxDay || 1) / 170, nodes = [], times = [];
             for (let t = t0; t <= t1 + 1e-6; t += step) { const s = unitAt(u, t); nodes.push([s[0], s[1]]); times.push(t); }
@@ -609,8 +611,10 @@ o=vec4(c,uColor.a);}`;
             freeMesh(terrain); freeMesh(route && route.m); freeMesh(ghost);
             trails.forEach((t) => freeMesh(t.m)); overlayMeshes.forEach((o) => freeMesh(o.m));
             terrain = mesh(terrainGeom());
-            const tg = tubeGeom(MAIN_DENSE.map((s) => P(s.ll, 0.38 * S)), 0.3 * S); route = { m: mesh(tg.g), per: tg.per };
-            ghost = mesh(dashGeom(MAIN_DENSE.map((s) => P(s.ll, 0.22 * S)), { w: 0.16 * S, h: 0.1 * S, dash: 0.55 * S, gap: 0.6 * S }).g);
+            if (MAIN_DENSE.length > 1) {
+                const tg = tubeGeom(MAIN_DENSE.map((s) => P(s.ll, 0.38 * S)), 0.3 * S); route = { m: mesh(tg.g), per: tg.per };
+                ghost = mesh(dashGeom(MAIN_DENSE.map((s) => P(s.ll, 0.22 * S)), { w: 0.16 * S, h: 0.1 * S, dash: 0.55 * S, gap: 0.6 * S }).g);
+            } else { route = null; ghost = null; }
             trails = TRAIL_SRC.map(({ u, d }) => { const g = dashGeom(d.map((s) => P(s.ll, 0.2 * S)), { w: 0.14 * S, h: 0.08 * S, dash: 0.4 * S, gap: 0.45 * S }); return { u, m: mesh(g.g), times: g.idx.map((k) => d[k].t) }; });
             overlayMeshes = (C.overlays || []).filter((o) => o.type === 'dash').map((o) => {
                 const pts = dense(o.nodes).map((s) => P(s.ll, 0.36));
@@ -630,13 +634,19 @@ o=vec4(c,uColor.a);}`;
             let L;
             if (m.type === 'crossing') { L = label(`<i>${escapeHtml(m.n)}</i><span>${escapeHtml(m.label)}</span>`, 'xing', () => P(m.at, 3.6 * S), { ax: -0.15, dy: -2 }); L.txt = L.e.querySelector('span'); L.e.title = m.label; }
             else if (m.type === 'battle') L = label(escapeHtml(m.label), 'battle', () => P(m.at, 1.4 * S), { ax: 0, ay: -0.5 });
-            else if (m.type === 'campaign') {
+            else if (m.type === 'history') {
+                L = label(`<b>${escapeHtml(m.date)}</b>${escapeHtml(m.label)}<small>${escapeHtml(m.place)}</small>`, `hist${m.major ? ' major' : ''}`, () => P(m.at, (m.major ? 2.6 : 2.0) * S), { tag: 'button', ax: -0.5, ay: -1 });
+                L.e.type = 'button'; L.e.title = `${m.date} ${m.label}：点击查看简介`;
+                L.e.addEventListener('click', () => onMarkerClick(m));
+                L.hist = m;
+            } else if (m.type === 'campaign') {
                 L = label(`▶ ${escapeHtml(m.label)}`, 'camp', () => P(m.at, 2.6 * S), { tag: 'button', ax: -0.5, ay: -1 });
                 L.e.type = 'button'; L.e.title = `进入沙盘：${m.label}`;
                 L.e.addEventListener('click', () => onCampaignClick(m.id));
             } else L = label(escapeHtml(m.label), 'event', () => P(m.at, 2.4 * S), { ax: 0, ay: -0.5 });
             return { m, L };
         });
+        const histL = markerL.filter(({ L }) => L.hist).map(({ L }) => L);
         const unitPos = new Map();
         const unitL = UNITS.map((u) => {
             const f = C.factions[u.faction];
@@ -664,7 +674,7 @@ o=vec4(c,uColor.a);}`;
             top: () => ({ th: 0, ph: 0.06, r: SIZE * (OVERVIEW ? 0.95 : 1.18) * fit(), tg: GEO.camera ? camAt(GEO.camera.at) : [0, 0, 0] }),
             low: () => ({ th: -0.55, ph: 1.12, r: SIZE * (GEO.lowR || 0.46), tg: [mainPos[0], 0, mainPos[2]] }),
         };
-        let mainPos = P([MAIN.k[0][1], MAIN.k[0][2]]);
+        let mainPos = MAIN ? P([MAIN.k[0][1], MAIN.k[0][2]]) : camAt(GEO.camera ? GEO.camera.at : [(L0 + L1) / 2, (B0 + B1) / 2]);
         const cam = PRESETS.all(), camT = PRESETS.all();
         const RMIN = SIZE * (OVERVIEW ? 0.08 : 0.2), RMAX = SIZE * 2.2;
         let follow = false;
@@ -707,15 +717,32 @@ o=vec4(c,uColor.a);}`;
             const W = Math.round(vw * dpr), H = Math.round(vh * dpr);
             if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
         }
+        // 党史事件：时间轴前后 HWIN 个事件内的标注可见；同一地点只显示离当前最近的一条，当前事件高亮。
+        const HWIN = C.historyWindow || 2.5;
+        const HIST = (C.markers || []).filter((m) => m.type === 'history');
+        function historyState() {
+            const out = new Map();
+            if (!HIST.length) return out;
+            const activeDay = Math.round(T), best = new Map();
+            for (const m of HIST) {
+                const d = Math.abs(T - m.day);
+                if (d > HWIN) continue;
+                out.set(m, { a: 1 - d / HWIN, active: m.day === activeDay, label: false });
+                const cur = best.get(m.place);
+                if (!cur || (cur.day !== activeDay && (m.day === activeDay || Math.abs(T - cur.day) > d))) best.set(m.place, m);
+            }
+            for (const m of best.values()) out.get(m).label = true;
+            return out;
+        }
         const fade = (t, a, b, r = 0.8) => (t < a - r || t > b + r ? 0 : t < a ? (t - (a - r)) / r : t > b ? 1 - (t - b) / r : 1);
         const dayScale = C.maxDay / 86;
 
         function frame(now) {
             raf = requestAnimationFrame(frame);
             const wave = reduce ? 0 : now / 1000, pulse = reduce ? 0.5 : (now / 1400) % 1;
-            const m0 = unitAt(MAIN, T); mainPos = P([m0[0], m0[1]]);
+            if (MAIN) { const m0 = unitAt(MAIN, T); mainPos = P([m0[0], m0[1]]); }
             UNITS.forEach((u) => { const s = unitAt(u, T); const p = P([s[0], s[1]]); p.s = s[2]; p.on = T >= u.from && T <= u.until; unitPos.set(u.index, p); });
-            if (follow) { camT.tg[0] += (mainPos[0] - camT.tg[0]) * 0.04; camT.tg[2] += (mainPos[2] - camT.tg[2]) * 0.04; }
+            if (follow && MAIN) { camT.tg[0] += (mainPos[0] - camT.tg[0]) * 0.04; camT.tg[2] += (mainPos[2] - camT.tg[2]) * 0.04; }
             const kk = reduce ? 1 : 0.12;
             cam.th += (camT.th - cam.th) * kk; cam.ph += (camT.ph - cam.ph) * kk; cam.r += (camT.r - cam.r) * kk;
             for (let j = 0; j < 3; j += 1) cam.tg[j] += (camT.tg[j] - cam.tg[j]) * kk;
@@ -732,13 +759,26 @@ o=vec4(c,uColor.a);}`;
             gl.disable(gl.BLEND); gl.depthMask(true);
             draw(terrain, I4, COL.white, 1, { tex: 1 });
             let seg = 0; while (seg < MAIN_DENSE.length - 1 && MAIN_DENSE[seg + 1].t <= T) seg += 1;
-            if (seg) draw(route.m, I4, COL.red, 1, { count: seg * route.per });
+            if (seg && route) draw(route.m, I4, COL.red, 1, { count: seg * route.per });
             trails.forEach((tr) => {
                 const isRed = tr.u.faction === 'red'; if (!isRed && !(layers.enemy && layers.trail)) return;
                 let n = 0; while (n < tr.times.length && tr.times[n] <= T) n += 1;
                 if (n) draw(tr.m, I4, hex3(C.factions[tr.u.faction].color), 1, { count: n * 36 });
             });
+            const hist = historyState();
             for (const m of C.markers || []) {
+                if (m.type === 'history') {
+                    // 已发生的事件留下一个小红点；时间轴附近的事件立起旗杆，当前事件最醒目。
+                    if (T < m.day - HWIN) continue;
+                    const p = P(m.at), st = hist.get(m);
+                    if (st && st.a > 0.05) {
+                        const big = (m.major ? 1.25 : 1) * S * (st.active ? 1.25 : 0.75 + 0.25 * st.a);
+                        draw(GEOM.cyl, trs(p, 0, [0.07, 2.2 * big, 0.07]), COL.pole);
+                        draw(GEOM.sph, trs([p[0], p[1] + 2.2 * big, p[2]], 0, [0.42 * big, 0.42 * big, 0.42 * big]), st.active ? COL.red : [0.62, 0.22, 0.16]);
+                    }
+                    if (T >= m.day) draw(GEOM.cyl, trs(p, 0, [0.32 * S, 0.12, 0.32 * S]), st && st.active ? COL.red : [0.55, 0.26, 0.2]);
+                    continue;
+                }
                 if (m.type === 'campaign') {
                     const p = P(m.at), act = T >= m.day && T <= (m.until ?? m.day);
                     draw(GEOM.cyl, trs(p, 0, [0.07, 2.5 * S, 0.07]), COL.pole);
@@ -773,7 +813,7 @@ o=vec4(c,uColor.a);}`;
                 draw(GEOM.flag, trs([p[0] + 0.55 * sc, p[1] + 1.95 * S, p[2]], Math.sin(wave * 1.3 + u.index) * 0.25, [1.25 * S, 0.72 * S, 1]), col);
             });
             gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(false);
-            if (layers.ghost) draw(ghost, I4, COL.red, 0.5);
+            if (layers.ghost && ghost) draw(ghost, I4, COL.red, 0.5);
             overlayMeshes.forEach(({ o, m, tip, dir }) => {
                 const a = o.until != null ? fade(T, o.from ?? 0, o.until) : (T >= (o.from ?? 0) ? Math.min(1, (T - (o.from ?? 0)) / 2) : 0);
                 if (!a) return;
@@ -781,7 +821,8 @@ o=vec4(c,uColor.a);}`;
                 if (o.arrow) { const Y = dir, Xv = norm(cross([0, 1, 0], Y)), Z = cross(Xv, Y), r = 0.55, len = 1.4; draw(GEOM.cone, new Float32Array([Xv[0] * r, Xv[1] * r, Xv[2] * r, 0, Y[0] * len, Y[1] * len, Y[2] * len, 0, Z[0] * r, Z[1] * r, Z[2] * r, 0, tip[0], tip[1], tip[2], 1]), col, a); }
             });
             const ring = 1.4 * S + pulse * 2.4 * S;
-            draw(GEOM.ring, trs([mainPos[0], mainPos[1] + 0.12, mainPos[2]], 0, [ring, 1, ring]), COL.red, 0.55 * (1 - pulse), { unlit: 1 });
+            if (MAIN) draw(GEOM.ring, trs([mainPos[0], mainPos[1] + 0.12, mainPos[2]], 0, [ring, 1, ring]), COL.red, 0.55 * (1 - pulse), { unlit: 1 });
+            for (const [m, st] of hist) if (st.active) { const p = P(m.at, 0.15), r = (1.2 + pulse * 3.2) * S; draw(GEOM.ring, trs(p, 0, [r, 1, r]), COL.red, 0.75 * (1 - pulse), { unlit: 1 }); }
             for (const m of C.markers || []) {
                 if (m.type === 'battle' && Math.abs(T - m.day) < 1.6 * dayScale) { const p = P(m.at, 0.2), r = (1.5 + pulse * 4) * S; draw(GEOM.ring, trs(p, 0, [r, 1, r]), COL.red, 0.8 * (1 - pulse), { unlit: 1 }); }
                 if (m.type === 'crossing' && T >= m.day && T - m.day < 2.5 * dayScale) { const p = P(m.at, 0.15), r = (1 + pulse * 3) * S; draw(GEOM.ring, trs(p, 0, [r, 1, r]), COL.red, 0.7 * (1 - pulse), { unlit: 1 }); }
@@ -796,6 +837,11 @@ o=vec4(c,uColor.a);}`;
                 if (m.type === 'crossing') { L.vis = T >= m.day; L.txt.hidden = T - m.day > Math.max(recent, 1.5); }
                 else if (m.type === 'battle') L.vis = T >= m.day - 0.5 * dayScale && T - m.day < 9 * dayScale + 1;
                 else if (m.type === 'campaign') { L.vis = true; L.e.classList.toggle('is-active', T >= m.day && T <= (m.until ?? m.day)); }
+                else if (m.type === 'history') {
+                    const st = hist.get(m);
+                    L.vis = Boolean(st && st.label);
+                    if (L.vis) { L.e.style.opacity = st.active ? '1' : (0.35 + 0.55 * st.a).toFixed(2); L.e.classList.toggle('is-active', st.active); L.e.style.zIndex = st.active ? '3' : '1'; L.pri = (st.active ? 10 : 0) + st.a + (m.major ? 0.3 : 0); }
+                }
                 else L.vis = T >= m.day && T <= (m.until ?? m.day + 6 * dayScale);
             });
             unitL.forEach(({ u, L }) => {
@@ -811,6 +857,16 @@ o=vec4(c,uColor.a);}`;
                 if (sx < -60 || sx > vw + 60 || sy < -30 || sy > vh + 30) { L.e.hidden = true; continue; }
                 L.e.hidden = false;
                 L.e.style.transform = `translate(${sx.toFixed(1)}px,${(sy + L.dy).toFixed(1)}px) translate(${L.ax * 100}%,${L.ay * 100}%)`;
+                if (L.hist) { L.sx = sx; L.sy = sy + L.dy; }
+            }
+            // 党史事件标签避让：当前事件优先，其次是离当前时间近的；与已放置的标签重叠就先隐藏。
+            const shown = [], cand = histL.filter((L) => !L.e.hidden).sort((a, b) => b.pri - a.pri);
+            for (const L of cand) {
+                if (L.mtxt !== L.e.textContent) { L.mtxt = L.e.textContent; L.w = L.e.offsetWidth; L.h = L.e.offsetHeight; }
+                if (L.e.classList.contains('is-active') !== L.wasActive) { L.wasActive = L.e.classList.contains('is-active'); L.w = L.e.offsetWidth; L.h = L.e.offsetHeight; }
+                const r = [L.sx - L.w / 2, L.sy - L.h, L.sx + L.w / 2, L.sy];
+                if (shown.some((q) => r[0] < q[2] && r[2] > q[0] && r[1] < q[3] && r[3] > q[1])) { L.e.hidden = true; continue; }
+                shown.push(r);
             }
         }
         raf = requestAnimationFrame(frame);
@@ -828,6 +884,8 @@ o=vec4(c,uColor.a);}`;
             setExaggeration(x) { EX = x; buildDraped(); },
             exaggerationFactor(x) { return Math.round(GEO.vex * x); },
             preset(name) { const p = PRESETS[name] && PRESETS[name](); if (!p) return; Object.assign(camT, p); setFollow(name === 'low'); },
+            // 把镜头平移到某个经纬度（zoom 为相对全景尺寸的距离，可省略）
+            focus(ll, zoom) { const [x, z] = XZ(ll[0], ll[1]); camT.tg = [x, 0, z]; if (zoom) camT.r = clamp(SIZE * zoom, RMIN, RMAX); },
             setFollow(v) { setFollow(v); const fr = SIZE * (GEO.followR || 0.64); if (v && camT.r > fr * 1.25) camT.r = fr; },
             isFollowing() { return follow; },
             destroy() {

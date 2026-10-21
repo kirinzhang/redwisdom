@@ -283,6 +283,97 @@
             border-top: 1px dashed #D6C6B0;
             padding: 0.625rem 0 0.25rem;
         }
+
+        /* ---------- 沙盘地图 ---------- */
+        :root { --stage: #E6DFD0; }
+        [hidden] { display: none !important; }
+        .tm-wide { position: relative; }
+        @media (min-width: 1024px) { .tm-wide { width: min(1180px, calc(100vw - 3rem)); left: 50%; transform: translateX(-50%); } }
+        .tm-view { position: relative; height: min(68vh, 720px); min-height: 380px; background: var(--stage); border: 1px solid rgba(214,198,176,.8); border-radius: .75rem; overflow: hidden; }
+        .tm-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; --stage: #E6DFD0; }
+        .tm-canvas.is-dragging { cursor: grabbing; }
+        .tm-labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+        .tm-loading { position: absolute; inset: 0; display: grid; place-items: center; color: #6b5a44; font-size: .875rem; letter-spacing: .1em; pointer-events: none; }
+        .no-webgl { position: absolute; inset: 0; display: grid; place-items: center; padding: 1.5rem; text-align: center; color: #6b7280; font-size: .875rem; }
+        .sb-lb { position: absolute; left: 0; top: 0; white-space: nowrap; font-size: 12px; will-change: transform; font-family: "Noto Serif SC", serif; }
+        .sb-lb.hist { pointer-events: auto; cursor: pointer; display: flex; align-items: baseline; gap: 5px; border: 1px solid rgba(156,31,21,.55); background: rgba(255,250,240,.95); color: #3a2418; padding: 2px 8px; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,.22); transition: opacity .2s; }
+        .sb-lb.hist b { color: #9c1f15; font-weight: 700; font-size: 11px; }
+        .sb-lb.hist small { color: #8a7560; font-size: 10.5px; }
+        .sb-lb.hist.major { font-weight: 700; }
+        .sb-lb.hist.is-active { background: #C4281C; border-color: #C4281C; color: #fff; font-size: 13.5px; padding: 3px 10px; box-shadow: 0 2px 8px rgba(0,0,0,.35); }
+        .sb-lb.hist.is-active b, .sb-lb.hist.is-active small { color: #fde7c9; }
+        .tm-caption { position: absolute; left: .75rem; top: .75rem; max-width: min(520px, calc(100% - 1.5rem)); display: flex; flex-wrap: wrap; align-items: baseline; gap: .15rem .6rem; text-align: left; background: rgba(247,244,237,.94); border: 1px solid rgba(214,198,176,.9); border-left: 4px solid #C4281C; border-radius: .5rem; padding: .5rem .8rem; box-shadow: 0 2px 10px rgba(0,0,0,.1); }
+        .tm-caption:hover { border-color: #C4281C; }
+        .tm-cap-date { color: #C4281C; font-weight: 700; font-size: .8125rem; }
+        .tm-cap-title { font-family: "Noto Serif SC", serif; font-weight: 700; font-size: 1rem; color: #2B2B2B; }
+        .tm-cap-place { font-size: .75rem; color: #6b5a44; }
+        .tm-cap-more { font-size: .75rem; color: #C4281C; }
+        .tm-presets { position: absolute; right: .75rem; top: .75rem; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .375rem; }
+        .view-btn { border-radius: .5rem; border: 1px solid rgba(214,198,176,.9); background: rgba(247,244,237,.92); padding: .3rem .7rem; font-size: .8125rem; color: #374151; }
+        .view-btn:hover { border-color: #BC2D22; color: #BC2D22; }
+        .tm-follow { display: inline-flex; align-items: center; gap: .3rem; cursor: pointer; }
+        .tm-follow input { accent-color: #BC2D22; }
+        .tm-inset { position: absolute; right: .75rem; bottom: .75rem; border: 1px solid rgba(120,90,60,.45); border-radius: 4px; background: #dfe8ea; line-height: 0; overflow: hidden; pointer-events: none; box-shadow: 0 1px 6px rgba(0,0,0,.18); }
+        .tm-help { position: absolute; left: .75rem; bottom: .5rem; border-radius: .25rem; background: rgba(247,244,237,.85); padding: .1rem .5rem; font-size: 11px; color: #6b7280; }
+        .tm-card { position: absolute; left: .75rem; bottom: 2.25rem; width: min(380px, calc(100% - 1.5rem)); max-height: calc(100% - 6rem); overflow-y: auto; background: rgba(255,252,246,.98); border: 1px solid rgba(214,198,176,.9); border-top: 4px solid #C4281C; border-radius: .6rem; padding: .9rem 1rem .8rem; box-shadow: 0 8px 24px rgba(0,0,0,.18); z-index: 5; }
+        .tm-card h3 { font-family: "Noto Serif SC", serif; font-size: 1.125rem; font-weight: 700; color: #2B2B2B; padding-right: 1.5rem; }
+        .tm-kicker { font-size: .7rem; letter-spacing: .08em; color: #8a7560; margin-bottom: .2rem; }
+        .tm-meta { margin-top: .3rem; display: flex; flex-wrap: wrap; gap: .25rem .75rem; font-size: .8125rem; color: #C4281C; }
+        .tm-meta span + span { color: #6b5a44; }
+        .tm-summary { margin-top: .5rem; font-size: .875rem; line-height: 1.7; color: #374151; }
+        .tm-lesson { margin-top: .4rem; font-size: .8125rem; line-height: 1.7; color: #374151; }
+        .tm-lesson b { color: #C4281C; }
+        .tm-articles { margin-top: .6rem; display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; font-size: .75rem; color: #6b7280; }
+        .tm-nav { margin-top: .75rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .4rem; border-top: 1px dashed #D6C6B0; padding-top: .6rem; font-size: .8125rem; }
+        .tm-nav button { color: #BC2D22; }
+        .tm-nav button:disabled { color: #c4b8a8; }
+        .tm-link { border-radius: 9999px; background: #BC2D22; color: #fff; padding: .2rem .7rem; font-size: .75rem; }
+        .tm-close { position: absolute; right: .5rem; top: .35rem; font-size: 1.25rem; line-height: 1; color: #9ca3af; padding: .25rem; }
+        .tm-close:hover { color: #BC2D22; }
+        .tm-axis { margin-top: .6rem; border: 1px solid rgba(214,198,176,.8); border-radius: .75rem; background: rgba(255,255,255,.6); padding: .7rem .9rem .5rem; }
+        .tm-axis-row { display: flex; align-items: center; gap: .75rem; }
+        .tm-play { flex: none; border-radius: .5rem; background: #BC2D22; color: #fff; padding: .45rem .85rem; font-size: .875rem; font-weight: 700; }
+        .tm-play:hover { background: #9c1f15; }
+        .tm-now { flex: none; min-width: 6.5rem; text-align: right; font-family: "Noto Serif SC", serif; font-weight: 700; color: #C4281C; font-size: .9375rem; }
+        .tm-track { position: relative; flex: 1; height: 58px; min-width: 0; }
+        .tm-bands { position: absolute; left: 0; right: 0; top: 0; height: 14px; }
+        .tm-band { position: absolute; top: 0; height: 100%; border-radius: 3px; overflow: hidden; font-size: 10px; line-height: 14px; color: #fff; padding: 0 4px; white-space: nowrap; }
+        .tm-band em { font-style: normal; }
+        .tm-band-revolution { background: #b53a2c; }
+        .tm-band-socialism { background: #c47a2c; }
+        .tm-band-reform { background: #4f7a5a; }
+        .tm-band-new-era { background: #3d5f8f; }
+        .tm-ticks { position: absolute; left: 0; right: 0; top: 18px; height: 18px; }
+        .tm-tick { position: absolute; bottom: 0; width: 5px; height: 9px; margin-left: -2.5px; border-radius: 1px; background: rgba(156,31,21,.55); }
+        .tm-tick::after { content: ''; position: absolute; left: -3px; right: -3px; top: -6px; bottom: -4px; }
+        .tm-tick.major { height: 16px; background: #9c1f15; }
+        .tm-tick.no-place { background: rgba(120,110,100,.45); }
+        .tm-tick.major.no-place { background: rgba(110,100,90,.75); }
+        .tm-tick:hover { background: #C4281C; transform: scaleY(1.15); }
+        .tm-tick.is-active { background: #C4281C; box-shadow: 0 0 0 2px rgba(196,40,28,.25); }
+        .tm-range { position: absolute; left: 0; right: 0; top: 30px; width: 100%; margin: 0; accent-color: #BC2D22; background: transparent; }
+        .tm-years { position: absolute; left: 0; right: 0; top: 46px; height: 12px; }
+        .tm-years span { position: absolute; transform: translateX(-50%); font-size: 10px; color: #8a7560; }
+        .tm-axis-note { margin-top: .5rem; font-size: 11px; line-height: 1.6; color: #8a7560; }
+        @media (max-width: 639px) {
+            .tm-view { height: 50vh; min-height: 320px; }
+            .tm-caption { right: .5rem; left: .5rem; top: .5rem; max-width: none; padding: .4rem .65rem; }
+            .tm-cap-title { font-size: .9375rem; }
+            .tm-presets { top: auto; right: auto; left: .5rem; bottom: .5rem; }
+            .tm-axis { padding: .6rem .6rem .4rem; position: sticky; bottom: calc(4.6rem + env(safe-area-inset-bottom)); z-index: 20; background: rgba(250,247,240,.97); box-shadow: 0 -4px 16px rgba(0,0,0,.08); }
+            .tm-axis-note { display: none; }
+            .tm-axis-row { flex-wrap: wrap; gap: .5rem; }
+            .tm-track { order: 3; flex-basis: 100%; }
+            .tm-now { margin-left: auto; }
+            .tm-band em { display: none; }
+            .tm-years span:nth-child(even) { display: none; }
+            .tm-presets .view-btn[data-tm-preset] { display: none; }
+            .tm-card { left: .5rem; right: .5rem; width: auto; bottom: .5rem; max-height: 70%; }
+            .tm-inset svg { width: 56px; height: auto; }
+            .tm-help { display: none; }
+            .tm-now { min-width: 0; font-size: .8125rem; }
+            .sb-lb.hist small { display: none; }
+        }
     </style>
 </head>
 
@@ -304,7 +395,7 @@
             </div>
             <div class="mt-3 flex flex-wrap items-baseline justify-between gap-2">
                 <h1 class="font-mao text-3xl text-china-red md:text-4xl">党史时间线</h1>
-                <p class="text-sm text-gray-500">1921—今 · 大事汇总 · <a href="campaign.html" class="text-china-red hover:underline">长征沙盘</a></p>
+                <p class="text-sm text-gray-500">1919—今 · 沙盘地图 · 大事汇总 · <a href="campaign.html" class="text-china-red hover:underline">长征沙盘</a></p>
             </div>
             <p class="mt-1 text-sm leading-relaxed text-gray-600">
                 与《毛选》对照学习：每条大事标注了对应原文，点击直达阅读页。框架依据 2021 年第三个历史决议的四时期划分。
@@ -316,13 +407,46 @@
 
         <!-- Tabs -->
         <div id="timelineTabs" class="mb-5 flex gap-2 overflow-x-auto pb-1" role="tablist" aria-label="时间线视图">
-            <button type="button" class="tab-button" data-tab="timeline" role="tab" aria-selected="true">时间线</button>
+            <button type="button" class="tab-button" data-tab="map" role="tab" aria-selected="true">沙盘地图</button>
+            <button type="button" class="tab-button" data-tab="timeline" role="tab" aria-selected="false">时间线</button>
             <button type="button" class="tab-button" data-tab="decisions" role="tab" aria-selected="false">路线之争 · 决策点</button>
             <button type="button" class="tab-button" data-tab="quickref" role="tab" aria-selected="false">速查表</button>
         </div>
 
+        <!-- Map view：在全国立体地图上随时间轴标注大事 -->
+        <section id="mapContent" class="tm-wide" aria-label="党史沙盘地图">
+            <div class="tm-view" data-tm="view">
+                <canvas class="tm-canvas" data-tm="canvas" aria-label="党史立体地图，可拖动旋转"></canvas>
+                <div class="tm-labels" data-tm="labels"></div>
+                <div class="tm-loading" data-tm="loading" hidden>正在载入地形……</div>
+                <button type="button" class="tm-caption" data-tm="caption" aria-label="查看当前事件简介"></button>
+                <div class="tm-presets">
+                    <button type="button" class="view-btn" data-tm-preset="all">全景</button>
+                    <button type="button" class="view-btn" data-tm-preset="top">俯视</button>
+                    <label class="view-btn tm-follow"><input type="checkbox" data-tm="follow" checked>镜头跟随</label>
+                </div>
+                <div class="tm-inset" data-tm="inset" hidden></div>
+                <p class="tm-help">拖动旋转 · 右键或双指平移 · 滚轮或捏合缩放 · 点击地图上的事件看简介</p>
+                <div class="tm-card" data-tm="card" role="dialog" aria-label="事件简介" hidden></div>
+            </div>
+            <div class="tm-axis">
+                <div class="tm-axis-row">
+                    <button type="button" class="tm-play" data-tm="play" aria-pressed="false">▶ 播放</button>
+                    <div class="tm-track">
+                        <div class="tm-bands" data-tm="bands"></div>
+                        <div class="tm-ticks" data-tm="ticks"></div>
+                        <input class="tm-range" data-tm="range" type="range" min="0" max="1" step="0.01" value="0" aria-label="党史时间轴，拖动查看各时期大事">
+                        <div class="tm-years" data-tm="years" aria-hidden="true"></div>
+                    </div>
+                    <div class="tm-now" data-tm="now" aria-live="polite"></div>
+                </div>
+                <p class="tm-axis-note">刻度为每一件大事（高刻度为重大节点，灰色为全国性事件、地图上不标点）。拖动或点击刻度，地图会在事件发生地标注；←/→ 键逐件切换。</p>
+            </div>
+            <p class="mt-2 text-xs leading-relaxed text-gray-500">地图地形与国界、省界依据 GEBCO 2024 与 Natural Earth 绘制，行政区划为今日区划，地点为大致位置；本图为教学示意图。</p>
+        </section>
+
         <!-- Timeline view -->
-        <div id="timelineContent">
+        <div id="timelineContent" class="hidden">
             <div id="timelineSearchWrap" class="mb-4">
                 <div class="flex flex-col gap-3">
                     <div id="periodTabs" class="flex gap-2 overflow-x-auto pb-1" role="group" aria-label="按时期筛选"></div>
@@ -414,6 +538,8 @@
     <script src="js/register-pwa.js?v=4"></script>
     <script src="js/i18n.js"></script>
     <script src="js/timeline-data.js"></script>
+    <script src="js/campaign-engine.js"></script>
+    <script src="js/timeline-map.js"></script>
     <script src="js/timeline.js"></script>
 </body>
 

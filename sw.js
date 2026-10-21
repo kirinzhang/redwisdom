@@ -1,4 +1,4 @@
-const CACHE_NAME = 'redwisdom-shell-v18';
+const CACHE_NAME = 'redwisdom-shell-v19';
 const SHELL_FILES = [
     './', './index.html', './reading.html', './chat.html', './practice.html', './problems.html', './me.html', './login.html',
     './timeline.html', './modern.html', './campaign.html',
@@ -8,7 +8,7 @@ const SHELL_FILES = [
     './js/problem-case-store.js', './js/cognition-spiral.js', './js/practice-loop-ui.js', './js/practice-store.js', './js/conversation-store.js', './js/reading-notes-store.js',
     './js/reading-progress-store.js', './js/full-text-search.js', './js/text-anchors.js', './js/reading-guides.js',
     './js/history-case-retrieval.js', './js/reading-annotations.js', './data/concepts.json',
-    './js/timeline-data.js', './js/timeline.js',
+    './js/timeline-data.js', './js/timeline.js', './js/timeline-map.js',
     './js/modern-cases.js', './js/modern.js',
     './js/campaign-data.js', './js/campaign-engine.js', './js/campaign.js',
     './data/terrain/index.json', './data/terrain/overview.lc.png', './data/map/overview.json',
