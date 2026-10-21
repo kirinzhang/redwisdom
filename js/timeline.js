@@ -22,7 +22,9 @@
         timeline: document.getElementById('timelineContent'),
         decisions: document.getElementById('decisionContent'),
         quickRef: document.getElementById('quickRefContent'),
+        map: document.getElementById('mapContent'),
     };
+    let mapView = null;
 
     function escapeHtml(value) {
         return String(value)
@@ -353,8 +355,19 @@
         els.timeline.classList.toggle('hidden', tab !== 'timeline');
         els.decisions.classList.toggle('hidden', tab !== 'decisions');
         els.quickRef.classList.toggle('hidden', tab !== 'quickref');
+        if (els.map) {
+            els.map.classList.toggle('hidden', tab !== 'map');
+            if (tab === 'map') {
+                if (!mapView && window.RedWisdomTimelineMap) mapView = window.RedWisdomTimelineMap.mount({ data, root: els.map, articleLink });
+                if (mapView) mapView.start();
+            }
+        }
         const searchWrap = document.getElementById('timelineSearchWrap');
         if (searchWrap) searchWrap.classList.toggle('hidden', tab !== 'timeline');
+    }
+
+    function hasWebgl() {
+        try { return Boolean(document.createElement('canvas').getContext('webgl2')); } catch (error) { return false; }
     }
 
     async function loadCatalog() {
@@ -380,7 +393,8 @@
         syncFilterControls();
         renderDecisionPoints();
         renderQuickRef();
-        switchTab('timeline');
+        const view = new URLSearchParams(location.search).get('view');
+        switchTab(['timeline', 'decisions', 'quickref', 'map'].includes(view) ? view : (els.map && hasWebgl() ? 'map' : 'timeline'));
         loadCatalog();
 
         els.tabs.querySelectorAll('.tab-button').forEach((button) => {
