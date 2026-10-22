@@ -1,0 +1,19 @@
+// Cloudflare Workers 部署配置（静态页面 + /api/* 接口）。说明见 docs/deploy/cloudflare.md
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "redwisdom",
+    "main": "worker/index.mjs",
+    "compatibility_date": "2025-09-01",
+    "assets": {
+        // 仓库根目录就是站点根目录；不对外发布的文件列在 .assetsignore
+        "directory": ".",
+        "binding": "ASSETS",
+        // 只有接口请求进入 Worker，静态页面直接由 Cloudflare 提供（不计 Worker 请求次数）
+        "run_worker_first": ["/api/*"],
+        "html_handling": "auto-trailing-slash",
+        "not_found_handling": "none"
+    },
+    "observability": { "enabled": true },
+    // 变量和机密都在 Cloudflare 控制台「设置 → 变量和机密」中维护；部署时保留控制台里的变量
+    "keep_vars": true
+}

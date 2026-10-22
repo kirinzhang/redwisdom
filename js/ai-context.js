@@ -17,21 +17,36 @@
         ['自我批评', ['反思', '批评', '改正', '缺点', '逃避']],
     ];
 
+    // 候选材料（含方法标签和检索用文本）只依赖原始数据，按数据数组缓存，
+    // 服务端同一实例的后续请求不必再为几千段原文重新打标签。
+    const candidateCache = typeof WeakMap === 'function' ? new WeakMap() : null;
+    function cachedNormalize(list, normalize) {
+        if (!candidateCache || !list || typeof list !== 'object') return normalize(list);
+        let hit = candidateCache.get(list);
+        if (!hit) {
+            hit = normalize(list).map((context) => ({ ...context, haystack: `${context.sourceTitle} ${context.text} ${context.methodologyTags.join(' ')}` }));
+            candidateCache.set(list, hit);
+        }
+        return hit;
+    }
+
     function findRelevantMaoContexts({ userMessage, quotes, guides, passages, limit = 4 }) {
-        const queryTokens = tokenize(userMessage);
+        const queryTokens = [...tokenize(userMessage)];
         const candidates = [
-            ...normalizeQuotes(quotes),
-            ...normalizeGuides(guides),
-            ...normalizePassages(passages),
+            ...cachedNormalize(quotes, normalizeQuotes),
+            ...cachedNormalize(guides, normalizeGuides),
+            ...cachedNormalize(passages, normalizePassages),
         ];
         const seen = new Set();
+        const methodHits = new Set(METHOD_KEYWORDS.filter(([, keywords]) => keywords.some((keyword) => userMessage.includes(keyword))).map(([tag]) => tag));
 
-        return candidates
-            .map((context, index) => ({
-                ...context,
-                score: scoreContext(context, queryTokens, userMessage) + (1 / (index + 100)),
-            }))
-            .filter((context) => context.score > 0)
+        const scored = [];
+        candidates.forEach((context, index) => {
+            // 与原逻辑一致：位置加分让没有命中的材料也按原顺序排在后面
+            scored.push({ context, score: scoreContext(context, queryTokens, userMessage, methodHits) + (1 / (index + 100)) });
+        });
+        return scored
+            .map(({ context, score }) => ({ ...context, score }))
             .sort((a, b) => b.score - a.score)
             .filter((context) => {
                 const key = `${context.type}:${context.sourceTitle}:${context.text}`;
@@ -40,7 +55,7 @@
                 return true;
             })
             .slice(0, limit)
-            .map(({ score, ...context }) => context);
+            .map(({ score, haystack, ...context }) => context);
     }
 
     function buildContextMessage(contexts, maxLength = 1500) {
@@ -99,14 +114,15 @@
         }));
     }
 
-    function scoreContext(context, queryTokens, rawQuery) {
-        const haystack = `${context.sourceTitle} ${context.text} ${context.methodologyTags.join(' ')}`;
-        const tokenScore = queryTokens.reduce((total, token) => total + (haystack.includes(token) ? 2 : 0), 0);
-        const methodScore = context.methodologyTags.reduce((total, tag) => {
-            const keywords = METHOD_KEYWORDS.find(([name]) => name === tag)?.[1] || [];
-            return total + (keywords.some((keyword) => rawQuery.includes(keyword)) ? 4 : 0);
-        }, 0);
-
+    function scoreContext(context, queryTokens, rawQuery, methodHits) {
+        const haystack = context.haystack || `${context.sourceTitle} ${context.text} ${context.methodologyTags.join(' ')}`;
+        let tokenScore = 0;
+        for (const token of queryTokens) if (haystack.includes(token)) tokenScore += 2;
+        let methodScore = 0;
+        for (const tag of context.methodologyTags) {
+            const hit = methodHits ? methodHits.has(tag) : (METHOD_KEYWORDS.find(([name]) => name === tag)?.[1] || []).some((keyword) => rawQuery.includes(keyword));
+            if (hit) methodScore += 4;
+        }
         return tokenScore + methodScore;
     }
 

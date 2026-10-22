@@ -9,6 +9,11 @@
     "eval:history": "node scripts/evaluate-history-retrieval.mjs",
     "validate:history": "node scripts/validate-history-cases.mjs",
     "build:css": "npx tailwindcss@3.4.17 -c tailwind.config.js -i styles/tailwind.input.css -o assets/tailwind.css --minify",
-    "build:concepts": "node scripts/build-concepts.mjs"
+    "build:concepts": "node scripts/build-concepts.mjs",
+    "cf:dev": "wrangler dev",
+    "cf:deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.40.0"
   }
 }
