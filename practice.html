@@ -7,7 +7,7 @@
     <title>实践 - Red Wisdom</title>
     <meta name="description" content="把毛选方法转成今日实践、结果记录和复盘。">
     <link rel="icon" type="image/png" href="/assets/favicon.png">
-    <link rel="stylesheet" href="assets/tailwind.css?v=4">
+    <link rel="stylesheet" href="assets/tailwind.css?v=5">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -112,7 +112,7 @@
 
     <nav class="mobile-bottom-nav md:hidden fixed inset-x-0 bottom-0 z-40 border-t border-dark-beige/60 bg-warm-rice/95 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] backdrop-blur pb-[calc(0.35rem+env(safe-area-inset-bottom))]"
         aria-label="移动端主导航">
-        <div class="mx-auto grid max-w-md grid-cols-5">
+        <div class="mx-auto grid max-w-md grid-cols-6">
             <a data-mobile-nav-item="home" href="index.html"
                 class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
                 <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -131,6 +131,15 @@
                     <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                 </svg>
                 <span class="text-[11px]" data-i18n="nav.reading">阅读</span>
+            </a>
+            <a data-mobile-nav-item="history" href="timeline.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M5 21V4"></path>
+                    <path d="M5 4h11l-2 4 2 4H5"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.history">党史</span>
             </a>
             <a data-mobile-nav-item="chat" href="chat.html"
                 class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">

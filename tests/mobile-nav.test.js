@@ -11,13 +11,14 @@ const pages = [
     ['chat.html', 'chat'],
     ['practice.html', 'practice'],
     ['me.html', 'me'],
-    ['timeline.html', 'reading'],
-    ['campaign.html', 'reading'],
+    ['timeline.html', 'history'],
+    ['campaign.html', 'history'],
 ];
 
 const navTargets = [
     ['home', 'index.html'],
     ['reading', 'reading.html'],
+    ['history', 'timeline.html'],
     ['chat', 'chat.html'],
     ['practice', 'practice.html'],
     ['me', 'me.html'],

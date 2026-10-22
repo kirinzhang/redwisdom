@@ -19,7 +19,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/favicon.png">
 
-    <link rel="stylesheet" href="assets/tailwind.css?v=4">
+    <link rel="stylesheet" href="assets/tailwind.css?v=5">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -63,7 +63,20 @@
             color: #BC2D22;
         }
 
-        .tab-button-active {
+.tab-link {
+            flex: none;
+            align-self: center;
+            margin-left: auto;
+            border: 1px solid #BC2D22;
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.8125rem;
+            color: #BC2D22;
+            white-space: nowrap;
+        }
+        .tab-link:hover { background: #BC2D22; color: #fff; }
+
+                .tab-button-active {
             background: #BC2D22;
             color: #fff;
             box-shadow: 0 2px 8px rgba(188, 45, 34, 0.25);
@@ -431,6 +444,7 @@
             <button type="button" class="tab-button" data-tab="timeline" role="tab" aria-selected="false">时间线</button>
             <button type="button" class="tab-button" data-tab="decisions" role="tab" aria-selected="false">路线之争 · 决策点</button>
             <button type="button" class="tab-button" data-tab="quickref" role="tab" aria-selected="false">速查表</button>
+            <a href="campaign.html" class="tab-link" title="在中国地形图上推演长征全程与六场战役">长征沙盘 ›</a>
         </div>
 
         <!-- Map view：在全国立体地图上随时间轴标注大事 -->
@@ -505,7 +519,7 @@
     <!-- Mobile bottom nav -->
     <nav class="mobile-bottom-nav md:hidden fixed inset-x-0 bottom-0 z-40 border-t border-dark-beige/60 bg-warm-rice/95 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] backdrop-blur pb-[calc(0.35rem+env(safe-area-inset-bottom))]"
         aria-label="移动端主导航">
-        <div class="mx-auto grid max-w-md grid-cols-5">
+        <div class="mx-auto grid max-w-md grid-cols-6">
             <a data-mobile-nav-item="home" href="index.html"
                 class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
                 <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -516,14 +530,23 @@
                 </svg>
                 <span class="text-[11px]" data-i18n="nav.cards">抽卡</span>
             </a>
-            <a data-mobile-nav-item="reading" href="reading.html" aria-current="page"
-                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-china-red font-bold">
+            <a data-mobile-nav-item="reading" href="reading.html"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
                 <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
                     <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                 </svg>
                 <span class="text-[11px]" data-i18n="nav.reading">阅读</span>
+            </a>
+            <a data-mobile-nav-item="history" href="timeline.html" aria-current="page"
+                class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-china-red font-bold">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M5 21V4"></path>
+                    <path d="M5 4h11l-2 4 2 4H5"></path>
+                </svg>
+                <span class="text-[11px]" data-i18n="nav.history">党史</span>
             </a>
             <a data-mobile-nav-item="chat" href="chat.html"
                 class="flex min-h-[64px] flex-col items-center justify-center gap-1 px-1 py-2 text-ink-black/70 hover:text-china-red">
