@@ -90,12 +90,13 @@ test('the Long March overview reuses each campaign route and links into every sa
     assert.equal(data.dateForDay(O, 374).toDateString(), new Date(1935, 9, 19).toDateString(), 'day 374 is the arrival at Wuqi');
 });
 
-test('the home page links to the party history timeline and the Long March sandbox', () => {
+test('the home page stays a plain card draw; party history lives in the navigation', () => {
     const page = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-    assert.match(page, /<a href="timeline\.html" data-entry="timeline"/);
-    assert.match(page, /<a href="campaign\.html" data-entry="sandbox"/);
+    assert.ok(!page.includes('id="explore-entries"'), 'no extra entry cards under the draw button');
     assert.match(page, /<a href="reading\.html"[\s\S]*?阅读毛选[\s\S]*?<a href="timeline\.html" data-entry="timeline-nav"[\s\S]*?<a href="campaign\.html" data-entry="sandbox-nav"/, 'desktop nav lists both right under 阅读毛选');
-    assert.match(page, /id="explore-entries"[^>]*md:hidden/, 'cards are the mobile entry; desktop uses the side nav');
+    assert.match(page, /data-mobile-nav-item="history" href="timeline\.html"/, 'mobile nav has a 党史 tab');
+    const timelinePage = fs.readFileSync(path.join(root, 'timeline.html'), 'utf8');
+    assert.match(timelinePage, /class="tab-link"[^>]*>长征沙盘/, 'the timeline page links on to the Long March sandbox');
     const worker = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
     for (const file of ['./data/terrain/index.json', './data/terrain/overview.lc.png', './data/map/overview.json']) assert.ok(worker.includes(`'${file}'`), `service worker caches ${file}`);
 });
