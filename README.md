@@ -105,10 +105,10 @@ Red Wisdom 是一个以《毛泽东选集》为核心内容和方法论来源的
 |------|------|
 | 前端 | HTML5 + Tailwind CSS + Vanilla JS |
 | AI 对话 | DeepSeek API V4 Pro（OpenRouter 作为回退） |
-| API 代理 | Vercel Serverless Function |
+| API 代理 | Cloudflare Worker（`worker/index.mjs`）；迁移完成前 Vercel Serverless Function 并行 |
 | 账户系统 | Supabase Auth (Google OAuth，配置后启用) |
 | 数据库 | Supabase Postgres + Row Level Security |
-| 部署平台 | Vercel |
+| 部署平台 | Cloudflare Workers（静态资源 + Worker），迁移步骤见 `docs/deploy/cloudflare.md` |
 | 数据格式 | JSON + Markdown |
 | 离线能力 | Web App Manifest + Service Worker |
 | 测试 | Node.js built-in test runner |
@@ -123,7 +123,7 @@ npm run dev
 # 访问 http://127.0.0.1:4173
 ```
 
-本地开发服务器会读取仓库根目录的 `.env`，并提供与 Vercel 一致的 `/api/chat` 路由。本地不会注册 PWA Service Worker，避免开发服务器停止后仍显示缓存页面。
+本地开发服务器会读取仓库根目录的 `.env`，并提供与线上一致的 `/api/chat` 路由。也可以用 `npm install && npm run cf:dev` 以 Cloudflare Workers 方式本地运行（机密写在 `.dev.vars`）。本地不会注册 PWA Service Worker，避免开发服务器停止后仍显示缓存页面。
 
 AI 对话优先直连 DeepSeek V4 Pro：
 
@@ -131,7 +131,7 @@ AI 对话优先直连 DeepSeek V4 Pro：
 DEEPSEEK_API_KEY=你的 DeepSeek API Key
 ```
 
-未配置 DeepSeek Key 时，可以使用 `OPENROUTER_API_KEY` 回退到 OpenRouter 上的 `deepseek/deepseek-v4-pro`。部署到 Vercel 时，需要在项目环境变量中单独配置密钥；本机 `.env` 不会上传。
+未配置 DeepSeek Key 时，可以使用 `OPENROUTER_API_KEY` 回退到 OpenRouter 上的 `deepseek/deepseek-v4-pro`。部署到 Cloudflare 时，在 Worker 的「变量和机密」中配置密钥（Vercel 同理）；本机 `.env` 不会上传。
 
 问道接口的限流与来源限制（均为可选环境变量）：
 
@@ -144,7 +144,7 @@ UPSTASH_REDIS_REST_TOKEN=...
 CHAT_ALLOWED_ORIGINS=https://redwisdom.xyz   # 额外允许的来源，本站域名默认允许
 ```
 
-未配置 Upstash 时，计数只保存在单个函数实例的内存里，只能挡住连续刷接口；正式环境建议在 Vercel Marketplace 接入 Upstash Redis。
+未配置 Upstash 时，计数只保存在单个函数实例的内存里，只能挡住连续刷接口；正式环境建议接入 Upstash Redis（Cloudflare 与 Vercel 均可，通过 REST 访问）。
 
 页面样式使用预先生成的 `assets/tailwind.css`。修改页面里的 Tailwind 类名后运行：
 
@@ -159,7 +159,7 @@ SUPABASE_URL: 'https://your-project.supabase.co',
 SUPABASE_ANON_KEY: 'your-anon-key'
 ```
 
-Vercel 生产环境推荐直接配置以下公开环境变量，前端会通过 `/api/public-config` 在运行时读取，无需把值写入仓库：
+生产环境（Cloudflare Worker 或 Vercel）推荐直接配置以下公开环境变量，前端会通过 `/api/public-config` 在运行时读取，无需把值写入仓库：
 
 ```text
 SUPABASE_URL=https://your-project.supabase.co
@@ -254,8 +254,11 @@ redwisdom/
 │   ├── modern-cases.js         # 现代问题案例数据（场景、原文依据、行动清单）
 │   ├── modern.js               # 现代问题栏目渲染与筛选
 │   └── reading-guides.js       # 阅读导读和主题路径
+├── worker/
+│   └── index.mjs               # Cloudflare Worker：/api/chat、/api/public-config，其余交给静态资源
 ├── api/
-│   ├── chat.js                 # Vercel API 代理
+│   ├── chat.js                 # Vercel API 代理（迁移完成后可删除）
+│   ├── chat-context-core.mjs   # 问道提示词与检索（与平台无关）
 │   ├── chat-provider.mjs       # DeepSeek/OpenRouter 服务选择
 │   └── openrouter-guard.mjs    # AI 请求白名单和长度守卫
 ├── data/
@@ -319,4 +322,4 @@ redwisdom/
 
 ---
 
-*Powered by Vercel & DeepSeek*
+*Powered by Cloudflare & DeepSeek*

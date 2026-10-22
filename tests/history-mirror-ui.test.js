@@ -17,7 +17,7 @@ test('chat renders a source-backed history mirror after the generated answer', (
 });
 
 test('server-side retrieval loads the problem taxonomy for classification and no-analogy blocking', () => {
-    const context = fs.readFileSync(path.resolve(__dirname, '../api/chat-context.mjs'), 'utf8');
+    const context = fs.readFileSync(path.resolve(__dirname, '../api/chat-context-core.mjs'), 'utf8');
     assert.match(context, /data\/history-problem-types\.json/);
     assert.match(context, /problemTypes: sources\.historyProblemTypes/);
     assert.match(context, /noAnalogyCues: sources\.noAnalogyCues/);

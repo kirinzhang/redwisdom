@@ -1,6 +1,7 @@
 import { buildProviderHeaders, resolveChatProvider } from './chat-provider.mjs';
 import { buildProviderRequest, sanitizeChatRequest } from './openrouter-guard.mjs';
 import { createRateLimiter, getClientIp, rateLimitMessage } from './rate-limit.mjs';
+import { isAllowedOriginHost } from './origin.mjs';
 
 let limiter = null;
 let limiterEnv = null;
@@ -13,24 +14,9 @@ function getLimiter(env) {
     return limiter;
 }
 
-// 只接受本站页面发起的浏览器请求。没有 Origin 头的请求（例如服务器间调用）交给限流处理。
+// 只接受本站页面发起的浏览器请求（规则见 origin.mjs）。
 export function isAllowedOrigin(req, env = {}) {
-    const origin = req.headers?.origin;
-    if (!origin) return true;
-    let originHost;
-    try {
-        originHost = new URL(origin).host;
-    } catch (error) {
-        return false;
-    }
-    const allowed = new Set(String(env.CHAT_ALLOWED_ORIGINS || '')
-        .split(',')
-        .map((item) => item.trim())
-        .filter(Boolean)
-        .map((item) => { try { return new URL(item).host; } catch (error) { return item; } }));
-    const requestHost = req.headers?.['x-forwarded-host'] || req.headers?.host;
-    if (requestHost) allowed.add(String(requestHost).split(',')[0].trim());
-    return allowed.has(originHost);
+    return isAllowedOriginHost(req.headers?.origin, req.headers?.['x-forwarded-host'] || req.headers?.host, env);
 }
 
 function sendJson(res, status, payload, extraHeaders = {}) {
