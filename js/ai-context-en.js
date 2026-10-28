@@ -36,7 +36,7 @@
         { triggers: /conflict|argu|disagree|tension|fight|quarrel|dilemma|torn|choose|choice|oppos|clash/,
             terms: ['contradiction', 'opposite', 'struggle', 'unity', 'identity'], articles: ['016-on-contradiction.md', '215-on-the-correct-handling-of-contradictions-among-the-people.md'] },
         { triggers: /don.?t know|unsure|unclear|not sure|research|data|fact|customer|user|market|decid|decision|information|assum|guess/,
-            terms: ['investigation', 'investigate', 'facts', 'study', 'conditions', 'subjectivism', 'truth'], articles: ['058-reform-our-study.md', '001-report-on-an-investigation-of-the-peasant-movement-in-hunan.md', '062-rectify-the-party-s-style-of-work.md'] },
+            terms: ['investigation', 'investigate', 'facts', 'study', 'conditions', 'subjectivism', 'truth'], articles: ['228-oppose-book-worship.md', '058-reform-our-study.md', '001-report-on-an-investigation-of-the-peasant-movement-in-hunan.md', '062-rectify-the-party-s-style-of-work.md'] },
         { triggers: /theor|learn|plan|try|experiment|test|idea|overthink|start|book|course|skill/,
             terms: ['practice', 'knowledge', 'test', 'experience', 'perceptual', 'rational'], articles: ['015-on-practice.md', '058-reform-our-study.md'] },
         { triggers: /long|slow|progress|patien|persever|give up|quit|tired|setback|fail|anxi|worr|procrastinat|stuck|hopeless|discourag|hard/,
