@@ -31,8 +31,15 @@
         '整顿党的作风': ['反对主观主义', '实事求是'],
     };
 
-    function getQuotePresentation(content) {
+    function getQuotePresentation(content, locale) {
         const len = String(content || '').length;
+        if (locale === 'en') {
+            // 英文按字母数计长度，阈值约为中文的三倍
+            if (len > 250) return { fontSizeClass: 'quote-size-xs', layoutClass: 'layout-top' };
+            if (len > 140) return { fontSizeClass: 'quote-size-small', layoutClass: 'layout-top' };
+            if (len < 70) return { fontSizeClass: 'quote-size-large', layoutClass: 'layout-center' };
+            return { fontSizeClass: 'quote-size-medium', layoutClass: 'layout-center' };
+        }
 
         if (len > 80) {
             return {
@@ -83,6 +90,32 @@
         });
     }
 
+    // 英文版：只用标记为卡片的语录（data/en/quotes.json 的 card），出处链接到英译本对应段落
+    function normalizeEnglishQuotes(payload, catalog) {
+        const quotes = Array.isArray(payload) ? payload : payload?.quotes || [];
+        const files = new Set();
+        Object.values(catalog?.volumes || {}).forEach((articles) => articles.forEach((a) => files.add(a.filename)));
+        return quotes.filter((quote) => quote.card).map((quote) => {
+            const linked = quote.articleFilename && files.has(quote.articleFilename);
+            const params = new URLSearchParams({ lang: 'en' });
+            if (linked) {
+                params.set('article', quote.articleFilename);
+                if (quote.anchor) params.set('anchor', quote.anchor);
+            }
+            return {
+                id: quote.id,
+                content: quote.content,
+                source: quote.source || 'Quotations from Chairman Mao Tse-tung',
+                date: quote.date || '',
+                category: quote.category || '',
+                methodTags: quote.category ? [quote.category] : [],
+                articleTitle: quote.source || '',
+                articleFilename: linked ? quote.articleFilename : '',
+                articleHref: `reading.html?${params.toString()}`,
+            };
+        });
+    }
+
     function buildArticleMap(catalog) {
         const map = new Map();
         const volumes = catalog?.volumes || {};
@@ -114,6 +147,7 @@
 
     return {
         getQuotePresentation,
+        normalizeEnglishQuotes,
         normalizeQuotes,
     };
 });

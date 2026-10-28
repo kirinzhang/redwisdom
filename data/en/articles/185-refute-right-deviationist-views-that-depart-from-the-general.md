@@ -1,0 +1,21 @@
+# Refute Right Deviationist Views that Depart from the General Line
+
+*June 15, 1953*
+
+> [Part of a speech at a meeting of the Political Bureau of the Central Committee of the Chinese Communist Party. Here Comrade Mao Tsetung refuted the Right opportunist views, such as "firmly establish the new-democratic social order", put forward by Liu Shao-chi and others.]
+
+The general line or the general task of the Party for the transition period **[1]** is basically to accomplish the industrialization of the country and the socialist transformation of agriculture, handicrafts and capitalist industry and commerce in ten to fifteen years, or a little longer. This general line is a beacon illuminating our work in all fields. Do not depart from this general line, otherwise "Left" or Right mistakes will occur.
+
+Some people think the period of transition is too long and give way to impatience. This will lead to "Left" deviationist mistakes. Others have remained where they were after the victory of the democratic revolution. They fail to realize there is a change in the character of the revolution and they go on pushing their "New Democracy" instead of socialist transformation. This will lead to Right deviationist mistakes. Take our agriculture for instance, the socialist road is the only road for it. The Party's central task in the rural areas is to develop the mutual-aid and co-operative movement and constantly raise productivity in agriculture.
+
+The Right deviation manifests itself in three remarks:
+
+"Firmly establish the new-democratic social order." That's a harmful formulation. In the transition period changes are taking place all the time and socialist factors are emerging every day. How can this "new-democratic social order" be "firmly established"? It would be very difficult indeed to "establish" it "firmly"! For instance, private industry and commerce are being transformed, and if an order is "established" in the second half of the year, it will no longer hold "firm" next year. And changes are taking place in mutual aid and co-operation in agriculture from year to year too. The period of transition is full of contradictions and struggles. Our present revolutionary struggle is even more profound than the revolutionary armed struggle of the past. It is a revolution that will bury the capitalist system and all other systems of exploitation once and for all. The idea, "Firmly establish the new-democratic social order", goes against the realities of our struggle and hinders the progress of the socialist cause
+
+"Move from New Democracy towards socialism." That's a vague formulation. Moving towards the goal and nothing more, moving towards it year in year out and still moving towards it after a lapse of fifteen years? Merely moving towards it means that the goal has not been reached. The formulation sounds plausible but does not bear scrutiny.
+
+"Sustain private property." Since the middle peasants are afraid of "becoming too conspicuous" and having their property "communized", some people have raised this slogan to put them at ease But that is not right.
+
+We have proposed a step-by-step transition to socialism. This is a better formulation. When we say "step-by-step", we mean that the steps are to be spread out over fifteen years and over the twelve months in each year. Going too fast means erring to the "Left", standing still means erring too much to the Right. We must oppose "Left" and Right deviations and make a step-by-step transition until the whole process is completed.
+
+1. Here "the transition period" refers to the period from the founding of the People's Republic of China to the basic completion of socialist transformation. The general line or the general task of the Party for this transition period was basically to accomplish the industrialization of China and the socialist transformation of agriculture, handicrafts and capitalist industry and commerce over a fairly long period of time. This transition period is different in meaning from the transition period Comrade Mao Tsetung spoke of at the Tenth Plenary Session of the Party's Eighth Central Committee in September 1962 and thereafter, which denotes the entire historical period of transition from capitalism to communism.

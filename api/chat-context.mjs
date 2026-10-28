@@ -9,6 +9,7 @@ import * as core from './chat-context-core.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 let cachedSources = null;
+let cachedEnglish = null;
 
 function readJson(relativePath, fallback) {
     try {
@@ -18,7 +19,12 @@ function readJson(relativePath, fallback) {
     }
 }
 
-export const { matchConcepts, buildContextSources, CONTEXT_DATA_FILES } = core;
+export const { matchConcepts, buildContextSources, CONTEXT_DATA_FILES, CONTEXT_DATA_FILES_EN } = core;
+
+export function loadEnglishSources() {
+    if (!cachedEnglish) cachedEnglish = core.buildEnglishSources({ search: readJson(core.CONTEXT_DATA_FILES_EN.search, { records: [] }) });
+    return cachedEnglish;
+}
 
 // data/quotes.json、data/search-index.json、data/history-cases.json、data/history-problem-types.json、data/concepts.json
 export function loadContextSources() {
@@ -38,6 +44,7 @@ export function buildRetrievalContext(userMessage, sources = loadContextSources(
     return core.buildRetrievalContext(userMessage, sources);
 }
 
-export function buildServerMessages(input, sources = loadContextSources()) {
-    return core.buildServerMessages(input, sources);
+export function buildServerMessages(input, sources) {
+    if (input && input.locale === 'en') return core.buildServerMessages(input, { ...(sources || {}), en: (sources && sources.en) || loadEnglishSources() });
+    return core.buildServerMessages(input, sources || loadContextSources());
 }

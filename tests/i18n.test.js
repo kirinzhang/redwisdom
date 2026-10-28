@@ -47,7 +47,7 @@ test('translate exposes reading page labels in English', () => {
 });
 
 test('translate exposes analysis guide labels in English', () => {
-    assert.equal(translate('en', 'guide.title'), 'Maoist Method Guide');
+    assert.equal(translate('en', 'guide.title'), 'Method Analysis Guide');
     assert.equal(translate('en', 'guide.usePrompt'), 'Use as Prompt');
     assert.equal(translate('en', 'guide.practiceSaved'), 'Practice task saved.');
 });

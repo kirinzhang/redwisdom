@@ -1,0 +1,17 @@
+# Expose the Plot for a Far Eastern Munich
+
+*May 25, 1941*
+
+> [This inner-Party directive was written by Comrade Mao Tse-tung for the Central Committee of the Communist Party of China.]
+
+1. A compromise between Japan and the United States at the expense of China and the creation of an Eastern Munich against communism and against the Soviet Union--such is the new plot which is now being hatched by Japan, the United States and Chiang Kai-shek. We must expose this plot and fight it.
+
+2. Now that the Japanese imperialists have ended their latest round of military attacks, which was designed to force Chiang Kai-shek to capitulate, there are bound to be moves to induce him to capitulate. This is a repeat performance of the enemy's old policy of using the stick and the carrot, either alternately or simultaneously. We must expose this policy and fight it.
+
+3. Simultaneously with her military attacks, Japan has launched a rumour-mongering campaign alleging that "the Eighth Route Army does not want to fight in co-ordination with the Kuomintang Central Army", that "the Eighth Route Army is seizing every opportunity to expand its territory", that "it is opening up an international route", that "it is setting up another Central Government", etc. This is a cunning Japanese scheme to foment discord between the Kuomintang and the Communist Party and thus to make it easier for them to induce the Kuomintang to capitulate. The Kuomintang Central News Agency and the Kuomintang press are copying and spreading these rumours, showing no qualms about echoing Japan's anti-Communist propaganda, and their intentions are most dubious. This, too, we must expose and fight.
+
+4. Although the New Fourth Army has been declared to be "in rebellion" and the Eighth Route Army has not received a single bullet or a single copper from the Kuomintang, they have never for a moment ceased fighting the enemy. The Eighth Route Army, moreover, has taken the initiative in co-ordinating its operations with those of the Kuomintang troops in the fighting in the present campaign in southern Shansi, **[1]** and for the last two weeks it has been launching attacks on all fronts in northern China, where fierce battles are raging at this very moment. The armed forces and the people led by the Communist Party have already become the mainstay in the War of Resistance Against Japan. All the calumnies against the Communist Party are aimed at sabotaging the War of Resistance and paving the way for capitulation. We should extend the military successes of the Eighth Route and New Fourth Armies and oppose all the defeatists and capitulationists.
+
+## Notes
+
+[1] The Southern Shansi campaign refers to the campaign of the Chungtiao Mountains. In May 1941, a Japanese invading force 50,000 strong attacked the Chungtiao Mountains area to the north of the Yellow River in southern Shansi. Altogether seven Kuomintang corps were massed in that area, and another four in the Kaoping area to the northeast, making a total of 250,000 men. Since the fight against the Communists was the main job of the Kuomintang troops north of the Yellow River, they had never prepared themselves to fight the Japanese, and most of them tried to avoid combat when the Japanese aggressors attacked. Therefore, in spite of vigorous efforts by the Eighth Route Army to support the Kuomintang troops against the enemy in this campaign, the Kuomintang troops were completely routed, losing more than 50,000 men in three weeks, while the remainder fled to the south of the Yellow River.
