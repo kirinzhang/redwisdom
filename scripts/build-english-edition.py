@@ -441,6 +441,8 @@ def main():
     json.dump(catalog, open(os.path.join(out_dir, 'catalog.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 
     # 语录卡只取适合日常思考的章节与篇幅：去掉以战争、军队、阶级斗争、帝国主义为主题的章节和过长的段落
+    # 卡片上只放能从容排开的语录；更长的仍可在阅读页和问道中使用
+    CARD_MAX_CHARS = 260
     CARD_EXCLUDED_CHAPTERS = {1, 2, 3, 5, 6, 8, 9, 12, 13, 14, 15, 16, 18, 26}
     CARD_EXCLUDED_WORDS = re.compile(r'(?i)imperialis|reactionar|running dogs|wipe (?:him|them|it) out|annihilat|atom bomb|U\.S\. aggress|\barmy\b|troops|military|enemy|counter-revolution|class struggle|bourgeois|landlord|Kuomintang')
     quotes = []
@@ -460,7 +462,7 @@ def main():
                 dm = re.search(r'\(([^)]*\d{4}[^)]*)\)', citation)
                 date = dm.group(1) if dm else ''
             prev = {'art': art, 'source': source, 'date': date}
-            card = (ch not in CARD_EXCLUDED_CHAPTERS and len(content) <= 360 and content.count('\n\n') <= 1
+            card = (ch not in CARD_EXCLUDED_CHAPTERS and len(content) <= CARD_MAX_CHARS and content.count('\n\n') <= 1
                     and not CARD_EXCLUDED_WORDS.search(content))
             quotes.append({
                 'id': len(quotes) + 1,
