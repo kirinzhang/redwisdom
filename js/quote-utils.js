@@ -35,8 +35,8 @@
         const len = String(content || '').length;
         if (locale === 'en') {
             // 英文按字母数计长度，阈值约为中文的三倍
-            if (len > 250) return { fontSizeClass: 'quote-size-xs', layoutClass: 'layout-top' };
-            if (len > 140) return { fontSizeClass: 'quote-size-small', layoutClass: 'layout-top' };
+            if (len > 200) return { fontSizeClass: 'quote-size-xs', layoutClass: 'layout-top' };
+            if (len > 130) return { fontSizeClass: 'quote-size-small', layoutClass: 'layout-top' };
             if (len < 70) return { fontSizeClass: 'quote-size-large', layoutClass: 'layout-center' };
             return { fontSizeClass: 'quote-size-medium', layoutClass: 'layout-center' };
         }
@@ -155,7 +155,7 @@
 
     // 正文在卡片里放不下时逐级缩小字号（每次 0.5px，最小 minPx），保证出处行不被挤压或遮挡。
     // container 需要 overflow:hidden 且高度固定；返回最终字号（px）。
-    function fitQuoteText(container, text, { minPx = 11, step = 0.5 } = {}) {
+    function fitQuoteText(container, text, { minPx = 13, step = 0.5 } = {}) {
         if (!container || !text || !text.ownerDocument) return null;
         const view = text.ownerDocument.defaultView;
         text.style.fontSize = '';

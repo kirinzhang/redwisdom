@@ -82,12 +82,12 @@ test('the English edition carries all five volumes of the FLP translation', () =
 
 test('English cards are short, verbatim and link back to the passage', () => {
     const cards = QuoteUtils.normalizeEnglishQuotes(quotes, catalog);
-    assert.ok(cards.length >= 60, `${cards.length} cards`);
+    assert.ok(cards.length >= 55, `${cards.length} cards`);
     const files = new Set(entries.map((e) => e.filename));
     const records = new Map(search.records.map((r) => [`${r.articleId}#${r.anchor}`, r]));
     const squash = (t) => String(t).replace(/[^a-z0-9]/gi, '').toLowerCase();
     for (const card of cards) {
-        assert.ok(card.content.length <= 360, card.content);
+        assert.ok(card.content.length <= 260, card.content);
         assert.doesNotMatch(card.content, /imperialis|reactionar|running dogs|army|enemy/i);
         assert.match(card.articleHref, /^reading\.html\?lang=en(&article=|$)/);
         const raw = quotes.quotes.find((q) => q.content === card.content);
@@ -172,7 +172,7 @@ test('fitQuoteText shrinks the quote until the card no longer overflows', () => 
     const size = QuoteUtils.fitQuoteText(container, text);
     assert.ok(size <= 18.75 && size > 18, `ends at ${size}px`);
     const tiny = { clientHeight: 10, scrollHeight: 999 };
-    assert.equal(QuoteUtils.fitQuoteText(tiny, { style: {}, ownerDocument: text.ownerDocument }), 11, 'stops at the minimum size');
+    assert.equal(QuoteUtils.fitQuoteText(tiny, { style: {}, ownerDocument: text.ownerDocument }), 13, 'stops at the minimum size');
 });
 
 test('English pages load their own reading fonts only in English mode', () => {

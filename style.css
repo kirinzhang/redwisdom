@@ -309,14 +309,15 @@ html[data-locale="en"] .card-back-text { font-family: 'Cinzel', Georgia, serif; 
 html[data-locale="en"] .card-back-text.vertical-text { writing-mode: horizontal-tb; letter-spacing: 0.22em; }
 html[data-locale="en"] .card-back-sub { font-family: var(--en-display); font-style: italic; font-size: 0.9rem; letter-spacing: 0.04em; text-align: center; left: 12px; right: 12px; }
 /* 英文卡片：出处排在正文下方（不再绝对定位覆盖在正文上），正文在剩余空间里居中，放不下时由 script.js 逐级缩小字号 */
+html[data-locale="en"] .card-front { padding: 1.7rem 1.55rem 1.25rem; }
 html[data-locale="en"] .card-front-content { justify-content: flex-start; align-items: stretch; }
-html[data-locale="en"] .quote-text { margin: auto 0; flex: 0 1 auto; font-family: var(--en-display); font-weight: 500; letter-spacing: 0; line-height: 1.32; text-align: left; hyphens: auto; -webkit-hyphens: auto; color: #241f1c; }
-html[data-locale="en"] .quote-text.quote-size-large { font-size: 1.85rem; line-height: 1.24; text-align: center; }
-html[data-locale="en"] .quote-text.quote-size-medium { font-size: 1.5rem; line-height: 1.28; }
-html[data-locale="en"] .quote-text.quote-size-small { font-size: 1.34rem; line-height: 1.3; }
-html[data-locale="en"] .quote-text.quote-size-xs { font-size: 1.18rem; line-height: 1.28; }
-html[data-locale="en"] .quote-meta { position: static; flex-shrink: 0; align-self: flex-start; width: 60%; margin-top: 0.7rem; }
-html[data-locale="en"] .quote-meta.quote-meta-long .quote-source-line { font-size: 0.78rem; -webkit-line-clamp: 4; }
+html[data-locale="en"] .quote-text { margin: auto 0; flex: 0 1 auto; font-family: var(--en-display); font-weight: 450; letter-spacing: 0.005em; word-spacing: 0.02em; line-height: 1.48; text-align: left; text-wrap: pretty; hyphens: manual; color: #2a2421; }
+html[data-locale="en"] .quote-text.quote-size-large { font-size: 1.55rem; line-height: 1.38; text-align: center; text-wrap: balance; }
+html[data-locale="en"] .quote-text.quote-size-medium { font-size: 1.28rem; line-height: 1.45; }
+html[data-locale="en"] .quote-text.quote-size-small { font-size: 1.12rem; line-height: 1.5; }
+html[data-locale="en"] .quote-text.quote-size-xs { font-size: 1.02rem; line-height: 1.5; }
+html[data-locale="en"] .quote-meta { position: static; flex-shrink: 0; align-self: flex-start; width: 56%; margin-top: 1.1rem; padding-top: 0.55rem; border-top: 1px solid rgba(184, 50, 40, 0.28); }
+html[data-locale="en"] .quote-meta.quote-meta-long .quote-source-line { font-size: 0.78rem; -webkit-line-clamp: 3; }
 html[data-locale="en"] .quote-source-line { font-family: var(--en-display); font-style: italic; font-weight: 600; font-size: 0.86rem; line-height: 1.25; overflow-wrap: normal; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
 html[data-locale="en"] .quote-date-line { font-family: var(--en-text); font-size: 0.7rem; }
 

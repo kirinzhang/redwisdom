@@ -1933,7 +1933,7 @@
    "date": "1955",
    "chapter": 11,
    "category": "The Mass Line",
-   "card": true,
+   "card": false,
    "articleFilename": "",
    "inSelectedWorks": false
   },
@@ -2033,7 +2033,7 @@
    "date": "",
    "chapter": 11,
    "category": "The Mass Line",
-   "card": true,
+   "card": false,
    "articleFilename": "123-a-talk-to-the-editorial-staff-of-the-shansi-suiyuan-daily.md",
    "inSelectedWorks": true,
    "anchor": "p-1ro72ig"
@@ -2084,7 +2084,7 @@
    "date": "November 29, 1943",
    "chapter": 11,
    "category": "The Mass Line",
-   "card": true,
+   "card": false,
    "articleFilename": "073-get-organized.md",
    "inSelectedWorks": true,
    "anchor": "p-1v9zx2y"
@@ -2097,7 +2097,7 @@
    "date": "April 2, 1948",
    "chapter": 11,
    "category": "The Mass Line",
-   "card": true,
+   "card": false,
    "articleFilename": "123-a-talk-to-the-editorial-staff-of-the-shansi-suiyuan-daily.md",
    "inSelectedWorks": true
   },
@@ -2122,7 +2122,7 @@
    "date": "June 1, 1943",
    "chapter": 11,
    "category": "The Mass Line",
-   "card": true,
+   "card": false,
    "articleFilename": "069-some-questions-concerning-methods-of-leadership.md",
    "inSelectedWorks": true,
    "anchor": "p-j6i21p"
@@ -2135,7 +2135,7 @@
    "date": "April 2, 1948",
    "chapter": 11,
    "category": "The Mass Line",
-   "card": true,
+   "card": false,
    "articleFilename": "123-a-talk-to-the-editorial-staff-of-the-shansi-suiyuan-daily.md",
    "inSelectedWorks": true,
    "anchor": "p-1ro72ig"
@@ -2844,7 +2844,7 @@
    "date": "April 24, 1945",
    "chapter": 17,
    "category": "Serving the People",
-   "card": true,
+   "card": false,
    "articleFilename": "081-on-coalition-government.md",
    "inSelectedWorks": true,
    "anchor": "p-12sms25"
@@ -2920,7 +2920,7 @@
    "date": "September 8, 1944",
    "chapter": 17,
    "category": "Serving the People",
-   "card": true,
+   "card": false,
    "articleFilename": "075-serve-the-people.md",
    "inSelectedWorks": true,
    "anchor": "p-1dsk5fu"
@@ -2933,7 +2933,7 @@
    "date": "September 8, 1944",
    "chapter": 17,
    "category": "Serving the People",
-   "card": true,
+   "card": false,
    "articleFilename": "075-serve-the-people.md",
    "inSelectedWorks": true,
    "anchor": "p-8xat0h"
@@ -3312,7 +3312,7 @@
    "date": "1955",
    "chapter": 21,
    "category": "Self-Reliance and Arduous Struggle",
-   "card": true,
+   "card": false,
    "articleFilename": "",
    "inSelectedWorks": false
   },
@@ -3426,7 +3426,7 @@
    "date": "July 1937",
    "chapter": 22,
    "category": "Methods of Thinking and Methods of Work",
-   "card": true,
+   "card": false,
    "articleFilename": "015-on-practice.md",
    "inSelectedWorks": true,
    "anchor": "p-1jaar23"
@@ -3488,7 +3488,7 @@
    "date": "May 1963",
    "chapter": 22,
    "category": "Methods of Thinking and Methods of Work",
-   "card": true,
+   "card": false,
    "articleFilename": "",
    "inSelectedWorks": false
   },
@@ -3615,7 +3615,7 @@
    "date": "August 1937",
    "chapter": 22,
    "category": "Methods of Thinking and Methods of Work",
-   "card": true,
+   "card": false,
    "articleFilename": "016-on-contradiction.md",
    "inSelectedWorks": true
   },
@@ -3728,7 +3728,7 @@
    "date": "December 27, 1935",
    "chapter": 22,
    "category": "Methods of Thinking and Methods of Work",
-   "card": true,
+   "card": false,
    "articleFilename": "010-on-tactics-against-japanese-imperialism.md",
    "inSelectedWorks": true,
    "anchor": "p-zibfc5"
@@ -3830,7 +3830,7 @@
    "date": "January 27, 1934",
    "chapter": 22,
    "category": "Methods of Thinking and Methods of Work",
-   "card": true,
+   "card": false,
    "articleFilename": "009-be-concerned-with-the-well-being-of-the-masses-pay-attention.md",
    "inSelectedWorks": true,
    "anchor": "p-18omgp4"
@@ -3856,7 +3856,7 @@
    "date": "June 1, 1943",
    "chapter": 22,
    "category": "Methods of Thinking and Methods of Work",
-   "card": true,
+   "card": false,
    "articleFilename": "069-some-questions-concerning-methods-of-leadership.md",
    "inSelectedWorks": true,
    "anchor": "p-bctn89"
@@ -3982,7 +3982,7 @@
    "date": "May 1941",
    "chapter": 23,
    "category": "Investigation and Study",
-   "card": true,
+   "card": false,
    "articleFilename": "058-reform-our-study.md",
    "inSelectedWorks": true
   },
@@ -4211,7 +4211,7 @@
    "date": "January 15, 1940",
    "chapter": 24,
    "category": "Correcting Mistaken Ideas",
-   "card": true,
+   "card": false,
    "articleFilename": "",
    "inSelectedWorks": false
   },
@@ -4403,7 +4403,7 @@
    "date": "August 1937",
    "chapter": 27,
    "category": "Criticism and Self-Criticism",
-   "card": true,
+   "card": false,
    "articleFilename": "016-on-contradiction.md",
    "inSelectedWorks": true,
    "anchor": "p-1kcxdl2"
@@ -4481,7 +4481,7 @@
    "date": "September 8, 1941",
    "chapter": 27,
    "category": "Criticism and Self-Criticism",
-   "card": true,
+   "card": false,
    "articleFilename": "075-serve-the-people.md",
    "inSelectedWorks": true,
    "anchor": "p-tt44k8"
@@ -4531,7 +4531,7 @@
    "date": "June 30, 1949",
    "chapter": 27,
    "category": "Criticism and Self-Criticism",
-   "card": true,
+   "card": false,
    "articleFilename": "152-on-the-people-s-democratic-dictatorship.md",
    "inSelectedWorks": true,
    "anchor": "p-1v0ch0q"
@@ -4609,7 +4609,7 @@
    "date": "February 1, 1942",
    "chapter": 28,
    "category": "Communists",
-   "card": true,
+   "card": false,
    "articleFilename": "062-rectify-the-party-s-style-of-work.md",
    "inSelectedWorks": true,
    "anchor": "p-119a43t"
@@ -4672,7 +4672,7 @@
    "date": "October 1938",
    "chapter": 28,
    "category": "Communists",
-   "card": true,
+   "card": false,
    "articleFilename": "026-the-role-of-the-chinese-communist-party-in-the-national-war.md",
    "inSelectedWorks": true,
    "anchor": "p-hsxmxy"
@@ -4711,7 +4711,7 @@
    "date": "October 1938",
    "chapter": 28,
    "category": "Communists",
-   "card": true,
+   "card": false,
    "articleFilename": "026-the-role-of-the-chinese-communist-party-in-the-national-war.md",
    "inSelectedWorks": true,
    "anchor": "p-1a598k4"
@@ -4736,7 +4736,7 @@
    "date": "November 21, 1941",
    "chapter": 28,
    "category": "Communists",
-   "card": true,
+   "card": false,
    "articleFilename": "061-speech-at-the-assembly-of-representatives-of-the-shensi-kans.md",
    "inSelectedWorks": true,
    "anchor": "p-v3tdzz"
@@ -4812,7 +4812,7 @@
    "date": "October 1938",
    "chapter": 29,
    "category": "Cadres",
-   "card": true,
+   "card": false,
    "articleFilename": "026-the-role-of-the-chinese-communist-party-in-the-national-war.md",
    "inSelectedWorks": true,
    "anchor": "p-2o7tl6"
@@ -4914,7 +4914,7 @@
    "date": "November 17, 1957",
    "chapter": 30,
    "category": "Youth",
-   "card": true,
+   "card": false,
    "articleFilename": "",
    "inSelectedWorks": false
   },
@@ -5051,7 +5051,7 @@
    "date": "1955",
    "chapter": 31,
    "category": "Women",
-   "card": true,
+   "card": false,
    "articleFilename": "",
    "inSelectedWorks": false
   },
@@ -5100,7 +5100,7 @@
    "date": "January 1940",
    "chapter": 32,
    "category": "Culture and Art",
-   "card": true,
+   "card": false,
    "articleFilename": "042-on-new-democracy.md",
    "inSelectedWorks": true,
    "anchor": "p-1d1gj2h"
@@ -5202,7 +5202,7 @@
    "date": "March 12, 1957",
    "chapter": 33,
    "category": "Study",
-   "card": true,
+   "card": false,
    "articleFilename": "216-speech-at-the-chinese-communist-party-s-national-conference.md",
    "inSelectedWorks": true,
    "anchor": "p-9a5lr3"
@@ -5293,7 +5293,7 @@
    "date": "February 1, 1942",
    "chapter": 33,
    "category": "Study",
-   "card": true,
+   "card": false,
    "articleFilename": "062-rectify-the-party-s-style-of-work.md",
    "inSelectedWorks": true,
    "anchor": "p-1ex8r18"
