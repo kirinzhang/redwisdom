@@ -99,6 +99,22 @@ Red Wisdom 是一个以《毛泽东选集》为核心内容和方法论来源的
 - 登录页接入 Google OAuth；配置 Supabase 并执行数据库 schema 后，首次登录会自动迁移本机档案，之后持续双向合并同步。
 - 我的档案页支持导出本机实践、问答历史、AI 回答收藏、阅读笔记、阅读进度、文章收藏、原文摘录和语录收藏，便于迁移和备份。
 
+### 英文版（English edition）
+
+首页、阅读毛选、问道毛选三个页面右上角有「中 / EN」切换，选择会记在本机；链接上加 `?lang=en` 或 `?lang=zh` 也可以直接指定。英文模式下导航只保留这三项。
+
+- 原文：外文出版社（Foreign Languages Press, Peking）英译本 *Selected Works of Mao Tse-tung* 第一至五卷，共 228 篇，取自 [Marxists Internet Archive](https://www.marxists.org/reference/archive/mao/selected-works/)。中文版的《反对本本主义》不在英译本第一卷中，英文模式下没有这一篇。
+- 卡片：取自 *Quotations from Chairman Mao Tse-tung* 的英译语录，筛掉军事和敌我斗争类，保留 92 张适合日常反思的卡片；大部分可以直接跳到英译本中的原段落。
+- 阅读：中英文章一一对照，切换语言时停留在同一篇；支持全文搜索和注释弹窗。专题导读和概念层暂只有中文。
+- 问道：服务端在英译本中检索相关段落（把「优先级」「拖延」等现代说法映射到主要矛盾、持久战等方法），回答只引用检索到的英译原文。党史镜鉴暂只有中文。
+
+重新生成英文数据（需要能访问 marxists.org）：
+
+```bash
+python3 scripts/build-english-edition.py --cache /tmp/mia-cache --out .
+node scripts/build-search-index.mjs --edition en
+```
+
 ## 技术栈
 
 | 类型 | 技术 |

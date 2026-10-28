@@ -20,6 +20,7 @@
     <link rel="icon" type="image/png" href="/assets/favicon.png">
 
     <link rel="stylesheet" href="assets/tailwind.css?v=5">
+    <script src="js/lang-switch.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.4/dist/purify.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -609,29 +610,23 @@
             </a>
             <div class="flex gap-3 text-sm mb-3">
                 <a href="chat.html" class="text-gray-300 hover:text-white" data-i18n="nav.chat">问道</a>
-                <a href="practice.html" class="text-gray-300 hover:text-white" data-i18n="nav.practice">实践</a>
-                <a href="problems.html" class="text-gray-300 hover:text-white" data-i18n="nav.problems">问题</a>
-                <a href="me.html" class="text-gray-300 hover:text-white" data-i18n="nav.me">我的</a>
-                <a href="timeline.html" class="text-china-red hover:text-white">时间线</a>
-                <a href="campaign.html" class="text-china-red hover:text-white">长征沙盘</a>
-                <a href="modern.html" class="text-china-red hover:text-white">现代问题</a>
-                <a href="login.html" class="text-gray-300 hover:text-white" data-i18n="nav.login">登录</a>
+                <a data-zh-only href="practice.html" class="text-gray-300 hover:text-white" data-i18n="nav.practice">实践</a>
+                <a data-zh-only href="problems.html" class="text-gray-300 hover:text-white" data-i18n="nav.problems">问题</a>
+                <a data-zh-only href="me.html" class="text-gray-300 hover:text-white" data-i18n="nav.me">我的</a>
+                <a data-zh-only href="timeline.html" class="text-china-red hover:text-white">时间线</a>
+                <a data-zh-only href="campaign.html" class="text-china-red hover:text-white">长征沙盘</a>
+                <a data-zh-only href="modern.html" class="text-china-red hover:text-white">现代问题</a>
+                <a data-zh-only href="login.html" class="text-gray-300 hover:text-white" data-i18n="nav.login">登录</a>
             </div>
-            <select id="readingLocaleSelect"
-                class="mb-3 w-full rounded border border-gray-600 bg-sidebar-bg px-3 py-2 text-sm text-gray-100 focus:border-china-red focus:outline-none"
-                aria-label="Language">
-                <option value="zh-CN">中文</option>
-                <option value="en">English</option>
-            </select>
-            <h1 class="font-mao text-2xl text-china-red">毛泽东选集</h1>
+            <h1 id="editionTitle" class="font-mao text-2xl text-china-red">毛泽东选集</h1>
             <p id="catalogCount" class="text-gray-400 text-sm mt-1">正在读取目录...</p>
-            <label class="mt-4 block text-sm text-gray-300" for="readingSearchInput">搜索原文</label>
+            <label class="mt-4 block text-sm text-gray-300" for="readingSearchInput" data-i18n="reading.searchLabel">搜索原文</label>
             <input id="readingSearchInput" type="search" autocomplete="off"
                 class="mt-1 w-full rounded border border-gray-600 bg-sidebar-bg px-3 py-2 text-sm text-white placeholder:text-gray-500 focus:border-china-red focus:outline-none"
-                placeholder="输入概念、句子或问题">
+                placeholder="输入概念、句子或问题" data-i18n-placeholder="reading.searchPlaceholder">
             <p id="readingSearchStatus" class="mt-2 text-xs text-gray-400" aria-live="polite"></p>
             <details id="editionDetails" class="mt-3 text-xs leading-relaxed text-gray-400">
-                <summary class="cursor-pointer text-gray-300">版本说明</summary>
+                <summary class="cursor-pointer text-gray-300" data-i18n="reading.editionTitle">版本说明</summary>
                 <div id="editionNotice" class="mt-2"></div>
             </details>
         </div>
@@ -669,7 +664,8 @@
                         <span id="readingExcerptCount" class="text-xs text-gray-500">0</span>
                     </button>
                 </div>
-                <div id="readingFontControls" class="relative ml-auto flex items-center text-sm">
+                <div data-lang-switch class="ml-auto"></div>
+                <div id="readingFontControls" class="relative flex items-center text-sm">
                     <button id="readingFontMenuButton" type="button" class="reading-toolbar-button" aria-label="调整字号"
                         aria-controls="readingFontPopover" aria-expanded="false">Aa</button>
                     <div id="readingFontPopover" class="reading-font-popover">
@@ -688,9 +684,10 @@
             class="article-content max-w-4xl mx-auto px-6 md:px-12 py-8 font-serif text-ink-black">
             <!-- Welcome Message -->
             <div id="welcomeMessage" class="text-center py-20">
-                <h1 class="font-mao text-4xl text-china-red mb-4">毛泽东选集</h1>
+                <h1 id="welcomeTitle" class="font-mao text-4xl text-china-red mb-4">毛泽东选集</h1>
                 <p class="text-gray-600 text-lg mb-8" data-i18n="reading.welcomeHint">请从左侧目录选择一篇文章开始阅读</p>
-                <div class="flex justify-center gap-4 flex-wrap">
+                <div id="welcomeStartsEn" class="flex justify-center gap-4 flex-wrap" hidden></div>
+                <div class="flex justify-center gap-4 flex-wrap" data-zh-only>
                     <button onclick="loadArticle('016-实践论.md')"
                         class="px-4 py-2 bg-china-red text-white rounded-lg hover:bg-red-800 transition">
                         实践论
@@ -720,12 +717,12 @@
                         长征沙盘推演
                     </a>
                 </div>
-                <div class="mt-12 text-left">
+                <div class="mt-12 text-left" data-zh-only>
                     <h2 class="font-mao text-3xl text-china-red text-center mb-2" data-i18n="reading.themeHeading">按问题学习</h2>
                     <p class="text-gray-600 text-center mb-6" data-i18n="reading.themeIntro">先选一个现实问题方向，再进入对应原文。</p>
                     <div id="themeTracks" class="grid md:grid-cols-2 gap-4"></div>
                 </div>
-                <div class="mt-12 text-left">
+                <div class="mt-12 text-left" data-zh-only>
                     <h2 class="font-mao text-3xl text-china-red text-center mb-2">概念索引</h2>
                     <p class="text-gray-600 text-center mb-6">毛选里反复出现的方法和概念。点开看原文出处、常见篇目和相关党史案例；读原文时，正文中的概念也可以直接点开。</p>
                     <div id="conceptIndex" class="concept-index"></div>
@@ -750,11 +747,11 @@
                         stroke="currentColor" stroke-width="2">
                         <path d="M19 12H5M12 19l-7-7 7-7" />
                     </svg>
-                    <span id="prevTitle">上一篇</span>
+                    <span id="prevTitle" data-i18n="reading.prev">上一篇</span>
                 </button>
                 <button id="nextBtn" onclick="loadNextArticle()"
                     class="flex items-center gap-2 text-china-red hover:opacity-70 transition disabled:opacity-30">
-                    <span id="nextTitle">下一篇</span>
+                    <span id="nextTitle" data-i18n="reading.next">下一篇</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14M12 5l7 7-7 7" />
@@ -883,7 +880,14 @@
         let lastSelectedArticleText = '';
         let activeReadingToolTab = 'notes';
         let readerToolsCollapsed = false;
-        let currentLocale = window.RedWisdomI18n?.getStoredLocale(localStorage) || 'zh-CN';
+        let currentLocale = window.RedWisdomLangSwitch?.locale === 'en' ? 'en' : 'zh-CN';
+        // 中文版读人民出版社五卷本整理稿；英文版读外文出版社英译本（marxists.org）
+        const EDITION = currentLocale === 'en'
+            ? { dir: 'data/en/', title: 'Selected Works of Mao Tse-tung', features: { guides: false, concepts: false } }
+            : { dir: 'data/', title: '毛泽东选集', features: { guides: true, concepts: true } };
+        document.getElementById('editionTitle').textContent = EDITION.title;
+        document.getElementById('welcomeTitle').textContent = EDITION.title;
+        document.title = currentLocale === 'en' ? 'Read the Selected Works of Mao Tse-tung | Red Wisdom' : document.title;
         const READING_FONT_SIZE_KEY = 'redwisdom.readingFontSize.v1';
         const DEFAULT_READING_FONT_SIZE = 18;
         const MIN_READING_FONT_SIZE = 15;
@@ -913,7 +917,7 @@
         // Load catalog data
         async function loadCatalog() {
             try {
-                const response = await fetch('data/catalog.json');
+                const response = await fetch(`${EDITION.dir}catalog.json`);
                 catalog = await response.json();
 
                 // Flatten all articles for navigation
@@ -924,13 +928,16 @@
                 renderCatalogCount();
 
                 renderVolumeList();
-                renderThemeTracks();
+                renderWelcomeStarts();
+                if (EDITION.features.guides) renderThemeTracks();
 
                 // Check URL hash for direct article link
                 const params = new URLSearchParams(window.location.search);
                 const linkedArticle = params.get('article');
-                renderConceptIndex();
-                if (params.get('concept')) openConcept(params.get('concept'));
+                if (EDITION.features.concepts) {
+                    renderConceptIndex();
+                    if (params.get('concept')) openConcept(params.get('concept'));
+                }
                 const linkedAnchor = params.get('anchor');
                 if (linkedArticle) {
                     loadArticle(linkedArticle, linkedAnchor);
@@ -956,7 +963,7 @@
                                 <path d="M9 18l6-6-6-6"/>
                             </svg>
                             <span>${volumeName}</span>
-                            <span class="text-gray-500 text-xs ml-auto">${articles.length}篇</span>
+                            <span class="text-gray-500 text-xs ml-auto">${currentLocale === 'en' ? articles.length : `${articles.length}篇`}</span>
                         </button>
                         <div id="volume-${idx}" class="volume-articles">
                             ${articles.map(article => `
@@ -976,6 +983,33 @@
             container.querySelectorAll('.article-item[data-filename]').forEach(button => {
                 button.addEventListener('click', () => loadArticle(button.dataset.filename));
             });
+        }
+
+        // 英文版欢迎页的入门篇目
+        function renderWelcomeStarts() {
+            const container = document.getElementById('welcomeStartsEn');
+            if (currentLocale !== 'en' || !container) return;
+            const picks = ['015-', '016-', '025-', '075-', '058-', '082-'];
+            container.innerHTML = picks.map((prefix) => allArticles.find((a) => a.filename.startsWith(prefix))).filter(Boolean)
+                .map((a) => `<button type="button" data-filename="${escapeAttribute(a.filename)}" class="px-4 py-2 bg-china-red text-white rounded-lg hover:bg-red-800 transition">${escapeHtml(a.title)}</button>`).join('');
+            container.hidden = false;
+            container.querySelectorAll('[data-filename]').forEach((b) => b.addEventListener('click', () => loadArticle(b.dataset.filename)));
+        }
+
+        // 切换语言时文章编号不同：按目录里的中英对照（英文目录的 zh 字段）换成当前版本的文章
+        async function resolveEditionFilename(filename) {
+            if (!catalog || allArticles.some((a) => a.filename === filename)) return { filename, mapped: false };
+            let hit = null;
+            if (currentLocale === 'en') {
+                hit = allArticles.find((a) => a.zh === filename);
+            } else {
+                try {
+                    const en = await fetch('data/en/catalog.json').then((r) => r.json());
+                    const entry = Object.values(en.volumes).flat().find((a) => a.filename === filename);
+                    if (entry) hit = { filename: entry.zh };
+                } catch (error) { /* 英文目录读不到时按原样打开 */ }
+            }
+            return hit ? { filename: hit.filename, mapped: true } : { filename, mapped: false };
         }
 
         function renderThemeTracks() {
@@ -1052,6 +1086,9 @@
 
         async function loadArticle(filename, targetAnchor = '') {
             filename = LEGACY_ARTICLE_IDS[filename] || filename;
+            const resolved = await resolveEditionFilename(filename);
+            if (resolved.mapped) targetAnchor = '';
+            filename = resolved.filename;
             const welcomeEl = document.getElementById('welcomeMessage');
             const loadingEl = document.getElementById('loadingState');
             const bodyEl = document.getElementById('articleBody');
@@ -1064,13 +1101,13 @@
             loadingEl.classList.remove('hidden');
 
             try {
-                const response = await fetch(`data/articles/${encodeURIComponent(filename)}`);
+                const response = await fetch(`${EDITION.dir}articles/${encodeURIComponent(filename)}`);
                 if (!response.ok) throw new Error('Article not found');
 
                 const markdown = await response.text();
                 const html = DOMPurify.sanitize(marked.parse(markdown));
                 const articleMeta = allArticles.find(article => article.filename === filename);
-                const guide = window.RedWisdomReadingGuides?.getReadingGuide(articleMeta?.title, currentLocale);
+                const guide = EDITION.features.guides ? window.RedWisdomReadingGuides?.getReadingGuide(articleMeta?.title, currentLocale) : null;
                 currentArticleMeta = articleMeta || null;
                 recordReadingProgress(articleMeta, 5, 0);
 
@@ -1082,7 +1119,7 @@
                 try {
                     window.RedWisdomAnnotations.enhanceArticle(articleRoot, {
                         notes: window.RedWisdomAnnotations.parseNotes(markdown),
-                        concepts: await loadConcepts(),
+                        concepts: EDITION.features.concepts ? await loadConcepts() : [],
                         popover: getAnnotationPopover(),
                     });
                 } catch (annotationError) {
@@ -1155,20 +1192,20 @@
             input.addEventListener('input', () => {
                 window.clearTimeout(timer);
                 const query = input.value.trim();
-                if (query.length < 2) {
-                    status.textContent = query ? '请至少输入两个字。' : '';
+                if (query.length < (currentLocale === 'en' ? 3 : 2)) {
+                    status.textContent = query ? t('reading.searchTooShort') : '';
                     renderSearchResults([]);
                     return;
                 }
-                status.textContent = '正在搜索原文...';
+                status.textContent = t('reading.searching');
                 timer = window.setTimeout(async () => {
                     try {
                         const records = await loadSearchIndex();
                         const results = window.RedWisdomFullTextSearch.searchIndex(records, query, 18);
-                        status.textContent = results.length ? `找到 ${results.length} 条相关段落` : '未找到相关段落';
+                        status.textContent = results.length ? t('reading.searchFound').replace('{n}', results.length) : t('reading.searchNone');
                         renderSearchResults(results);
                     } catch (error) {
-                        status.textContent = '搜索索引加载失败，请稍后重试。';
+                        status.textContent = t('reading.searchFailed');
                     }
                 }, 180);
             });
@@ -1176,7 +1213,7 @@
 
         function loadSearchIndex() {
             if (!searchIndexPromise) {
-                searchIndexPromise = fetch('data/search-index.json')
+                searchIndexPromise = fetch(`${EDITION.dir}search-index.json`)
                     .then(response => {
                         if (!response.ok) throw new Error('Search index unavailable');
                         return response.json();
@@ -1196,6 +1233,7 @@
             container.classList.remove('hidden');
             container.innerHTML = results.map(result => {
                 const params = new URLSearchParams({ article: result.articleId, anchor: result.anchor });
+                if (currentLocale === 'en') params.set('lang', 'en');
                 if (problemCaseId) params.set('case', problemCaseId);
                 return `
                     <a href="reading.html?${params.toString()}" data-search-article="${escapeAttribute(result.articleId)}" data-search-anchor="${escapeAttribute(result.anchor)}" class="mb-2 block rounded border border-gray-700 bg-white/5 px-3 py-2 hover:border-china-red">
@@ -1214,7 +1252,7 @@
 
         async function loadEditionNotice() {
             try {
-                const response = await fetch('data/text-edition.json');
+                const response = await fetch(`${EDITION.dir}text-edition.json`);
                 const edition = await response.json();
                 document.getElementById('editionNotice').innerHTML = `
                     <strong class="text-gray-200">${escapeHtml(edition.displayName)}</strong>
@@ -1222,7 +1260,7 @@
                     <p class="mt-1 text-china-red">${escapeHtml(edition.verificationStatus)}</p>
                 `;
             } catch (error) {
-                document.getElementById('editionNotice').textContent = '版本信息暂时无法读取。';
+                document.getElementById('editionNotice').textContent = t('reading.editionUnavailable');
             }
         }
 
@@ -1657,6 +1695,7 @@
         }
 
         function setupLocaleControls() {
+            if (window.RedWisdomI18n) window.RedWisdomI18n.applyTranslations(document, currentLocale);
             const localeSelect = document.getElementById('readingLocaleSelect');
             if (!localeSelect || !window.RedWisdomI18n) return;
 

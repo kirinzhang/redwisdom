@@ -4,7 +4,7 @@
 //   POST /api/chat           问道（服务端组装提示词与检索，流式转发模型回答）
 //   GET  /api/public-config  浏览器端需要的 Supabase 公开配置
 
-import { CONTEXT_DATA_FILES, buildContextSources, buildServerMessages } from '../api/chat-context-core.mjs';
+import { CONTEXT_DATA_FILES, CONTEXT_DATA_FILES_EN, buildContextSources, buildEnglishSources, buildServerMessages } from '../api/chat-context-core.mjs';
 import { buildProviderHeaders, resolveChatProvider } from '../api/chat-provider.mjs';
 import { buildProviderRequest, sanitizeChatRequest } from '../api/openrouter-guard.mjs';
 import { createRateLimiter, rateLimitMessage } from '../api/rate-limit.mjs';
@@ -30,6 +30,17 @@ function loadSources(env, requestUrl) {
         sourcesPromise.catch(() => { sourcesPromise = null; });
     }
     return sourcesPromise;
+}
+
+let englishPromise = null;
+function loadEnglishSources(env, requestUrl) {
+    if (!englishPromise) {
+        englishPromise = env.ASSETS.fetch(new Request(new URL(`/${CONTEXT_DATA_FILES_EN.search}`, requestUrl)))
+            .then((response) => { if (!response.ok) throw new Error(`${CONTEXT_DATA_FILES_EN.search}: ${response.status}`); return response.json(); })
+            .then((search) => buildEnglishSources({ search }));
+        englishPromise.catch(() => { englishPromise = null; });
+    }
+    return englishPromise;
 }
 
 let limiter = null;
@@ -92,7 +103,9 @@ export async function handleChat(request, env, deps = {}) {
     let upstream;
     let retrieval;
     try {
-        const sources = deps.sources || await loadSources(env, request.url);
+        const sources = deps.sources || (input.locale === 'en'
+            ? { en: await loadEnglishSources(env, request.url) }
+            : await loadSources(env, request.url));
         const built = buildServerMessages(input, sources);
         retrieval = built.retrieval;
         upstream = await fetchImpl(provider.endpoint, {

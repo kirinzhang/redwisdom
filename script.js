@@ -10,9 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let allQuotes = [];
     const quoteUtils = window.RedWisdomQuoteUtils;
+    // 语言由 js/lang-switch.js 决定；英文版卡片取自外文出版社英译本语录
+    const locale = window.RedWisdomLangSwitch?.locale === 'en' ? 'en' : 'zh-CN';
+    const t = (key) => window.RedWisdomI18n?.translate(locale, key) || key;
+    if (window.RedWisdomI18n) window.RedWisdomI18n.applyTranslations(document, locale);
 
     startBtn.disabled = true;
-    startBtn.textContent = '载入毛选...';
+    startBtn.textContent = t('home.loading');
 
     loadQuoteData();
 
@@ -43,9 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadQuoteData() {
         try {
+            const base = locale === 'en' ? 'data/en/' : 'data/';
             const [quotesResponse, catalogResponse] = await Promise.all([
-                fetch('data/quotes.json'),
-                fetch('data/catalog.json'),
+                fetch(`${base}quotes.json`),
+                fetch(`${base}catalog.json`),
             ]);
 
             const [quotesPayload, catalog] = await Promise.all([
@@ -53,14 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 catalogResponse.json(),
             ]);
 
-            allQuotes = quoteUtils.normalizeQuotes(quotesPayload, catalog);
+            allQuotes = locale === 'en'
+                ? quoteUtils.normalizeEnglishQuotes(quotesPayload, catalog)
+                : quoteUtils.normalizeQuotes(quotesPayload, catalog);
         } catch (error) {
             console.warn('Falling back to inline quote data:', error);
-            allQuotes = quoteUtils.normalizeQuotes(window.quotesData || [], null);
+            allQuotes = locale === 'en' ? [] : quoteUtils.normalizeQuotes(window.quotesData || [], null);
         }
 
         startBtn.disabled = allQuotes.length === 0;
-        startBtn.textContent = allQuotes.length === 0 ? '语录载入失败' : '抽一张';
+        startBtn.textContent = allQuotes.length === 0 ? t('home.loadFailed') : t('home.draw');
     }
 
     function dealCard() {
@@ -72,11 +79,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Pick 1 random
         const quote = getRandomQuotes(1)[0];
 
-        sourceLink.href = quote.articleHref || 'reading.html';
+        sourceLink.href = quote.articleHref || (locale === 'en' ? 'reading.html?lang=en' : 'reading.html');
         const askParams = new URLSearchParams({
             quote: quote.content,
-            source: quote.source || '毛选',
+            source: quote.source || t('card.defaultSource'),
         });
+        if (locale === 'en') askParams.set('lang', 'en');
         askLink.href = `chat.html?${askParams.toString()}`;
 
         // Create Card Element
@@ -94,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cardScene.className = `card fade-in-up`;
         cardScene.tabIndex = 0;
         cardScene.setAttribute('role', 'button');
-        cardScene.setAttribute('aria-label', '翻开语录卡');
+        cardScene.setAttribute('aria-label', t('card.ariaClosed'));
         // Card starts face down (default style)
 
         const cardInner = document.createElement('div');
@@ -104,8 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const back = document.createElement('div');
         back.className = 'card-face card-back';
         back.innerHTML = `
-            <div class="vertical-text card-back-text">毛选</div>
-            <div class="card-back-sub">学习毛选中的顶层治愈</div>
+            <div class="vertical-text card-back-text">${t('card.backTitle')}</div>
+            <div class="card-back-sub">${t('card.backSub')}</div>
         `;
 
         // Front
@@ -123,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const content = document.createElement('div');
         content.className = 'card-front-content';
 
-        const { fontSizeClass, layoutClass } = quoteUtils.getQuotePresentation(quote.content);
+        const { fontSizeClass, layoutClass } = quoteUtils.getQuotePresentation(quote.content, locale);
 
         content.classList.add(layoutClass);
 
@@ -139,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const source = document.createElement('p');
         source.className = 'quote-source-line';
-        source.innerText = `《${quote.source}》`;
+        source.innerText = locale === 'en' ? `— ${quote.source}` : `《${quote.source}》`;
         metadata.appendChild(source);
 
         if (quote.date) {
@@ -164,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isFlipped) {
                 // STATE 3: Flip & Reveal
                 cardScene.classList.add('flipped');
-                cardScene.setAttribute('aria-label', '语录卡已翻开');
+                cardScene.setAttribute('aria-label', t('card.ariaOpen'));
                 isFlipped = true;
 
                 // Show Controls after delay

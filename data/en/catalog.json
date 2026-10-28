@@ -1,0 +1,1838 @@
+{
+ "volumes": {
+  "Volume I · The First Revolutionary Civil War Period and the Second Revolutionary Civil War Period": [
+   {
+    "index": 0,
+    "title": "Analysis of the Classes in Chinese Society",
+    "filename": "000-analysis-of-the-classes-in-chinese-society.md",
+    "date": "March 1926",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_1.htm",
+    "zh": "000-中国社会各阶级的分析.md"
+   },
+   {
+    "index": 1,
+    "title": "Report on an Investigation of the Peasant Movement In Hunan",
+    "filename": "001-report-on-an-investigation-of-the-peasant-movement-in-hunan.md",
+    "date": "March 1927",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_2.htm",
+    "zh": "001-湖南农民运动考察报告.md"
+   },
+   {
+    "index": 2,
+    "title": "Why is it that Red Political Power can Exist in China?",
+    "filename": "002-why-is-it-that-red-political-power-can-exist-in-china.md",
+    "date": "October 5, 1928",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_3.htm",
+    "zh": "002-中国的红色政权为什么能够存在？.md"
+   },
+   {
+    "index": 3,
+    "title": "The Struggle in the Chingkang Mountains",
+    "filename": "003-the-struggle-in-the-chingkang-mountains.md",
+    "date": "November 25, 1928",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_4.htm",
+    "zh": "003-井冈山的斗争.md"
+   },
+   {
+    "index": 4,
+    "title": "On Correcting Mistaken Ideas in the Party",
+    "filename": "004-on-correcting-mistaken-ideas-in-the-party.md",
+    "date": "December 1929",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_5.htm",
+    "zh": "004-关于纠正党内的错误思想.md"
+   },
+   {
+    "index": 5,
+    "title": "A Single Spark Can Start a Prairie Fire",
+    "filename": "005-a-single-spark-can-start-a-prairie-fire.md",
+    "date": "January 5, 1930",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_6.htm",
+    "zh": "005-星星之火，可以燎原.md"
+   },
+   {
+    "index": 6,
+    "title": "Pay Attention to Economic Work",
+    "filename": "006-pay-attention-to-economic-work.md",
+    "date": "August 20, 1933",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_7.htm",
+    "zh": "007-必须注意经济工作.md"
+   },
+   {
+    "index": 7,
+    "title": "How to Differentiate the Classes in the Rural Areas",
+    "filename": "007-how-to-differentiate-the-classes-in-the-rural-areas.md",
+    "date": "October 1933",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_8.htm",
+    "zh": "008-怎样分析农村阶级.md"
+   },
+   {
+    "index": 8,
+    "title": "Our Economic Policy",
+    "filename": "008-our-economic-policy.md",
+    "date": "January 23, 1934",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_9.htm",
+    "zh": "009-我们的经济政策.md"
+   },
+   {
+    "index": 9,
+    "title": "Be Concerned With the Well-Being of the Masses, Pay Attention to Methods of Work",
+    "filename": "009-be-concerned-with-the-well-being-of-the-masses-pay-attention.md",
+    "date": "January 27, 1934",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_10.htm",
+    "zh": "010-关心群众生活，注意工作方法.md"
+   },
+   {
+    "index": 10,
+    "title": "On Tactics Against Japanese Imperialism",
+    "filename": "010-on-tactics-against-japanese-imperialism.md",
+    "date": "December 27, 1935",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_11.htm",
+    "zh": "011-论反对日本帝国主义的策略.md"
+   },
+   {
+    "index": 11,
+    "title": "Problems of Strategy in China's Revolutionary War",
+    "filename": "011-problems-of-strategy-in-china-s-revolutionary-war.md",
+    "date": "December 1936",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_12.htm",
+    "zh": "012-中国革命战争的战略问题.md"
+   },
+   {
+    "index": 12,
+    "title": "A Statement on Chiang Kai-shek's Statement",
+    "filename": "012-a-statement-on-chiang-kai-shek-s-statement.md",
+    "date": "December 28, 1936",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_13.htm",
+    "zh": "013-关于蒋介石声明的声明.md"
+   },
+   {
+    "index": 13,
+    "title": "The Tasks of the Chinese Communist Party in the Period of Resistance to Japan",
+    "filename": "013-the-tasks-of-the-chinese-communist-party-in-the-period-of-re.md",
+    "date": "May 3, 1937",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_14.htm",
+    "zh": "014-中国共产党在抗日时期的任务.md"
+   },
+   {
+    "index": 14,
+    "title": "Win the Masses in their Millions for the Anti-Japanese National United Front",
+    "filename": "014-win-the-masses-in-their-millions-for-the-anti-japanese-natio.md",
+    "date": "May 7, 1937",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_15.htm",
+    "zh": "015-为争取千百万群众进入抗日民族统一战线而斗争.md"
+   },
+   {
+    "index": 15,
+    "title": "On Practice",
+    "filename": "015-on-practice.md",
+    "date": "July 1937",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_16.htm",
+    "zh": "016-实践论.md"
+   },
+   {
+    "index": 16,
+    "title": "On Contradiction",
+    "filename": "016-on-contradiction.md",
+    "date": "August 1937",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_17.htm",
+    "zh": "017-矛盾论.md"
+   }
+  ],
+  "Volume II · The Period of the War of Resistance Against Japan (I)": [
+   {
+    "index": 17,
+    "title": "Policies, Measures and Perspectives for Resisting the Japanese Invasion",
+    "filename": "017-policies-measures-and-perspectives-for-resisting-the-japanes.md",
+    "date": "July 23, 1937",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_01.htm",
+    "zh": "018-反对日本进攻的方针、办法和前途.md"
+   },
+   {
+    "index": 18,
+    "title": "For the Mobilization of All the Nation's Forces for Victory in the War of Resistance",
+    "filename": "018-for-the-mobilization-of-all-the-nation-s-forces-for-victory.md",
+    "date": "August 25, 1937",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_02.htm",
+    "zh": "019-为动员一切力量争取抗战胜利而斗争.md"
+   },
+   {
+    "index": 19,
+    "title": "Combat Liberalism",
+    "filename": "019-combat-liberalism.md",
+    "date": "September 7, 1937",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_03.htm",
+    "zh": "020-反对自由主义.md"
+   },
+   {
+    "index": 20,
+    "title": "Urgent Tasks Following the Establishment of Kuomintang-Communist Co-operation",
+    "filename": "020-urgent-tasks-following-the-establishment-of-kuomintang-commu.md",
+    "date": "September 29, 1937",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_04.htm",
+    "zh": "021-国共合作成立后的迫切任务.md"
+   },
+   {
+    "index": 21,
+    "title": "Interview with the British Journalist James Bertram",
+    "filename": "021-interview-with-the-british-journalist-james-bertram.md",
+    "date": "October 25, 1937",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_05.htm",
+    "zh": "022-和英国记者贝特兰的谈话.md"
+   },
+   {
+    "index": 22,
+    "title": "The Situation and Tasks in the Anti-Japanese War After the Fall of Shanghai and Taiyuan",
+    "filename": "022-the-situation-and-tasks-in-the-anti-japanese-war-after-the-f.md",
+    "date": "November 12, 1937",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_06.htm",
+    "zh": "023-上海太原失陷以后抗日战争的形势和任务.md"
+   },
+   {
+    "index": 23,
+    "title": "Proclamation by the Government of the Shensi-Kansu ningsia Border Region and the Rear Headquarters of the Eighth Route Army",
+    "filename": "023-proclamation-by-the-government-of-the-shensi-kansu-ningsia-b.md",
+    "date": "May 15, 1938",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_07.htm",
+    "zh": "024-陕甘宁边区政府第八路军后方留守处布告.md"
+   },
+   {
+    "index": 24,
+    "title": "Problems of Strategy in Guerrilla War Against Japan",
+    "filename": "024-problems-of-strategy-in-guerrilla-war-against-japan.md",
+    "date": "May 1938",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_08.htm",
+    "zh": "025-抗日游击战争的战略问题.md"
+   },
+   {
+    "index": 25,
+    "title": "On Protracted War",
+    "filename": "025-on-protracted-war.md",
+    "date": "May 1938",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_09.htm",
+    "zh": "026-论持久战.md"
+   },
+   {
+    "index": 26,
+    "title": "The Role of the Chinese Communist Party in the National War",
+    "filename": "026-the-role-of-the-chinese-communist-party-in-the-national-war.md",
+    "date": "October 1938",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_10.htm",
+    "zh": "027-中国共产党在民族战争中的地位.md"
+   },
+   {
+    "index": 27,
+    "title": "The Question of Independence and Initiative Within the United Front",
+    "filename": "027-the-question-of-independence-and-initiative-within-the-unite.md",
+    "date": "November 5, 1938",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_11.htm",
+    "zh": "028-统一战线中的独立自主问题.md"
+   },
+   {
+    "index": 28,
+    "title": "Problems of War and Strategy",
+    "filename": "028-problems-of-war-and-strategy.md",
+    "date": "November 6, 1938",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_12.htm",
+    "zh": "029-战争和战略问题.md"
+   },
+   {
+    "index": 29,
+    "title": "The May 4th Movement",
+    "filename": "029-the-may-4th-movement.md",
+    "date": "May 1939",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_13.htm",
+    "zh": "030-五四运动.md"
+   },
+   {
+    "index": 30,
+    "title": "The Orientation of the Youth Movement",
+    "filename": "030-the-orientation-of-the-youth-movement.md",
+    "date": "May 4, 1939",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_14.htm",
+    "zh": "031-青年运动的方向.md"
+   },
+   {
+    "index": 31,
+    "title": "Oppose Capitulationist Activity",
+    "filename": "031-oppose-capitulationist-activity.md",
+    "date": "June 30, 1939",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_15.htm",
+    "zh": "032-反对投降活动.md"
+   },
+   {
+    "index": 32,
+    "title": "The Reactionaries Must Be Punished",
+    "filename": "032-the-reactionaries-must-be-punished.md",
+    "date": "August 1, 1939",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_16.htm",
+    "zh": "033-必须制裁反动派.md"
+   },
+   {
+    "index": 33,
+    "title": "Interview With a New China Daily Correspondent on the New International Situation",
+    "filename": "033-interview-with-a-new-china-daily-correspondent-on-the-new-in.md",
+    "date": "September 1, 1939",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_17.htm",
+    "zh": "034-关于国际新形势对新华日报记者的谈话.md"
+   },
+   {
+    "index": 34,
+    "title": "Interview with Three Correspondents from the Central News Agency, the Sao Tang Pao and the Hsin Min Pao",
+    "filename": "034-interview-with-three-correspondents-from-the-central-news-ag.md",
+    "date": "September 16, 1939",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_18.htm",
+    "zh": "035-和中央社、扫荡报、新民报三记者的谈话.md"
+   },
+   {
+    "index": 35,
+    "title": "The Identity of Interests Between the Soviet Union and All Mankind",
+    "filename": "035-the-identity-of-interests-between-the-soviet-union-and-all-m.md",
+    "date": "September 28, 1939",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_19.htm",
+    "zh": "036-苏联利益和人类利益的一致.md"
+   },
+   {
+    "index": 36,
+    "title": "Introducing The Communist",
+    "filename": "036-introducing-the-communist.md",
+    "date": "October 4, 1939",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_20.htm",
+    "zh": "037-《共产党人》发刊词.md"
+   },
+   {
+    "index": 37,
+    "title": "The Current Situation and the Party's Tasks",
+    "filename": "037-the-current-situation-and-the-party-s-tasks.md",
+    "date": "October 10, 1939",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_21.htm",
+    "zh": "038-目前形势和党的任务.md"
+   },
+   {
+    "index": 38,
+    "title": "Recruit Large Numbers of Intellectuals",
+    "filename": "038-recruit-large-numbers-of-intellectuals.md",
+    "date": "December 1, 1939",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_22.htm",
+    "zh": "039-大量吸收知识分子.md"
+   },
+   {
+    "index": 39,
+    "title": "The Chinese Revolution and the Chinese Communist Party",
+    "filename": "039-the-chinese-revolution-and-the-chinese-communist-party.md",
+    "date": "December 1939",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_23.htm",
+    "zh": "040-中国革命和中国共产党.md"
+   },
+   {
+    "index": 40,
+    "title": "Stalin, Friend of the Chinese People",
+    "filename": "040-stalin-friend-of-the-chinese-people.md",
+    "date": "December 20, 1939",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_24.htm",
+    "zh": "041-斯大林是中国人民的朋友.md"
+   },
+   {
+    "index": 41,
+    "title": "In Memory of Norman Bethune",
+    "filename": "041-in-memory-of-norman-bethune.md",
+    "date": "December 21, 1939",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_25.htm",
+    "zh": "042-纪念白求恩.md"
+   },
+   {
+    "index": 42,
+    "title": "On New Democracy",
+    "filename": "042-on-new-democracy.md",
+    "date": "January 1940",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_26.htm",
+    "zh": "043-新民主主义论.md"
+   },
+   {
+    "index": 43,
+    "title": "Overcome the Danger of Capitulation and Strive for a turn for the Better",
+    "filename": "043-overcome-the-danger-of-capitulation-and-strive-for-a-turn-fo.md",
+    "date": "January 28, 1940",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_27.htm",
+    "zh": "044-克服投降危险，力争时局好转.md"
+   },
+   {
+    "index": 44,
+    "title": "Unite all Anti-Japanese Forces and Combat the Anti-Communist Die Hards",
+    "filename": "044-unite-all-anti-japanese-forces-and-combat-the-anti-communist.md",
+    "date": "February 1, 1940",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_28.htm",
+    "zh": "045-团结一切抗日力量，反对反共顽固派.md"
+   },
+   {
+    "index": 45,
+    "title": "Ten Demands on the Kuomintang",
+    "filename": "045-ten-demands-on-the-kuomintang.md",
+    "date": "February 1, 1940",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_29.htm",
+    "zh": "046-向国民党的十点要求.md"
+   },
+   {
+    "index": 46,
+    "title": "Introducing The Chinese Worker",
+    "filename": "046-introducing-the-chinese-worker.md",
+    "date": "February 7, 1940",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_30.htm",
+    "zh": "047-《中国工人》发刊词.md"
+   },
+   {
+    "index": 47,
+    "title": "We Must Stress Unity and Progress",
+    "filename": "047-we-must-stress-unity-and-progress.md",
+    "date": "February 10, 1940",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_31.htm",
+    "zh": "048-必须强调团结和进步.md"
+   },
+   {
+    "index": 48,
+    "title": "New-Democratic Constitutional Government",
+    "filename": "048-new-democratic-constitutional-government.md",
+    "date": "February 20, 1940",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_32.htm",
+    "zh": "049-新民主主义的宪政.md"
+   },
+   {
+    "index": 49,
+    "title": "On the Question of Political Power in the Anti-Japanese Base Areas",
+    "filename": "049-on-the-question-of-political-power-in-the-anti-japanese-base.md",
+    "date": "March 6, 1940",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_33.htm",
+    "zh": "050-抗日根据地的政权问题.md"
+   },
+   {
+    "index": 50,
+    "title": "Current Problems of Tactics in the Anti-Japanese United Front",
+    "filename": "050-current-problems-of-tactics-in-the-anti-japanese-united-fron.md",
+    "date": "March 11, 1940",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_34.htm",
+    "zh": "051-目前抗日统一战线中的策略问题.md"
+   },
+   {
+    "index": 51,
+    "title": "Freely Expand the Anti-Japanese Forces and Resist the Onslaughts of the Anti-Communist Die-Hards",
+    "filename": "051-freely-expand-the-anti-japanese-forces-and-resist-the-onslau.md",
+    "date": "May 4, 1940",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_35.htm",
+    "zh": "052-放手发展抗日力量，抵抗反共顽固派的进攻.md"
+   },
+   {
+    "index": 52,
+    "title": "Unity to the Very End",
+    "filename": "052-unity-to-the-very-end.md",
+    "date": "July 1940",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_36.htm",
+    "zh": "053-团结到底.md"
+   },
+   {
+    "index": 53,
+    "title": "On Policy",
+    "filename": "053-on-policy.md",
+    "date": "December 25, 1940",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_37.htm",
+    "zh": "054-论政策.md"
+   },
+   {
+    "index": 54,
+    "title": "Order and Statement on the Southern Anhwei Incident",
+    "filename": "054-order-and-statement-on-the-southern-anhwei-incident.md",
+    "date": "January 1941",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_38.htm",
+    "zh": "055-为皖南事变发表的命令和谈话.md"
+   },
+   {
+    "index": 55,
+    "title": "The Situation After the Repulse of the Second Anti-Communist Onslaught",
+    "filename": "055-the-situation-after-the-repulse-of-the-second-anti-communist.md",
+    "date": "March 18, 1941",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_39.htm",
+    "zh": "056-打退第二次反共高潮后的时局.md"
+   },
+   {
+    "index": 56,
+    "title": "Conclusions on the Repulse of the Second Anti-Communist Onslaught",
+    "filename": "056-conclusions-on-the-repulse-of-the-second-anti-communist-onsl.md",
+    "date": "May 8, 1941",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_40.htm",
+    "zh": "057-关于打退第二次反共高潮的总结.md"
+   }
+  ],
+  "Volume III · The Period of the War of Resistance Against Japan (II)": [
+   {
+    "index": 57,
+    "title": "Preface and Postscript to Rural Surveys",
+    "filename": "057-preface-and-postscript-to-rural-surveys.md",
+    "date": "March and April 1941",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_01.htm",
+    "zh": "058-《农村调查》的序言和跋.md"
+   },
+   {
+    "index": 58,
+    "title": "Reform our Study",
+    "filename": "058-reform-our-study.md",
+    "date": "May 1941",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_02.htm",
+    "zh": "059-改造我们的学习.md"
+   },
+   {
+    "index": 59,
+    "title": "Expose the Plot for a Far Eastern Munich",
+    "filename": "059-expose-the-plot-for-a-far-eastern-munich.md",
+    "date": "May 25, 1941",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_03.htm",
+    "zh": "060-揭破远东慕尼黑的阴谋.md"
+   },
+   {
+    "index": 60,
+    "title": "On the International United Front Against Fascism",
+    "filename": "060-on-the-international-united-front-against-fascism.md",
+    "date": "June 23, 1941",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_04.htm",
+    "zh": "061-关于反法西斯的国际统一战线.md"
+   },
+   {
+    "index": 61,
+    "title": "Speech at the Assembly of Representatives of the Shensi-Kansu-Ningsia Border Region",
+    "filename": "061-speech-at-the-assembly-of-representatives-of-the-shensi-kans.md",
+    "date": "November 21, 1941",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_05.htm",
+    "zh": "062-在陕甘宁边区参议会的演说.md"
+   },
+   {
+    "index": 62,
+    "title": "Rectify the Party's Style of Work",
+    "filename": "062-rectify-the-party-s-style-of-work.md",
+    "date": "February 1, 1942",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_06.htm",
+    "zh": "063-整顿党的作风.md"
+   },
+   {
+    "index": 63,
+    "title": "Oppose Stereotyped Party Writing",
+    "filename": "063-oppose-stereotyped-party-writing.md",
+    "date": "February 8, 1942",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_07.htm",
+    "zh": "064-反对党八股.md"
+   },
+   {
+    "index": 64,
+    "title": "Talks at the Yenan Forum on Literature and Art",
+    "filename": "064-talks-at-the-yenan-forum-on-literature-and-art.md",
+    "date": "May 1942",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_08.htm",
+    "zh": "065-在延安文艺座谈会上的讲话.md"
+   },
+   {
+    "index": 65,
+    "title": "A Most Important Policy",
+    "filename": "065-a-most-important-policy.md",
+    "date": "September 7, 1942",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_09.htm",
+    "zh": "066-一个极其重要的政策.md"
+   },
+   {
+    "index": 66,
+    "title": "The Turning Point in World War II",
+    "filename": "066-the-turning-point-in-world-war-ii.md",
+    "date": "October 12, 1942",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_10.htm",
+    "zh": "067-第二次世界大战的转折点.md"
+   },
+   {
+    "index": 67,
+    "title": "In Celebration of the Twenty-Fifth Anniversary of the October Revolution",
+    "filename": "067-in-celebration-of-the-twenty-fifth-anniversary-of-the-octobe.md",
+    "date": "November 6, 1942",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_11.htm",
+    "zh": "068-祝十月革命二十五周年.md"
+   },
+   {
+    "index": 68,
+    "title": "Economic and Financial Problems in the Anti-Japanese War",
+    "filename": "068-economic-and-financial-problems-in-the-anti-japanese-war.md",
+    "date": "December 1942",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_12.htm",
+    "zh": "069-抗日时期的经济问题和财政问题.md"
+   },
+   {
+    "index": 69,
+    "title": "Some Questions Concerning Methods of Leadership",
+    "filename": "069-some-questions-concerning-methods-of-leadership.md",
+    "date": "June 1, 1943",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_13.htm",
+    "zh": "070-关于领导方法的若干问题.md"
+   },
+   {
+    "index": 70,
+    "title": "Some Pointed Questions for the Kuomintang",
+    "filename": "070-some-pointed-questions-for-the-kuomintang.md",
+    "date": "July 12, 1943",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_14.htm",
+    "zh": "071-质问国民党.md"
+   },
+   {
+    "index": 71,
+    "title": "Spread the Campaigns to Reduce Rent, Increase Production and \"Support the Government and Cherish the People\" In the Base Areas",
+    "filename": "071-spread-the-campaigns-to-reduce-rent-increase-production-and.md",
+    "date": "October 1, 1943",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_15.htm",
+    "zh": "072-开展根据地的减租、生产和拥政爱民运动.md"
+   },
+   {
+    "index": 72,
+    "title": "A Comment on the Sessions of the Kuomintang Central Executive Committee and of the People's Political Council",
+    "filename": "072-a-comment-on-the-sessions-of-the-kuomintang-central-executiv.md",
+    "date": "October 5, 1943",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_16.htm",
+    "zh": "073-评国民党十一中全会和三届二次国民参政会.md"
+   },
+   {
+    "index": 73,
+    "title": "Get Organized!",
+    "filename": "073-get-organized.md",
+    "date": "November 29, 1943",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_17.htm",
+    "zh": "074-组织起来.md"
+   },
+   {
+    "index": 74,
+    "title": "Our Study and the Current Situation",
+    "filename": "074-our-study-and-the-current-situation.md",
+    "date": "April 12, 1944",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_18.htm",
+    "zh": "075-学习和时局.md"
+   },
+   {
+    "index": 75,
+    "title": "Serve the People",
+    "filename": "075-serve-the-people.md",
+    "date": "September 8,1944",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_19.htm",
+    "zh": "076-为人民服务.md"
+   },
+   {
+    "index": 76,
+    "title": "On Chiang Kai-shek's Speech on the Double Tenth Festival",
+    "filename": "076-on-chiang-kai-shek-s-speech-on-the-double-tenth-festival.md",
+    "date": "October 11, 1944",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_20.htm",
+    "zh": "077-评蒋介石在双十节的演说.md"
+   },
+   {
+    "index": 77,
+    "title": "The United Front in Cultural Work",
+    "filename": "077-the-united-front-in-cultural-work.md",
+    "date": "October 30, 1944",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_21.htm",
+    "zh": "078-文化工作中的统一战线.md"
+   },
+   {
+    "index": 78,
+    "title": "We Must Learn to Do Economic Work",
+    "filename": "078-we-must-learn-to-do-economic-work.md",
+    "date": "January 10, 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_22.htm",
+    "zh": "079-必须学会做经济工作.md"
+   },
+   {
+    "index": 79,
+    "title": "Production is Also Possible in the Guerrilla Zones",
+    "filename": "079-production-is-also-possible-in-the-guerrilla-zones.md",
+    "date": "January 31, 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_23.htm",
+    "zh": "080-游击区也能够进行生产.md"
+   },
+   {
+    "index": 80,
+    "title": "China's Two Possible Destinies",
+    "filename": "080-china-s-two-possible-destinies.md",
+    "date": "April 23, 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_24.htm",
+    "zh": "081-两个中国之命运.md"
+   },
+   {
+    "index": 81,
+    "title": "On Coalition Government",
+    "filename": "081-on-coalition-government.md",
+    "date": "April 24, 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_25.htm",
+    "zh": "082-论联合政府.md"
+   },
+   {
+    "index": 82,
+    "title": "The Foolish Old Man Who Removed the Mountains",
+    "filename": "082-the-foolish-old-man-who-removed-the-mountains.md",
+    "date": "June 11, 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_26.htm",
+    "zh": "083-愚公移山.md"
+   },
+   {
+    "index": 83,
+    "title": "On Production by the Army for Its Own Support and On the Importance of the Great Movements for Rectification and for Production",
+    "filename": "083-on-production-by-the-army-for-its-own-support-and-on-the-imp.md",
+    "date": "April 27, 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_27.htm",
+    "zh": "084-论军队生产自给，兼论整风和生产两大运动的重要性.md"
+   },
+   {
+    "index": 84,
+    "title": "The Hurley-Chiang Duet is a Flop",
+    "filename": "084-the-hurley-chiang-duet-is-a-flop.md",
+    "date": "July 10, 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_28.htm",
+    "zh": "085-赫尔利和蒋介石的双簧已经破产.md"
+   },
+   {
+    "index": 85,
+    "title": "On the Danger of the Hurley Policy",
+    "filename": "085-on-the-danger-of-the-hurley-policy.md",
+    "date": "July 12, 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_29.htm",
+    "zh": "086-评赫尔利政策的危险.md"
+   },
+   {
+    "index": 86,
+    "title": "Telegram to Comrade William Z. Foster",
+    "filename": "086-telegram-to-comrade-william-z-foster.md",
+    "date": "July 29, 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_30.htm",
+    "zh": "087-给福斯特同志的电报.md"
+   },
+   {
+    "index": 87,
+    "title": "The Last Round with the Japanese Invaders",
+    "filename": "087-the-last-round-with-the-japanese-invaders.md",
+    "date": "August 9, 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_31.htm",
+    "zh": "088-对日寇的最后一战.md"
+   }
+  ],
+  "Volume IV · The Period of the Third Revolutionary Civil War": [
+   {
+    "index": 88,
+    "title": "The Situation and Our Policy After the Victory in the War of Resistance against Japan",
+    "filename": "088-the-situation-and-our-policy-after-the-victory-in-the-war-of.md",
+    "date": "August 13, 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_01.htm",
+    "zh": "089-抗日战争胜利后的时局和我们的方针.md"
+   },
+   {
+    "index": 89,
+    "title": "Chiang Kai-Shek is Provoking Civil War",
+    "filename": "089-chiang-kai-shek-is-provoking-civil-war.md",
+    "date": "August 13, 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_02.htm",
+    "zh": "090-蒋介石在挑动内战.md"
+   },
+   {
+    "index": 90,
+    "title": "Two Telegrams from the Commander-in-Chief of the Eighteenth Group to Chiang Kai-Shek",
+    "filename": "090-two-telegrams-from-the-commander-in-chief-of-the-eighteenth.md",
+    "date": "August 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_03.htm",
+    "zh": "091-第十八集团军总司令给蒋介石的两个电报.md"
+   },
+   {
+    "index": 91,
+    "title": "On a Statement by Chiang Kai-Shek's Spokesman",
+    "filename": "091-on-a-statement-by-chiang-kai-shek-s-spokesman.md",
+    "date": "August 16, 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_04.htm",
+    "zh": "092-评蒋介石发言人谈话.md"
+   },
+   {
+    "index": 92,
+    "title": "On Peace Negotiations with the Kuomintang — Circular of the Central Committee of the Communist Party of China",
+    "filename": "092-on-peace-negotiations-with-the-kuomintang-circular-of-the-ce.md",
+    "date": "August 26, 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_05.htm",
+    "zh": "093-中共中央关于同国民党进行和平谈判的通知.md"
+   },
+   {
+    "index": 93,
+    "title": "On the Chungking Negotiations",
+    "filename": "093-on-the-chungking-negotiations.md",
+    "date": "October 17, 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_06.htm",
+    "zh": "094-关于重庆谈判.md"
+   },
+   {
+    "index": 94,
+    "title": "The Truth About the Kuomintang Attacks",
+    "filename": "094-the-truth-about-the-kuomintang-attacks.md",
+    "date": "November 5, 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_07.htm",
+    "zh": "095-国民党进攻的真相.md"
+   },
+   {
+    "index": 95,
+    "title": "Rent Reduction and Production Are Two Important Matters for the Defence of the Liberated Areas",
+    "filename": "095-rent-reduction-and-production-are-two-important-matters-for.md",
+    "date": "November 7, 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_08.htm",
+    "zh": "096-减租和生产是保卫解放区的两件大事.md"
+   },
+   {
+    "index": 96,
+    "title": "Policy for Work in the Liberated Areas for 1946",
+    "filename": "096-policy-for-work-in-the-liberated-areas-for-1946.md",
+    "date": "December 15, 1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_09.htm",
+    "zh": "097-一九四六年解放区工作的方针.md"
+   },
+   {
+    "index": 97,
+    "title": "Build Stable base Areas in the Northeast",
+    "filename": "097-build-stable-base-areas-in-the-northeast.md",
+    "date": "December 28,1945",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_10.htm",
+    "zh": "098-建立巩固的东北根据地.md"
+   },
+   {
+    "index": 98,
+    "title": "Some Points in Appraisal of the present International Situation",
+    "filename": "098-some-points-in-appraisal-of-the-present-international-situat.md",
+    "date": "April 1946",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_11.htm",
+    "zh": "099-关于目前国际形势的几点估计.md"
+   },
+   {
+    "index": 99,
+    "title": "Smash Chiang Kai-Shek's Offensive by a War of Self-Defence",
+    "filename": "099-smash-chiang-kai-shek-s-offensive-by-a-war-of-self-defence.md",
+    "date": "July 20, 1946",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_12.htm",
+    "zh": "100-以自卫战争粉碎蒋介石的进攻.md"
+   },
+   {
+    "index": 100,
+    "title": "Talk With the American Correspondent Anna Louise Strong",
+    "filename": "100-talk-with-the-american-correspondent-anna-louise-strong.md",
+    "date": "August 1946",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_13.htm",
+    "zh": "101-和美国记者安娜·路易斯·斯特朗的谈话.md"
+   },
+   {
+    "index": 101,
+    "title": "Concentrate a Superior Force to Destroy the Enemy Forces One by One",
+    "filename": "101-concentrate-a-superior-force-to-destroy-the-enemy-forces-one.md",
+    "date": "September 16, 1946",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_14.htm",
+    "zh": "102-集中优势兵力，各个歼灭敌人.md"
+   },
+   {
+    "index": 102,
+    "title": "The Truth About U.S. \"Mediation\" and the Future of the Civil War in China",
+    "filename": "102-the-truth-about-u-s-mediation-and-the-future-of-the-civil-wa.md",
+    "date": "September 29, 1946",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_15.htm",
+    "zh": "103-美国“调解”真相和中国内战前途.md"
+   },
+   {
+    "index": 103,
+    "title": "A Three Months' Summary",
+    "filename": "103-a-three-months-summary.md",
+    "date": "October 1, 1946",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_16.htm",
+    "zh": "104-三个月总结.md"
+   },
+   {
+    "index": 104,
+    "title": "Greet the New High Tide of the Chinese Revolution",
+    "filename": "104-greet-the-new-high-tide-of-the-chinese-revolution.md",
+    "date": "February 1, 1947",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_17.htm",
+    "zh": "105-迎接中国革命的新高潮.md"
+   },
+   {
+    "index": 105,
+    "title": "On the Temporary Abandonment of Yenan and the Defence of the Shensi-Kansu-Ningsia Border Region — Two Documents Issued by the Central Committee of the Communist Party of China",
+    "filename": "105-on-the-temporary-abandonment-of-yenan-and-the-defence-of-the.md",
+    "date": "November 1946 and April 1947",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_18.htm",
+    "zh": "106-中共中央关于暂时放弃延安和保卫陕甘宁边区的两个文件.md"
+   },
+   {
+    "index": 106,
+    "title": "The Concept of Operations for the Northwest War Theatre",
+    "filename": "106-the-concept-of-operations-for-the-northwest-war-theatre.md",
+    "date": "April 15, 1947",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_19.htm",
+    "zh": "107-关于西北战场的作战方针.md"
+   },
+   {
+    "index": 107,
+    "title": "The Chiang Kai-Shek Government is Besieged by the Whole People",
+    "filename": "107-the-chiang-kai-shek-government-is-besieged-by-the-whole-peop.md",
+    "date": "May 30, 1947",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_20.htm",
+    "zh": "108-蒋介石政府已处在全民的包围中.md"
+   },
+   {
+    "index": 108,
+    "title": "Strategy for the Second Year of the War of Liberation",
+    "filename": "108-strategy-for-the-second-year-of-the-war-of-liberation.md",
+    "date": "September 1, 1947",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_21.htm",
+    "zh": "109-解放战争第二年的战略方针.md"
+   },
+   {
+    "index": 109,
+    "title": "Manifesto of the Chinese Peoples Liberation Army",
+    "filename": "109-manifesto-of-the-chinese-peoples-liberation-army.md",
+    "date": "October 1947",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_22.htm",
+    "zh": "110-中国人民解放军宣言.md"
+   },
+   {
+    "index": 110,
+    "title": "On the Reissue of the Three Main Rules of Discipline and the Eight Points for Attention — Instruction of the general Headquarters of the Chinese People's Liberation Army",
+    "filename": "110-on-the-reissue-of-the-three-main-rules-of-discipline-and-the.md",
+    "date": "October 10, 1947",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_23.htm",
+    "zh": "111-中国人民解放军总部关于重行颁布三大纪律八项注意的训令.md"
+   },
+   {
+    "index": 111,
+    "title": "The Present Situation and Our Tasks",
+    "filename": "111-the-present-situation-and-our-tasks.md",
+    "date": "December 25, 1947",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_24.htm",
+    "zh": "112-目前形势和我们的任务.md"
+   },
+   {
+    "index": 112,
+    "title": "On Setting Up a System of Reports",
+    "filename": "112-on-setting-up-a-system-of-reports.md",
+    "date": "January7, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_25.htm",
+    "zh": "113-关于建立报告制度.md"
+   },
+   {
+    "index": 113,
+    "title": "On Some Important Problems of the Party's Present Policy",
+    "filename": "113-on-some-important-problems-of-the-party-s-present-policy.md",
+    "date": "January 18, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_26.htm",
+    "zh": "114-关于目前党的政策中的几个重要问题.md"
+   },
+   {
+    "index": 114,
+    "title": "The Democratic Movement in the Army",
+    "filename": "114-the-democratic-movement-in-the-army.md",
+    "date": "January 30, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_27.htm",
+    "zh": "115-军队内部的民主运动.md"
+   },
+   {
+    "index": 115,
+    "title": "Different Tactics for Carrying Out the land Law in Different Areas",
+    "filename": "115-different-tactics-for-carrying-out-the-land-law-in-different.md",
+    "date": "February 3, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_28.htm",
+    "zh": "116-在不同地区实施土地法的不同策略.md"
+   },
+   {
+    "index": 116,
+    "title": "Correct the \"Left\" Errors in Land Reform Propaganda",
+    "filename": "116-correct-the-left-errors-in-land-reform-propaganda.md",
+    "date": "February 11, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_29.htm",
+    "zh": "117-纠正土地改革宣传中的“左”倾错误.md"
+   },
+   {
+    "index": 117,
+    "title": "Essential Points in Land Reform in the New Liberated Areas",
+    "filename": "117-essential-points-in-land-reform-in-the-new-liberated-areas.md",
+    "date": "February 15, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_30.htm",
+    "zh": "118-新解放区土地改革要点.md"
+   },
+   {
+    "index": 118,
+    "title": "On the Policy Concerning Industry and Commerce",
+    "filename": "118-on-the-policy-concerning-industry-and-commerce.md",
+    "date": "February 27, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_31.htm",
+    "zh": "119-关于工商业政策.md"
+   },
+   {
+    "index": 119,
+    "title": "On the Question of the National Bourgeoisie and the Enlightened Gentry",
+    "filename": "119-on-the-question-of-the-national-bourgeoisie-and-the-enlighte.md",
+    "date": "March 1, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_32.htm",
+    "zh": "120-关于民族资产阶级和开明绅士问题.md"
+   },
+   {
+    "index": 120,
+    "title": "On the Great Victory in the Northwest and on the New Type of Ideological Education Movement in the Liberation Army",
+    "filename": "120-on-the-great-victory-in-the-northwest-and-on-the-new-type-of.md",
+    "date": "March 7, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_33.htm",
+    "zh": "121-评西北大捷兼论解放军的新式整军运动.md"
+   },
+   {
+    "index": 121,
+    "title": "A Circular on the Situation",
+    "filename": "121-a-circular-on-the-situation.md",
+    "date": "March 20, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_34.htm",
+    "zh": "122-关于情况的通报.md"
+   },
+   {
+    "index": 122,
+    "title": "Speech at a Conference of Cadres in the Shansi-Suiyuan Liberated Area",
+    "filename": "122-speech-at-a-conference-of-cadres-in-the-shansi-suiyuan-liber.md",
+    "date": "April 1, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_35.htm",
+    "zh": "123-在晋绥干部会议上的讲话.md"
+   },
+   {
+    "index": 123,
+    "title": "A Talk to the Editorial Staff of the Shansi-Suiyuan Daily",
+    "filename": "123-a-talk-to-the-editorial-staff-of-the-shansi-suiyuan-daily.md",
+    "date": "April 2, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_36.htm",
+    "zh": "124-对晋绥日报编辑人员的谈话.md"
+   },
+   {
+    "index": 124,
+    "title": "Telegram to the Headquarters of the Loyang Front After the Recapture of the City",
+    "filename": "124-telegram-to-the-headquarters-of-the-loyang-front-after-the-r.md",
+    "date": "April 8, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_37.htm",
+    "zh": "125-再克洛阳后给洛阳前线指挥部的电报.md"
+   },
+   {
+    "index": 125,
+    "title": "Tactical Problems of Rural Work in the New Liberated Areas",
+    "filename": "125-tactical-problems-of-rural-work-in-the-new-liberated-areas.md",
+    "date": "May 24, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_38.htm",
+    "zh": "126-新解放区农村工作的策略问题.md"
+   },
+   {
+    "index": 126,
+    "title": "The Work of Land Reform and of party Consolidation in 1948",
+    "filename": "126-the-work-of-land-reform-and-of-party-consolidation-in-1948.md",
+    "date": "May 25, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_39.htm",
+    "zh": "127-一九四八年的土地改革工作和整党工作.md"
+   },
+   {
+    "index": 127,
+    "title": "The Concept of Operations for the Liaohsi-Shenyang Campaign",
+    "filename": "127-the-concept-of-operations-for-the-liaohsi-shenyang-campaign.md",
+    "date": "September and October 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_40.htm",
+    "zh": "128-关于辽沈战役的作战方针.md"
+   },
+   {
+    "index": 128,
+    "title": "On Strengthening the Party Committee System",
+    "filename": "128-on-strengthening-the-party-committee-system.md",
+    "date": "September 20, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_41.htm",
+    "zh": "129-关于健全党委制.md"
+   },
+   {
+    "index": 129,
+    "title": "On the September Meeting — Circular of the Central Committee of the Communist Party of China",
+    "filename": "129-on-the-september-meeting-circular-of-the-central-committee-o.md",
+    "date": "October 10, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_42.htm",
+    "zh": "130-中共中央关于九月会议的通知.md"
+   },
+   {
+    "index": 130,
+    "title": "The Concept of Operations for the Huai-hai Campaign",
+    "filename": "130-the-concept-of-operations-for-the-huai-hai-campaign.md",
+    "date": "October 11, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_43.htm",
+    "zh": "131-关于淮海战役的作战方针.md"
+   },
+   {
+    "index": 131,
+    "title": "Revolutionary Forces of the World Unite, Fight Against Imperialist Aggression!",
+    "filename": "131-revolutionary-forces-of-the-world-unite-fight-against-imperi.md",
+    "date": "November 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_44.htm",
+    "zh": "132-全世界革命力量团结起来，反对帝国主义的侵略.md"
+   },
+   {
+    "index": 132,
+    "title": "The Momentous Change in China's Military Situation",
+    "filename": "132-the-momentous-change-in-china-s-military-situation.md",
+    "date": "November 14, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_45.htm",
+    "zh": "133-中国军事形势的重大变化.md"
+   },
+   {
+    "index": 133,
+    "title": "The Concept of Operations for the Peiping-Tientsin Campaign",
+    "filename": "133-the-concept-of-operations-for-the-peiping-tientsin-campaign.md",
+    "date": "December 11, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_46.htm",
+    "zh": "134-关于平津战役的作战方针.md"
+   },
+   {
+    "index": 134,
+    "title": "Message Urging Tu Yu-ming and Others to Surrender",
+    "filename": "134-message-urging-tu-yu-ming-and-others-to-surrender.md",
+    "date": "December 17, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_47.htm",
+    "zh": "135-敦促杜聿明等投降书.md"
+   },
+   {
+    "index": 135,
+    "title": "Carry the Revolution Through to the End",
+    "filename": "135-carry-the-revolution-through-to-the-end.md",
+    "date": "December 30, 1948",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_48.htm",
+    "zh": "136-将革命进行到底.md"
+   },
+   {
+    "index": 136,
+    "title": "On the War Criminal's Suing for Peace",
+    "filename": "136-on-the-war-criminal-s-suing-for-peace.md",
+    "date": "January 5, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_49.htm",
+    "zh": "137-评战犯求和.md"
+   },
+   {
+    "index": 137,
+    "title": "Statement on the Present Situation by Mao Tse-tung, Chairman of the Central Committee of the Communist Party of China",
+    "filename": "137-statement-on-the-present-situation-by-mao-tse-tung-chairman.md",
+    "date": "January 14, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_50.htm",
+    "zh": "138-中共中央毛泽东主席关于时局的声明.md"
+   },
+   {
+    "index": 138,
+    "title": "Comment by the Spokesman for the Communist Party of China on the Resolution of the Nanking Executive Yuan",
+    "filename": "138-comment-by-the-spokesman-for-the-communist-party-of-china-on.md",
+    "date": "January 21, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_51.htm",
+    "zh": "139-中共发言人评南京行政院的决议.md"
+   },
+   {
+    "index": 139,
+    "title": "On Ordering the Reactionary Kuomintang Government to Re-arrest Yasuji Okamura, Former Commander-in-Chief of the Japanese Forces of Aggression in China, and to Arrest the Kuomintang Civil War Criminals Statement by the Spokesman for the Communist Party of China",
+    "filename": "139-on-ordering-the-reactionary-kuomintang-government-to-re-arre.md",
+    "date": "January 28, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_52.htm",
+    "zh": "140-中共发言人关于命令国民党反动政府重新逮捕前日本侵华军总司令冈村宁次和逮捕国民党内战罪犯的谈话.md"
+   },
+   {
+    "index": 140,
+    "title": "Peace Terms Must Include the Punishment of Japanese War Criminals and Kuomintang War Criminals — Statement by the Spokesman for the Communist Party of China",
+    "filename": "140-peace-terms-must-include-the-punishment-of-japanese-war-crim.md",
+    "date": "February 5, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_53.htm",
+    "zh": "141-中共发言人关于和平条件必须包括惩办日本战犯和国民党战犯的声明.md"
+   },
+   {
+    "index": 141,
+    "title": "Turn the Army into a Working Force",
+    "filename": "141-turn-the-army-into-a-working-force.md",
+    "date": "February 8, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_54.htm",
+    "zh": "142-把军队变为工作队.md"
+   },
+   {
+    "index": 142,
+    "title": "Why do the Badly Split Reactionaries Still Idly Clamour for \"Total Peace\"?",
+    "filename": "142-why-do-the-badly-split-reactionaries-still-idly-clamour-for.md",
+    "date": "February 15, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_55.htm",
+    "zh": "143-四分五裂的反动派为什么还要空喊“全面和平”？.md"
+   },
+   {
+    "index": 143,
+    "title": "The Kuomintang reactionaries Turn from an \"Appeal for Peace\" to an Appeal for War",
+    "filename": "143-the-kuomintang-reactionaries-turn-from-an-appeal-for-peace-t.md",
+    "date": "February 16, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_56.htm",
+    "zh": "144-国民党反动派由“呼吁和平”变为呼吁战争.md"
+   },
+   {
+    "index": 144,
+    "title": "On the Kuomintang's Different Answers to the Question of Responsibility for the War",
+    "filename": "144-on-the-kuomintang-s-different-answers-to-the-question-of-res.md",
+    "date": "February 18, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_57.htm",
+    "zh": "145-评国民党对战争责任问题的几种答案.md"
+   },
+   {
+    "index": 145,
+    "title": "Report to the Second Plenary Session of the Seventh Central Committee of the Communist Party of China",
+    "filename": "145-report-to-the-second-plenary-session-of-the-seventh-central.md",
+    "date": "March 5, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_58.htm",
+    "zh": "146-在中国共产党第七届中央委员会第二次全体会议上的报告.md"
+   },
+   {
+    "index": 146,
+    "title": "Methods of Work of Party Committees",
+    "filename": "146-methods-of-work-of-party-committees.md",
+    "date": "March 13, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_59.htm",
+    "zh": "147-党委会的工作方法.md"
+   },
+   {
+    "index": 147,
+    "title": "Whither the Nanking Government?",
+    "filename": "147-whither-the-nanking-government.md",
+    "date": "April 4, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_60.htm",
+    "zh": "148-南京政府向何处去？.md"
+   },
+   {
+    "index": 148,
+    "title": "Order to the Army for the Country-Wide Advance",
+    "filename": "148-order-to-the-army-for-the-country-wide-advance.md",
+    "date": "April 21, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_61.htm",
+    "zh": "149-向全国进军的命令.md"
+   },
+   {
+    "index": 149,
+    "title": "Proclamation of the Chinese People's Liberation Army",
+    "filename": "149-proclamation-of-the-chinese-people-s-liberation-army.md",
+    "date": "April 25, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_62.htm",
+    "zh": "150-中国人民解放军布告.md"
+   },
+   {
+    "index": 150,
+    "title": "On the Outrages by British Warships — Statement by the Spokesman of the general Headquarters of the Chinese People's Liberation Army",
+    "filename": "150-on-the-outrages-by-british-warships-statement-by-the-spokesm.md",
+    "date": "April 30, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_63.htm",
+    "zh": "151-中国人民解放军总部发言人为英国军舰暴行发表的声明.md"
+   },
+   {
+    "index": 151,
+    "title": "Address to the Preparatory Meeting of the New Political Consultative Conference",
+    "filename": "151-address-to-the-preparatory-meeting-of-the-new-political-cons.md",
+    "date": "June 15, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_64.htm",
+    "zh": "152-在新政治协商会议筹备会上的讲话.md"
+   },
+   {
+    "index": 152,
+    "title": "On the People's Democratic Dictatorship",
+    "filename": "152-on-the-people-s-democratic-dictatorship.md",
+    "date": "June 30, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_65.htm",
+    "zh": "153-论人民民主专政--纪念中国共产党二十八周年.md"
+   },
+   {
+    "index": 153,
+    "title": "Cast Away Illusions, Prepare for Struggle",
+    "filename": "153-cast-away-illusions-prepare-for-struggle.md",
+    "date": "August 14, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_66.htm",
+    "zh": "154-丢掉幻想，准备斗争.md"
+   },
+   {
+    "index": 154,
+    "title": "Farewell, Leighton Stuart!",
+    "filename": "154-farewell-leighton-stuart.md",
+    "date": "August 18, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_67.htm",
+    "zh": "155-别了，司徒雷登.md"
+   },
+   {
+    "index": 155,
+    "title": "Why it is Necessary to Discuss the White Paper",
+    "filename": "155-why-it-is-necessary-to-discuss-the-white-paper.md",
+    "date": "August 28, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_68.htm",
+    "zh": "157-为什么要讨论白皮书？.md"
+   },
+   {
+    "index": 156,
+    "title": "\"Friendship\" or Aggression?",
+    "filename": "156-friendship-or-aggression.md",
+    "date": "August 30, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_69.htm",
+    "zh": "156-“友谊”，还是侵略？.md"
+   },
+   {
+    "index": 157,
+    "title": "The Bankruptcy of the Idealist Conception of History",
+    "filename": "157-the-bankruptcy-of-the-idealist-conception-of-history.md",
+    "date": "September 16, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_70.htm",
+    "zh": "158-唯心历史观的破产.md"
+   }
+  ],
+  "Volume V · The Period of the Socialist Revolution and Socialist Construction (I)": [
+   {
+    "index": 158,
+    "title": "The Chinese People Have Stood Up!",
+    "filename": "158-the-chinese-people-have-stood-up.md",
+    "date": "September 21, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_01.htm",
+    "zh": "159-中国人民站起来了.md"
+   },
+   {
+    "index": 159,
+    "title": "Long Live the Great Unity of the Chinese People!",
+    "filename": "159-long-live-the-great-unity-of-the-chinese-people.md",
+    "date": "September 30, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_02.htm",
+    "zh": "160-中国人民大团结万岁.md"
+   },
+   {
+    "index": 160,
+    "title": "Eternal Glory to the Heroes of the People!",
+    "filename": "160-eternal-glory-to-the-heroes-of-the-people.md",
+    "date": "September 30, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_03.htm",
+    "zh": "161-人民英雄们永垂不朽.md"
+   },
+   {
+    "index": 161,
+    "title": "Always Keep to the Style of Plain Living and Hard Struggle",
+    "filename": "161-always-keep-to-the-style-of-plain-living-and-hard-struggle.md",
+    "date": "October 26, 1949",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_04.htm",
+    "zh": "162-永远保持艰苦奋斗的作风.md"
+   },
+   {
+    "index": 162,
+    "title": "Request for Opinions on the Tactics for Dealing With Rich Peasants",
+    "filename": "162-request-for-opinions-on-the-tactics-for-dealing-with-rich-pe.md",
+    "date": "March 12, 1950",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_05.htm",
+    "zh": "163-征询对待富农策略问题的意见.md"
+   },
+   {
+    "index": 163,
+    "title": "Fight for a Fundamental Turn for the Better in the Nation's Financial and Economic Situation",
+    "filename": "163-fight-for-a-fundamental-turn-for-the-better-in-the-nation-s.md",
+    "date": "June 6, 1950",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_06.htm",
+    "zh": "164-为争取国家财政经济状况的基本好转而斗争.md"
+   },
+   {
+    "index": 164,
+    "title": "Don't Hit Out in All Directions",
+    "filename": "164-don-t-hit-out-in-all-directions.md",
+    "date": "June 6, 1950",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_07.htm",
+    "zh": "165-不要四面出击.md"
+   },
+   {
+    "index": 165,
+    "title": "Be a True Revolutionary",
+    "filename": "165-be-a-true-revolutionary.md",
+    "date": "June 23, 1950",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_08.htm",
+    "zh": "166-做一个完全的革命派.md"
+   },
+   {
+    "index": 166,
+    "title": "You Are Models for the Whole Nation",
+    "filename": "166-you-are-models-for-the-whole-nation.md",
+    "date": "September 25, 1950",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_09.htm",
+    "zh": "167-你们是全民族的模范人物.md"
+   },
+   {
+    "index": 167,
+    "title": "Order to the Chinese People's Volunteers",
+    "filename": "167-order-to-the-chinese-people-s-volunteers.md",
+    "date": "October 8, 1950",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_10.htm",
+    "zh": "168-给中国人民志愿军的命令.md"
+   },
+   {
+    "index": 168,
+    "title": "The Chinese People's Volunteers Should Cherish Every Hill, Every River, Every Tree and Every Blade of Grass in Korea",
+    "filename": "168-the-chinese-people-s-volunteers-should-cherish-every-hill-ev.md",
+    "date": "January 19, 1951",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_11.htm",
+    "zh": "169-中国人民志愿军要爱护朝鲜的一山一水一草一木.md"
+   },
+   {
+    "index": 169,
+    "title": "Main Points of the Resolution Adopted at the Enlarged Meeting of the Political Bureau of the Central Committee of the Communist Party of China",
+    "filename": "169-main-points-of-the-resolution-adopted-at-the-enlarged-meetin.md",
+    "date": "February 18, 1951",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_12.htm",
+    "zh": "170-中共中央政治局扩大会议决议要点.md"
+   },
+   {
+    "index": 170,
+    "title": "The Party's Mass Line Must be Followed in Suppressing Counter-revolutionaries",
+    "filename": "170-the-party-s-mass-line-must-be-followed-in-suppressing-counte.md",
+    "date": "May 1951",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_13.htm",
+    "zh": "171-镇压反革命必须实行党的群众路线.md"
+   },
+   {
+    "index": 171,
+    "title": "Strike Surely, Accurately and Relentlessly in Suppressing Counter-revolutionaries",
+    "filename": "171-strike-surely-accurately-and-relentlessly-in-suppressing-cou.md",
+    "date": "December 1950-- September 1951",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_14.htm",
+    "zh": "172-镇压反革命必须打得稳，打得准，打得狠.md"
+   },
+   {
+    "index": 172,
+    "title": "Pay Serious Attention to the Discussion of the Film The Life of Wu Hsun",
+    "filename": "172-pay-serious-attention-to-the-discussion-of-the-film-the-life.md",
+    "date": "May 20, 1951",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_15.htm",
+    "zh": "173-应当重视电影《武训传》的讨论.md"
+   },
+   {
+    "index": 173,
+    "title": "Great Victories in Three Mass Movements",
+    "filename": "173-great-victories-in-three-mass-movements.md",
+    "date": "October 23, 1951",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_16.htm",
+    "zh": "174-三大运动的伟大胜利.md"
+   },
+   {
+    "index": 174,
+    "title": "On the Struggle Against the \"Three Evils\" and the \"Five Evils\"",
+    "filename": "174-on-the-struggle-against-the-three-evils-and-the-five-evils.md",
+    "date": "November 1951--March 1952",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_17.htm",
+    "zh": "175-关于“三反”、“五反”的斗争.md"
+   },
+   {
+    "index": 175,
+    "title": "Take Mutual Aid and Co-Operation in Agriculture as a Major Task",
+    "filename": "175-take-mutual-aid-and-co-operation-in-agriculture-as-a-major-t.md",
+    "date": "December 15, 1951",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_18.htm",
+    "zh": "176-把农业互助合作当作一件大事去做.md"
+   },
+   {
+    "index": 176,
+    "title": "New Year's Day Message",
+    "filename": "176-new-year-s-day-message.md",
+    "date": "January 1, 1952",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_19.htm",
+    "zh": "177-元旦祝词.md"
+   },
+   {
+    "index": 177,
+    "title": "On the Policies for Our Work in Tibet -- Directive of the Central Committee of the Communist Party of China",
+    "filename": "177-on-the-policies-for-our-work-in-tibet-directive-of-the-centr.md",
+    "date": "April 6, 1952",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_20.htm",
+    "zh": "178-中共中央关于西藏工作方针的指示.md"
+   },
+   {
+    "index": 178,
+    "title": "The Contradiction Between the Working Class and the Bourgeoisie is the Principal Contradiction in China",
+    "filename": "178-the-contradiction-between-the-working-class-and-the-bourgeoi.md",
+    "date": "June 6, 1952",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_21.htm",
+    "zh": "179-工人阶级与资产阶级的矛盾是国内的主要矛盾.md"
+   },
+   {
+    "index": 179,
+    "title": "Let Us Unite and Clearly Distinguish Between Ourselves and the Enemy",
+    "filename": "179-let-us-unite-and-clearly-distinguish-between-ourselves-and-t.md",
+    "date": "August 4, 1952",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_22.htm",
+    "zh": "180-团结起来，划清敌我界限.md"
+   },
+   {
+    "index": 180,
+    "title": "Hail the Signal Victory of the Chinese People's Volunteers!",
+    "filename": "180-hail-the-signal-victory-of-the-chinese-people-s-volunteers.md",
+    "date": "October 24, 1952",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_23.htm",
+    "zh": "181-祝贺中国人民志愿军的重大胜利.md"
+   },
+   {
+    "index": 181,
+    "title": "Combat Bureaucracy, Commandism and Violations of the Law and of Discipline",
+    "filename": "181-combat-bureaucracy-commandism-and-violations-of-the-law-and.md",
+    "date": "January 5, 1953",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_24.htm",
+    "zh": "182-反对官僚主义、命令主义和违法乱纪.md"
+   },
+   {
+    "index": 182,
+    "title": "Criticize Han Chauvinism",
+    "filename": "182-criticize-han-chauvinism.md",
+    "date": "March 16, 1953",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_25.htm",
+    "zh": "183-批判大汉族主义.md"
+   },
+   {
+    "index": 183,
+    "title": "Solve the Problem of the \"Five Excesses\"",
+    "filename": "183-solve-the-problem-of-the-five-excesses.md",
+    "date": "March 19, 1953",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_26.htm",
+    "zh": "184-解决“五多”问题.md"
+   },
+   {
+    "index": 184,
+    "title": "Liu Shao-chi and Yang Shang-kun Criticized for Breach of Discipline in Issuing Documents in the Name of the Central Committee Without Authorization",
+    "filename": "184-liu-shao-chi-and-yang-shang-kun-criticized-for-breach-of-dis.md",
+    "date": "May 19, 1953",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_27.htm",
+    "zh": "185-对刘少奇、杨尚昆破坏纪律擅自以中央名义发出文件的批评.md"
+   },
+   {
+    "index": 185,
+    "title": "Refute Right Deviationist Views that Depart from the General Line",
+    "filename": "185-refute-right-deviationist-views-that-depart-from-the-general.md",
+    "date": "June 15, 1953",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_28.htm",
+    "zh": "186-批判离开总路线的右倾观点.md"
+   },
+   {
+    "index": 186,
+    "title": "The Youth League in Its Work Must Take the Characteristics of Youth Into Consideration",
+    "filename": "186-the-youth-league-in-its-work-must-take-the-characteristics-o.md",
+    "date": "June 30, 1953",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_29.htm",
+    "zh": "187-青年团的工作要照顾青年的特点.md"
+   },
+   {
+    "index": 187,
+    "title": "On State Capitalism",
+    "filename": "187-on-state-capitalism.md",
+    "date": "July 9, 1953",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_30.htm",
+    "zh": "188-关于国家资本主义.md"
+   },
+   {
+    "index": 188,
+    "title": "The Party's General Line for the Transition Period",
+    "filename": "188-the-party-s-general-line-for-the-transition-period.md",
+    "date": "August 1953",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_31.htm",
+    "zh": "189-党在过渡时期的总路线.md"
+   },
+   {
+    "index": 189,
+    "title": "Combat Bourgeois Ideas in the Party",
+    "filename": "189-combat-bourgeois-ideas-in-the-party.md",
+    "date": "August 12, 1953",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_32.htm",
+    "zh": "190-反对党内的资产阶级思想.md"
+   },
+   {
+    "index": 190,
+    "title": "The Only Road for the Transformation of Capitalist Industry and Commerce",
+    "filename": "190-the-only-road-for-the-transformation-of-capitalist-industry.md",
+    "date": "September 7, 1953",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_33.htm",
+    "zh": "191-改造资本主义工商业的必经之路.md"
+   },
+   {
+    "index": 191,
+    "title": "Our Great Victory in the War to Resist U.S. Aggression and Aid Korea and Our Future Tasks",
+    "filename": "191-our-great-victory-in-the-war-to-resist-u-s-aggression-and-ai.md",
+    "date": "September 12, 1953",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_34.htm",
+    "zh": "192-抗美援朝的伟大胜利和今后的任务.md"
+   },
+   {
+    "index": 192,
+    "title": "Criticism of Liang Shu-ming's Reactionary Ideas",
+    "filename": "192-criticism-of-liang-shu-ming-s-reactionary-ideas.md",
+    "date": "September 16-18, 1953",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_35.htm",
+    "zh": "193-批判梁漱溟的反动思想.md"
+   },
+   {
+    "index": 193,
+    "title": "Two Talks on Mutual Aid and Co-Operation in Agriculture",
+    "filename": "193-two-talks-on-mutual-aid-and-co-operation-in-agriculture.md",
+    "date": "October and November 1953",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_36.htm",
+    "zh": "194-关于农业互助合作的两次谈话.md"
+   },
+   {
+    "index": 194,
+    "title": "On the Draft Constitution of the People's Republic of China",
+    "filename": "194-on-the-draft-constitution-of-the-people-s-republic-of-china.md",
+    "date": "June 14, 1954",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_37.htm",
+    "zh": "195-关于中华人民共和国宪法草案.md"
+   },
+   {
+    "index": 195,
+    "title": "Strive to Build a Great Socialist Country",
+    "filename": "195-strive-to-build-a-great-socialist-country.md",
+    "date": "September 15, 1954",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_38.htm",
+    "zh": "196-为建设一个伟大的社会主义国家而奋斗.md"
+   },
+   {
+    "index": 196,
+    "title": "Letter Concerning the Study of The Dream of the Red Chamber",
+    "filename": "196-letter-concerning-the-study-of-the-dream-of-the-red-chamber.md",
+    "date": "October 16, 1954",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_39.htm",
+    "zh": "197-关于《红楼梦》研究问题的信.md"
+   },
+   {
+    "index": 197,
+    "title": "The Chinese People Cannot be Cowed by the Atom Bomb",
+    "filename": "197-the-chinese-people-cannot-be-cowed-by-the-atom-bomb.md",
+    "date": "January 28, 1955",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_40.htm",
+    "zh": "198-原子弹吓不倒中国人民.md"
+   },
+   {
+    "index": 198,
+    "title": "Speeches at the National Conference of the Communist Party of China",
+    "filename": "198-speeches-at-the-national-conference-of-the-communist-party-o.md",
+    "date": "March 1955",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_41.htm",
+    "zh": "199-在中国共产党全国代表会议上的讲话.md"
+   },
+   {
+    "index": 199,
+    "title": "In Refutation of \"Uniformity of Public Opinion\"",
+    "filename": "199-in-refutation-of-uniformity-of-public-opinion.md",
+    "date": "May 24, 1955",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_42.htm",
+    "zh": "200-驳“舆论一律”.md"
+   },
+   {
+    "index": 200,
+    "title": "Preface and Editor's Notes to Material on the Counter-Revolutionary Hu Feng Clique",
+    "filename": "200-preface-and-editor-s-notes-to-material-on-the-counter-revolu.md",
+    "date": "May and June 1955",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_43.htm",
+    "zh": "201-《关于胡风反革命集团的材料》的序言和按语.md"
+   },
+   {
+    "index": 201,
+    "title": "On the Co-Operative Transformation of Agriculture",
+    "filename": "201-on-the-co-operative-transformation-of-agriculture.md",
+    "date": "July 31, 1955",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_44.htm",
+    "zh": "202-关于农业合作化问题.md"
+   },
+   {
+    "index": 202,
+    "title": "Rely on Party and League Members and Poor and Lower-Middle Peasants in the Co-Operative Transformation of Agriculture",
+    "filename": "202-rely-on-party-and-league-members-and-poor-and-lower-middle-p.md",
+    "date": "September 7, 1955",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_45.htm",
+    "zh": "203-农业合作化必须依靠党团员和贫农下中农.md"
+   },
+   {
+    "index": 203,
+    "title": "The Debate on the Co-Operative Transformation of Agriculture and the Current Class Struggle",
+    "filename": "203-the-debate-on-the-co-operative-transformation-of-agriculture.md",
+    "date": "October 11, 1955",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_46.htm",
+    "zh": "204-农业合作化的一场辩论和当前的阶级斗争.md"
+   },
+   {
+    "index": 204,
+    "title": "Prefaces to Socialist Upsurge in China's Countryside",
+    "filename": "204-prefaces-to-socialist-upsurge-in-china-s-countryside.md",
+    "date": "September and December 1955",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_47.htm",
+    "zh": "205-《中国农村的社会主义高潮》的序言.md"
+   },
+   {
+    "index": 205,
+    "title": "Editor's Notes from Socialist Upsurge in China's Countryside",
+    "filename": "205-editor-s-notes-from-socialist-upsurge-in-china-s-countryside.md",
+    "date": "September and December 1955",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_48.htm",
+    "zh": "206-《中国农村的社会主义高潮》的按语.md"
+   },
+   {
+    "index": 206,
+    "title": "Request for Opinions on the Seventeen-Article Document Concerning Agriculture",
+    "filename": "206-request-for-opinions-on-the-seventeen-article-document-conce.md",
+    "date": "December 21, 1955",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_49.htm",
+    "zh": "207-征询对农业十七条的意见.md"
+   },
+   {
+    "index": 207,
+    "title": "Speed up the Socialist Transformation of Handicrafts",
+    "filename": "207-speed-up-the-socialist-transformation-of-handicrafts.md",
+    "date": "March 5, 1956",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_50.htm",
+    "zh": "208-加快手工业的社会主义改造.md"
+   },
+   {
+    "index": 208,
+    "title": "On the Ten Major Relationships",
+    "filename": "208-on-the-ten-major-relationships.md",
+    "date": "April 25, 1956",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_51.htm",
+    "zh": "209-论十大关系.md"
+   },
+   {
+    "index": 209,
+    "title": "U.S. Imperialism is a Paper Tiger",
+    "filename": "209-u-s-imperialism-is-a-paper-tiger.md",
+    "date": "July 14, 1956",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_52.htm",
+    "zh": "210-美帝国主义是纸老虎.md"
+   },
+   {
+    "index": 210,
+    "title": "Strengthen Party Unity and Carry Forward Party Traditions",
+    "filename": "210-strengthen-party-unity-and-carry-forward-party-traditions.md",
+    "date": "August 30, 1956",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_53.htm",
+    "zh": "211-增强党的团结，继承党的传统.md"
+   },
+   {
+    "index": 211,
+    "title": "Some Experiences in Our Party's History",
+    "filename": "211-some-experiences-in-our-party-s-history.md",
+    "date": "September 25, 1956",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_54.htm",
+    "zh": "212-我们党的—些历史经验.md"
+   },
+   {
+    "index": 212,
+    "title": "In Commemoration of Dr. Sun Yat-sen",
+    "filename": "212-in-commemoration-of-dr-sun-yat-sen.md",
+    "date": "November 12, 1956",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_55.htm",
+    "zh": "213-纪念孙中山先生.md"
+   },
+   {
+    "index": 213,
+    "title": "Speech at the Second Plenary Session of the Eighth Central Committee of the Communist Party of China",
+    "filename": "213-speech-at-the-second-plenary-session-of-the-eighth-central-c.md",
+    "date": "November 15, 1956",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_56.htm",
+    "zh": "214-在中国共产党第八届中央委员会第二次全体会议上的讲话.md"
+   },
+   {
+    "index": 214,
+    "title": "Talks at a Conference of Secretaries of Provincial, Municipal and Autonomous Region Party Committees",
+    "filename": "214-talks-at-a-conference-of-secretaries-of-provincial-municipal.md",
+    "date": "January 1957",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_57.htm",
+    "zh": "215-在省市自治区党委书记会议上的讲话.md"
+   },
+   {
+    "index": 215,
+    "title": "On the Correct Handling of Contradictions Among the People",
+    "filename": "215-on-the-correct-handling-of-contradictions-among-the-people.md",
+    "date": "February 27, 1957",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_58.htm",
+    "zh": "216-关于正确处理人民内部矛盾的问题.md"
+   },
+   {
+    "index": 216,
+    "title": "Speech at the Chinese Communist Party's National Conference on Propaganda Work",
+    "filename": "216-speech-at-the-chinese-communist-party-s-national-conference.md",
+    "date": "March 12, 1957",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_59.htm",
+    "zh": "217-在中国共产党全国宣传工作会议上的讲话.md"
+   },
+   {
+    "index": 217,
+    "title": "Persevere in Plain Living and Hard Struggle, Maintain Close Ties with the Masses",
+    "filename": "217-persevere-in-plain-living-and-hard-struggle-maintain-close-t.md",
+    "date": "March 1957",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_60.htm",
+    "zh": "218-坚持艰苦奋斗，密切联系群众.md"
+   },
+   {
+    "index": 218,
+    "title": "Things Are Beginning to Change",
+    "filename": "218-things-are-beginning-to-change.md",
+    "date": "May 15, 1957",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_61.htm",
+    "zh": "219-事情正在起变化.md"
+   },
+   {
+    "index": 219,
+    "title": "The Chinese Communist Party is the Core of Leadership of the Whole Chinese People",
+    "filename": "219-the-chinese-communist-party-is-the-core-of-leadership-of-the.md",
+    "date": "May 25, 1957",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_62.htm",
+    "zh": "220-中国共产党是全中国人民的领导核心.md"
+   },
+   {
+    "index": 220,
+    "title": "Muster Our Forces to Repulse the Rightists' Wild Attacks",
+    "filename": "220-muster-our-forces-to-repulse-the-rightists-wild-attacks.md",
+    "date": "June 8, 1957",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_63.htm",
+    "zh": "221-组织力量反击右派分子的猖狂进攻.md"
+   },
+   {
+    "index": 221,
+    "title": "Wen Hui Pao's Bourgeois Orientation Should Be Criticized",
+    "filename": "221-wen-hui-pao-s-bourgeois-orientation-should-be-criticized.md",
+    "date": "July 1, 1957",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_64.htm",
+    "zh": "222-文汇报的资产阶级方向应当批判.md"
+   },
+   {
+    "index": 222,
+    "title": "Beat Back the Attacks of the Bourgeois Rightists",
+    "filename": "222-beat-back-the-attacks-of-the-bourgeois-rightists.md",
+    "date": "July 9, 1957",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_65.htm",
+    "zh": "223-打退资产阶级右派的进攻.md"
+   },
+   {
+    "index": 223,
+    "title": "The Situation in the Summer of 1957",
+    "filename": "223-the-situation-in-the-summer-of-1957.md",
+    "date": "July 1957",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_66.htm",
+    "zh": "224-一九五七年夏季的形势.md"
+   },
+   {
+    "index": 224,
+    "title": "Be Activists in Promoting the Revolution",
+    "filename": "224-be-activists-in-promoting-the-revolution.md",
+    "date": "October 9, 1957",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_67.htm",
+    "zh": "225-做革命的促进派.md"
+   },
+   {
+    "index": 225,
+    "title": "Have Firm Faith in the Majority of the People",
+    "filename": "225-have-firm-faith-in-the-majority-of-the-people.md",
+    "date": "October 13, 1957",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_68.htm",
+    "zh": "226-坚定地相信群众的大多数.md"
+   },
+   {
+    "index": 226,
+    "title": "A Dialectical Approach to Inner Party Unity",
+    "filename": "226-a-dialectical-approach-to-inner-party-unity.md",
+    "date": "November 18, 1957",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_69.htm",
+    "zh": "227-党内团结的辩证方法.md"
+   },
+   {
+    "index": 227,
+    "title": "All Reactionaries Are Paper Tigers",
+    "filename": "227-all-reactionaries-are-paper-tigers.md",
+    "date": "November 18, 1957",
+    "source": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_70.htm",
+    "zh": "228-一切反动派都是纸老虎.md"
+   }
+  ]
+ }
+}

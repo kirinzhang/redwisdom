@@ -25,6 +25,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;700&display=swap"
         rel="stylesheet">
+    <script src="js/lang-switch.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.4/dist/purify.min.js"></script>
     <style>
@@ -97,6 +98,12 @@
 
         .message-content strong {
             color: #BC2D22;
+        }
+
+        .message-content a {
+            color: #BC2D22;
+            text-decoration: underline;
+            text-underline-offset: 2px;
         }
 
         .message-content ul,
@@ -215,16 +222,12 @@
             <div class="flex items-center gap-3">
                 <nav class="text-sm opacity-90 hidden md:flex items-center gap-4" aria-label="主导航">
                 <a href="reading.html" class="hover:underline" data-i18n="nav.reading">阅读</a>
-                <a href="practice.html" class="hover:underline" data-i18n="nav.practice">实践</a>
-                <a href="problems.html" class="hover:underline" data-i18n="nav.problems">我的问题</a>
-                <a href="me.html" class="hover:underline" data-i18n="nav.me">我的</a>
-                <a href="login.html" class="hover:underline" data-i18n="nav.login">登录</a>
+                <a href="practice.html" class="hover:underline" data-zh-only data-i18n="nav.practice">实践</a>
+                <a href="problems.html" class="hover:underline" data-zh-only data-i18n="nav.problems">我的问题</a>
+                <a href="me.html" class="hover:underline" data-zh-only data-i18n="nav.me">我的</a>
+                <a href="login.html" class="hover:underline" data-zh-only data-i18n="nav.login">登录</a>
                 </nav>
-                <select id="localeSelect"
-                    class="rounded border border-warm-rice/40 bg-china-red px-2 py-1 text-xs text-warm-rice" aria-label="Language">
-                    <option value="zh-CN">中文</option>
-                    <option value="en">English</option>
-                </select>
+                <div data-lang-switch></div>
             </div>
         </div>
     </header>
@@ -302,7 +305,7 @@
                         <button id="useAnalysisGuideBtn" type="button"
                             class="px-4 py-2 bg-china-red text-warm-rice rounded-lg text-sm hover:bg-red-800"
                             data-i18n="guide.usePrompt">带入提问</button>
-                        <button id="saveAnalysisPracticeBtn" type="button"
+                        <button id="saveAnalysisPracticeBtn" type="button" data-zh-only
                             class="px-4 py-2 border border-china-red text-china-red rounded-lg text-sm hover:bg-red-50"
                             data-i18n="guide.savePractice">保存实践</button>
                     </div>
@@ -317,7 +320,7 @@
                 <!-- Welcome Message -->
                 <div class="flex gap-3 fade-in">
                     <div class="w-10 h-10 rounded-full bg-china-red flex items-center justify-center flex-shrink-0">
-                        <span class="text-warm-rice font-mao text-lg">毛</span>
+                        <span class="text-warm-rice font-mao text-lg" data-i18n="chat.avatar">毛</span>
                     </div>
                     <div class="flex-1 bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm max-w-[85%]">
                         <p class="font-serif text-ink-black leading-relaxed" data-i18n="chat.greeting">
@@ -352,7 +355,7 @@
             </div>
             <p class="text-center text-xs text-dark-beige/70 mt-2">
                 <span data-i18n="chat.footer">回答仅供参考，基于毛选文章生成</span> ·
-                <a href="reading.html" class="text-china-red hover:underline" data-i18n="chat.readOriginal">阅读原著</a>
+                <a id="readOriginalLink" href="reading.html" class="text-china-red hover:underline" data-i18n="chat.readOriginal">阅读原著</a>
             </p>
         </div>
     </main>
@@ -474,7 +477,6 @@
         const apiKeyInput = document.getElementById('apiKeyInput');
         const saveApiKeyBtn = document.getElementById('saveApiKey');
         const cancelApiKeyBtn = document.getElementById('cancelApiKey');
-        const localeSelect = document.getElementById('localeSelect');
         const analysisGuideToggle = document.getElementById('analysisGuideToggle');
         const analysisGuidePanel = document.getElementById('analysisGuidePanel');
         const analysisGuideToggleIcon = document.getElementById('analysisGuideToggleIcon');
@@ -490,7 +492,7 @@
         let isGenerating = false;
         let activeAbortController = null;
         let stoppedByUser = false;
-        let currentLocale = window.RedWisdomI18n.getStoredLocale(localStorage);
+        let currentLocale = window.RedWisdomLangSwitch?.locale === 'en' ? 'en' : 'zh-CN';
         let chatMode = 'direct';
         const chatSessions = {
             direct: {
@@ -535,11 +537,13 @@
             problemContextBar.classList.remove('hidden');
             problemContextBar.insertAdjacentHTML('beforeend', `
                 <div class="mt-2 border-l-4 border-dark-beige bg-white/80 px-4 py-3 text-sm leading-relaxed">
-                    <span class="text-gray-500">来自语录卡：</span>“${escapeHtml(quoteContext.content)}”
-                    <span class="text-gray-500">《${escapeHtml(quoteContext.source || '毛选')}》</span>
+                    <span class="text-gray-500">${currentLocale === 'en' ? 'From your quote card: ' : '来自语录卡：'}</span>“${escapeHtml(quoteContext.content)}”
+                    <span class="text-gray-500">${currentLocale === 'en' ? `— ${escapeHtml(quoteContext.source || 'Selected Works')}` : `《${escapeHtml(quoteContext.source || '毛选')}》`}</span>
                 </div>
             `);
-            userInput.value = `这句话对我当前的问题有什么启发？请先解释原意，再告诉我怎样调查事实和采取一个具体行动：\n\n“${quoteContext.content}”`;
+            userInput.value = currentLocale === 'en'
+                ? `What does this passage suggest for the problem I am facing now? First explain what it originally meant, then tell me how to investigate the facts and take one concrete step:\n\n“${quoteContext.content}”`
+                : `这句话对我当前的问题有什么启发？请先解释原意，再告诉我怎样调查事实和采取一个具体行动：\n\n“${quoteContext.content}”`;
             chatSessions.direct.draft = userInput.value;
         }
 
@@ -602,15 +606,11 @@
             return document.getElementById(mode === 'guided' ? 'guidedMessages' : 'directMessages');
         }
 
-        localeSelect.value = currentLocale;
         window.RedWisdomI18n.applyTranslations(document, currentLocale);
-        localeSelect.addEventListener('change', () => {
-            currentLocale = window.RedWisdomI18n.setStoredLocale(localStorage, localeSelect.value);
-            localeSelect.value = currentLocale;
-            window.RedWisdomI18n.applyTranslations(document, currentLocale);
-            chatModeStatus.textContent = window.RedWisdomI18n.translate(currentLocale, chatMode === 'guided' ? 'chat.mode.guidedHelp' : 'chat.mode.directHelp');
-            userInput.placeholder = window.RedWisdomI18n.translate(currentLocale, chatMode === 'guided' ? 'chat.mode.guidedPlaceholder' : 'chat.placeholder');
-        });
+        if (currentLocale === 'en') {
+            document.getElementById('readOriginalLink').href = 'reading.html?lang=en';
+            document.querySelectorAll('a[href="reading.html"]').forEach((link) => { link.href = 'reading.html?lang=en'; });
+        }
 
         analysisGuideToggle.addEventListener('click', () => {
             const isHidden = analysisGuidePanel.classList.toggle('hidden');
@@ -704,7 +704,7 @@
             messageDiv.dataset.chatMessage = 'assistant';
             messageDiv.innerHTML = `
                 <div class="w-10 h-10 rounded-full bg-china-red flex items-center justify-center flex-shrink-0">
-                    <span class="text-warm-rice font-mao text-lg">毛</span>
+                    <span class="text-warm-rice font-mao text-lg">${currentLocale === 'en' ? 'M' : '毛'}</span>
                 </div>
                 <div class="flex-1 bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm max-w-[85%]">
                     <div class="message-content font-serif text-ink-black leading-relaxed" role="status" aria-live="polite"></div>
@@ -719,11 +719,11 @@
 
         function addCoachPrompt(text, progress = null, mode = 'guided') {
             const messageDiv = document.createElement('div');
-            const progressText = progress ? `<span class="mb-1 block text-xs text-china-red">第 ${Math.min(progress.completed + 1, progress.total)} / ${progress.total} 步</span>` : '';
+            const progressText = progress ? `<span class="mb-1 block text-xs text-china-red">${currentLocale === 'en' ? `Step ${Math.min(progress.completed + 1, progress.total)} of ${progress.total}` : `第 ${Math.min(progress.completed + 1, progress.total)} / ${progress.total} 步`}</span>` : '';
             messageDiv.className = 'flex gap-3 fade-in';
             messageDiv.dataset.chatMessage = 'coach';
             messageDiv.innerHTML = `
-                <div class="w-10 h-10 rounded-full border border-china-red flex items-center justify-center flex-shrink-0"><span class="text-china-red font-mao text-lg">问</span></div>
+                <div class="w-10 h-10 rounded-full border border-china-red flex items-center justify-center flex-shrink-0"><span class="text-china-red font-mao text-lg">${currentLocale === 'en' ? 'Q' : '问'}</span></div>
                 <div class="flex-1 border-l-2 border-china-red bg-white p-4 max-w-[85%]">
                     ${progressText}<p class="font-serif leading-relaxed text-ink-black">${escapeHtml(text)}</p>
                 </div>
@@ -809,6 +809,7 @@
         }
 
         function addPracticeSaveAction(contentElement, conversation) {
+            if (currentLocale === 'en') return; // 实践记录页暂无英文版
             const wrapper = contentElement.closest('.flex-1');
             if (!wrapper) return;
 

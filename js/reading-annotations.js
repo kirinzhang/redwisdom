@@ -7,9 +7,10 @@
     // 纯函数（parseNotes / markerNumber / findConceptMatch）可在 Node 中测试；
     // enhanceArticle / createPopover 只在浏览器中使用。
 
-    const NOTE_HEADING = /^\s*注\s*释\s*$/;
+    const NOTE_HEADING = /^\s*(?:注\s*释|notes?)\s*$/i;
     const NOTE_LINE = /^\s*(?:〔(\d+)〕|\[(\d+)\]|［(\d+)］|（(\d+)）)\s*(.*)$/;
-    const INLINE_MARKER = /[⑴-⒇]|〔\d+〕|（\d+）|\(\d+\)/g;
+    // 中文版：⑴〔1〕（1）(1)；英文版（外文出版社英译本）：[1]
+    const INLINE_MARKER = /[⑴-⒇]|〔\d+〕|（\d+）|\(\d+\)|\[\d+\]/g;
     const MAX_CONCEPT_LINKS = 12;
 
     function stripMarkdown(line) {
@@ -98,7 +99,8 @@
     }
 
     function renderNoteCard(number, text) {
-        return `<div class="note-card"><p class="concept-kicker">注释 ${number}</p><p>${escapeHtml(text)}</p></div>`;
+        const label = /[\u4e00-\u9fa5]/.test(text) ? `注释 ${number}` : `Note ${number}`;
+        return `<div class="note-card"><p class="concept-kicker">${label}</p><p>${escapeHtml(text.replace(/\*/g, ''))}</p></div>`;
     }
 
     /* ---------- 浏览器端 ---------- */

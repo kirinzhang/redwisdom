@@ -1,10 +1,10 @@
-const CACHE_NAME = 'redwisdom-shell-v21';
+const CACHE_NAME = 'redwisdom-shell-v22';
 const SHELL_FILES = [
     './', './index.html', './reading.html', './chat.html', './practice.html', './problems.html', './me.html', './login.html',
     './timeline.html', './modern.html', './campaign.html',
-    './style.css?v=3', './assets/tailwind.css?v=5', './script.js?v=3', './config.js?v=7', './manifest.webmanifest',
+    './style.css?v=6', './assets/tailwind.css?v=5', './script.js?v=6', './config.js?v=7', './manifest.webmanifest',
     './assets/favicon.png', './assets/bg_back.jpg', './assets/bg_front.jpg', './assets/portrait_color.jpg',
-    './js/i18n.js', './js/auth-utils.js', './js/cloud-sync.js', './js/auto-sync.js', './js/auto-sync-bootstrap.js',
+    './js/i18n.js', './js/lang-switch.js', './js/quote-utils.js', './js/auth-utils.js', './js/cloud-sync.js', './js/auto-sync.js', './js/auto-sync-bootstrap.js',
     './js/problem-case-store.js', './js/cognition-spiral.js', './js/practice-loop-ui.js', './js/practice-store.js', './js/conversation-store.js', './js/reading-notes-store.js',
     './js/reading-progress-store.js', './js/full-text-search.js', './js/text-anchors.js', './js/reading-guides.js',
     './js/history-case-retrieval.js', './js/reading-annotations.js', './data/concepts.json',
@@ -12,7 +12,7 @@ const SHELL_FILES = [
     './js/modern-cases.js', './js/modern.js',
     './js/campaign-data.js', './js/campaign-engine.js', './js/campaign.js',
     './data/terrain/index.json', './data/terrain/overview.lc.png', './data/map/overview.json',
-    './data/catalog.json', './data/text-edition.json', './data/history-cases.json', './data/history-problem-types.json'
+    './data/catalog.json', './data/en/catalog.json', './data/en/quotes.json', './data/en/text-edition.json', './data/text-edition.json', './data/history-cases.json', './data/history-problem-types.json'
 ];
 
 self.addEventListener('install', event => {

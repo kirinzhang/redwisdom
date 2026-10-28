@@ -8,8 +8,9 @@ import AIContext from '../js/ai-context.js';
 import History from '../js/history-case-retrieval.js';
 import I18n from '../js/i18n.js';
 import ReadingGuides from '../js/reading-guides.js';
+import AIContextEn from '../js/ai-context-en.js';
 
-const { createPracticeCoachSystemPrompt } = Methodology;
+const { createPracticeCoachSystemPrompt, createPracticeCoachSystemPromptEn } = Methodology;
 const { findRelevantMaoContexts, buildContextMessage } = AIContext;
 const { createLocaleInstructionMessage } = I18n;
 
@@ -20,6 +21,20 @@ export const CONTEXT_DATA_FILES = {
     history: 'data/history-cases.json',
     types: 'data/history-problem-types.json',
     concepts: 'data/concepts.json',
+};
+
+// 英文版问道只检索英译本原文（党史案例和概念层目前只有中文）
+export const CONTEXT_DATA_FILES_EN = {
+    search: 'data/en/search-index.json',
+};
+
+export function buildEnglishSources({ search = {} } = {}) {
+    return { passages: search.records || [] };
+}
+
+const ENGLISH_LOCALE_MESSAGE = {
+    role: 'system',
+    content: 'Answer in English. Use the English article titles and the Foreign Languages Press wording from the passages provided; do not translate Chinese sources yourself inside quotation marks.',
 };
 
 function buildGuideSources() {
@@ -100,8 +115,23 @@ export function buildRetrievalContext(userMessage, sources) {
     };
 }
 
+// 英文版：英文系统提示词 + 英译本段落检索
+export function buildEnglishServerMessages({ mode, dialogue }, englishSources) {
+    const lastUser = [...dialogue].reverse().find((message) => message.role === 'user');
+    const passages = AIContextEn.findRelevantPassages({ userMessage: lastUser ? lastUser.content : '', passages: englishSources.passages, limit: 4 });
+    const context = AIContextEn.buildContextMessage(passages);
+    const system = [
+        { role: 'system', content: createPracticeCoachSystemPromptEn(mode) },
+        context,
+        ENGLISH_LOCALE_MESSAGE,
+    ].filter(Boolean);
+    return { messages: [...system, ...dialogue], retrieval: { message: context, historyMirror: [], classificationLabel: '', passages } };
+}
+
 // 浏览器提交 { mode, locale, messages }，messages 只允许 user / assistant。
+// sources.en 存在且 locale 为 en 时走英文版。
 export function buildServerMessages({ mode, locale, dialogue }, sources) {
+    if (locale === 'en' && sources && sources.en) return buildEnglishServerMessages({ mode, dialogue }, sources.en);
     const lastUser = [...dialogue].reverse().find((message) => message.role === 'user');
     const retrieval = buildRetrievalContext(lastUser ? lastUser.content : '', sources);
     const system = [
