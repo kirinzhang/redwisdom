@@ -90,11 +90,24 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create Card Element
         const card = createCardElement(quote);
         container.appendChild(card);
+        if (locale === 'en') fitCurrentCard();
     }
 
     function getRandomQuotes(count) {
         const shuffled = [...allQuotes].sort(() => 0.5 - Math.random());
         return shuffled.slice(0, count);
+    }
+
+    // 英文语录较长，按卡片实际高度自动缩小字号；字体加载完成或窗口尺寸变化后重新计算
+    function fitCurrentCard() {
+        const content = container.querySelector('.card-front-content');
+        const text = content && content.querySelector('.quote-text');
+        if (text) quoteUtils.fitQuoteText(content, text);
+    }
+    if (locale === 'en') {
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitCurrentCard);
+        let resizeTimer = null;
+        window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(fitCurrentCard, 120); });
     }
 
     function createCardElement(quote) {
@@ -148,6 +161,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const source = document.createElement('p');
         source.className = 'quote-source-line';
         source.innerText = locale === 'en' ? `— ${quote.source}` : `《${quote.source}》`;
+        if (locale === 'en') {
+            source.title = quote.source; // 出处太长时卡片上最多显示三到四行
+            if (quote.source.length > 48) metadata.classList.add('quote-meta-long');
+        }
         metadata.appendChild(source);
 
         if (quote.date) {

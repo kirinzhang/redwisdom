@@ -102,11 +102,19 @@
                 params.set('article', quote.articleFilename);
                 if (quote.anchor) params.set('anchor', quote.anchor);
             }
+            // 题词类出处把报刊与日期写在一起（"…, Liberation Daily of Yenan, November 24, 1943"），拆出日期放到日期行
+            let source = quote.source || 'Quotations from Chairman Mao Tse-tung';
+            let date = quote.date || '';
+            const trailingDate = source.match(/^(.{20,}?),\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4})$/);
+            if (trailingDate && !date) {
+                source = trailingDate[1];
+                date = trailingDate[2];
+            }
             return {
                 id: quote.id,
                 content: quote.content,
-                source: quote.source || 'Quotations from Chairman Mao Tse-tung',
-                date: quote.date || '',
+                source,
+                date,
                 category: quote.category || '',
                 methodTags: quote.category ? [quote.category] : [],
                 articleTitle: quote.source || '',
@@ -145,7 +153,23 @@
         }
     }
 
+    // 正文在卡片里放不下时逐级缩小字号（每次 0.5px，最小 minPx），保证出处行不被挤压或遮挡。
+    // container 需要 overflow:hidden 且高度固定；返回最终字号（px）。
+    function fitQuoteText(container, text, { minPx = 11, step = 0.5 } = {}) {
+        if (!container || !text || !text.ownerDocument) return null;
+        const view = text.ownerDocument.defaultView;
+        text.style.fontSize = '';
+        let size = parseFloat(view.getComputedStyle(text).fontSize) || 16;
+        const overflowing = () => container.scrollHeight > container.clientHeight + 1;
+        while (overflowing() && size > minPx) {
+            size = Math.max(minPx, size - step);
+            text.style.fontSize = `${size}px`;
+        }
+        return size;
+    }
+
     return {
+        fitQuoteText,
         getQuotePresentation,
         normalizeEnglishQuotes,
         normalizeQuotes,

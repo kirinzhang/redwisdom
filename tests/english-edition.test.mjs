@@ -153,3 +153,30 @@ test('the Worker loads the English index for English questions', async () => {
     assert.deepEqual(ASSETS.requested, ['/data/en/search-index.json']);
     assert.ok(sent.messages.some((m) => m.role === 'system' && /Selected Works of Mao Tse-tung \(English translation/.test(m.content)));
 });
+
+test('English card sources never sit on top of the quote', () => {
+    const cards = QuoteUtils.normalizeEnglishQuotes(quotes, catalog);
+    const inscription = cards.find((c) => c.content.startsWith('Production by the masses'));
+    assert.equal(inscription.date, 'November 24, 1943', 'a date at the end of an inscription source moves to the date line');
+    assert.doesNotMatch(inscription.source, /1943$/);
+    const css = fs.readFileSync(path.join(root, 'style.css'), 'utf8');
+    assert.match(css, /html\[data-locale="en"\] \.quote-meta \{ position: static;/, 'the English source line is laid out below the quote');
+    assert.match(css, /\.home-lang-switch \{ position: fixed;/);
+    const script = fs.readFileSync(path.join(root, 'script.js'), 'utf8');
+    assert.match(script, /quoteUtils\.fitQuoteText\(content, text\)/, 'long quotes shrink to fit the card');
+});
+
+test('fitQuoteText shrinks the quote until the card no longer overflows', () => {
+    const text = { style: { fontSize: '' }, ownerDocument: { defaultView: { getComputedStyle: () => ({ fontSize: '24px' }) } } };
+    const container = { clientHeight: 300, get scrollHeight() { const size = parseFloat(text.style.fontSize) || 24; return size * 16; } };
+    const size = QuoteUtils.fitQuoteText(container, text);
+    assert.ok(size <= 18.75 && size > 18, `ends at ${size}px`);
+    const tiny = { clientHeight: 10, scrollHeight: 999 };
+    assert.equal(QuoteUtils.fitQuoteText(tiny, { style: {}, ownerDocument: text.ownerDocument }), 11, 'stops at the minimum size');
+});
+
+test('English pages load their own reading fonts only in English mode', () => {
+    assert.match(LangSwitch.EN_FONT_URL, /^https:\/\/fonts\.googleapis\.com\/css2\?family=EB\+Garamond.*Source\+Serif\+4/);
+    const source = fs.readFileSync(path.join(root, 'js/lang-switch.js'), 'utf8');
+    assert.match(source, /if \(pageLocale === 'en' && win\.document\.head\) injectEnglishFonts/);
+});
