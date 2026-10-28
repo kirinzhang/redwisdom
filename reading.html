@@ -651,7 +651,7 @@
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                             <path d="M14 2v6h6M8 13h8M8 17h6"></path>
                         </svg>
-                        <span class="hidden sm:inline" data-i18n="reading.notesTitle">阅读笔记</span>
+                        <span class="hidden sm:inline" data-i18n="reading.notesShort">阅读笔记</span>
                         <span id="readingNoteCount" class="text-xs text-gray-500">0</span>
                     </button>
                     <button id="openReadingExcerptsBtn" type="button" class="reading-toolbar-button"
@@ -660,7 +660,7 @@
                             stroke="currentColor" stroke-width="2" aria-hidden="true">
                             <path d="M6 17h3l2-4V7H5v6h3M15 17h3l2-4V7h-6v6h3"></path>
                         </svg>
-                        <span class="hidden sm:inline" data-i18n="reading.excerptsTitle">原文摘录</span>
+                        <span class="hidden sm:inline" data-i18n="reading.excerptsShort">原文摘录</span>
                         <span id="readingExcerptCount" class="text-xs text-gray-500">0</span>
                     </button>
                 </div>
@@ -1377,7 +1377,7 @@
             const highlights = readingProgressStore.listHighlightsForArticle(articleMeta.filename);
             const bookmarkText = progress?.bookmarked ? t('reading.bookmarked') : t('reading.bookmarkArticle');
 
-            document.getElementById('readerToolsArticleTitle').textContent = `《${articleMeta.title}》`;
+            document.getElementById('readerToolsArticleTitle').textContent = currentLocale === 'en' ? articleMeta.title : `《${articleMeta.title}》`;
             toolsBody.innerHTML = `
                 <section id="readingNotesPanel" data-reading-tool-panel="notes" role="tabpanel">
                     <div class="mb-4 flex flex-wrap items-center gap-2 text-sm text-gray-600">
@@ -1548,7 +1548,7 @@
                 recordProblemActivity({
                     type: 'note',
                     referenceId: articleMeta.filename,
-                    title: `阅读笔记：《${articleMeta.title}》`,
+                    title: currentLocale === 'en' ? `Reading note: ${articleMeta.title}` : `阅读笔记：《${articleMeta.title}》`,
                     detail: input.value.slice(0, 500),
                     sourceHref: `reading.html?case=${encodeURIComponent(problemCaseId)}#${encodeURIComponent(articleMeta.filename)}`,
                 });

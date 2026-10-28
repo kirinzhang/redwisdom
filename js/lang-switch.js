@@ -48,11 +48,37 @@
         return url.toString();
     }
 
-    const CSS = `.lang-switch{display:inline-flex;overflow:hidden;border:1px solid rgba(188,45,34,.55);border-radius:9999px;background:rgba(250,247,240,.92);box-shadow:0 1px 4px rgba(0,0,0,.08)}
-.lang-switch button{min-width:2.4rem;padding:.25rem .7rem;font-size:.8125rem;line-height:1.4;color:#9c1f15;font-family:'Noto Serif SC',Georgia,serif;background:transparent;border:0;cursor:pointer}
+    const CSS = `.lang-switch{display:inline-flex;flex-shrink:0;overflow:hidden;border:1px solid rgba(188,45,34,.55);border-radius:9999px;background:rgba(250,247,240,.92);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.lang-switch button{white-space:nowrap;min-width:2.4rem;padding:.25rem .7rem;font-size:.8125rem;line-height:1.4;color:#9c1f15;font-family:'Noto Serif SC',Georgia,serif;background:transparent;border:0;cursor:pointer}
 .lang-switch button[aria-pressed="true"]{background:#BC2D22;color:#fff;font-weight:700}
 .lang-switch button:not([aria-pressed="true"]):hover{background:rgba(188,45,34,.08)}
 [data-zh-only][hidden],[data-mobile-nav-item][hidden]{display:none!important}`;
+
+    // 英文排版：正文用 Source Serif 4（为屏幕阅读设计，字面大、长文不累），
+    // 标题与语录卡用 EB Garamond（古典书籍感，和外文出版社旧版选集的气质接近）。只在英文模式下加载。
+    const EN_FONT_URL = 'https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&display=swap';
+    const EN_CSS = `html[data-locale="en"]{--en-text:'Source Serif 4',Georgia,'Times New Roman',serif;--en-display:'EB Garamond',Garamond,Georgia,serif}
+html[data-locale="en"] .font-serif,html[data-locale="en"] .article-content,html[data-locale="en"] .article-content p,html[data-locale="en"] .article-content h2,html[data-locale="en"] .article-content h3,html[data-locale="en"] .article-content blockquote,html[data-locale="en"] .message-content,html[data-locale="en"] .selected-text-preview,html[data-locale="en"] textarea{font-family:var(--en-text)}
+html[data-locale="en"] .article-content p{hyphens:auto;-webkit-hyphens:auto;line-height:1.8}
+@media (max-width:640px){html[data-locale="en"] .article-content p{text-align:left;line-height:1.7}}
+html[data-locale="en"] #readerToolsArticleTitle{font-style:italic}
+html[data-locale="en"] .reading-toolbar-button,html[data-locale="en"] .reading-font-popover span{white-space:nowrap}
+html[data-locale="en"] .article-content h1,html[data-locale="en"] .font-mao{font-family:var(--en-display);font-weight:600;letter-spacing:0}
+html[data-locale="en"] .article-content h1{font-size:2.25rem;line-height:1.2}
+html[data-locale="en"] .article-content h2{font-weight:600;line-height:1.45}`;
+
+    function injectEnglishFonts(doc) {
+        if (doc.getElementById('lang-en-fonts')) return;
+        const link = doc.createElement('link');
+        link.id = 'lang-en-fonts';
+        link.rel = 'stylesheet';
+        link.href = EN_FONT_URL;
+        doc.head.appendChild(link);
+        const style = doc.createElement('style');
+        style.id = 'lang-en-style';
+        style.textContent = EN_CSS;
+        doc.head.appendChild(style);
+    }
 
     function injectStyle(doc) {
         if (doc.getElementById('lang-switch-style')) return;
@@ -104,6 +130,7 @@
         const pageLocale = locale === 'en' && supportsEnglish(win.location.pathname) ? 'en' : 'zh-CN';
         win.document.documentElement.lang = pageLocale === 'en' ? 'en' : 'zh-CN';
         win.document.documentElement.dataset.locale = pageLocale;
+        if (pageLocale === 'en' && win.document.head) injectEnglishFonts(win.document);
         return { storage, locale, pageLocale };
     }
 
@@ -122,7 +149,7 @@
         return pageLocale;
     }
 
-    const api = { ENGLISH_PAGES, ENGLISH_NAV_ITEMS, STORAGE_KEY, normalize, resolveLocale, supportsEnglish, switchUrl, boot, init };
+    const api = { EN_FONT_URL, ENGLISH_PAGES, ENGLISH_NAV_ITEMS, STORAGE_KEY, normalize, resolveLocale, supportsEnglish, switchUrl, boot, init };
     if (typeof window !== 'undefined' && window.document) {
         const state = boot(window);
         api.locale = state.pageLocale;
