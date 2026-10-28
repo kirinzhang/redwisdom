@@ -58,8 +58,8 @@ test('each English page loads the switch early and shows it in the top right', (
 });
 
 test('the English edition carries all five volumes of the FLP translation', () => {
-    assert.deepEqual(Object.values(catalog.volumes).map((v) => v.length), [17, 40, 31, 70, 70]);
-    assert.equal(entries.length, 228);
+    assert.deepEqual(Object.values(catalog.volumes).map((v) => v.length), [18, 40, 31, 70, 70]);
+    assert.equal(entries.length, 229);
     const files = new Set(fs.readdirSync(path.join(root, 'data/en/articles')));
     const zhFiles = new Set(Object.values(zhCatalog.volumes).flat().map((a) => a.filename));
     for (const entry of entries) {
@@ -67,11 +67,20 @@ test('the English edition carries all five volumes of the FLP translation', () =
         assert.match(entry.source, /^https:\/\/www\.marxists\.org\/reference\/archive\/mao\/selected-works\//);
         assert.ok(zhFiles.has(entry.zh), `${entry.filename} maps to a Chinese article`);
     }
-    assert.equal(new Set(entries.map((e) => e.zh)).size, 228, 'the mapping is one to one');
+    assert.equal(new Set(entries.map((e) => e.zh)).size, 229, 'every Chinese article has its English counterpart');
     const byTitle = Object.fromEntries(entries.map((e) => [e.title, e.zh]));
     assert.equal(byTitle['On Contradiction'], '017-矛盾论.md');
     assert.equal(byTitle['On Practice'], '016-实践论.md');
     assert.equal(byTitle['Serve the People'], '076-为人民服务.md');
+    // 《反对本本主义》不在外文出版社第一卷，作为补遗插在与中文版相同的位置，编号排在最后以免改动已有链接
+    const volumeOne = Object.values(catalog.volumes)[0].map((e) => e.filename);
+    assert.deepEqual(volumeOne.slice(5, 8), ['005-a-single-spark-can-start-a-prairie-fire.md', '228-oppose-book-worship.md', '006-pay-attention-to-economic-work.md']);
+    const supplement = entries.find((e) => e.supplement);
+    assert.equal(supplement.zh, '006-反对本本主义.md');
+    const worship = fs.readFileSync(path.join(root, 'data/en/articles/228-oppose-book-worship.md'), 'utf8');
+    assert.match(worship, /^# Oppose Book Worship\n\n\*May 1930\*\n\n> \[Supplement:/);
+    assert.match(worship, /inquire into everything''\[1\]/);
+    assert.equal((worship.match(/^\[\d\] /gm) || []).length, 5, 'five notes in the reading-page format');
     const practice = fs.readFileSync(path.join(root, 'data/en/articles/015-on-practice.md'), 'utf8');
     assert.match(practice, /^# On Practice\n\n\*July 1937\*\n/);
     assert.equal(practice.match(/^July 1937$/gm), null, 'the date is not repeated under the subtitle');

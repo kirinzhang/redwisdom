@@ -103,7 +103,7 @@ Red Wisdom 是一个以《毛泽东选集》为核心内容和方法论来源的
 
 首页、阅读毛选、问道毛选三个页面右上角有「中 / EN」切换，选择会记在本机；链接上加 `?lang=en` 或 `?lang=zh` 也可以直接指定。英文模式下导航只保留这三项。
 
-- 原文：外文出版社（Foreign Languages Press, Peking）英译本 *Selected Works of Mao Tse-tung* 第一至五卷，共 228 篇，取自 [Marxists Internet Archive](https://www.marxists.org/reference/archive/mao/selected-works/)。中文版的《反对本本主义》不在英译本第一卷中，英文模式下没有这一篇。
+- 原文：外文出版社（Foreign Languages Press, Peking）英译本 *Selected Works of Mao Tse-tung* 第一至五卷，共 228 篇，取自 [Marxists Internet Archive](https://www.marxists.org/reference/archive/mao/selected-works/)。《反对本本主义》1961 年才重新找到，不在英译本第一卷中；英文版把 marxists.org 第六卷里的译文作为补遗放在第一卷相同位置，共 229 篇，与中文版一一对应。
 - 卡片：取自 *Quotations from Chairman Mao Tse-tung* 的英译语录，筛掉军事和敌我斗争类，只留 260 个字母以内、能在卡片上从容排开的 61 张；大部分可以直接跳到英译本中的原段落。
 - 阅读：中英文章一一对照，切换语言时停留在同一篇；支持全文搜索和注释弹窗。专题导读和概念层暂只有中文。
 - 问道：服务端在英译本中检索相关段落（把「优先级」「拖延」等现代说法映射到主要矛盾、持久战等方法），回答只引用检索到的英译原文。党史镜鉴暂只有中文。

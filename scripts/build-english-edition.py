@@ -35,6 +35,14 @@ VOLUME_PERIODS = [
 ]
 # 1991 年中文第二版第一卷收入的《反对本本主义》在外文出版社英译本中没有
 ZH_ONLY = {'反对本本主义'}
+# 外文出版社英译本第一卷按中文第一版编排，没有《反对本本主义》（该文 1961 年才重新找到）。
+# 英译文取自 marxists.org 自编的第六卷，作为补遗插在第一卷中与中文版相同的位置。
+# 编号放在最后（228），不改动已有英文文章的文件名和链接。
+SUPPLEMENTS = [
+    {'volume': 0, 'after_zh': '星星之火，可以燎原', 'zh_title': '反对本本主义', 'href': 'volume-6/mswv6_11.htm',
+     'title': 'Oppose Book Worship', 'date': 'May 1930',
+     'note': 'Supplement: this article was lost for many years and recovered in 1961, so it is not in Volume I of the Foreign Languages Press edition. It was added to Volume I of the Chinese second edition (1991). English text from the Marxists Internet Archive, Selected Works Vol. VI.'},
+]
 
 
 def fetch(url, cache_dir):
@@ -396,6 +404,22 @@ def match_article(citation, by_title):
     return None
 
 
+def normalize_supplement_notes(md):
+    # 第六卷的页面排版和正卷不同：注码写成粗体 [N]，注释是文末一串 "N. " 段落、没有 Notes 标题。
+    # 统一成正卷的格式（正文 [N]，文末 "## Notes" 下 "[N] 注文"），阅读页才能弹出注释。
+    md = re.sub(r'\*\*\s*(\.?)\s*\[(\d+)\]\s*\*\*', r'\1[\2]', md)
+    blocks = md.split('\n\n')
+    starts = [i for i, b in enumerate(blocks) if re.match(r'^1\.\s', b)]
+    if not starts:
+        return md
+    first = starts[-1]
+    tail = blocks[first:]
+    if not all(re.match(r'^\d+\.\s', b) for b in tail):
+        return md
+    notes = [re.sub(r'^(\d+)\.\s+', r'[\1] ', b) for b in tail]
+    return '\n\n'.join(blocks[:first] + ['## Notes'] + notes) + '\n'
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--cache', default='.cache/marxists')
@@ -425,6 +449,7 @@ def main():
         zh_pairs = pair_volume([dict(e, date=e['date'] or clean(re.sub(r'(?is).*?</h1>', '', src, count=1)[:200])) for e, src in zip(entries, srcs)], zh)
         label = f'{VOLUME_LABELS[v]} · {VOLUME_PERIODS[v]}'
         catalog['volumes'][label] = []
+        supplements = [sup for sup in SUPPLEMENTS if sup['volume'] == v]
         for i, e in enumerate(entries):
             src = srcs[i]
             filename = f'{index:03d}-{slugify(e["title"])}.md'
@@ -438,6 +463,30 @@ def main():
             catalog['volumes'][label].append(entry)
             by_title[norm_title(e['title'])] = entry
             index += 1
+            for sup in supplements:
+                if zh_pairs[i]['title'] == sup['after_zh']:
+                    sup['position'] = (label, len(catalog['volumes'][label]))
+    # 补遗：放在对应位置，编号排在所有正卷之后
+    for sup in SUPPLEMENTS:
+        if 'position' not in sup:
+            raise SystemExit(f'supplement {sup["title"]}: anchor article not found')
+        src = fetch(f'{SW}{sup["href"]}', args.cache)
+        md, n_body, art_date = article_markdown(src, sup['title'], sup['date'])
+        if n_body == 0:
+            raise SystemExit(f'empty supplement: {sup["href"]}')
+        md = normalize_supplement_notes(md)
+        head, rest = md.split('\n\n', 2)[:2], md.split('\n\n', 2)[2]
+        md = '\n\n'.join(head + [f'> [{sup["note"]}]', rest])
+        filename = f'{index:03d}-{slugify(sup["title"])}.md'
+        open(os.path.join(art_dir, filename), 'w', encoding='utf-8').write(md)
+        texts[filename] = md
+        zh_file = next(a['filename'] for a in zh_volumes[sup['volume']] if a['title'] == sup['zh_title'])
+        entry = {'index': index, 'title': sup['title'], 'filename': filename, 'date': art_date,
+                 'source': f'{SW}{sup["href"]}', 'zh': zh_file, 'supplement': True}
+        label, pos = sup['position']
+        catalog['volumes'][label].insert(pos, entry)
+        by_title[norm_title(sup['title'])] = entry
+        index += 1
     json.dump(catalog, open(os.path.join(out_dir, 'catalog.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 
     # 语录卡只取适合日常思考的章节与篇幅：去掉以战争、军队、阶级斗争、帝国主义为主题的章节和过长的段落
@@ -489,7 +538,7 @@ def main():
         'source': SW + 'index.htm',
         'transcription': 'Transcribed by the Maoist Documentation Project; HTML revised by the Marxists Internet Archive (marxists.org).',
         'verificationStatus': 'Converted automatically from marxists.org; check the printed edition for formal citation.',
-        'notice': 'Text from the Marxists Internet Archive (marxists.org). Chinese article titles are linked for comparison; the English translation follows the Foreign Languages Press edition and differs from the 1991 Chinese second edition in places (e.g. "Oppose Book Worship" is not in English Volume I).',
+        'notice': 'Text from the Marxists Internet Archive (marxists.org). Chinese article titles are linked for comparison; the English translation follows the Foreign Languages Press edition and differs from the 1991 Chinese second edition in places. "Oppose Book Worship", which is not in the FLP Volume I, is included as a supplement from the Marxists Internet Archive Vol. VI.',
     }
     json.dump(edition, open(os.path.join(out_dir, 'text-edition.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     linked = sum(1 for q in quotes if q['articleFilename'])
